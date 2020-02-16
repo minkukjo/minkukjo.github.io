@@ -4,7 +4,7 @@ title: Java
 slug: Java
 menu: true
 submenu: false
-order: 2
+order: 4
 description: >
   자바에 관한 내용
 ---
