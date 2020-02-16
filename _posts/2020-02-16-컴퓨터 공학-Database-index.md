@@ -2,7 +2,7 @@
 layout: post
 title: 블로그 시작
 subtitle: ''
-categories: Database
+categories: cs
 tags: index
 comments: false
 ---
