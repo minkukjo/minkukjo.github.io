@@ -8,6 +8,7 @@ layout: base
 Looks like you are using the `{{ page.layout }}` layout. This layout is not supported by Hydejack. Instead use `blog` or `list`. For more information see the [Hydejack Documentation](https://qwtel.com/hydejack/docs/latest/).
   {% endcapture %}
   {% include message.html text=text %}
+  {% include google-analytics.html %}
   <hr/>
 
   {{ content }}
