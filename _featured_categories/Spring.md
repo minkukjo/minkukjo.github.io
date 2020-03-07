@@ -2,7 +2,7 @@
 layout: list
 title: Spring
 slug: spring
-menu: false
+menu: true
 submenu: false
 order: 3
 description: >
