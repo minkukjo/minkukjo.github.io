@@ -2,9 +2,9 @@
 layout: list
 title: Spring
 slug: spring
-menu: true
+menu: false
 submenu: false
-order: 4
+order: 3
 description: >
-  Spring Framework 학습
+  Spring Framework
 ---
