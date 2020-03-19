@@ -4,5 +4,5 @@ title: Algorithm
 slug: Algorithm
 category: cs
 menu: false
-order: 4
+order: 1
 ---
