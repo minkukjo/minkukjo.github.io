@@ -1,10 +1,10 @@
 ---
 layout: list
-title: Books
-slug: books
+title: JavaScript
+slug: js
 menu: true
 submenu: false
-order: 8
+order: 7
 description: >
-  사고 싶은 책들
+  js
 ---
