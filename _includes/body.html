@@ -19,6 +19,7 @@
       {{ content }}
 
       {% if site.disqus_shortname and page.layout == 'post' %}
+        {% include comments.html %}
       {% endif %}
 
       {% include footer.html %}

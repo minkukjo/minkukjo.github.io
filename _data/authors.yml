@@ -22,7 +22,7 @@ minkukjo:
   # Comment/uncommet to show/hide
   # Icons appear in order, can be rearranged:
   social:
-    #facebook:        <username>
+    facebook:        01037015889
     # twitter:         <username>
     # google:          <number>
     # vk:              <username>
@@ -46,7 +46,7 @@ minkukjo:
     # pinterest:       <username>
     # foursquare:      <number>
     # yelp:            <string>
-    #github:          minkuk
+    github:          minkukjo
     # stackoverflow:   <number/username>
     # npm:             <username>
     # hackernews:      <username>
@@ -57,7 +57,7 @@ minkukjo:
     # delicious:       <username>
     # stumbleupon:     <username>
     # paypal:          <username>
-    email:           mailto:strike0115@naver.com
+    email:           mailto:harrycode@kakao.com
     #rss:             https://isme2n.github.io/feed.xml
 
 # Another author
