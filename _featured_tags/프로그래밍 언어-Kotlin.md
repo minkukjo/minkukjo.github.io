@@ -1,7 +1,7 @@
 ---
 layout: tag-blog
-title: Java
-slug: java
+title: Kotlin
+slug: kotlin
 category: language
 menu: false
 order: 1
