@@ -51,13 +51,13 @@ minkukjo:
     # npm:             <username>
     # hackernews:      <username>
     # trello:          <firstnamelastname>
-    # linkedin:        <firstname-lastname-string>
+    linkedin:        민국-조-567052166
     # xing:            <firstname_lastname_counter>
     # blogger:         <number>
     # delicious:       <username>
     # stumbleupon:     <username>
     # paypal:          <username>
-    email:           mailto:harrycode@kakao.com
+    # email:           mailto:harrycode@kakao.com
     #rss:             https://isme2n.github.io/feed.xml
 
 # Another author
