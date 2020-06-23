@@ -22,7 +22,7 @@ minkukjo:
   # Comment/uncommet to show/hide
   # Icons appear in order, can be rearranged:
   social:
-    facebook:        kakaoharry
+    # facebook:        kakaoharry
     # twitter:         <username>
     # google:          <number>
     # vk:              <username>
@@ -57,7 +57,7 @@ minkukjo:
     # delicious:       <username>
     # stumbleupon:     <username>
     # paypal:          <username>
-    # email:           mailto:harrycode@kakao.com
+    email:           mailto:harrycode@kakao.com
     #rss:             https://isme2n.github.io/feed.xml
 
 # Another author
