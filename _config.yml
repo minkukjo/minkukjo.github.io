@@ -47,7 +47,7 @@ google_fonts: Lato
 google_analytics: UA-158654037-1
 
 # Setting a disqus shortname will enable the comment section on pages with `comments: true` in the front matter
-disqus_shortname: harrycode
+# disqus_shortname: harrycode
 
 # This text will appear in the footer of every page. Markdown enabled.
 copyright: "&copy; 2020. by minkuk"
