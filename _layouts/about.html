@@ -1,0 +1,14 @@
+---
+layout: base
+---
+
+{% assign author = site.data.authors[page.author] | default:site.data.authors.first[1] %}
+
+<article class="page" role="article">
+
+  <h1 class="page-title hr" style="padding-bottom:1rem">{{ page.title }}</h1>
+
+  <div class="markdown-body">
+    {{ content }}
+  </div>
+</article>
