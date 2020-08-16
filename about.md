@@ -7,23 +7,47 @@ order: 10
 
 ## 소개
 
-안녕하세요 매일 매일 도전하는 개발자 조민국입니다.
+안녕하세요 매일 도전하는 개발자 조민국입니다.
 
-제가 현재 사용하고 있는 기술은 다음과 같습니다.
+하나를 공부해도 깊게 공부하려고 노력하고 새로운 기술을 배우는 것을 즐기고 좋아합니다.
 
-`Springboot, JPA, JUnit 5, Docker, k8s, Java, Kotlin, JVM, Go, Vue`
-
-하나를 공부해도 깊게 공부하려고 노력하고 늘 새로운 기술을 배우는 것을 즐기고 좋아합니다.
-
-현재는 카카오 엔터프라이즈에서 서버 개발팀에서 정규직으로 근무하고 있습니다. 
+현재는 카카오 엔터프라이즈에서 서버 개발팀에서 신입 개발자로 근무하고 있습니다. 
 
 재사용성 높고 확장 가능성 높은 코드와 안정적인 서비스를 구축하는 것에 많은 고민을 하며 배우고 있습니다.
 
 게으른 성격 때문에 더 많은 코드를 짜서 미래에 편해지기 위한 자동화 기술을 구축하는 것을 좋아합니다.
 
-테스트 코드와 클린 코드에 관심이 많습니다.
+최근에는 JVM과 테스트 코드, 그리고 클린 코드에 관심이 많습니다.
 
 무덤에 들어가기 직전까지 코딩하는 것이 꿈입니다.
+
+## 보유 기술 스택
+
+제가 현재 사용해본, 사용하고 있는 기술은 다음과 같습니다.
+
+### Back Framework & Language
+
+- Springboot 2.3.2
+- Spring Data JPA
+- Spring Batch
+- JUnit 5, Mockito
+- Java (8, 11, 14)
+- Kotlin (1.3.72)
+- Go
+
+### Front Framework & Language
+
+- Vue.js
+- React.js
+- Javascript
+
+### Devops & Cloud
+
+- Docker
+- Kubernetes
+- Google Cloud Platform(GCE, GKE) 
+- Jenkins
+- Github Action
 
 ## 서식지
 
