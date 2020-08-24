@@ -18,8 +18,9 @@
     <main id="_main" class="content" role="main" data-color="{{ color | escape }}" data-image="{{ image | escape }}">
       {{ content }}
 
-      
-      {% include comments.html %}
+      {% if page.layout == 'post' %}
+        {% include comments.html %}
+      {% endif %}
 
       {% include footer.html %}
     </main>
