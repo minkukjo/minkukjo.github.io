@@ -27,8 +27,9 @@ order: 10
 
 ### Back Framework & Language
 
-- Springboot 2.3.2
+- Springboot 2.3.x
 - Spring Data JPA
+- Spring Kafka
 - Spring Batch
 - JUnit 5, Mockito
 - Java (8, 11, 14)
@@ -45,9 +46,13 @@ order: 10
 
 - Docker
 - Kubernetes
-- Google Cloud Platform(GCE, GKE) 
+- Google Cloud Platform(GCE, GKE)
 - Jenkins
-- Github Action
+- Ansible
+- Github Actions
+- Elastic Search
+- Fluentd
+- Kafka
 
 ## 서식지
 
