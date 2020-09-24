@@ -22,8 +22,8 @@
       data-color="{{ color | escape }}"
       data-image="{{ image | escape }}"
     >
-      {{ content }} {% if page.layout == 'post' %} {% include add.html %} {%
-      include comments.html %} {% endif %} {% include footer.html %}
+      {{ content }} {% if page.layout == 'post' %} {% include comments.html %}
+      {% endif %} {% include footer.html %}
     </main>
     {% include right-side.html %}
   </div>
