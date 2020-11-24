@@ -11,7 +11,7 @@ order: 10
 
 하나를 공부해도 깊게 공부하려고 노력하고 새로운 기술을 배우는 것을 즐기고 좋아합니다.
 
-현재는 카카오 엔터프라이즈에서 서버 개발팀에서 신입 개발자로 근무하고 있습니다. 
+현재는 카카오 엔터프라이즈에서 서버 개발팀에서 신입 개발자로 근무하고 있습니다.
 
 재사용성 높고 확장 가능성 높은 코드와 안정적인 서비스를 구축하는 것에 많은 고민을 하며 배우고 있습니다.
 
@@ -31,6 +31,7 @@ order: 10
 - Spring Data JPA
 - Spring Kafka
 - Spring Batch
+- Nest.js
 - JUnit 5, Mockito
 - Java (8, 11, 14)
 - Kotlin (1.3.72)
@@ -41,6 +42,7 @@ order: 10
 - Vue.js
 - React.js
 - Javascript
+- Typescript
 
 ### Devops & Cloud
 
@@ -50,9 +52,10 @@ order: 10
 - Jenkins
 - Ansible
 - Github Actions
-- Elastic Search
+- Elastic Search + Kibana
 - Fluentd
 - Kafka
+- Bamboo
 
 ## 서식지
 
@@ -91,14 +94,16 @@ order: 10
 ## 프로젝트 (보안상 회사 프로젝트 제외)
 
 - 구글 코리아와 함께 진행한 음성인식 IOT 가게 플랫폼 졸업 프로젝트 [저장소 링크](https://github.com/minkukjo/CapstoneDesign2)
+
   - 기술 스택 : Python, Docker, k8s, 라즈베리파이
   - 좋았던 점 : 실력있는 팀원들과 즐겁게 협업, 구글 개발자와 협업하며 배우는 쿠버네티스 특강
-  - 아쉬웠던 점 
+  - 아쉬웠던 점
     - 당시 학부생이었어서 웹 개발이나 서버 개발의 이해도가 낮아서 구글 개발자님에게 더 많은 질문을 못한게 아쉬움
     - 코드 퀄리티를 신경쓰지 않은 점
     - 서버 개발 보다는 클라이언트(라즈베리파이)에 집중해서 k8s를 더 많이 다뤄보지 못한 점
 
 - Go와 Vue.js 학습을 목적으로 만들어본 Kakao Login + 게시판 프로젝트 [저장소 링크](https://github.com/minkukjo/BookStudy)
+
   - 기술 스택 : Go, Vue, Gorm, GCP, Docker, Mysql
   - 좋았던 점
     - 처음 써보는 Go와 Vue를 사용해보면서 익숙해질 수 있었음
@@ -107,23 +112,41 @@ order: 10
     - GCP에 CI/CD를 구축해보고 싶었는데 실패해서 아쉬웠음
 
 - 헬스를 좋아하는 사람들을 위한 `삼대얼마` 서비스의 백엔드 개발 [저장소 링크](https://github.com/depromeet/8th-warming-up-backend-2team)
+
   - 기술 스택 : Java 11, Spring Security, Spring JPA, Mysql, Docker, Github Actions
-  - 좋았던 점 
+  - 좋았던 점
     - 처음 써보는 Github Action을 사용해 GCP의 GCE에 CI/CD 구축을 해봄
     - 처음 써보는 Spring Security를 사용해 JWT 토큰 발급 기능 구현
     - 처음 해보는 App 개발자들과의 소통 경험
     - 처음 해보는 주도적으로 프로젝트 기획에 참여, 프로젝트 매니징
-  - 아쉬웠던 점 
+  - 아쉬웠던 점
     - 비즈니스 로직을 구현하기 바빠서 테스트 커버리지를 높이지 못한 부분
     - 혼자 개발하다보니 코드 리뷰를 주고 받지 못한 부분
 
+- 결정장애들을 위한 음식점 추천 서비스 `아무거나` 서비스의 프론트 & 백엔드 개발
+  - [프론트 저장소](https://github.com/depromeet/8th-final-3team-front)
+    - 기술 스택 : React.js, Typescript
+  - [백엔드 저장소](https://github.com/depromeet/8th-final-3team-back)
+    - 기술 스택 : Kotlin, Springboot, Fuel
+  - 좋았던 점
+    - 처음으로 디자이너와 소통하며 개발하는 법을 경험
+  - 아쉬웠던 점
+    - 혼자 개발해서 코드 리뷰를 주고 받지 못한 부분
+    - 프론트 코딩 방법을 몰라서 코드가 지저분한 부분
+    - Styled Component가 아닌 CSS로 마크업을 한 부분
+
 ## 발표
 
+<img width="850" alt="스크린샷 2020-11-24 오후 11 28 13" src="https://user-images.githubusercontent.com/43809168/100107185-bae8be80-2eac-11eb-9aa8-c9ae26cfa3d7.png">
+
 - [GDG Campus 인턴 경험 발표](https://festa.io/events/1118?fbclid=IwAR3ZbOFO6raTOddnZO6kdtxn74ig-vFH9-HkXfIlPG05hTeNn4oc4scYZzs)
+  - 98% 청중이 내 발표를 잘 들었다고 투표
 
 ## 기술 블로그 기고
 
-- 준비 중
+<img width="1434" alt="스크린샷 2020-11-24 오후 11 21 37" src="https://user-images.githubusercontent.com/43809168/100106924-73fac900-2eac-11eb-8f07-a50d0c0711d0.png">
+
+- [기술 블로그 Tech &에 기고](https://tech.kakaoenterprise.com/82?category=882489)
 
 ## 하고싶은 말
 
