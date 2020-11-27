@@ -95,6 +95,8 @@ order: 10
 
 - 구글 코리아와 함께 진행한 음성인식 IOT 가게 플랫폼 졸업 프로젝트 [저장소 링크](https://github.com/minkukjo/CapstoneDesign2)
 
+- [담당 파트 시연 영상](https://www.youtube.com/watch?v=8FPSDPq4I3s)
+
   - 기술 스택 : Python, Docker, k8s, 라즈베리파이
   - 좋았던 점 : 실력있는 팀원들과 즐겁게 협업, 구글 개발자와 협업하며 배우는 쿠버네티스 특강
   - 아쉬웠던 점
