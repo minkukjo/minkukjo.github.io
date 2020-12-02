@@ -2,7 +2,7 @@
 layout: tag-blog
 title: Clean Code
 slug: cc
-category: gd
+category: dev
 menu: false
-order: 1
+order: 3
 ---

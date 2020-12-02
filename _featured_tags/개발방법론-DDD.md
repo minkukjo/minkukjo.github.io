@@ -2,7 +2,7 @@
 layout: tag-blog
 title: DDD
 slug: ddd
-category: gd
+category: dev
 menu: false
 order: 1
 ---
