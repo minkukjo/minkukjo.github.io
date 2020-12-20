@@ -7,11 +7,11 @@ order: 10
 
 ## 소개
 
-안녕하세요 매일 도전하는 0년차 개발자 조민국입니다.
+안녕하세요 **도전하는 개발자** 조민국입니다.
 
 하나를 공부해도 깊게 공부하려고 노력하고 새로운 기술을 배우는 것을 즐기고 좋아합니다.
 
-현재는 카카오 엔터프라이즈에서 서버 개발팀에서 신입 개발자로 근무하고 있습니다.
+현재는 카카오 엔터프라이즈에서 서버 개발팀에서 서버 개발자로 근무하고 있습니다.
 
 재사용성 높고 확장 가능성 높은 코드와 안정적인 서비스를 구축하는 것에 많은 고민을 하며 배우고 있습니다.
 
@@ -27,14 +27,15 @@ order: 10
 
 ### Back Framework & Language
 
-- Springboot 2.3.x
+- Springboot 2.4.x
+- Spring Security
 - Spring Data JPA
 - Spring Kafka
 - Spring Batch
 - Nest.js
 - JUnit 5, Mockito
-- Java (8, 11, 14)
-- Kotlin (1.3.72)
+- Java (8, 11, 14) - 현재 14 사용 중
+- Kotlin (1.4.2)
 - Go
 
 ### Front Framework & Language
@@ -42,13 +43,12 @@ order: 10
 - Vue.js
 - React.js
 - Javascript
-- Typescript
+- Typescript (4.x)
 
 ### Devops & Cloud
 
 - Docker
 - Kubernetes
-- Google Cloud Platform(GCE, GKE)
 - Jenkins
 - Ansible
 - Github Actions
@@ -56,6 +56,17 @@ order: 10
 - Fluentd
 - Kafka
 - Bamboo
+- MySql
+- Redis
+
+### Public Cloud
+
+- AWS ( EC2, CodeDeploy )
+- Google Cloud Platform(GCE, GKE, CloudSQL, AppEngine)
+
+### Private Cloud
+
+- DKOS V3 ( 카카오 사내 쿠버네티스 클라우드 서비스 )
 
 ## 서식지
 
@@ -77,7 +88,7 @@ order: 10
 
 - **카카오 엔터프라이즈** 백엔드 전환형 인턴 - 2020.03.02 ~ 2020.06.01
 
-- **카카오 엔터프라이즈** AI 서비스 플랫폼실 서버 개발팀 소프트웨어 엔지니어 - 2020.06.02 ~
+- **카카오 엔터프라이즈** 비즈니스 플랫폼실 비즈 플랫폼 개발팀 소프트웨어 엔지니어 - 2020.06.02 ~ 재직 중
 
 ## 수상 내역
 
@@ -129,26 +140,28 @@ order: 10
   - [프론트 저장소](https://github.com/depromeet/8th-final-3team-front)
     - 기술 스택 : React.js, Typescript
   - [백엔드 저장소](https://github.com/depromeet/8th-final-3team-back)
-    - 기술 스택 : Kotlin, Springboot, Fuel
+    - 기술 스택 : Node.js, Javascript, GCP AppEngine
   - 좋았던 점
     - 처음으로 디자이너와 소통하며 개발하는 법을 경험
+    - 팀에 함께 개발할 프론트 개발자가 없어서 회사 동기 데니스와 함께 코딩을 하며 프로늩 개발에 대해 배운 것
   - 아쉬웠던 점
     - 혼자 개발해서 코드 리뷰를 주고 받지 못한 부분
     - 프론트 코딩 방법을 몰라서 코드가 지저분한 부분
+    - 일정이 급해서 코드를 예쁘게 짜지 못한 점
     - Styled Component가 아닌 CSS로 마크업을 한 부분
 
 ## 발표
 
 <img width="850" alt="스크린샷 2020-11-24 오후 11 28 13" src="https://user-images.githubusercontent.com/43809168/100107185-bae8be80-2eac-11eb-9aa8-c9ae26cfa3d7.png">
 
-- [GDG Campus 인턴 경험 발표](https://festa.io/events/1118?fbclid=IwAR3ZbOFO6raTOddnZO6kdtxn74ig-vFH9-HkXfIlPG05hTeNn4oc4scYZzs)
+- [GDG Campus, 삼성, 네이버, 카카오 세 번의 인턴을 하며 내가 배운 것들](https://festa.io/events/1118?fbclid=IwAR3ZbOFO6raTOddnZO6kdtxn74ig-vFH9-HkXfIlPG05hTeNn4oc4scYZzs)
   - 98% 청중이 내 발표를 잘 들었다고 투표
 
 ## 기술 블로그 기고
 
 <img width="1434" alt="스크린샷 2020-11-24 오후 11 21 37" src="https://user-images.githubusercontent.com/43809168/100106924-73fac900-2eac-11eb-8f07-a50d0c0711d0.png">
 
-- [기술 블로그 Tech &에 기고](https://tech.kakaoenterprise.com/82?category=882489)
+- [신입 개발자의 좌충우돌 문제 해결기](https://tech.kakaoenterprise.com/82?category=882489)
 
 ## 하고싶은 말
 
