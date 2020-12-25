@@ -25,21 +25,7 @@ GCP에서 제공하는 CloudSQL은 HA, 모니터링, 알람 등 여러가지 기
 
 본 글은 MySQL 도커 이미지파일을 GCE 인스턴스로 배포해서 가볍게 사용해보는 예제를 다루고 있다.
 
-## GCP 컨테이너 레지스트리에 MySQL 이미지 업로드
-
-MySQL 도커 이미지를 셋팅 후 GCP에 업로드해주자.
-
-만들기 전에 tag를 수정해주자.
-
-```bash
-docker image tag test-mysql:latest gcr.io/amugeonago/mysql
-```
-
-만들어진 이미지를 GCP 컨테이너 이미지 저장소에 푸시해주자.
-
-```bash
-docker push gcr.io/amugeonago/mysql
-```
+## GCP에서 Mysql 도커 이미지를 띄워보자
 
 그리고 인스턴스를 하나 만든다 사양은 DB 하나 동작할거라 가벼운 걸로 만들었다.
 
@@ -86,4 +72,4 @@ GCP 내부에서 같은 프로젝트라고 하더라도 VM 끼리 통신시에�
 
 <https://velog.io/@pop8682/Docker-Cannot-connect-to-the-Docker-daemon-at-unixvarrundocker.sock.-Is-the-docker-daemon-running-%EC%97%90%EB%9F%AC-%ED%95%B4%EA%B2%B0>
 
-https://whitechoi.tistory.com/23
+<https://whitechoi.tistory.com/23>
