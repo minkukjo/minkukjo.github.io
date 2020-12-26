@@ -68,6 +68,12 @@ GCP 내부에서 같은 프로젝트라고 하더라도 VM 끼리 통신시에�
 
 이 경우에도 외부 인터넷이 아닌 구글 클라우드의 내부 광케이블 네트워크를 이용해 통신하므로 속도, 보안, 비용적 부분에서 상당 수 이점을 얻을 수 있다고 한다.
 
+```bash
+docker run -d -p 3307:3306 -e MYSQL_ROOT_PASSWORD=1234 docker.io/mysql
+```
+
+마지막으로 도커 명령어를 실행해서 도커를 실행시켜주자.
+
 ## Reference
 
 <https://velog.io/@pop8682/Docker-Cannot-connect-to-the-Docker-daemon-at-unixvarrundocker.sock.-Is-the-docker-daemon-running-%EC%97%90%EB%9F%AC-%ED%95%B4%EA%B2%B0>
