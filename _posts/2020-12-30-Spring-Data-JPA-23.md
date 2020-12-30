@@ -73,7 +73,7 @@ findMember.getAddressHistory().add(new Address("newCity1","street","10000")); //
 
 왜 그럴까?
 
-결론적으로는 DB에 AddHistory에는 old2dㅘ newCity1이 추가되어있기는 하다.
+결론적으로는 DB에 AddHistory에는 old2와 newCity1이 추가되어있기는 하다.
 
 값은 제대로 들어가긴 했는데, 인서트가 쿼리가 두 번 날아가는 것은 아무래도 이상하다.
 
