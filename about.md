@@ -27,36 +27,37 @@ order: 10
 
 ### Server Framework
 
-- Springboot 2.4.x
+- Springboot 2.4.x ❤️
 - Spring MVC
 - Spring Security
 - Spring Data JPA
 - Spring Kafka
 - Spring Batch
-- Nest.js
-- JUnit 5, Mockito
+- Nest.js ❤️
+- JUnit 5, Mockito ❤️
+- go-chi
 
 ### Front Framework
 
 - Vue.js
-- React.js
+- React.js ❤️
 
 ### Programming Language
 
 - C, C++
 - Java (8, 11, 14) - 현 회사에서 14 사용 중
-- Kotlin (1.4.2) :heart:
+- Kotlin (1.4.2) ❤️
 - Go
-- Typescript (4.x) :heart:
+- Typescript (4.x) ❤️
 - Javascript (ESMA 6)
 
 ### Devops
 
 - Docker
-- Kubernetes
+- Kubernetes ❤️
 - Jenkins
 - Ansible
-- Github Actions
+- Github Actions ❤️
 - Elastic Search + Kibana
 - Fluentd
 - Kafka
@@ -67,11 +68,11 @@ order: 10
 ### Public Cloud
 
 - AWS ( EC2, CodeDeploy )
-- Google Cloud Platform(GCE, GKE, CloudSQL, AppEngine)
+- Google Cloud Platform(GCE, GKE, CloudSQL, AppEngine) ❤️
 
 ### Private Cloud
 
-- DKOS V3 ( 카카오 사내 쿠버네티스 클라우드 서비스 )
+- DKOS V3 ( 카카오 사내 쿠버네티스 클라우드 서비스 ) ❤️
 
 ## 서식지
 
