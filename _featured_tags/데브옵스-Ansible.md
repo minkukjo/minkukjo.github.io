@@ -4,6 +4,6 @@ title: Ansible
 slug: ansible
 category: devops
 menu: false
-order: 4
+order: 2
 header-img: '/img/ansible-logo.png'
 ---

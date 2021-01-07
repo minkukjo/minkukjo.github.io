@@ -4,6 +4,6 @@ title: Docker
 slug: docker
 category: devops
 menu: false
-order: 2
+order: 4
 header-img: '/img/docker-logo.png'
 ---

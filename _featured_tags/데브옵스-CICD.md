@@ -4,6 +4,6 @@ title: CI/CD
 slug: cicd
 category: devops
 menu: false
-order: 1
+order: 3
 header-img: '/img/devops-logo.png'
 ---
