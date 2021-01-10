@@ -17,7 +17,7 @@ Spring Security는 애플리케이션의 보안을 쉽게 구성할 수 있게 �
 
 이러한 인증의 흐름을 그림으로 표현하면 아래와 같다.
 
-<img width="1488" alt="스크린샷 2021-01-10 오후 8 06 57" src="https://user-images.githubusercontent.com/43809168/104121129-70999f00-537f-11eb-8e6f-568dda5e672d.png">
+<img width="1483" alt="스크린샷 2021-01-10 오후 9 40 03" src="https://user-images.githubusercontent.com/43809168/104123093-6762ff00-538c-11eb-9e42-74c66ee318bb.png">
 
 시나리오의 흐름을 보면 다음과 같다.
 
