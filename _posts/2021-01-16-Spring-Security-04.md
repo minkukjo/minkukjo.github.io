@@ -22,7 +22,6 @@ comments: false
 그 중에서도 시큐리티에 관련된 클래스들도 있는데 아래와 같다.
 
 ```
-
 org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration,\
 org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration,\
 org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration,\
@@ -321,8 +320,6 @@ class WebSecurityConfiguration : WebSecurityConfigurerAdapter() {
 `LoginUrlAuthenticationEntryPoint`이 로그인 url로 리다이렉트 했다면,
 
 `BasicAuthenticationEntryPoint`의 경우 헤더에 값을 채워서 응답을 반환해준다.
-
-다음 시간에는 `HttpBasic Authentication`의 문제점에 대해서 이야기해보고, `Digest Authentication`을 적용해보자.
 
 ## Reference
 
