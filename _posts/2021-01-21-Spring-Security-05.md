@@ -72,8 +72,6 @@ Spring Security에서는 마지막 과정의 Profile을 `Principal`에서 관리
 
 이러한 과정을 `Authorization Code Grant`라고 부른다.
 
-**Authorization Server**에게
-
 ## Reference
 
 [유데미 스프링 시큐리티 강의](https://www.udemy.com/course/spring-boot-security-and-oauth2)
