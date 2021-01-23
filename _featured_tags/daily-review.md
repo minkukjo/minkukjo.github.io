@@ -1,7 +1,7 @@
 ---
 layout: tag-blog
 title: Review
-slug: daily
+slug: review
 category: life
 menu: false
 order: 1
