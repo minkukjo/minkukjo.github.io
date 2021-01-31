@@ -21,13 +21,13 @@ order: 10
 
 무덤에 들어가기 직전까지 코딩하는 것이 꿈입니다.
 
-## Currently Interesting Technology
+## Currently Interesting Technologies
 
 - Spring Framework
 - Kotlin
 - TypeScript
 - React.js
-- Coatiner & Kubernetes
+- Kubernetes
 
 ## 서식지
 
