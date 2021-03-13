@@ -9,9 +9,11 @@ comments: false
 
 ## GCP BigQuery 실습
 
-<img width="1250" alt="스크린샷 2021-03-13 오후 9 02 03" src="https://user-images.githubusercontent.com/43809168/111033719-f906ef80-8455-11eb-8ba1-d1fb645a0e66.png">
+<img width="1275" alt="스크린샷 2021-03-14 오전 12 52 34" src="https://user-images.githubusercontent.com/43809168/111040496-80645b00-8476-11eb-8c9a-cae5fe13bc2b.png">
 
-<img width="1283" alt="스크린샷 2021-03-13 오후 10 22 15" src="https://user-images.githubusercontent.com/43809168/111033720-fa381c80-8455-11eb-8890-7e8a234ca4da.png">
+<img width="1253" alt="스크린샷 2021-03-14 오전 12 52 30" src="https://user-images.githubusercontent.com/43809168/111040502-83f7e200-8476-11eb-924e-fd71c77ffae8.png">
+
+<img width="1277" alt="스크린샷 2021-03-14 오전 12 52 23" src="https://user-images.githubusercontent.com/43809168/111040503-85290f00-8476-11eb-98bf-4c774464f409.png">
 
 GCP에서 제공하는 BigQuery를 사용해보았다.
 
