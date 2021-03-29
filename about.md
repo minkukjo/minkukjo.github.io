@@ -80,11 +80,13 @@ order: 10
   - Spring Data JPA
   - Spring Data Redis
   - Spring Security
+  - Gradle
   - JUnit 5
 
 - 서브 서비스 기술 스택
 
   - Typescript 3.9
+  - Javascript
   - Nest.js
   - typeorm
 
