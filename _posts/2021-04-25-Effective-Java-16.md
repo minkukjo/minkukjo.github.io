@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Effective Java 03 - item 14 -
+title: Kafka
 subtitle: ''
 categories: language
 tags: java
