@@ -24,6 +24,7 @@ order: 10
 ## Currently Interesting Technologies
 
 - Spring Framework
+- Java
 - Kotlin
 - TypeScript
 - React.js
