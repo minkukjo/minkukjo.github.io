@@ -54,7 +54,9 @@ order: 10
 
 ## 자격증
 
--
+<img width="1045" alt="스크린샷 2021-05-13 오후 11 06 25" src="https://user-images.githubusercontent.com/43809168/118144463-7398bf00-b447-11eb-9586-d4529e43049c.png">
+
+- CNCF 주관 공인 쿠버네티스 관리자 자격증 CKA 2021-05-13 합격
 
 ## 수상 내역
 
