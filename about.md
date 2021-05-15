@@ -21,7 +21,7 @@ order: 10
 
 무덤에 들어가기 직전까지 코딩하는 것이 꿈입니다.
 
-## Currently Interesting Technologies
+## 관심있는 기술들
 
 - Spring Framework
 - Java
@@ -72,7 +72,7 @@ order: 10
 
 ## 프로젝트
 
-### 카카오 엔터프라이즈 계정 서비스 Kakaoi Account 개발
+### 전 세계에 존재하지않는 기업과 일반 사용자를 위한 계정 체계 서비스 Kakao i Account 개발
 
 서비스 도메인 : <https://account.kakaoi.ai/>
 
@@ -174,8 +174,6 @@ order: 10
 
 - [신입 개발자의 좌충우돌 문제 해결기](https://tech.kakaoenterprise.com/82?category=882489)
 
-## 하고싶은 말
+## 연락처
 
-개발자들과 티타임 갖는 것을 좋아합니다.
-
-궁금한점이 있거나 저와 친해지고 싶으시다면 언제든 harrycode@kakao.com으로 연락주세요.
+email : harrycode@kakao.com
