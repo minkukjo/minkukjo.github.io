@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Effective Java 01
+title: Effective Java 01 이 책을 통해 배울 수 있는 것들
 subtitle: ''
 categories: language
 tags: java
