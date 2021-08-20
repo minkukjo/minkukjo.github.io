@@ -161,6 +161,14 @@ order: 10
   - 일정이 급해서 코드를 예쁘게 짜지 못한 점
   - Styled Component가 아닌 CSS로 마크업을 한 부분
 
+### 예비 신혼 부부를 위한 플래너 플랫폼 `피치 플래너` 서비스의 프론트 개발
+
+- 넥스터즈 19기 활동
+
+- 주소 : <https://peachplanner.com>
+
+- 저장소 : <https://github.com/Nexters/peach-planner-front>
+
 ## 발표
 
 <img width="850" alt="스크린샷 2020-11-24 오후 11 28 13" src="https://user-images.githubusercontent.com/43809168/100107185-bae8be80-2eac-11eb-9aa8-c9ae26cfa3d7.png">
