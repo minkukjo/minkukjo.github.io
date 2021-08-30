@@ -169,6 +169,13 @@ order: 10
 
 - 저장소 : <https://github.com/Nexters/peach-planner-front>
 
+- 좋았던 점
+  - 뛰어난 프론트엔드 개발자와의 협업
+  - 컴포넌트 분리의 기본을 배울 수 있었음
+  - 협업을 위한 마크업 컨벤션을 정해보는 경험
+
+- 아쉬웠던 점
+  - 없음 넥스터즈 최고
 ## 발표
 
 <img width="850" alt="스크린샷 2020-11-24 오후 11 28 13" src="https://user-images.githubusercontent.com/43809168/100107185-bae8be80-2eac-11eb-9aa8-c9ae26cfa3d7.png">
