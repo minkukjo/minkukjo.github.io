@@ -4,6 +4,7 @@
 #  User configuration
 title: 도전하는 개발자
 
+future: true
 # The unique resource location of your page.
 # Set to `https://<username>.github.io` when hosting on GitHub Pages
 url: https://minkukjo.github.io
