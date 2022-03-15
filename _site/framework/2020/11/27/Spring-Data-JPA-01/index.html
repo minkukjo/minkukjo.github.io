@@ -1,0 +1,1677 @@
+<!DOCTYPE html>
+<html lang="en"><!--
+ __  __                __                                     __
+/\ \/\ \              /\ \             __                    /\ \
+\ \ \_\ \   __  __    \_\ \      __   /\_\      __       ___ \ \ \/'\
+ \ \  _  \ /\ \/\ \   /'_` \   /'__`\ \/\ \   /'__`\    /'___\\ \ , <
+  \ \ \ \ \\ \ \_\ \ /\ \L\ \ /\  __/  \ \ \ /\ \L\.\_ /\ \__/ \ \ \\`\
+   \ \_\ \_\\/`____ \\ \___,_\\ \____\ _\ \ \\ \__/.\_\\ \____\ \ \_\ \_\
+    \/_/\/_/ `/___/> \\/__,_ / \/____//\ \_\ \\/__/\/_/ \/____/  \/_/\/_/
+                /\___/                \ \____/
+                \/__/                  \/___/
+
+Powered by Hydejack v6.4.0 (https://qwtel.com/hydejack/)
+-->
+
+
+
+
+
+
+
+
+
+<head>
+  <!-- =============== -->
+<!-- META            -->
+<!-- =============== -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta
+  name="naver-site-verification"
+  content="22c5b4ef3bfda7fc6100671413989219de7a4ac8"
+/>
+<meta property="og:title" content="자바 ORM 표준 JPA 프로그래밍 - SQL의 문제점과 JPA 소개" />
+<meta property="og:type" content="article" />
+
+<!-- =============== -->
+<!-- Google AdSense  -->
+<!-- =============== -->
+<script
+  data-ad-client="ca-pub-8247516864622650"
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+></script>
+
+ 
+<meta
+  property="og:image"
+  content="http://localhost:4000/assets//img/spring-data-logo.png"
+/>
+<br />
+
+
+<meta property="og:image:width" content="640" />
+<meta property="og:image:height" content="360" />
+ 
+<title>자바 ORM 표준 JPA 프로그래밍 - SQL의 문제점과 JPA 소개 &middot; 도전하는 개발자</title>
+ 
+<meta
+  name="description"
+  content="JPA의 등장과 SQL 중심 개발의 문제점
+
+"
+/>
+<meta
+  property="og:description"
+  content="JPA의 등장과 SQL 중심 개발의 문제점
+
+"
+/>
+
+
+
+<!-- =============== -->
+<!-- LINKS           -->
+<!-- =============== -->
+<link rel="canonical" href="http://localhost:4000/framework/2020/11/27/Spring-Data-JPA-01/" />
+<meta property="og:url" content="http://localhost:4000/framework/2020/11/27/Spring-Data-JPA-01/" />
+
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="도전하는 개발자 Feed"
+  href="http://localhost:4000/feed.xml"
+/>
+
+
+<link rel="prev" href="http://localhost:4000/framework/2020/11/27/Spring-Data-JPA-00/" />
+ 
+<link rel="next" href="http://localhost:4000/dev/2020/12/03/CleanCode/" />
+
+
+<link
+  rel="apple-touch-icon"
+  href="http://localhost:4000/apple-touch-icon.png"
+/>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+<!-- Place favicon.ico in the root directory -->
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+<script>
+  !function(n,e){function t(n,e){n.onload=function(){this.onerror=this.onload=null,e(null,n)},n.onerror=function(){this.onerror=this.onload=null,e(new Error("Failed to load "+this.src),n)}}function o(n,e){n.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||(this.onreadystatechange=null,e(null,n))}}n._loaded=!1,n.loadJSDeferred=function(a,d){function r(){n._loaded=!0;var r=e.createElement("script");r.src=a,d&&(("onload"in r?t:o)(r,d),r.onload||t(r,d));var l=e.getElementsByTagName("script")[0];l.parentNode.insertBefore(r,l)}n._loaded?r():n.addEventListener?n.addEventListener("load",r,!1):n.attachEvent?n.attachEvent("onload",r):n.onload=r}}(window,document);
+
+  !function(e){"use strict";var n=function(n,t,o){function i(e){if(a.body)return e();setTimeout(function(){i(e)})}function r(){l.addEventListener&&l.removeEventListener("load",r),l.media=o||"all"}var d,a=e.document,l=a.createElement("link");if(t)d=t;else{var f=(a.body||a.getElementsByTagName("head")[0]).childNodes;d=f[f.length-1]}var s=a.styleSheets;l.rel="stylesheet",l.href=n,l.media="only x",i(function(){d.parentNode.insertBefore(l,t?d:d.nextSibling)});var u=function(e){for(var n=l.href,t=s.length;t--;)if(s[t].href===n)return e();setTimeout(function(){u(e)})};return l.addEventListener&&l.addEventListener("load",r),l.onloadcssdefined=u,u(r),l};"undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this);
+
+  !function(t){if(t.loadCSS){var e=loadCSS.relpreload={};if(e.support=function(){try{return t.document.createElement("link").relList.supports("preload")}catch(t){return!1}},e.poly=function(){for(var e=t.document.getElementsByTagName("link"),r=0;r<e.length;r++){var n=e[r];"preload"===n.rel&&"style"===n.getAttribute("as")&&(t.loadCSS(n.href,n,n.getAttribute("media")),n.rel=null)}},!e.support()){e.poly();var r=t.setInterval(e.poly,300);t.addEventListener&&t.addEventListener("load",function(){e.poly(),t.clearInterval(r)}),t.attachEvent&&t.attachEvent("onload",function(){t.clearInterval(r)})}}}(this);
+
+  window.disablePushState = false;
+  window.disableDrawer = false;
+</script>
+
+<!--[if lt IE 9]>
+  <script src="https://unpkg.com/html5shiv/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+<!-- =============== -->
+<!-- STYLES          -->
+<!-- =============== -->
+<!--[if gt IE 8]><!---->
+<style>
+  
+  article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}*{box-sizing:border-box}html,body{margin:0;padding:0}html{font-size:16px;line-height:1.75}body{color:#333;background-color:#fff;overflow-y:scroll}a{text-decoration:none}.lead{margin-left:-1rem;margin-right:-1rem}img,.img{display:block;max-width:100%;margin-bottom:1rem;border:none}img.lead,.img.lead{max-width:calc(100% + 2rem);width:calc(100% + 2rem)}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-weight:bold;text-rendering:optimizeLegibility}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{margin:1.6rem 0 1rem;line-height:1.6}h1,.h1{font-size:2rem;line-height:1.25}h2,.h2{font-size:1.5rem}h3,.h3{font-size:1.17em}p{margin-top:0;margin-bottom:1rem}p.lead{font-size:1.25rem;font-weight:300;padding:0 1rem}ul,ol,dl{margin-top:0;margin-bottom:1rem}ul,ol{padding-left:1.25rem}hr{position:relative;margin:1.5rem 0;border:0;border-top:1px solid #eee}.hr{padding-bottom:.5rem;border-bottom:1px solid #eee;margin-bottom:1.5rem}h4,h5,h6,.h4,.h5,.h6{margin-bottom:0.5rem;font-size:1rem}table{margin-bottom:1rem;width:100%;width:calc(100% + 2rem);margin-left:-1rem;border:1px solid #e5e5e5;border-collapse:collapse;border-spacing:0}td,th{padding:.25rem .5rem;border:1px solid #e5e5e5}td:first-child,th:first-child{padding-left:1rem}td:last-child,th:last-child{padding-right:1rem}thead+tbody,tbody+tbody,tfoot{border-top:3px double #e5e5e5}tbody tr:nth-child(odd) td,tbody tr:nth-child(odd) th{background-color:#f9f9f9}footer{margin-bottom:2rem}.page,.post{margin-bottom:3em}.page li+li,.post li+li{margin-top:.25rem}.page>header,.post>header{margin-bottom:2rem}.page-title,.post-title{margin-top:0}.post-date{display:block;margin-top:-0.5rem;margin-bottom:1rem;color:#9a9a9a}.related-posts{padding-left:0;list-style:none}.related-posts>li,.related-posts>li+li{margin-top:1rem}.related-posts>li>small,.related-posts>li+li>small{font-size:75%;color:#9a9a9a}.message{margin-bottom:1rem;padding:1rem;color:#787878;background-color:#f9f9f9;margin-left:-1rem;margin-right:-1rem}body,main{position:relative;overflow-x:hidden}@media screen{body::before{content:'';background:#e5e5e5;position:absolute;left:0;top:0;bottom:0}}@media screen and (min-width: 40em){html{font-size:17px}}@media screen and (min-width: 54em){html{font-size:16px}}@media screen and (min-width: 88em){html{font-size:17px}}@media screen and (min-width: 125em){html{font-size:18px}}.sr-only{display:none}.clearfix,.sidebar-social::after,.clearafter::after{content:"";display:table;clear:both}a,.a{position:relative;padding-bottom:.15rem;border-style:hidden}.img{overflow:hidden;background-color:#f9f9f9}.img>img{margin:0;width:100%;height:100%}.sixteen-nine{position:relative}.sixteen-nine::before{display:block;content:"";width:100%;padding-top:56.25%}.sixteen-nine>*{position:absolute;top:0;left:0;right:0;bottom:0}h1+hr,h2+hr,h3+hr,h4+hr,h5+hr,h6+hr{margin-top:0}.fade-in{animation-duration:500ms;animation-name:fade-in;animation-fill-mode:forwards}@keyframes fade-in{from{transform:translateY(-2rem);opacity:0}50%{transform:translateY(-2rem);opacity:0}to{transform:translateY(0);opacity:1}}.mb6{margin-bottom:10rem}.sidebar{color:rgba(255,255,255,0.75);text-align:left}.sidebar::before{content:"";position:absolute;z-index:2;top:0;left:0;bottom:0;right:0;background:linear-gradient(to bottom, rgba(32,32,32,0) 0%, rgba(32,32,32,0.5) 100%)}.sidebar a{color:#fff;border-bottom-color:rgba(255,255,255,0.2)}.right-side{width:100%;margin-left:auto;margin-right:auto}.right-side .ad-first{text-align:center}@media screen{.right-side{max-width:38rem;min-height:100vh}.right-side .ad-second{display:none}}@media screen and (min-width: 54em){.right-side{margin-left:20rem;margin-right:1rem;padding:4rem 1rem 12rem}.right-side .ad-second{text-align:center;display:block}}@media screen and (min-width: 72em){.right-side{margin-left:22rem;max-width:42rem}}@media screen and (min-width: 88em){.right-side{width:162px;margin-left:0rem;margin-right:0rem;padding:0rem;margin-top:10rem;display:block;float:left}}@media screen and (min-width: 96em){.right-side{width:300px;margin-right:0rem}}#_yDrawer{position:relative}@media screen{#_yDrawer{min-height:640px;min-height:100vh}}@media screen and (min-width: 54em){#_yDrawer{width:18rem;margin-left:0}}.sidebar-bg{position:absolute;height:100%;overflow:hidden;top:0;right:0;bottom:0;left:0;background:#202020 center / cover}.sidebar-box{display:flex;justify-content:center}.sidebar-sticky{position:relative;z-index:3}@media screen{.sidebar-sticky{-ms-overflow-style:none;overflow:-moz-scrollbars-none;height:100%;overflow:auto;position:absolute;padding:3rem 0rem;right:2.5rem;left:2.5rem}}.sidebar-sticky::-webkit-scrollbar{display:none}.sidebar-about>h1{color:#fff;font-size:2rem}.sidebar-nav>ul{list-style:none;padding-left:0;margin-bottom:.5rem}a.sidebar-nav-item{width:100%;font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}a.sidebar-nav-subitem{font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}@media screen{.y-drawer-scrim{z-index:2}.y-drawer-content{width:18rem;left:-18rem;z-index:3}}.sidebar-social{margin-bottom:.5rem}.sidebar-social>ul{list-style:none;padding-left:0;margin:0 -.25rem}.sidebar-social>ul>li{float:left}.sidebar-social>ul>li>a{display:inline-block;text-align:center;font-size:1.6rem;line-height:3rem;width:3.1249rem;height:4rem;padding:.5rem 0}.sidebar-social>ul li+li{margin-top:0}.fixed-top{position:fixed;top:0;left:0;width:100%;z-index:1}.navbar>.content{padding-top:0;padding-bottom:0;min-height:0;height:0}.menu{display:inline-block;padding:1.75rem 1.5rem;border-bottom:none;margin-left:-1.5rem;color:#9a9a9a !important}.menu::after{content:"\2630"}@media screen and (min-width: 54em){.menu{padding:1.25rem 1.5rem;position:absolute;left:-9999px}.menu:focus{position:static}}.animation-main{pointer-events:none}.loading{display:none}@media print{.menu{display:none}}.animation-main{opacity:0;will-change:opacity}.loading{position:absolute;top:0;right:0;padding:5.25rem 4.5rem;transform-origin:top right;transform:scale(0.33)}.content{position:relative;margin-left:auto;margin-right:auto;padding:5rem 1rem 12rem}@media screen{.content{min-height:100vh}}@media screen and (min-width: 54em){.content{padding:4rem 1rem 12rem;margin-left:19rem;margin-right:3rem}}@media screen and (min-width: 72em){.content{max-width:42rem;margin-left:21rem}}@media screen and (min-width: 88em){.content{float:left;width:100%;margin-left:22rem;margin-right:5rem}}@media screen and (min-width: 96em){.content{max-width:44rem}}@media screen and (min-width: 102em){.content{margin-left:25rem;margin-right:8rem}}.me{width:6.5rem;height:6.5rem;align-self:center;margin-right:20px;border-radius:100%;position:relative}@media screen and (min-width: 40em){.me{width:7rem;height:7rem}}@media screen and (min-width: 54em){.me{width:6.5rem;height:6.5rem}}@media screen and (min-width: 72em){.me{width:7rem;height:7rem}}main>footer{width:100%;position:absolute;bottom:0;left:0;right:0;padding:0 1rem;color:#9a9a9a;font-size:smaller;text-align:center}main>footer>p{margin-bottom:0}html{font-family:'Sans-serif'}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-family:'Sans-serif'}
+
+</style>
+
+
+<link
+  rel="preload"
+  href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0"
+  as="style"
+  onload="this.rel='stylesheet'"
+/>
+
+<style id="_pageStyle">
+
+.content a{color:#4f86aa;border-color:rgba(79,134,170,0.2)}.content a:hover{border-color:#4f86aa}:focus{outline-color:#4f86aa}::selection{color:#fff;background:#4f86aa}::-moz-selection{color:#fff;background:#4f86aa}
+
+</style>
+
+
+<noscript>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0" />
+    
+  
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Lato"
+  />
+  <style>
+    html { font-family: 'Lato', 'Sans-serif' }
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .heading { font-family: 'Lato', 'Sans-serif' }
+  </style>
+   
+  <link rel="stylesheet" href="http://localhost:4000/assets/icomoon/style.css" />
+</noscript>
+<!--<![endif]-->
+
+</head>
+
+<body>
+  <!-- =============== -->
+<!-- MENU            -->
+<!-- =============== -->
+<div class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <a id="_menu" class="menu no-hover" href="#_title">
+      <span class="sr-only">Menu</span>
+    </a>
+  </div>
+</div>
+
+<!-- =============== -->
+<!-- CONTENT         -->
+<!-- =============== -->
+<div id="_yPushState">
+  <div class="fade-in">
+    <main
+      id="_main"
+      class="content"
+      role="main"
+      data-color="#4f86aa"
+      data-image="/assets/img/bg.jpg"
+    >
+      
+
+<article id="post-framework/2020/11/27/Spring-Data-JPA-01" class="post" role="article">
+  <header>
+    <h1 class="post-title">
+      
+        자바 ORM 표준 JPA 프로그래밍 - SQL의 문제점과 JPA 소개
+        
+    </h1>
+
+    <p class="post-date heading">
+      <time datetime="2020-11-27T00:00:00+09:00">27 Nov 2020</time>
+      
+
+
+
+
+
+
+
+
+
+in <a href="/category/framework/" data-flip="title">Framework</a>
+
+      
+
+
+
+
+
+
+
+
+
+on <a href="/tag/framework-spring-data-jpa/" data-flip="title">Spring Data JPA</a>
+
+    </p>
+
+    
+  <div class="hr" style="padding-bottom:0"></div>
+
+
+  </header>
+  
+
+
+  
+  <div class="markdown-body">
+
+    <!-- 
+    <div class="head-image"><img src="http://localhost:4000/assets//img/spring-data-logo.png" /></div>
+    <br /> -->
+    <style>
+      .myAd1190 {
+        width: 48%;
+        height: 280px;
+      }
+
+      .myAd1290 {
+        width: 48%;
+        height: 280px;
+      }
+
+      @media(max-width: 800px) {
+        .myAd1190 {
+          display: none;
+        }
+
+        .myAd1290 {
+          width: 98%;
+        }
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 300px;
+      }
+
+      .row-center {
+        display: flex;
+        justify-content: center;
+        height: 258px;
+      }
+    </style>
+   
+    <!--<br />-->
+    <h2 id="jpa의-등장과-sql-중심-개발의-문제점">JPA의 등장과 SQL 중심 개발의 문제점</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Member</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">memberId</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">MEMBER</span> <span class="p">(</span> <span class="n">MEMBER_ID</span><span class="p">,</span> <span class="n">NAME</span> <span class="p">)</span> <span class="k">VALUES</span>
+<span class="k">SELECT</span> <span class="n">MEMBER_ID</span><span class="p">,</span> <span class="n">NAME</span> <span class="k">FROM</span> <span class="n">MEMBER</span> <span class="n">M</span>
+<span class="k">UPDATE</span> <span class="n">MEMBER</span> <span class="k">SET</span> <span class="p">...</span>
+</code></pre></div></div>
+
+<p>위는 JPA를 사용하지않는 자바 + SQL 코드이다.</p>
+
+<p>만약 여기서 전화번호 필드가 추가된다면?</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Member</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">memberId</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">tel</span><span class="o">;</span>
+    <span class="o">...</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">MEMBER</span> <span class="p">(</span> <span class="n">MEMBER_ID</span><span class="p">,</span> <span class="n">NAME</span><span class="p">,</span> <span class="n">TEL</span> <span class="p">)</span> <span class="k">VALUES</span>
+<span class="k">SELECT</span> <span class="n">MEMBER_ID</span><span class="p">,</span> <span class="n">NAME</span><span class="p">,</span> <span class="n">TEL</span> <span class="k">FROM</span> <span class="n">MEMBER</span> <span class="n">M</span>
+<span class="k">UPDATE</span> <span class="n">MEMBER</span> <span class="k">SET</span> <span class="p">...</span> <span class="n">TEL</span> <span class="o">=</span> <span class="o">?</span>
+</code></pre></div></div>
+
+<p>이렇게 되면 <strong>객체의 변경</strong>과 <strong>Query의 수정</strong> 두 가지 작업을 모두 해주어야한다.</p>
+
+<p>이는 매우 비효율적이다.</p>
+
+<p>요구 사항은 계속 변한다.</p>
+
+<p>소프트웨어는 계속 변화하며 요구 사항은 어제와 오늘이 다르다.</p>
+
+<p>객체 또한 계속해서 진화하고 변화한다.</p>
+
+<p>이러한 변화에 유연하게 대처하기 위해서 개발자들은 적은 시간에 뻐르게 기능을 추가하고 변경 할 수 있게 개발 해야한다.</p>
+
+<p>관계형 DB에서는 필연적으로 SQL과 객체가 엮이기 마련이다.</p>
+
+<h2 id="객체와-관계형-데이터베이스의-차이">객체와 관계형 데이터베이스의 차이</h2>
+
+<ol>
+  <li>
+    <p>상속</p>
+  </li>
+  <li>
+    <p>연관 관계</p>
+
+    <ul>
+      <li>객체는 <strong>참조</strong>를, 테이블은 <strong>외래키</strong>를 사용한다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>데이터 타입</p>
+  </li>
+  <li>
+    <p>데이터 식별 방법</p>
+  </li>
+</ol>
+
+<h2 id="sql에-맞춰서-객체를-개발하기는-어렵다">SQL에 맞춰서 객체를 개발하기는 어렵다</h2>
+
+<p>왜냐하면 SQL을 기반으로 해서 객체답게 모델링을 하려면 너무 많은 코드와 작업이 필요로해진다.</p>
+
+<p>사람들은 객체를 자바 컬렉션에 저장 하듯이 DB에 저장할 수 없을까? 라는 고민을 하기 시작한다.</p>
+
+<h2 id="jpa의-등장">JPA의 등장</h2>
+
+<ul>
+  <li>자바 진영 ORM 표준</li>
+</ul>
+
+<h3 id="orm">ORM</h3>
+
+<ul>
+  <li>Object-Relational Mapping (객체 관계 매핑)</li>
+  <li>객체는 객체대로 설계</li>
+  <li>ORM 프레임워크가 중간에서 매핑</li>
+  <li>대중적인 언어에는 대부분 ORM 기술이 존재</li>
+</ul>
+
+<h2 id="jpa는-애플리케이션과-jdbc-사이에서-동작">JPA는 애플리케이션과 JDBC 사이에서 동작</h2>
+
+<p>Java 애플리케이션 &lt;-&gt; JPA &lt;-&gt; JDBC API &lt;-&gt; DB</p>
+
+<h2 id="저장은-어떻게">저장은 어떻게</h2>
+
+<p>유저가 Entity를 저장하는 메소드를 사용하면 JPA가 Entity 객체를 분석하여 적절한 INSERT 쿼리를 만들어내고 JDBC API를 사용해 DB에 저장함.</p>
+
+<p>JPA는 결국 패러다임의 불일치를 해결해준다.</p>
+
+<h2 id="조회는-어떻게">조회는 어떻게</h2>
+
+<p>JPA가 멤버 객체를 보고 적절한 SELECT 쿼리를 만들어낸다.</p>
+
+<p>ResultSet을 객체에 매핑한 후 객체에 매핑해서 반환해준다.</p>
+
+<p>이 역시도 패러다임의 불일치를 해결해준다.</p>
+
+<h2 id="jpa-소개">JPA 소개</h2>
+
+<p>EJB (틀딱 자바 표준) -&gt; 하이버네이트(오픈소스) -&gt; JPA (자바 표준)</p>
+
+<h3 id="자바-진영-orm의-역사">자바 진영 ORM의 역사</h3>
+
+<p>EJB가 자바 표준으로 만들고 영업을 오지게 잘했으나 직접 써보면 개구림, 성능도 안나옴.</p>
+
+<p>기술 자체가 아마추어적이고, 인터페이스도 엄청나게 구현해야함. 기능도 잘 안동작함.</p>
+
+<p>이 EJB를 쓰던 SI 개발자 개빈 킹이 <strong>내가 만들어도 이거보단 낫겠다</strong>하고 만든게 그 유명한 <strong>Hibernate</strong>다.</p>
+
+<p>EJB가 망하고 하이버네이트가 쫙 든다.</p>
+
+<p>자바 진영은 크게 반성하고 <strong>Hibernate</strong>를 만든 개빈 킹을 잡아와서 복사 붙여넣기 수준으로 만든게 JPA다.</p>
+
+<p>하이버네이트가 오픈소스이므로 JPA가 하이버네이트를 거의 가져다 왔지만 자바 진영의 표준이 될 때는 어느 정도 다듬게 된다.</p>
+
+<h3 id="또-하나의-재밌는-이야기">또 하나의 재밌는 이야기</h3>
+
+<p>EJB에서도 지금의 스프링 IoC 컨테이너와 유사한 기능이 있었지만 너무 너무 구렸었다.</p>
+
+<p>이 때 역시나 또 한명의 SI 개발자가 EJB를 보고 <strong>이건 아니다</strong> 싶어서 만든게 바로 지금 자바 진영의 애플리케이션 프레임워크 표준이라고 할 수 있는 <strong>Spring Framework</strong>이며 이 개발자가 바로 <strong>로드 존슨</strong>이다.</p>
+
+<h2 id="jpa는-표준-명세">JPA는 표준 명세</h2>
+
+<p>JPA는 사실상 인터페이스의 모음이다.</p>
+
+<p>이 JPA 스펙을 구현한 몇 가지들이 있는데, 80~90%는 하이버네이트를 쓴다.</p>
+
+<h2 id="jpa와-패러다임의-불일치-해결">JPA와 패러다임의 불일치 해결</h2>
+
+<p><img width="754" alt="스크린샷 2020-11-28 오전 1 23 42" src="https://user-images.githubusercontent.com/43809168/100468763-65184e80-3118-11eb-96db-04feac813c1e.png" /></p>
+
+<p>객체 지향 언어에는 <strong>상속</strong>이 존재하지만 RDBMS에서 <strong>상속</strong>이란 개념은 존재하지 않는다.</p>
+
+<p>그나마 비슷하게 흉내내볼만한 것이 바로 Table 슈퍼타입, 서브타입 관계이다.</p>
+
+<p>JPA의 상속은 <code class="language-plaintext highlighter-rouge">jpa.persist(album)</code>으로 전달하면</p>
+
+<p>JPA는</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">ITEM</span> <span class="p">...</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">ALBUM</span> <span class="p">...</span>
+</code></pre></div></div>
+
+<p>과 같이 쿼리문을 생성해준다.</p>
+
+<p>조회는 어떨까? <code class="language-plaintext highlighter-rouge">jpa.find(Album.class, albumId);</code>를 전달하면</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">I</span><span class="p">.</span><span class="o">*</span><span class="p">,</span> <span class="n">A</span><span class="p">.</span><span class="o">*</span>
+<span class="k">FROM</span> <span class="n">ITEM</span> <span class="n">I</span>
+<span class="k">JOIN</span> <span class="n">ALBUM</span> <span class="n">A</span> <span class="k">ON</span> <span class="n">I</span><span class="p">.</span><span class="n">ITEM_ID</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">ITEM_ID</span>
+</code></pre></div></div>
+
+<p>라는 쿼리를 생성해준다.</p>
+
+<h2 id="jpa의-성능-최적화-기능">JPA의 성능 최적화 기능</h2>
+
+<p><strong>JPA를 쓰면 기존 MyBatis나 SQL 기반 보다 성능이 더 떨어지지는 않을까</strong>? 라고 걱정할 수 있다.</p>
+
+<p>항상 소프트웨어에서는 계층 사이에 하나의 중간 계층이 생기면 <strong>무언가</strong> 할 수 있는 것이 생긴다.</p>
+
+<p><strong>모아서 쏘는 버퍼링</strong>과 <strong>읽을 때 캐싱하는 것</strong>을 할 수 있다.</p>
+
+<p>이는 CPU와 메모리 구조도 마찬가지이다.</p>
+
+<p>JPA에서도 마찬가지이다. JPA는 애플리케이션과 JDBC API 간의 징검다리 역할을 하기 때문에 잘만 쓴다면 성능을 더욱 끌어올릴 수 있다.</p>
+
+<p>그 장점들을 지금부터 하나씩 살펴보자</p>
+
+<h3 id="1차-캐시와-동일성-보장">1차 캐시와 동일성 보장</h3>
+
+<ol>
+  <li>같은 트랜잭션 안에서는 같은 엔티티를 반환한다. -&gt; 약간의 조회 성능을 향상할 수 있다.</li>
+</ol>
+
+<p>아래의 예시를 보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">memberId</span> <span class="o">=</span> <span class="s">"100"</span><span class="o">;</span>
+<span class="nc">Member</span> <span class="n">m1</span> <span class="o">=</span> <span class="n">jpa</span><span class="o">.</span><span class="na">find</span><span class="o">(</span><span class="nc">Member</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">memberId</span><span class="o">);</span> <span class="c1">// SQL</span>
+<span class="nc">Member</span> <span class="n">m2</span> <span class="o">=</span> <span class="n">jpa</span><span class="o">.</span><span class="na">find</span><span class="o">(</span><span class="nc">Member</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">memberId</span><span class="o">);</span> <span class="c1">// 캐시</span>
+
+<span class="n">println</span><span class="o">(</span> <span class="n">m1</span> <span class="o">==</span> <span class="n">m2</span> <span class="o">)</span> <span class="c1">// true</span>
+</code></pre></div></div>
+
+<p>위와 같이 캐싱이 되어지고, <strong>SQL은 한 번만</strong> 실행한다.</p>
+
+<p>굉장히 짧은 시간의 캐싱이라 실무에서 엄청나게 이점이 있다고 할 정도까지는 아니다.</p>
+
+<ol>
+  <li>DB Isolation Level이 Read Commit이어도 애플리케이션에서 Repeatable Read를 보장한다.</li>
+</ol>
+
+<h3 id="트랜잭션을-지원하는-쓰기-지연---insert">트랜잭션을 지원하는 쓰기 지연 - INSERT</h3>
+
+<ol>
+  <li>
+    <p>트랜잭션을 커밋할 때까지 INSERT SQL을 모음</p>
+  </li>
+  <li>
+    <p>JDBC BATCH SQL 기능을 사용해서 한번에 SQL 전송</p>
+  </li>
+</ol>
+
+<p>JPA에서 옵션 하나만 켜주면, BATCH SQL 기능을 사용해 모아진 쿼리를 한방에 보낸다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">transaction</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span> <span class="c1">// 트랜잭션 시작</span>
+
+<span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">memberA</span><span class="o">);</span>
+<span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">memberB</span><span class="o">);</span>
+<span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">memberC</span><span class="o">);</span>
+<span class="c1">// 여기까지 INSERT SQL을 DB에 보내지 않는다.</span>
+
+<span class="c1">// 커밋하는 순간 DB에 INSERT SQL을 모아서 보낸다.</span>
+<span class="n">transaction</span><span class="o">.</span><span class="na">commit</span><span class="o">();</span> <span class="c1">// 트랜잭션 커밋</span>
+</code></pre></div></div>
+
+<h3 id="트랜잭션을-지원하는-쓰기-지연---update">트랜잭션을 지원하는 쓰기 지연 - UPDATE</h3>
+
+<ol>
+  <li>
+    <p>UPDATE, DELETE로 인한 ROW락 시간 최소화</p>
+  </li>
+  <li>
+    <p>트랜잭션 커밋 시 UPDATE, DELETE SQL 실행하고, 바로 커밋</p>
+  </li>
+</ol>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">transaction</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span> <span class="c1">// 트랜잭션 시작</span>
+
+<span class="n">changeMember</span><span class="o">(</span><span class="n">memberA</span><span class="o">;</span>
+<span class="n">deleteMember</span><span class="o">(</span><span class="n">memberB</span><span class="o">);</span>
+<span class="n">비즈니스로직</span> <span class="n">수행</span><span class="o">();</span> <span class="c1">// 비즈니스 로직 수행 동안 DB 로우 락이 걸리지 않는다.</span>
+
+<span class="c1">// 커밋하는 순간 DB에 UPDATE, DELETE SQL을 보낸다.</span>
+<span class="n">transaction</span><span class="o">.</span><span class="na">commit</span><span class="o">();</span> <span class="c1">// 트랜잭션 커밋</span>
+</code></pre></div></div>
+
+<h3 id="지연-로딩과-즉시-로딩">지연 로딩과 즉시 로딩</h3>
+
+<p>지연 로딩 : 객체가 실제 사용될 때 로딩</p>
+
+<p>즉시 로딩 : JOIN SQL로 한번에 연관된 객체까지 미리 조회</p>
+
+<h2 id="reference">Reference</h2>
+
+<p>인프런 김영한님의 자바 ORM 표준 JPA 프로그래밍 - 기본편</p>
+
+    <br />
+    <br />
+  </div>
+  
+
+</article>
+
+<!--<hr class="dingbat" />-->
+<!--
+<div class="share">
+  <h2>Share this post</h2>
+  <div class="share-body">
+    <a href="http://twitter.com/share?text=자바 ORM 표준 JPA 프로그래밍 - SQL의 문제점과 JPA 소개&amp;url=http://localhost:4000/framework/2020/11/27/Spring-Data-JPA-01/"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="icon-twitter">
+      </span>
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/framework/2020/11/27/Spring-Data-JPA-01/"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="icon-facebook">
+      </span>
+    </a>
+  </div>
+</div>
+-->
+<br />
+
+
+
+
+<aside class="related" role="complementary">
+  <h2 class="hr">Related Posts</h2>
+
+  <ul class="related-posts">
+    
+      
+      
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/framework/2022/03/16/JPA-31/" data-flip="title">
+    <span>시간 관련 트러블 슈팅</span>
+  </a>
+  <small><time datetime="2022-03-16T00:00:00+09:00">
+    16 Mar 2022
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/framework/2021/05/23/Spring/" data-flip="title">
+    <span>Spring의 @Transactional과 AOP 그리고 CGLib와 Dynamic Proxy(JDK Proxy)</span>
+  </a>
+  <small><time datetime="2021-05-23T00:00:00+09:00">
+    23 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/framework/2021/05/22/Spring/" data-flip="title">
+    <span>Springboot 테스트 코드 한글 깨짐 현상 (feat. JUnit 5)</span>
+  </a>
+  <small><time datetime="2021-05-22T00:00:00+09:00">
+    22 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+      
+    
+  </ul>
+</aside>
+  <aside class="comments" role="complementary">
+  <h2>Comments</h2>
+  <hr/>
+
+  <script src="https://utteranc.es/client.js"
+    repo="minkukjo/minkukjo.github.io"
+    issue-term="title"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</aside>
+
+       <footer>
+  <hr/>
+  
+    <p>© 2022. by minkuk</p>
+
+  
+  <p>
+    <code>Powered by <a href="https://minkukjo.github.io/">minkuk</a></code>
+  </p>
+</footer>
+
+    </main>
+    <div class="right-side">
+  <div class="add-first">
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+    ></script>
+    <!-- 우측 광고 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="9124111205"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+  <br />
+  <br />
+  <div class="add-second">
+    <!-- 우측 광고2 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="5156946039"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+
+  </div>
+  <div id="_yDrawer">
+  <div id="_sidebar" class="sidebar">
+    <div class="sidebar-bg" style="background-color:#4f86aa;background-image:url(/assets/img/bg.jpg)"></div>
+    <header class="sidebar-sticky" role="banner">
+      <br/>
+      <div class="sidebar-about">
+        <h1><a id="_title" href="/">도전하는 개발자</a></h1>
+        
+
+      </div>
+
+      <br/>
+      <br/>
+      <nav class="sidebar-nav heading" role="navigation">
+        <span class="sr-only">Navigation:</span>
+<ul>
+  
+
+  
+
+  
+  
+  
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-1"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/life/">Life</a>
+       <label class="folder" for="list-item-1">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-daily/">Daily</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-review/">Review</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-books/">Books</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-2"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/computer-science/">Computer Science</a>
+       <label class="folder" for="list-item-2">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-algorithm/">Algorithm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-oop/">OOP</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-network/">Network</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-db/">Database</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-ai/">AI</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-security/">Security</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-distribution-system/">Distribution System</a>
+             </li>
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-3"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/programming-language/">Programming Language</a>
+       <label class="folder" for="list-item-3">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-kotlin/">Kotlin</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-go/">Go</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-java/">Java</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-javascript/">JavaScript</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-typescript/">TypeScript</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-4"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/framework/">Framework</a>
+       <label class="folder" for="list-item-4">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring/">Spring</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-data-jpa/">Spring Data JPA</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-security/">Spring Security</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-junit/">JUnit</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-5"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/language/">Language</a>
+       <label class="folder" for="list-item-5">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/language-english/">English</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-6"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/development/">Development</a>
+       <label class="folder" for="list-item-6">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-ddd/">DDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-tdd/">TDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-clean-code/">Clean Code</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-git/">Git</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-7"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/devops/">Devops</a>
+       <label class="folder" for="list-item-7">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-alarm/">Alarm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-ansible/">Ansible</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-cicd/">CI/CD</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-docker/">Docker</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-es/">Elasticsearch</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-k8s/">Kubernetes</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-public-cloud/">Public Cloud</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-kafka/">Kafka</a>
+             </li>
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-8"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/opensource/">Open Source</a>
+       <label class="folder" for="list-item-8">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/opensource-opensource/">Open Source</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-9"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/about/">About</a>
+       
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+</ul>
+
+      </nav>
+    <br/>
+    <br/>
+      <div class="sidebar-box">
+        
+      </div>
+      <p>매일 매일 한계를 뛰어넘기 위한 도전을 즐기는 개발자</p>
+
+      
+      
+        <div class="sidebar-social">
+          <span class="sr-only">Social:</span>
+<ul>
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://github.com/minkukjo">
+    <span class="icon-github" title="GitHub"></span>
+    <span class="sr-only">GitHub</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://www.linkedin.com/in/민국-조-567052166">
+    <span class="icon-linkedin2" title="LinkedIn"></span>
+    <span class="sr-only">LinkedIn</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:harrycode@kakao.com">
+    <span class="icon-mail" title="Email"></span>
+    <span class="sr-only">Email</span>
+  </a>
+</li>
+
+  
+</ul>
+
+        </div>
+      
+    </header>
+  </div>
+</div>
+</div>
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-158654037-1', 'auto');
+  ga('send', 'pageview');
+  loadJSDeferred('https://www.google-analytics.com/analytics.js');
+</script>
+
+
+
+
+
+<!--[if gt IE 8]><!---->
+<script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+  WebFont.load({
+    
+    google: {
+      families: 'Lato'.split('|')
+    },
+    
+
+    custom: {
+      families: ['icomoon'],
+      urls: ['/assets/icomoon/style.css']
+    }
+  });
+</script>
+<!--<![endif]-->
+
+
+  <!--[if gt IE 9]><!---->
+  
+  <script>loadJSDeferred('/assets/js/hydejack.js?v=6.4.0');</script>
+
+  
+  <!--<![endif]-->
+
+
+
+</body>
+
+</html>

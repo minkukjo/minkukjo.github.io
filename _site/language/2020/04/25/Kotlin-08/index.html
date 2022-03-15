@@ -1,0 +1,1900 @@
+<!DOCTYPE html>
+<html lang="en"><!--
+ __  __                __                                     __
+/\ \/\ \              /\ \             __                    /\ \
+\ \ \_\ \   __  __    \_\ \      __   /\_\      __       ___ \ \ \/'\
+ \ \  _  \ /\ \/\ \   /'_` \   /'__`\ \/\ \   /'__`\    /'___\\ \ , <
+  \ \ \ \ \\ \ \_\ \ /\ \L\ \ /\  __/  \ \ \ /\ \L\.\_ /\ \__/ \ \ \\`\
+   \ \_\ \_\\/`____ \\ \___,_\\ \____\ _\ \ \\ \__/.\_\\ \____\ \ \_\ \_\
+    \/_/\/_/ `/___/> \\/__,_ / \/____//\ \_\ \\/__/\/_/ \/____/  \/_/\/_/
+                /\___/                \ \____/
+                \/__/                  \/___/
+
+Powered by Hydejack v6.4.0 (https://qwtel.com/hydejack/)
+-->
+
+
+
+
+
+
+
+
+
+<head>
+  <!-- =============== -->
+<!-- META            -->
+<!-- =============== -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta
+  name="naver-site-verification"
+  content="22c5b4ef3bfda7fc6100671413989219de7a4ac8"
+/>
+<meta property="og:title" content="Kotlin In Action 8장" />
+<meta property="og:type" content="article" />
+
+<!-- =============== -->
+<!-- Google AdSense  -->
+<!-- =============== -->
+<script
+  data-ad-client="ca-pub-8247516864622650"
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+></script>
+
+ 
+<meta
+  property="og:image"
+  content="http://localhost:4000/assets//img/kotlin-logo.png"
+/>
+<br />
+
+
+<meta property="og:image:width" content="640" />
+<meta property="og:image:height" content="360" />
+ 
+<title>Kotlin In Action 8장 &middot; 도전하는 개발자</title>
+ 
+<meta
+  name="description"
+  content="이번 시간에 공부할 내용
+
+"
+/>
+<meta
+  property="og:description"
+  content="이번 시간에 공부할 내용
+
+"
+/>
+
+
+
+<!-- =============== -->
+<!-- LINKS           -->
+<!-- =============== -->
+<link rel="canonical" href="http://localhost:4000/language/2020/04/25/Kotlin-08/" />
+<meta property="og:url" content="http://localhost:4000/language/2020/04/25/Kotlin-08/" />
+
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="도전하는 개발자 Feed"
+  href="http://localhost:4000/feed.xml"
+/>
+
+
+<link rel="prev" href="http://localhost:4000/framework/2020/04/24/Spring-104/" />
+ 
+<link rel="next" href="http://localhost:4000/framework/2020/04/27/Spring-105/" />
+
+
+<link
+  rel="apple-touch-icon"
+  href="http://localhost:4000/apple-touch-icon.png"
+/>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+<!-- Place favicon.ico in the root directory -->
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+<script>
+  !function(n,e){function t(n,e){n.onload=function(){this.onerror=this.onload=null,e(null,n)},n.onerror=function(){this.onerror=this.onload=null,e(new Error("Failed to load "+this.src),n)}}function o(n,e){n.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||(this.onreadystatechange=null,e(null,n))}}n._loaded=!1,n.loadJSDeferred=function(a,d){function r(){n._loaded=!0;var r=e.createElement("script");r.src=a,d&&(("onload"in r?t:o)(r,d),r.onload||t(r,d));var l=e.getElementsByTagName("script")[0];l.parentNode.insertBefore(r,l)}n._loaded?r():n.addEventListener?n.addEventListener("load",r,!1):n.attachEvent?n.attachEvent("onload",r):n.onload=r}}(window,document);
+
+  !function(e){"use strict";var n=function(n,t,o){function i(e){if(a.body)return e();setTimeout(function(){i(e)})}function r(){l.addEventListener&&l.removeEventListener("load",r),l.media=o||"all"}var d,a=e.document,l=a.createElement("link");if(t)d=t;else{var f=(a.body||a.getElementsByTagName("head")[0]).childNodes;d=f[f.length-1]}var s=a.styleSheets;l.rel="stylesheet",l.href=n,l.media="only x",i(function(){d.parentNode.insertBefore(l,t?d:d.nextSibling)});var u=function(e){for(var n=l.href,t=s.length;t--;)if(s[t].href===n)return e();setTimeout(function(){u(e)})};return l.addEventListener&&l.addEventListener("load",r),l.onloadcssdefined=u,u(r),l};"undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this);
+
+  !function(t){if(t.loadCSS){var e=loadCSS.relpreload={};if(e.support=function(){try{return t.document.createElement("link").relList.supports("preload")}catch(t){return!1}},e.poly=function(){for(var e=t.document.getElementsByTagName("link"),r=0;r<e.length;r++){var n=e[r];"preload"===n.rel&&"style"===n.getAttribute("as")&&(t.loadCSS(n.href,n,n.getAttribute("media")),n.rel=null)}},!e.support()){e.poly();var r=t.setInterval(e.poly,300);t.addEventListener&&t.addEventListener("load",function(){e.poly(),t.clearInterval(r)}),t.attachEvent&&t.attachEvent("onload",function(){t.clearInterval(r)})}}}(this);
+
+  window.disablePushState = false;
+  window.disableDrawer = false;
+</script>
+
+<!--[if lt IE 9]>
+  <script src="https://unpkg.com/html5shiv/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+<!-- =============== -->
+<!-- STYLES          -->
+<!-- =============== -->
+<!--[if gt IE 8]><!---->
+<style>
+  
+  article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}*{box-sizing:border-box}html,body{margin:0;padding:0}html{font-size:16px;line-height:1.75}body{color:#333;background-color:#fff;overflow-y:scroll}a{text-decoration:none}.lead{margin-left:-1rem;margin-right:-1rem}img,.img{display:block;max-width:100%;margin-bottom:1rem;border:none}img.lead,.img.lead{max-width:calc(100% + 2rem);width:calc(100% + 2rem)}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-weight:bold;text-rendering:optimizeLegibility}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{margin:1.6rem 0 1rem;line-height:1.6}h1,.h1{font-size:2rem;line-height:1.25}h2,.h2{font-size:1.5rem}h3,.h3{font-size:1.17em}p{margin-top:0;margin-bottom:1rem}p.lead{font-size:1.25rem;font-weight:300;padding:0 1rem}ul,ol,dl{margin-top:0;margin-bottom:1rem}ul,ol{padding-left:1.25rem}hr{position:relative;margin:1.5rem 0;border:0;border-top:1px solid #eee}.hr{padding-bottom:.5rem;border-bottom:1px solid #eee;margin-bottom:1.5rem}h4,h5,h6,.h4,.h5,.h6{margin-bottom:0.5rem;font-size:1rem}table{margin-bottom:1rem;width:100%;width:calc(100% + 2rem);margin-left:-1rem;border:1px solid #e5e5e5;border-collapse:collapse;border-spacing:0}td,th{padding:.25rem .5rem;border:1px solid #e5e5e5}td:first-child,th:first-child{padding-left:1rem}td:last-child,th:last-child{padding-right:1rem}thead+tbody,tbody+tbody,tfoot{border-top:3px double #e5e5e5}tbody tr:nth-child(odd) td,tbody tr:nth-child(odd) th{background-color:#f9f9f9}footer{margin-bottom:2rem}.page,.post{margin-bottom:3em}.page li+li,.post li+li{margin-top:.25rem}.page>header,.post>header{margin-bottom:2rem}.page-title,.post-title{margin-top:0}.post-date{display:block;margin-top:-0.5rem;margin-bottom:1rem;color:#9a9a9a}.related-posts{padding-left:0;list-style:none}.related-posts>li,.related-posts>li+li{margin-top:1rem}.related-posts>li>small,.related-posts>li+li>small{font-size:75%;color:#9a9a9a}.message{margin-bottom:1rem;padding:1rem;color:#787878;background-color:#f9f9f9;margin-left:-1rem;margin-right:-1rem}body,main{position:relative;overflow-x:hidden}@media screen{body::before{content:'';background:#e5e5e5;position:absolute;left:0;top:0;bottom:0}}@media screen and (min-width: 40em){html{font-size:17px}}@media screen and (min-width: 54em){html{font-size:16px}}@media screen and (min-width: 88em){html{font-size:17px}}@media screen and (min-width: 125em){html{font-size:18px}}.sr-only{display:none}.clearfix,.sidebar-social::after,.clearafter::after{content:"";display:table;clear:both}a,.a{position:relative;padding-bottom:.15rem;border-style:hidden}.img{overflow:hidden;background-color:#f9f9f9}.img>img{margin:0;width:100%;height:100%}.sixteen-nine{position:relative}.sixteen-nine::before{display:block;content:"";width:100%;padding-top:56.25%}.sixteen-nine>*{position:absolute;top:0;left:0;right:0;bottom:0}h1+hr,h2+hr,h3+hr,h4+hr,h5+hr,h6+hr{margin-top:0}.fade-in{animation-duration:500ms;animation-name:fade-in;animation-fill-mode:forwards}@keyframes fade-in{from{transform:translateY(-2rem);opacity:0}50%{transform:translateY(-2rem);opacity:0}to{transform:translateY(0);opacity:1}}.mb6{margin-bottom:10rem}.sidebar{color:rgba(255,255,255,0.75);text-align:left}.sidebar::before{content:"";position:absolute;z-index:2;top:0;left:0;bottom:0;right:0;background:linear-gradient(to bottom, rgba(32,32,32,0) 0%, rgba(32,32,32,0.5) 100%)}.sidebar a{color:#fff;border-bottom-color:rgba(255,255,255,0.2)}.right-side{width:100%;margin-left:auto;margin-right:auto}.right-side .ad-first{text-align:center}@media screen{.right-side{max-width:38rem;min-height:100vh}.right-side .ad-second{display:none}}@media screen and (min-width: 54em){.right-side{margin-left:20rem;margin-right:1rem;padding:4rem 1rem 12rem}.right-side .ad-second{text-align:center;display:block}}@media screen and (min-width: 72em){.right-side{margin-left:22rem;max-width:42rem}}@media screen and (min-width: 88em){.right-side{width:162px;margin-left:0rem;margin-right:0rem;padding:0rem;margin-top:10rem;display:block;float:left}}@media screen and (min-width: 96em){.right-side{width:300px;margin-right:0rem}}#_yDrawer{position:relative}@media screen{#_yDrawer{min-height:640px;min-height:100vh}}@media screen and (min-width: 54em){#_yDrawer{width:18rem;margin-left:0}}.sidebar-bg{position:absolute;height:100%;overflow:hidden;top:0;right:0;bottom:0;left:0;background:#202020 center / cover}.sidebar-box{display:flex;justify-content:center}.sidebar-sticky{position:relative;z-index:3}@media screen{.sidebar-sticky{-ms-overflow-style:none;overflow:-moz-scrollbars-none;height:100%;overflow:auto;position:absolute;padding:3rem 0rem;right:2.5rem;left:2.5rem}}.sidebar-sticky::-webkit-scrollbar{display:none}.sidebar-about>h1{color:#fff;font-size:2rem}.sidebar-nav>ul{list-style:none;padding-left:0;margin-bottom:.5rem}a.sidebar-nav-item{width:100%;font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}a.sidebar-nav-subitem{font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}@media screen{.y-drawer-scrim{z-index:2}.y-drawer-content{width:18rem;left:-18rem;z-index:3}}.sidebar-social{margin-bottom:.5rem}.sidebar-social>ul{list-style:none;padding-left:0;margin:0 -.25rem}.sidebar-social>ul>li{float:left}.sidebar-social>ul>li>a{display:inline-block;text-align:center;font-size:1.6rem;line-height:3rem;width:3.1249rem;height:4rem;padding:.5rem 0}.sidebar-social>ul li+li{margin-top:0}.fixed-top{position:fixed;top:0;left:0;width:100%;z-index:1}.navbar>.content{padding-top:0;padding-bottom:0;min-height:0;height:0}.menu{display:inline-block;padding:1.75rem 1.5rem;border-bottom:none;margin-left:-1.5rem;color:#9a9a9a !important}.menu::after{content:"\2630"}@media screen and (min-width: 54em){.menu{padding:1.25rem 1.5rem;position:absolute;left:-9999px}.menu:focus{position:static}}.animation-main{pointer-events:none}.loading{display:none}@media print{.menu{display:none}}.animation-main{opacity:0;will-change:opacity}.loading{position:absolute;top:0;right:0;padding:5.25rem 4.5rem;transform-origin:top right;transform:scale(0.33)}.content{position:relative;margin-left:auto;margin-right:auto;padding:5rem 1rem 12rem}@media screen{.content{min-height:100vh}}@media screen and (min-width: 54em){.content{padding:4rem 1rem 12rem;margin-left:19rem;margin-right:3rem}}@media screen and (min-width: 72em){.content{max-width:42rem;margin-left:21rem}}@media screen and (min-width: 88em){.content{float:left;width:100%;margin-left:22rem;margin-right:5rem}}@media screen and (min-width: 96em){.content{max-width:44rem}}@media screen and (min-width: 102em){.content{margin-left:25rem;margin-right:8rem}}.me{width:6.5rem;height:6.5rem;align-self:center;margin-right:20px;border-radius:100%;position:relative}@media screen and (min-width: 40em){.me{width:7rem;height:7rem}}@media screen and (min-width: 54em){.me{width:6.5rem;height:6.5rem}}@media screen and (min-width: 72em){.me{width:7rem;height:7rem}}main>footer{width:100%;position:absolute;bottom:0;left:0;right:0;padding:0 1rem;color:#9a9a9a;font-size:smaller;text-align:center}main>footer>p{margin-bottom:0}html{font-family:'Sans-serif'}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-family:'Sans-serif'}
+
+</style>
+
+
+<link
+  rel="preload"
+  href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0"
+  as="style"
+  onload="this.rel='stylesheet'"
+/>
+
+<style id="_pageStyle">
+
+.content a{color:#4f86aa;border-color:rgba(79,134,170,0.2)}.content a:hover{border-color:#4f86aa}:focus{outline-color:#4f86aa}::selection{color:#fff;background:#4f86aa}::-moz-selection{color:#fff;background:#4f86aa}
+
+</style>
+
+
+<noscript>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0" />
+    
+  
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Lato"
+  />
+  <style>
+    html { font-family: 'Lato', 'Sans-serif' }
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .heading { font-family: 'Lato', 'Sans-serif' }
+  </style>
+   
+  <link rel="stylesheet" href="http://localhost:4000/assets/icomoon/style.css" />
+</noscript>
+<!--<![endif]-->
+
+</head>
+
+<body>
+  <!-- =============== -->
+<!-- MENU            -->
+<!-- =============== -->
+<div class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <a id="_menu" class="menu no-hover" href="#_title">
+      <span class="sr-only">Menu</span>
+    </a>
+  </div>
+</div>
+
+<!-- =============== -->
+<!-- CONTENT         -->
+<!-- =============== -->
+<div id="_yPushState">
+  <div class="fade-in">
+    <main
+      id="_main"
+      class="content"
+      role="main"
+      data-color="#4f86aa"
+      data-image="/assets/img/bg.jpg"
+    >
+      
+
+<article id="post-language/2020/04/25/Kotlin-08" class="post" role="article">
+  <header>
+    <h1 class="post-title">
+      
+        Kotlin In Action 8장
+        
+    </h1>
+
+    <p class="post-date heading">
+      <time datetime="2020-04-25T00:00:00+09:00">25 Apr 2020</time>
+      
+
+
+
+
+
+
+
+
+
+in <a href="/category/programming-language/" data-flip="title">Programming Language</a>
+
+      
+
+
+
+
+
+
+
+
+
+on <a href="/tag/programming-language-kotlin/" data-flip="title">Kotlin</a>
+
+    </p>
+
+    
+  <div class="hr" style="padding-bottom:0"></div>
+
+
+  </header>
+  
+
+
+  
+  <div class="markdown-body">
+
+    <!-- 
+    <div class="head-image"><img src="http://localhost:4000/assets//img/kotlin-logo.png" /></div>
+    <br /> -->
+    <style>
+      .myAd1190 {
+        width: 48%;
+        height: 280px;
+      }
+
+      .myAd1290 {
+        width: 48%;
+        height: 280px;
+      }
+
+      @media(max-width: 800px) {
+        .myAd1190 {
+          display: none;
+        }
+
+        .myAd1290 {
+          width: 98%;
+        }
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 300px;
+      }
+
+      .row-center {
+        display: flex;
+        justify-content: center;
+        height: 258px;
+      }
+    </style>
+   
+    <!--<br />-->
+    <h2 id="이번-시간에-공부할-내용">이번 시간에 공부할 내용</h2>
+
+<p>우리는 5장에서 람다의 개념과 람다를 사용하는 표준 라이브러리 함수에 대해 배웠다.</p>
+
+<p>여기서는 람다를 인자로 받거나 반환하는 함수인 <strong>고차 함수</strong>를 만드는 방법을 다룬다.</p>
+
+<h2 id="고차-함수의-정의">고차 함수의 정의</h2>
+
+<p>고차 함수란 무엇일까?</p>
+
+<p>고차 함수는 다른 함수를 <strong>인자</strong>로 받거나 <strong>함수</strong>를 반환하는 함수이다.</p>
+
+<p>코틀린에서는 람다나 함수 참조를 사용해 함수를 값으로 표현 할 수 있다. (함수형 프로그래밍을 지원한다는 뜻)</p>
+
+<p>예를 들어 표준 라이브러리인 <strong>filter</strong> 또한 고차 함수라고 할 수 있겠다.</p>
+
+<p>우리는 앞서 5장에서 map,with 등의 여러 고차 함수를 살펴봤다.</p>
+
+<p>이제는 그런 고차 함수를 정의하는 방법을 살펴보자.</p>
+
+<p>고차 함수를 정의하려면 <strong>Function Type</strong>( 함수 타입 )에 대해 이해해야한다.</p>
+
+<h2 id="함수-타입">함수 타입</h2>
+
+<p>람다를 인자로 받는 함수를 정의하려면 어떻게 할 수 있을까?</p>
+
+<p>이를 알기 위해서는 먼저, 람다 인자의 타입을 어떻게 선언할 수 있는지를 알아야한다.</p>
+
+<p>이를 알아보기에 앞서 우리는 어떻게 람다를 로컬 변수에 대입할 수 있었을까?</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">sum</span> <span class="p">=</span> <span class="p">{</span> <span class="n">x</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span><span class="nc">Int</span> <span class="p">-&gt;</span> <span class="n">x</span><span class="p">+</span> <span class="n">y</span> <span class="p">}</span>
+<span class="kd">val</span> <span class="py">action</span> <span class="p">=</span> <span class="p">{</span><span class="nf">println</span><span class="p">(</span><span class="mi">42</span><span class="p">)}</span>
+</code></pre></div></div>
+
+<p>우리는 이전에 변수에 람다를 대입할 수 있다는 사실을 이미 공부했다.</p>
+
+<p>이 경우 컴파일러는 <strong>sum</strong>이 함수 타입임을 추론하게된다.</p>
+
+<p>그러면 이제 여기에 좀 더 구체적으로 타입을 명시해보자.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">sum</span><span class="p">:(</span><span class="nc">Int</span><span class="p">,</span><span class="nc">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nc">Int</span> <span class="p">=</span> <span class="p">{</span> <span class="n">x</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span><span class="nc">Int</span> <span class="p">-&gt;</span> <span class="n">x</span><span class="p">+</span> <span class="n">y</span> <span class="p">}</span>
+<span class="kd">val</span> <span class="py">action</span><span class="p">:</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="nc">Unit</span> <span class="p">=</span> <span class="p">{</span><span class="nf">println</span><span class="p">(</span><span class="mi">42</span><span class="p">)}</span>
+</code></pre></div></div>
+
+<p>코틀린의 함수 타입 문법은 다음과 같다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(파라미터 타입) -&gt; 반환 타입
+e.q. (Int,Int) -&gt; Unit
+</code></pre></div></div>
+
+<p>함수를 정의할 때는 Unit을 굳이 명시하지않아도 되지만, 함수 타입을 선언할 때는 반드시 반환 타입을 명시해주어야한다.</p>
+
+<p>이렇게 변수 타입을 함수 타입으로 지정하면 함수 타입에 있는 파라미터로부터 람다의 파라미터 타입을 유추할 수가 있게 된다.</p>
+
+<p>그래서 람다 식안에서 굳이 파라미터 타입을 적을 필요가 없는 것이다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">funOrNull</span><span class="p">:</span> <span class="p">((</span><span class="nc">Int</span><span class="p">,</span><span class="nc">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nc">Int</span><span class="p">)?</span> <span class="p">=</span> <span class="k">null</span>
+</code></pre></div></div>
+
+<p>함수 타입 자체가 null이 되는 경우도 존재하기 때문에 이 경우 함수 타입을 괄호로 감싸고 <code class="language-plaintext highlighter-rouge">?</code>를 붙여준다.</p>
+
+<h2 id="인자로-받은-함수-호출">인자로 받은 함수 호출</h2>
+
+<p>인자로 함수를 호출하는 구문은 일반 함수를 호출하는 구문과 동일하다.</p>
+
+<p>지금부터 재밌는 예제로 가장 자주 사용해온 표준 라이브러리 함수인 <strong>filter</strong>를 다시 구현해보자.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nc">String</span><span class="p">.</span><span class="nf">filter</span><span class="p">(</span><span class="n">predicate</span><span class="p">:</span> <span class="p">(</span><span class="nc">Char</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nc">Boolean</span><span class="p">):</span> <span class="nc">String</span>
+</code></pre></div></div>
+
+<p>한눈에 확 와닿지는 않으니 하나씩 살펴보자.</p>
+
+<p>우선 String의 확장함수로 filter를 정의하고 그 매개변수의 이름이 predicate이다.</p>
+
+<p>predicate는 함수 타입으로 Char형을 받고 Boolean 타입을 반환한다.</p>
+
+<p>그리고 이 확장함수의 반환 값은 String이다.</p>
+
+<p>그럼 마저 이 함수를 구현해보자.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nc">String</span><span class="p">.</span><span class="nf">filter</span><span class="p">(</span><span class="n">predicate</span><span class="p">:</span> <span class="p">(</span><span class="nc">Char</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nc">Boolean</span><span class="p">):</span> <span class="nc">String</span><span class="p">{</span>
+    <span class="kd">val</span> <span class="py">sb</span> <span class="p">=</span> <span class="nc">StringBuilder</span><span class="p">()</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">index</span> <span class="k">in</span> <span class="mi">0</span> <span class="n">until</span> <span class="n">length</span><span class="p">){</span>
+        <span class="kd">val</span> <span class="py">element</span> <span class="p">=</span> <span class="k">get</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+        <span class="k">if</span><span class="p">(</span><span class="nf">predicate</span><span class="p">(</span><span class="n">element</span><span class="p">))</span> <span class="n">sb</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">sb</span><span class="p">.</span><span class="nf">toString</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="자바에서-코틀린-함수-타입-사용">자바에서 코틀린 함수 타입 사용</h2>
+
+<p>컴파일된 코드에서 함수 타입은 일반 인터페이스로 바뀐다.</p>
+
+<p>즉 함수 타입의 변수는 <strong>FunctionN</strong> (여기서 N은 숫자) 인터페이스를 구현하는 객체를 저장한다.</p>
+
+<p>코틀린 표준 라이브러리 함수 인자의 개수에 따라 Function0<R>, Function1&lt;P1,R&gt; 등의 인터페이스를 제공한다.</R></p>
+
+<p>각 인터페이스에는 invoke 메소드 정의가 하나 들어있다.</p>
+
+<p>invoke를 호출하면 함수를 실행할 수 있다.</p>
+
+<p>함수 타입인 변수는 인자 개수에 따라 적당한 <strong>FunctionN</strong> 인터페이스를 구현하는 클래스의 인스턴스를 저장하며, 그 클래스의 invoke 메소드 본문에는 람다의 본문이 들어간다.</p>
+
+<p>다만 주의해야할 점이 있다.</p>
+
+<p>자바에서는 코틀린 표준 라이브러리가 제공하는 람다를 인자로 받는 확장함수를 쉽게 호출이 가능하다.</p>
+
+<p>하지만 수신 객체를 확장 함수의 첫 번째 인자로 명시적으로 넘겨야 하므로 코틀린처럼 코드가 깔끔하지는 않다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">strings</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Arraylist</span><span class="o">();</span>
+<span class="n">strings</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"42"</span><span class="o">);</span>
+<span class="nc">CollectionsKt</span><span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">strings</span><span class="o">,</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+    <span class="k">return</span> <span class="nc">Unit</span><span class="o">.</span><span class="na">INSTANCE</span><span class="o">;</span>
+<span class="o">});</span>
+</code></pre></div></div>
+
+<p>반환 타입이 Unit인 함수나 람다를 자바로 작성할 수 있다.</p>
+
+<p>하지만 코틀린에는 Unit 타입에는 값이 존재하므로 자바에서는 그 값을 명시적으로 반환해주어야한다. 만약 (String) -&gt; Unit처럼 void를 반환하는 자바 람다를 넘겨서는 안된다.</p>
+
+<h2 id="디폴트-값을-지정한-함수-타입-파라미터나-널이-될-수-있는-함수-파라미터">디폴트 값을 지정한 함수 타입 파라미터나 널이 될 수 있는 함수 파라미터</h2>
+
+<p>디폴트 값을 지정한 함수를 선언하여 조금 더 편리하게 작업할 수 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">function</span> <span class="nf">hello</span><span class="p">(</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nc">Person</span><span class="p">,</span>
+    <span class="n">transform</span><span class="p">:</span> <span class="p">(</span><span class="nc">T</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nc">String</span> <span class="p">=</span> <span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="nf">toString</span><span class="p">()</span> <span class="p">}</span>
+<span class="p">){</span>
+    <span class="nf">println</span><span class="p">(</span><span class="s">"Hello! "</span> <span class="p">+</span> <span class="nf">transform</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>널이 될 수 있는 함수 타입을 사용할 수도 있다.</p>
+
+<p>우리는 함수 타입이 invoke 메소드를 구현하는 인터페이스라는 사실을 이미 알고 있다.</p>
+
+<p>이를 사용해서 안전한 호출을 구현할 수 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">function</span> <span class="nf">hello</span><span class="p">(</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nc">Person</span><span class="p">,</span>
+    <span class="n">transform</span><span class="p">:</span> <span class="p">((</span><span class="nc">T</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nc">String</span><span class="p">)?</span> <span class="p">=</span> <span class="k">null</span>
+<span class="p">){</span>
+    <span class="nf">println</span><span class="p">(</span><span class="s">"Hello! "</span> <span class="p">+</span> <span class="n">transform</span><span class="o">?.</span><span class="nf">invoke</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">?:</span> <span class="n">name</span><span class="p">.</span><span class="nf">toString</span><span class="p">())</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="람다를-활용한-중복-제거">람다를 활용한 중복 제거</h2>
+
+<p>고차 함수는 코드 구조를 개선하고 <strong>중복</strong>을 제거할 때 사용할 수 있는 아주 강력한 도구다.</p>
+
+<p>고차 함수를 사용하면 중복 사용하는 함수들을 하나의 함수로 만들어서 재사용함으로써 코드 재상용성을 높일 수 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">averageMoney</span> <span class="p">=</span> <span class="n">personList</span>
+    <span class="p">.</span><span class="nf">filter</span><span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">age</span> <span class="p">&gt;=</span> <span class="mi">25</span> <span class="p">&amp;&amp;</span> <span class="n">it</span><span class="p">.</span><span class="n">sex</span> <span class="p">==</span> <span class="s">"male"</span> <span class="p">}</span>
+    <span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="nc">Person</span><span class="o">::</span><span class="n">money</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">average</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>위는 person이라는 컬렉션 객체의 나이가 25살 이상이고 성별이 남자에 해당하는 객체들의 돈의 평균을 구하는 예제이다.</p>
+
+<p>하지만 위의 filter map average를 계속해서 반복적으로 사용하게 될 우려가 있다.</p>
+
+<p>그래서 이를 개선하면 아래와 같이 개선 가능하다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">List</span><span class="p">&lt;</span><span class="nc">Person</span><span class="p">&gt;.</span><span class="nf">averageMoney</span><span class="p">(</span><span class="n">age</span><span class="p">:</span><span class="nc">Int</span><span class="p">,</span> <span class="n">sex</span><span class="p">:</span><span class="nc">String</span><span class="p">)</span> <span class="p">=</span>
+    <span class="nf">filter</span><span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">age</span> <span class="p">&gt;=</span> <span class="n">age</span> <span class="p">&amp;&amp;</span> <span class="n">it</span><span class="p">.</span><span class="n">sex</span> <span class="p">==</span> <span class="n">sex</span> <span class="p">}</span>
+    <span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="nc">Person</span><span class="o">::</span><span class="n">money</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">average</span><span class="p">()</span>
+
+<span class="nf">println</span><span class="p">(</span><span class="n">personList</span><span class="p">.</span><span class="nf">averageMoney</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span><span class="s">"male"</span><span class="p">))</span>
+<span class="nf">println</span><span class="p">(</span><span class="n">personList</span><span class="p">.</span><span class="nf">averageMoney</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span><span class="s">"female"</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>age 값을 매개변수로 줌으로써 해당 연령과 성별에 해당하는 객체들의 평균 소지금액을 알아낼 수 있게 되었다.</p>
+
+<p>이처럼 고차함수는 중복을 제거하는데 사용하기 매우 유용하다.</p>
+
+<p>또한 함수를 매개변수로 넘겨서 사용자가 임의의 로직을 구성하게 하는 것도 가능하다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">List</span><span class="p">&lt;</span><span class="nc">Person</span><span class="p">&gt;.</span><span class="nf">averageMoney</span><span class="p">(</span><span class="n">predicate</span><span class="p">:</span> <span class="p">(</span><span class="nc">Person</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nc">Boolean</span><span class="p">)</span> <span class="p">=</span>
+    <span class="nf">filter</span><span class="p">(</span><span class="n">predicate</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="nc">Person</span><span class="o">::</span><span class="n">money</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">average</span><span class="p">()</span>
+
+<span class="nf">println</span><span class="p">(</span><span class="n">personList</span><span class="p">.</span><span class="nf">averageMoney</span><span class="p">{</span>
+    <span class="n">it</span><span class="p">.</span><span class="n">city</span> <span class="k">in</span> <span class="nf">setOf</span><span class="p">(</span><span class="s">"Seoul"</span><span class="p">,</span><span class="s">"Daegu"</span><span class="p">)</span> <span class="p">&amp;&amp;</span> <span class="n">it</span><span class="p">.</span><span class="n">age</span> <span class="p">&gt;=</span> <span class="mi">25</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p>자 이렇게 편리하고 좋은 고차함수이지만 이렇게 고차함수를 사용하면 성능이 더 느려지지는 않을까 걱정하는 사람이 분명히 있을 것이다.</p>
+
+<p>다음은 람다를 활용한다고 해서 코드가 항상 더 느려지지는 않으며 inline 키워드를 통해 어떻게 람다의 성능을 개선하는지 보여주도록 하겠다.</p>
+
+<h2 id="인라인-함수---람다의-부가-비용을-없애보자">인라인 함수 - 람다의 부가 비용을 없애보자</h2>
+
+<p>5장에서 우리는 코틀린이 람다를 무명 클래스로 컴파일하지만 그렇다고 람다 식을 사용할 때 마다 새롱누 클래스가 만들어지지 않는다는 사실을 우리는 이미 공부했다.</p>
+
+<p>그러나 람다가 변수를 포획하면 람다가 생성되는 시점마다 새로운 무명 클래스 객체가 생성된다는 것도 알고 있다.</p>
+
+<p>이는 똑같은 작업을 수행하는 일반 함수보다 람다가 덜 효율적이라는 것을 알 수 있다.</p>
+
+<p>그러면 반복되는 코드를 별도의 라이버르리 함수로 빼내되 컴파일러가 자바의 일반 명령문만큼 효율적인 코드를 생성하게 만들 수는 없을까?</p>
+
+<p>사실 코틀린 컴파일러는 이를 위해 <strong>inline</strong>이라는 변경자를 지원한다.</p>
+
+<p>이 <strong>inline</strong> 변경자를 함수에 붙이면 컴파일러는 그 함수를 호출하는 모든 문장을 함수 본문에 해당하는 바이트코드로 바꿔치기 해준다.</p>
+
+<h2 id="인라이닝이-작동하는-방식">인라이닝이 작동하는 방식</h2>
+
+<p>어떤 함수를 <strong>inline</strong>으로 선언하면 그 함수의 본문이 인라인된다.</p>
+
+<p>즉, 함수를 호출하는 코드를 함수를 호출하는 바이트코드 대신에 함수 본문을 번역한 바이트코드로 컴파일한다는 뜻이다.</p>
+
+<p>가령 다음과 같은 인라인 함수가 있다고 해보자.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">inline</span> <span class="k">fun</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;</span> <span class="nf">synchronized</span><span class="p">(</span><span class="n">lock</span><span class="p">:</span><span class="nc">Lock</span><span class="p">,</span> <span class="n">action</span><span class="p">:()</span> <span class="p">-&gt;</span> <span class="nc">T</span><span class="p">):</span><span class="nc">T</span> <span class="p">{</span>
+    <span class="n">lock</span><span class="p">.</span><span class="nf">lock</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">{</span>
+        <span class="k">return</span> <span class="nf">action</span><span class="p">()</span>
+    <span class="p">}</span>
+    <span class="k">finally</span><span class="p">{</span>
+        <span class="n">lock</span><span class="p">.</span><span class="nf">unlock</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">val</span> <span class="py">l</span> <span class="p">=</span> <span class="nc">Lock</span><span class="p">()</span>
+<span class="nf">synchronized</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="p">{</span>
+    <span class="o">..</span><span class="p">.</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>위 함수를 다음과 같이 호출해보자.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">foo</span><span class="p">(</span><span class="n">l</span><span class="p">:</span> <span class="nc">Lock</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">println</span><span class="p">(</span><span class="s">"Before sync"</span><span class="p">)</span>
+    <span class="nf">synchronized</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nf">println</span><span class="p">(</span><span class="s">"Action"</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="nf">println</span><span class="p">(</span><span class="s">"After sync"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>위의 함수를 컴파일 하면 아래와 같은 바이트코드가 생성된다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">__foo__</span><span class="p">(:</span> <span class="nc">Lock</span><span class="p">){</span>
+    <span class="nf">println</span><span class="p">(</span><span class="s">"Before sync"</span><span class="p">)</span>
+    <span class="n">l</span><span class="p">.</span><span class="nf">lock</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">{</span>
+        <span class="nf">println</span><span class="p">(</span><span class="s">"Action"</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">finally</span><span class="p">{</span>
+        <span class="n">l</span><span class="p">.</span><span class="nf">unlock</span><span class="p">()</span>
+    <span class="p">}</span>
+    <span class="nf">println</span><span class="p">(</span><span class="s">"After sync"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>synchronized의 함수 본문 뿐 아니라 synchronized에 전달된 람다의 보눔ㄴ도 함께 인라이닝된다는 점에 유의하자.</p>
+
+<p>만약 인라인 함수에 람다를 넘기는 대신 함수 타입의 변수를 넘기면 어떻게 될까?</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">runUnderLock</span><span class="p">(</span><span class="n">body</span><span class="p">:</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="nc">Unit</span><span class="p">){</span>
+    <span class="nf">synchronized</span><span class="p">(</span><span class="n">lock</span><span class="p">,</span><span class="n">body</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>주의해야할 점은 이렇게 함수 타입의 변수로 넘기게 되면 람다 본문이 인라이닝 되지 않는다.</p>
+
+<p>왜냐하면 인라인 함수를 호출하는 코드 위치에서 변수에 저장된 람다의 코드를 알 수 없기 때문이다.</p>
+
+<h2 id="인라인-함수의-한계">인라인 함수의 한계</h2>
+
+<p>위에서 봤듯이, 함수가 인라이닝될 때 그 함수에 인자로 전달된 람다 식의 본문은 결과 코드에 직접 들어갈 수 있다.</p>
+
+<p>하지만 람다가 본문에 펼쳐지기 때문에 함수가 파라미터로 전달받은 람다를 본문에 반드시 명시하는 방법이 사용될 수 밖에 없다.</p>
+
+<p>하지만 만약 둘 이상의 람다를 인자로 받는 경우 어떤 함수에서 일부 람다만 인라이닝 하고 싶을 수 있다.</p>
+
+<p>그런 경우에 <code class="language-plaintext highlighter-rouge">noninline</code> 변경자를 파라미터 이름 앞에 붙여서 인라이닝을 금지할 수 있다.</p>
+
+<p>코틀린에서는 어떤 모듈이나 서드파티 라이브러리 안에서 인라인 함수르 ㄹ정의하고 그 모듈이나 라이브러리 밖에서 해당 인라인 함수를 사용할 수 있다.</p>
+
+<p>또 자바에서도 코틀린에 정의한 인라인 함수를 호출할 수 있다.</p>
+
+<p>이런 경우 컴파일러는 인라인 함수를 인라이닝하지 않고 일반 함수 호출로 컴파일한다.</p>
+
+<h2 id="컬렉션-연산-인라이닝">컬렉션 연산 인라이닝</h2>
+
+<p>코틀린 표준 라이브러리의 성능을 살펴보자.</p>
+
+<p>코틀린 표준 라이버르리의 컬렉션 함수는 대부분 람다를 인자로 받는다.</p>
+
+<p>표준 라이브러리 함수를 사용하지 않고 직접 이런 연산을 구현하면 더 효율적이지 않을까?</p>
+
+<p>아래의 예제를 살펴보자.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">data class</span> <span class="nc">Person</span><span class="p">(</span><span class="kd">val</span> <span class="py">name</span><span class="p">:</span> <span class="nc">String</span><span class="p">,</span> <span class="kd">val</span> <span class="py">age</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span>
+<span class="kd">val</span> <span class="py">people</span> <span class="p">=</span> <span class="nf">listOf</span><span class="p">(</span><span class="nc">Person</span><span class="p">(</span><span class="s">"Alice"</span><span class="p">,</span><span class="mi">29</span><span class="p">),</span> <span class="nc">Person</span><span class="p">(</span><span class="s">"Bob"</span><span class="p">,</span><span class="mi">31</span><span class="p">))</span>
+<span class="nf">println</span><span class="p">(</span><span class="n">people</span><span class="p">.</span><span class="nf">filter</span><span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">age</span> <span class="p">&lt;</span> <span class="mi">30</span><span class="p">&gt;)}</span>
+</code></pre></div></div>
+
+<p>위 예제를 람다를 쓰지 않고 다시 써보자.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">result</span> <span class="p">=</span> <span class="n">mutableListOf</span><span class="p">&lt;</span><span class="nc">Person</span><span class="p">&gt;()</span>
+<span class="k">for</span><span class="p">(</span><span class="n">person</span> <span class="k">in</span> <span class="n">people</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">person</span><span class="p">.</span><span class="n">age</span> <span class="p">&lt;</span> <span class="mi">30</span><span class="p">)</span> <span class="n">result</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">person</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="nf">println</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>코틀린의 filter 함수는 인라인 함수다.</p>
+
+<p>따라서 filter 함수의 바이트코드는 그 함수에 전달된 람다 본문의 바이트코드와 함게 filter를 호출한 위치에 들어간다.</p>
+
+<p>그래서 앞 예제에서 사용한 filter를 써서 생긴 바이트코드와 뒤 예제에서 생긴 바이트코드는 거의 동일하다.</p>
+
+<p>때문에 성능상의 문제는 없다고 할 수 있겠다.</p>
+
+<p>만약 filter와 map을 연쇄해서 사용하면 어떻게 될까?</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">println</span><span class="p">(</span><span class="n">people</span><span class="p">.</span><span class="nf">filter</span> <span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">age</span> <span class="p">&gt;</span> <span class="mi">30</span><span class="p">}</span>
+       <span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="nc">Person</span><span class="o">::</span><span class="n">name</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>두 함수 모두 인라인 함수이다.</p>
+
+<p>따라서 그 두 함수의 본문은 인라이닝 되며 추가 객체나 클래스 생성은 없다.</p>
+
+<p>하지만 이 코드는 리스트를 걸러낸 결과를 저장하는 <code class="language-plaintext highlighter-rouge">중간 리스트</code>를 만든다.</p>
+
+<p>처리할 원소가 많아지면 중간 리스트를 사용하는 부가 비용도 걱정할 만큼 커진다.</p>
+
+<p><strong>asSequence</strong>를 통해 리스트 대신 시퀀스를 사용하면 중간 리스트로 인한 부가 비용은 줄어든다.</p>
+
+<p>시퀀스는 람다를 인라인하지 않는다. 따라서 지연 연산을 통해 성능을 향상시키려는 이유로 모든 컬렉션 연산에 asSequence를 남발해서는 안된다.</p>
+
+<p>시퀀스 연산에서는 람다가 인라이닝되지 않으므로 크기가 작은 컬렉션은 오히려 일반 컬렉션 연산이 더 성능이 나쁠 수 있다.</p>
+
+<p>시퀀스를 통해 성능을 향상 시킬 수 있는 경우는 <strong>컬렉션 크기가 큰 경우</strong> 오직 하나 뿐이다.</p>
+
+<h2 id="함수를-인라인으로-선언해야-하는-경우">함수를 인라인으로 선언해야 하는 경우</h2>
+
+<p>inline의 이점을 공부하고 나면 “와 여기저기 다 붙여야지!” 라고 생각할지도 모른다.</p>
+
+<p>그러나 이는 좋은 생각이 아니다. inline 키워드를 상용해서 성능의 이점을 얻는 것은 람다를 인자로 받는 함수만 성능이 좋아지고, 나머지 경우는 주의 깊게 성능을 측정해봐야한다.</p>
+
+<p>JVM은 바이트코드에서 각 함수의 구현이 정확히 한번만 있으면 된다.</p>
+
+<p>반면 코틀린의 인라인 함수는 바이트 코드에서 각 함수 호출 지점을 함수 본문으로 대치하기 때문에 코드 중복이 발생한다.</p>
+
+<p>반면 람다를 인자로 받는 함수를 인라이닝 하면 이익이 더 많다.</p>
+
+<p>우선 첫 번째로 인라이닝을 통해 없앨 수 있는 부가비용이 상당하다.</p>
+
+<p>함수 호출 비용을 줄이고 람다를 표현하는 클래스와 람다 인스턴스에 해당하는 객체를 만들 필요도 없다.</p>
+
+<p>두 번째로는 현재 JVM은 함수 호출과 람다를 인라이닝해 줄 정도로 똑똑하지않다.</p>
+
+<p>마지막으로 인라이닝을 사용하면 일반 람다에서는 사용할 수 없는 몇가지 기능을 사용할 수 있다. non-local 반환인데 이는 뒤에서 설명하도록 하겠다.</p>
+
+<p>하지만 inline 변경자를 함수에 붙일 때는 코드 크기에 주의해야한다.</p>
+
+<p>인라이닝하는 함수가 큰 경우 함수의 본문에 해당하는 바이트코드를 모든 호출 지점에 복사해 넣고 나면 바이트코드가 전체적으로 아주 커질 수 있다.</p>
+
+<p>그 경우 람다 인자와 무관한 코드를 별도의 비인라인 함수로 빼낼 수도 있다.</p>
+
+<p>코틀린 표준라이브러리를 보면 대게 inline 함수의 크기가 아주 작다는 것을 알 수 있을 것이다.</p>
+
+<h2 id="자원-관리를-위해-인라인된-람다-사용">자원 관리를 위해 인라인된 람다 사용</h2>
+
+<p>람다로 중복을 없앨 수 있는 일반적인 패턴 중 하나는 어떤 작업을 하기 전 자원을 획득하고 작업을 마친 후 자원을 해제하는 자원관리이다.</p>
+
+<p>여기서 자원이란 파일,락,DB 트랜잭션 등 여러 대상을 의미한다.</p>
+
+<p>자바 7에서는 try-with-resource를 지원하면서 간편하게 자원에 대한 반환처리를 할 수 있게 되었다.</p>
+
+<p>다만 코틀린에서는 아주 매끄럽게 이를 처리할 수 있는 기능을 제공하기 때문에, 위와 같은 try-with-resource를 언어에서 지원하지는 않는다.</p>
+
+<p>try-with-resource와 같은 기능을 수행하는 <code class="language-plaintext highlighter-rouge">use</code> 함수를 사용하면 된다.</p>
+
+<p>여기서 <code class="language-plaintext highlighter-rouge">use</code> 함수 내에서 사용한 return non-local인데, 이 use 함수를 호출한 함수가 끝내면서 값을 반환한다.</p>
+
+<p>이에 대해서 조금 더 자세히 알아보자.</p>
+
+<h2 id="고차-함수-안에서-흐름-제어">고차 함수 안에서 흐름 제어</h2>
+
+<p>방금 non-local이라는 개념을 처음 들어서 당황했을 것이다.</p>
+
+<p>람다 내부에서의 return을 사용하면 람다로부터만 반환되는 것이 아니라 그 람다를 호출하는 함수가 실행을 끝내고 반환된다.</p>
+
+<p>즉, 자신을 둘러싼 블록보다 더 바깥에 있는 다른 블록을 반환하게 만드는 return문을 <code class="language-plaintext highlighter-rouge">non-local return</code>이라고 부른다.</p>
+
+<p>이렇게 return이 바깥쪽 함수를 반환시킬 수 있는 때는 람다를 인자로받는 함수가 인라인 함수인 경우 뿐이다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">test</span><span class="p">(</span><span class="n">list</span><span class="p">:</span><span class="nc">List</span><span class="p">&lt;</span><span class="nc">Int</span><span class="p">&gt;){</span>
+    <span class="n">list</span><span class="p">.</span><span class="nf">forEach</span><span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">it</span> <span class="p">==</span> <span class="mi">5</span><span class="p">){</span>
+            <span class="nf">println</span><span class="p">(</span><span class="s">"5!!!"</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="nf">println</span><span class="p">(</span><span class="s">"Hello?"</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">list</span> <span class="p">=</span> <span class="nf">listOf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+
+    <span class="nf">test</span><span class="p">(</span><span class="n">list</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>위 출력 결과에서 Hello?는 출력되지 않는다.</p>
+
+<h2 id="람다로부터-반환--레이블을-사용한-return">람다로부터 반환 : 레이블을 사용한 return</h2>
+
+<p>람다 식에서도 local return을 사용하는 것이 가능하다.</p>
+
+<p>람다 안에서 로컬 return은 for 루프의 break와 비슷한 역할을 한다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">test</span><span class="p">(</span><span class="n">list</span><span class="p">:</span><span class="nc">List</span><span class="p">&lt;</span><span class="nc">Int</span><span class="p">&gt;){</span>
+    <span class="n">list</span><span class="p">.</span><span class="n">forEach</span> <span class="nd">label@</span><span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">it</span> <span class="p">==</span> <span class="mi">5</span><span class="p">){</span>
+            <span class="nf">println</span><span class="p">(</span><span class="s">"5!!!"</span><span class="p">)</span>
+            <span class="k">return</span><span class="nd">@label</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="nf">println</span><span class="p">(</span><span class="s">"Hello?"</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">list</span> <span class="p">=</span> <span class="nf">listOf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+
+    <span class="nf">test</span><span class="p">(</span><span class="n">list</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>위 코드에선 Hello? 까지 출력이 된다.</p>
+
+<p>그러나 넌로컬 반환문은 장황하고, 람다 안의 여러 위치에 return 식이 들어가야해서 사용하기 불편하다.</p>
+
+<p>코틀린은 코드 블록을 여기저기 전달하기 위한 다른 해법을 제공하는데 그 해법이 바로 <code class="language-plaintext highlighter-rouge">무명 함수</code>이다.</p>
+
+<h2 id="무명-함수">무명 함수</h2>
+
+<p>무명 함수는 코드 블록을 함수에 넘길 때 사용할 수 있는 다른 방법이다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">test</span><span class="p">(</span><span class="n">list</span><span class="p">:</span><span class="nc">List</span><span class="p">&lt;</span><span class="nc">Int</span><span class="p">&gt;){</span>
+    <span class="n">list</span><span class="p">.</span><span class="nf">forEach</span> <span class="p">(</span><span class="k">fun</span> <span class="err">(</span><span class="nf">num</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">num</span> <span class="p">==</span> <span class="mi">5</span><span class="p">){</span>
+            <span class="nf">println</span><span class="p">(</span><span class="s">"5!!!"</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="p">}</span>
+    <span class="p">})</span>
+    <span class="nf">println</span><span class="p">(</span><span class="s">"Hello?"</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">list</span> <span class="p">=</span> <span class="nf">listOf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+
+    <span class="nf">test</span><span class="p">(</span><span class="n">list</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>조금 더 간결하게 작성이 가능하며 여기서 무명함수는 함수 이름이나 타입 파라미터 타입을 명시하지 않아도 된다.</p>
+
+<p>무명 함수는 일반 함수와 비슷해보이지만 실제로는 람다 식에 대한 문법적 편의일 뿐이다.</p>
+
+<p>람다식의 구현 방법이나 람다 식을 인라인 함수에 넘길 때 어떻게 본문이 인라이닝 되는지 등의 규칙을 무명함수에도 모두 적용할 수 있다.</p>
+
+<h2 id="reference">Reference</h2>
+
+<p><strong>Kotlin In Action</strong> (드미트리 제메로프, 스베트라나 이사코바)</p>
+
+    <br />
+    <br />
+  </div>
+  
+
+</article>
+
+<!--<hr class="dingbat" />-->
+<!--
+<div class="share">
+  <h2>Share this post</h2>
+  <div class="share-body">
+    <a href="http://twitter.com/share?text=Kotlin In Action 8장&amp;url=http://localhost:4000/language/2020/04/25/Kotlin-08/"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="icon-twitter">
+      </span>
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/language/2020/04/25/Kotlin-08/"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="icon-facebook">
+      </span>
+    </a>
+  </div>
+</div>
+-->
+<br />
+
+
+
+
+<aside class="related" role="complementary">
+  <h2 class="hr">Related Posts</h2>
+
+  <ul class="related-posts">
+    
+      
+      
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/language/2021/05/27/Effective-Java-44/" data-flip="title">
+    <span>Effective Java 07 람다와 스트림</span>
+  </a>
+  <small><time datetime="2021-05-27T00:00:00+09:00">
+    27 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/language/2021/05/25/Effective-Java-43/" data-flip="title">
+    <span>Effective Java 06 - item 41 -</span>
+  </a>
+  <small><time datetime="2021-05-25T00:00:00+09:00">
+    25 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/language/2021/05/25/Effective-Java-42/" data-flip="title">
+    <span>Effective Java 06 - item 40 -</span>
+  </a>
+  <small><time datetime="2021-05-25T00:00:00+09:00">
+    25 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+      
+    
+  </ul>
+</aside>
+  <aside class="comments" role="complementary">
+  <h2>Comments</h2>
+  <hr/>
+
+  <script src="https://utteranc.es/client.js"
+    repo="minkukjo/minkukjo.github.io"
+    issue-term="title"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</aside>
+
+       <footer>
+  <hr/>
+  
+    <p>© 2022. by minkuk</p>
+
+  
+  <p>
+    <code>Powered by <a href="https://minkukjo.github.io/">minkuk</a></code>
+  </p>
+</footer>
+
+    </main>
+    <div class="right-side">
+  <div class="add-first">
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+    ></script>
+    <!-- 우측 광고 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="9124111205"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+  <br />
+  <br />
+  <div class="add-second">
+    <!-- 우측 광고2 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="5156946039"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+
+  </div>
+  <div id="_yDrawer">
+  <div id="_sidebar" class="sidebar">
+    <div class="sidebar-bg" style="background-color:#4f86aa;background-image:url(/assets/img/bg.jpg)"></div>
+    <header class="sidebar-sticky" role="banner">
+      <br/>
+      <div class="sidebar-about">
+        <h1><a id="_title" href="/">도전하는 개발자</a></h1>
+        
+
+      </div>
+
+      <br/>
+      <br/>
+      <nav class="sidebar-nav heading" role="navigation">
+        <span class="sr-only">Navigation:</span>
+<ul>
+  
+
+  
+
+  
+  
+  
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-1"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/life/">Life</a>
+       <label class="folder" for="list-item-1">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-daily/">Daily</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-review/">Review</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-books/">Books</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-2"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/computer-science/">Computer Science</a>
+       <label class="folder" for="list-item-2">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-algorithm/">Algorithm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-oop/">OOP</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-network/">Network</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-db/">Database</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-ai/">AI</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-security/">Security</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-distribution-system/">Distribution System</a>
+             </li>
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-3"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/programming-language/">Programming Language</a>
+       <label class="folder" for="list-item-3">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-kotlin/">Kotlin</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-go/">Go</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-java/">Java</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-javascript/">JavaScript</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-typescript/">TypeScript</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-4"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/framework/">Framework</a>
+       <label class="folder" for="list-item-4">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring/">Spring</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-data-jpa/">Spring Data JPA</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-security/">Spring Security</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-junit/">JUnit</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-5"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/language/">Language</a>
+       <label class="folder" for="list-item-5">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/language-english/">English</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-6"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/development/">Development</a>
+       <label class="folder" for="list-item-6">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-ddd/">DDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-tdd/">TDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-clean-code/">Clean Code</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-git/">Git</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-7"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/devops/">Devops</a>
+       <label class="folder" for="list-item-7">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-alarm/">Alarm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-ansible/">Ansible</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-cicd/">CI/CD</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-docker/">Docker</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-es/">Elasticsearch</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-k8s/">Kubernetes</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-public-cloud/">Public Cloud</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-kafka/">Kafka</a>
+             </li>
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-8"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/opensource/">Open Source</a>
+       <label class="folder" for="list-item-8">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/opensource-opensource/">Open Source</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-9"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/about/">About</a>
+       
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+</ul>
+
+      </nav>
+    <br/>
+    <br/>
+      <div class="sidebar-box">
+        
+      </div>
+      <p>매일 매일 한계를 뛰어넘기 위한 도전을 즐기는 개발자</p>
+
+      
+      
+        <div class="sidebar-social">
+          <span class="sr-only">Social:</span>
+<ul>
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://github.com/minkukjo">
+    <span class="icon-github" title="GitHub"></span>
+    <span class="sr-only">GitHub</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://www.linkedin.com/in/민국-조-567052166">
+    <span class="icon-linkedin2" title="LinkedIn"></span>
+    <span class="sr-only">LinkedIn</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:harrycode@kakao.com">
+    <span class="icon-mail" title="Email"></span>
+    <span class="sr-only">Email</span>
+  </a>
+</li>
+
+  
+</ul>
+
+        </div>
+      
+    </header>
+  </div>
+</div>
+</div>
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-158654037-1', 'auto');
+  ga('send', 'pageview');
+  loadJSDeferred('https://www.google-analytics.com/analytics.js');
+</script>
+
+
+
+
+
+<!--[if gt IE 8]><!---->
+<script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+  WebFont.load({
+    
+    google: {
+      families: 'Lato'.split('|')
+    },
+    
+
+    custom: {
+      families: ['icomoon'],
+      urls: ['/assets/icomoon/style.css']
+    }
+  });
+</script>
+<!--<![endif]-->
+
+
+  <!--[if gt IE 9]><!---->
+  
+  <script>loadJSDeferred('/assets/js/hydejack.js?v=6.4.0');</script>
+
+  
+  <!--<![endif]-->
+
+
+
+</body>
+
+</html>

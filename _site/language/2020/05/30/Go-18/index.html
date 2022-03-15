@@ -1,0 +1,1508 @@
+<!DOCTYPE html>
+<html lang="en"><!--
+ __  __                __                                     __
+/\ \/\ \              /\ \             __                    /\ \
+\ \ \_\ \   __  __    \_\ \      __   /\_\      __       ___ \ \ \/'\
+ \ \  _  \ /\ \/\ \   /'_` \   /'__`\ \/\ \   /'__`\    /'___\\ \ , <
+  \ \ \ \ \\ \ \_\ \ /\ \L\ \ /\  __/  \ \ \ /\ \L\.\_ /\ \__/ \ \ \\`\
+   \ \_\ \_\\/`____ \\ \___,_\\ \____\ _\ \ \\ \__/.\_\\ \____\ \ \_\ \_\
+    \/_/\/_/ `/___/> \\/__,_ / \/____//\ \_\ \\/__/\/_/ \/____/  \/_/\/_/
+                /\___/                \ \____/
+                \/__/                  \/___/
+
+Powered by Hydejack v6.4.0 (https://qwtel.com/hydejack/)
+-->
+
+
+
+
+
+
+
+
+
+<head>
+  <!-- =============== -->
+<!-- META            -->
+<!-- =============== -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta
+  name="naver-site-verification"
+  content="22c5b4ef3bfda7fc6100671413989219de7a4ac8"
+/>
+<meta property="og:title" content="Go + Vue 토이프로젝트 후기" />
+<meta property="og:type" content="article" />
+
+<!-- =============== -->
+<!-- Google AdSense  -->
+<!-- =============== -->
+<script
+  data-ad-client="ca-pub-8247516864622650"
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+></script>
+
+ 
+<meta
+  property="og:image"
+  content="http://localhost:4000/assets//img/go-logo.png"
+/>
+<br />
+
+
+<meta property="og:image:width" content="640" />
+<meta property="og:image:height" content="360" />
+ 
+<title>Go + Vue 토이프로젝트 후기 &middot; 도전하는 개발자</title>
+ 
+<meta
+  name="description"
+  content="나는 황금 연휴 기간 동안 무엇을 하였나?
+
+"
+/>
+<meta
+  property="og:description"
+  content="나는 황금 연휴 기간 동안 무엇을 하였나?
+
+"
+/>
+
+
+
+<!-- =============== -->
+<!-- LINKS           -->
+<!-- =============== -->
+<link rel="canonical" href="http://localhost:4000/language/2020/05/30/Go-18/" />
+<meta property="og:url" content="http://localhost:4000/language/2020/05/30/Go-18/" />
+
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="도전하는 개발자 Feed"
+  href="http://localhost:4000/feed.xml"
+/>
+
+
+<link rel="prev" href="http://localhost:4000/framework/2020/05/29/Spring-115/" />
+ 
+<link rel="next" href="http://localhost:4000/framework/2020/05/31/Spring-116/" />
+
+
+<link
+  rel="apple-touch-icon"
+  href="http://localhost:4000/apple-touch-icon.png"
+/>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+<!-- Place favicon.ico in the root directory -->
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+<script>
+  !function(n,e){function t(n,e){n.onload=function(){this.onerror=this.onload=null,e(null,n)},n.onerror=function(){this.onerror=this.onload=null,e(new Error("Failed to load "+this.src),n)}}function o(n,e){n.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||(this.onreadystatechange=null,e(null,n))}}n._loaded=!1,n.loadJSDeferred=function(a,d){function r(){n._loaded=!0;var r=e.createElement("script");r.src=a,d&&(("onload"in r?t:o)(r,d),r.onload||t(r,d));var l=e.getElementsByTagName("script")[0];l.parentNode.insertBefore(r,l)}n._loaded?r():n.addEventListener?n.addEventListener("load",r,!1):n.attachEvent?n.attachEvent("onload",r):n.onload=r}}(window,document);
+
+  !function(e){"use strict";var n=function(n,t,o){function i(e){if(a.body)return e();setTimeout(function(){i(e)})}function r(){l.addEventListener&&l.removeEventListener("load",r),l.media=o||"all"}var d,a=e.document,l=a.createElement("link");if(t)d=t;else{var f=(a.body||a.getElementsByTagName("head")[0]).childNodes;d=f[f.length-1]}var s=a.styleSheets;l.rel="stylesheet",l.href=n,l.media="only x",i(function(){d.parentNode.insertBefore(l,t?d:d.nextSibling)});var u=function(e){for(var n=l.href,t=s.length;t--;)if(s[t].href===n)return e();setTimeout(function(){u(e)})};return l.addEventListener&&l.addEventListener("load",r),l.onloadcssdefined=u,u(r),l};"undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this);
+
+  !function(t){if(t.loadCSS){var e=loadCSS.relpreload={};if(e.support=function(){try{return t.document.createElement("link").relList.supports("preload")}catch(t){return!1}},e.poly=function(){for(var e=t.document.getElementsByTagName("link"),r=0;r<e.length;r++){var n=e[r];"preload"===n.rel&&"style"===n.getAttribute("as")&&(t.loadCSS(n.href,n,n.getAttribute("media")),n.rel=null)}},!e.support()){e.poly();var r=t.setInterval(e.poly,300);t.addEventListener&&t.addEventListener("load",function(){e.poly(),t.clearInterval(r)}),t.attachEvent&&t.attachEvent("onload",function(){t.clearInterval(r)})}}}(this);
+
+  window.disablePushState = false;
+  window.disableDrawer = false;
+</script>
+
+<!--[if lt IE 9]>
+  <script src="https://unpkg.com/html5shiv/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+<!-- =============== -->
+<!-- STYLES          -->
+<!-- =============== -->
+<!--[if gt IE 8]><!---->
+<style>
+  
+  article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}*{box-sizing:border-box}html,body{margin:0;padding:0}html{font-size:16px;line-height:1.75}body{color:#333;background-color:#fff;overflow-y:scroll}a{text-decoration:none}.lead{margin-left:-1rem;margin-right:-1rem}img,.img{display:block;max-width:100%;margin-bottom:1rem;border:none}img.lead,.img.lead{max-width:calc(100% + 2rem);width:calc(100% + 2rem)}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-weight:bold;text-rendering:optimizeLegibility}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{margin:1.6rem 0 1rem;line-height:1.6}h1,.h1{font-size:2rem;line-height:1.25}h2,.h2{font-size:1.5rem}h3,.h3{font-size:1.17em}p{margin-top:0;margin-bottom:1rem}p.lead{font-size:1.25rem;font-weight:300;padding:0 1rem}ul,ol,dl{margin-top:0;margin-bottom:1rem}ul,ol{padding-left:1.25rem}hr{position:relative;margin:1.5rem 0;border:0;border-top:1px solid #eee}.hr{padding-bottom:.5rem;border-bottom:1px solid #eee;margin-bottom:1.5rem}h4,h5,h6,.h4,.h5,.h6{margin-bottom:0.5rem;font-size:1rem}table{margin-bottom:1rem;width:100%;width:calc(100% + 2rem);margin-left:-1rem;border:1px solid #e5e5e5;border-collapse:collapse;border-spacing:0}td,th{padding:.25rem .5rem;border:1px solid #e5e5e5}td:first-child,th:first-child{padding-left:1rem}td:last-child,th:last-child{padding-right:1rem}thead+tbody,tbody+tbody,tfoot{border-top:3px double #e5e5e5}tbody tr:nth-child(odd) td,tbody tr:nth-child(odd) th{background-color:#f9f9f9}footer{margin-bottom:2rem}.page,.post{margin-bottom:3em}.page li+li,.post li+li{margin-top:.25rem}.page>header,.post>header{margin-bottom:2rem}.page-title,.post-title{margin-top:0}.post-date{display:block;margin-top:-0.5rem;margin-bottom:1rem;color:#9a9a9a}.related-posts{padding-left:0;list-style:none}.related-posts>li,.related-posts>li+li{margin-top:1rem}.related-posts>li>small,.related-posts>li+li>small{font-size:75%;color:#9a9a9a}.message{margin-bottom:1rem;padding:1rem;color:#787878;background-color:#f9f9f9;margin-left:-1rem;margin-right:-1rem}body,main{position:relative;overflow-x:hidden}@media screen{body::before{content:'';background:#e5e5e5;position:absolute;left:0;top:0;bottom:0}}@media screen and (min-width: 40em){html{font-size:17px}}@media screen and (min-width: 54em){html{font-size:16px}}@media screen and (min-width: 88em){html{font-size:17px}}@media screen and (min-width: 125em){html{font-size:18px}}.sr-only{display:none}.clearfix,.sidebar-social::after,.clearafter::after{content:"";display:table;clear:both}a,.a{position:relative;padding-bottom:.15rem;border-style:hidden}.img{overflow:hidden;background-color:#f9f9f9}.img>img{margin:0;width:100%;height:100%}.sixteen-nine{position:relative}.sixteen-nine::before{display:block;content:"";width:100%;padding-top:56.25%}.sixteen-nine>*{position:absolute;top:0;left:0;right:0;bottom:0}h1+hr,h2+hr,h3+hr,h4+hr,h5+hr,h6+hr{margin-top:0}.fade-in{animation-duration:500ms;animation-name:fade-in;animation-fill-mode:forwards}@keyframes fade-in{from{transform:translateY(-2rem);opacity:0}50%{transform:translateY(-2rem);opacity:0}to{transform:translateY(0);opacity:1}}.mb6{margin-bottom:10rem}.sidebar{color:rgba(255,255,255,0.75);text-align:left}.sidebar::before{content:"";position:absolute;z-index:2;top:0;left:0;bottom:0;right:0;background:linear-gradient(to bottom, rgba(32,32,32,0) 0%, rgba(32,32,32,0.5) 100%)}.sidebar a{color:#fff;border-bottom-color:rgba(255,255,255,0.2)}.right-side{width:100%;margin-left:auto;margin-right:auto}.right-side .ad-first{text-align:center}@media screen{.right-side{max-width:38rem;min-height:100vh}.right-side .ad-second{display:none}}@media screen and (min-width: 54em){.right-side{margin-left:20rem;margin-right:1rem;padding:4rem 1rem 12rem}.right-side .ad-second{text-align:center;display:block}}@media screen and (min-width: 72em){.right-side{margin-left:22rem;max-width:42rem}}@media screen and (min-width: 88em){.right-side{width:162px;margin-left:0rem;margin-right:0rem;padding:0rem;margin-top:10rem;display:block;float:left}}@media screen and (min-width: 96em){.right-side{width:300px;margin-right:0rem}}#_yDrawer{position:relative}@media screen{#_yDrawer{min-height:640px;min-height:100vh}}@media screen and (min-width: 54em){#_yDrawer{width:18rem;margin-left:0}}.sidebar-bg{position:absolute;height:100%;overflow:hidden;top:0;right:0;bottom:0;left:0;background:#202020 center / cover}.sidebar-box{display:flex;justify-content:center}.sidebar-sticky{position:relative;z-index:3}@media screen{.sidebar-sticky{-ms-overflow-style:none;overflow:-moz-scrollbars-none;height:100%;overflow:auto;position:absolute;padding:3rem 0rem;right:2.5rem;left:2.5rem}}.sidebar-sticky::-webkit-scrollbar{display:none}.sidebar-about>h1{color:#fff;font-size:2rem}.sidebar-nav>ul{list-style:none;padding-left:0;margin-bottom:.5rem}a.sidebar-nav-item{width:100%;font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}a.sidebar-nav-subitem{font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}@media screen{.y-drawer-scrim{z-index:2}.y-drawer-content{width:18rem;left:-18rem;z-index:3}}.sidebar-social{margin-bottom:.5rem}.sidebar-social>ul{list-style:none;padding-left:0;margin:0 -.25rem}.sidebar-social>ul>li{float:left}.sidebar-social>ul>li>a{display:inline-block;text-align:center;font-size:1.6rem;line-height:3rem;width:3.1249rem;height:4rem;padding:.5rem 0}.sidebar-social>ul li+li{margin-top:0}.fixed-top{position:fixed;top:0;left:0;width:100%;z-index:1}.navbar>.content{padding-top:0;padding-bottom:0;min-height:0;height:0}.menu{display:inline-block;padding:1.75rem 1.5rem;border-bottom:none;margin-left:-1.5rem;color:#9a9a9a !important}.menu::after{content:"\2630"}@media screen and (min-width: 54em){.menu{padding:1.25rem 1.5rem;position:absolute;left:-9999px}.menu:focus{position:static}}.animation-main{pointer-events:none}.loading{display:none}@media print{.menu{display:none}}.animation-main{opacity:0;will-change:opacity}.loading{position:absolute;top:0;right:0;padding:5.25rem 4.5rem;transform-origin:top right;transform:scale(0.33)}.content{position:relative;margin-left:auto;margin-right:auto;padding:5rem 1rem 12rem}@media screen{.content{min-height:100vh}}@media screen and (min-width: 54em){.content{padding:4rem 1rem 12rem;margin-left:19rem;margin-right:3rem}}@media screen and (min-width: 72em){.content{max-width:42rem;margin-left:21rem}}@media screen and (min-width: 88em){.content{float:left;width:100%;margin-left:22rem;margin-right:5rem}}@media screen and (min-width: 96em){.content{max-width:44rem}}@media screen and (min-width: 102em){.content{margin-left:25rem;margin-right:8rem}}.me{width:6.5rem;height:6.5rem;align-self:center;margin-right:20px;border-radius:100%;position:relative}@media screen and (min-width: 40em){.me{width:7rem;height:7rem}}@media screen and (min-width: 54em){.me{width:6.5rem;height:6.5rem}}@media screen and (min-width: 72em){.me{width:7rem;height:7rem}}main>footer{width:100%;position:absolute;bottom:0;left:0;right:0;padding:0 1rem;color:#9a9a9a;font-size:smaller;text-align:center}main>footer>p{margin-bottom:0}html{font-family:'Sans-serif'}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-family:'Sans-serif'}
+
+</style>
+
+
+<link
+  rel="preload"
+  href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0"
+  as="style"
+  onload="this.rel='stylesheet'"
+/>
+
+<style id="_pageStyle">
+
+.content a{color:#4f86aa;border-color:rgba(79,134,170,0.2)}.content a:hover{border-color:#4f86aa}:focus{outline-color:#4f86aa}::selection{color:#fff;background:#4f86aa}::-moz-selection{color:#fff;background:#4f86aa}
+
+</style>
+
+
+<noscript>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0" />
+    
+  
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Lato"
+  />
+  <style>
+    html { font-family: 'Lato', 'Sans-serif' }
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .heading { font-family: 'Lato', 'Sans-serif' }
+  </style>
+   
+  <link rel="stylesheet" href="http://localhost:4000/assets/icomoon/style.css" />
+</noscript>
+<!--<![endif]-->
+
+</head>
+
+<body>
+  <!-- =============== -->
+<!-- MENU            -->
+<!-- =============== -->
+<div class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <a id="_menu" class="menu no-hover" href="#_title">
+      <span class="sr-only">Menu</span>
+    </a>
+  </div>
+</div>
+
+<!-- =============== -->
+<!-- CONTENT         -->
+<!-- =============== -->
+<div id="_yPushState">
+  <div class="fade-in">
+    <main
+      id="_main"
+      class="content"
+      role="main"
+      data-color="#4f86aa"
+      data-image="/assets/img/bg.jpg"
+    >
+      
+
+<article id="post-language/2020/05/30/Go-18" class="post" role="article">
+  <header>
+    <h1 class="post-title">
+      
+        Go + Vue 토이프로젝트 후기
+        
+    </h1>
+
+    <p class="post-date heading">
+      <time datetime="2020-05-30T00:00:00+09:00">30 May 2020</time>
+      
+
+
+
+
+
+
+
+
+
+in <a href="/category/programming-language/" data-flip="title">Programming Language</a>
+
+      
+
+
+
+
+
+
+
+
+
+on <a href="/tag/programming-language-go/" data-flip="title">Go</a>
+
+    </p>
+
+    
+  <div class="hr" style="padding-bottom:0"></div>
+
+
+  </header>
+  
+
+
+  
+  <div class="markdown-body">
+
+    <!-- 
+    <div class="head-image"><img src="http://localhost:4000/assets//img/go-logo.png" /></div>
+    <br /> -->
+    <style>
+      .myAd1190 {
+        width: 48%;
+        height: 280px;
+      }
+
+      .myAd1290 {
+        width: 48%;
+        height: 280px;
+      }
+
+      @media(max-width: 800px) {
+        .myAd1190 {
+          display: none;
+        }
+
+        .myAd1290 {
+          width: 98%;
+        }
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 300px;
+      }
+
+      .row-center {
+        display: flex;
+        justify-content: center;
+        height: 258px;
+      }
+    </style>
+   
+    <!--<br />-->
+    <h2 id="나는-황금-연휴-기간-동안-무엇을-하였나">나는 황금 연휴 기간 동안 무엇을 하였나?</h2>
+
+<p>4월 30일(석가탄신일), 5월1일(노동자의 날), 5월 2일(토요일), 5월 3일(일요일), 5월 4일 (휴가), 5월 5일(어린이날)</p>
+
+<p>4월 말부터 공휴일이 끼면서 약 6일간 황금연휴가 있었다.</p>
+
+<p>연휴때 뭘 해볼까… 하고 고민하다가 프로젝트를 해보고 싶다는 생각이 문득 들었다.</p>
+
+<p>당시 프로젝트로 Go와 Vue로 개발된 마이크로 서비스를 담당하고 있었기 때문에</p>
+
+<p>같은 기술 스택으로 토이프로젝트를 해봐야겠다고 생각했다.</p>
+
+<p><a href="https://github.com/minkukjo/BookStudy">프로젝트 Git 저장소</a></p>
+
+<p>곧장 실행에 옮겨 간단한 CRUD 게시판을 만들어보았다.</p>
+
+<p>현재는 GCP에 배포하여 올린 상태이다. (그러나 종종 서버가 내려감… 역시 k8s를 써야…)</p>
+
+<p>오늘은 Go와 Vue로 개발하면서 내가 느꼈던 점을 간략하게 적어보려고 한다.</p>
+
+<h2 id="go-언어">Go 언어</h2>
+
+<p>요즘 굉장히 핫한 언어이고 성능에 초점을 맞춘 언어이다.</p>
+
+<p>원래는 C를 대체할만한 간단하고 직관적이며 성능이 뛰어난 (특히 동시성 프로그래밍을 아주 손쉽게 구현 가능) 언어를 지향하고 있다.</p>
+
+<p>실제로 Go는 정말 간략하고 C스러운 개념들(구조체, 포인터가 존재)은 한 때 C를 좋아하던 나에게는 아주 반갑게 다가왔다.</p>
+
+<p>다만 <strong>Spring Framework</strong>라는 서버 개발에 특화된 프레임워크를 써보다 보니 분명히 불편한 점들도 있었다.</p>
+
+<p>우선 Go는 표준 라이브러리들이 굉장히 방대하고, 서버 개발을 위한 서드파티 라이브러리들이 많이 존재한다.</p>
+
+<p>그래서 Go로 개발할 때는 특정 프레임워크를 쓴다는 느낌 보다는 마이크로 라이브러리들을 조합해서 만든다는 느낌이 강하다.</p>
+
+<p>그래서 스프링보다는 오히려 러닝커브가 완만한 편이었다.</p>
+
+<p>하지만 그만큼 번거로운 부분들이 많았으며, 날 것(?)을 그대로 다룬다는 느낌도 많이 들었다. (에러처리 부분)</p>
+
+<p>또한 Gorm이라고 하는 ORM 라이브러리를 사용했는데 이 라이브러리 문서가 생각보다 불친절해서 좀 애를 먹었던 기억이 난다.</p>
+
+<p>또한 나같은 주니어의 입장에서 봤을 때 Go 관련 자료들이 대부분 영어인 것도 조금 어렵게 느껴졌다.</p>
+
+<p>스프링은 한국에서 고수분들이 많다보니 아무래도 한국어 자료가 많은 편인데 Go는 상대적으로 한국어 자료가 적었다.</p>
+
+<p>그래서 Go를 배우는 것 자체는 어렵지 않지만, Go의 서드파티 라이브러리들은 문서화가 잘 안되어있는 경우가 종종 있어서 학습하기가 사람에 따라서는 조금 어려울 수도 있겠다 생각했다.</p>
+
+<p>네이버에서 Go를 주력으로 쓰는 친구의 말로는 Go는 초보자가 처음 배우기에는 별로고, 주력 언어가 있고 사이드로 배우면 괜찮은 언어라는 얘기를 선배에게 들었다고 했는데 공감이 됐다.</p>
+
+<p>그래도 여전히 직관적이고 간편한 문법은 매력적으로 느껴졌다.</p>
+
+<p>다만 Go에서는 자바처럼 클래스안에 Attribute와 Method가 묶여지지 않아서 메소드가 다른 파일에 중구난방으로 있으면 한눈에 보기는 조금 불편한 감도 없지않아 있었다. ( 그래서 가급적이면 구조체와 메소드를 하나의 파일 안에 두고 최대한 가깝게 두려고 노력했다. )</p>
+
+<p>그리고 스프링의 AOP( Go에도 있을 수도..? )가 없는 것이 로깅할 때 꽤나 불편했다.</p>
+
+<h2 id="vue">Vue</h2>
+
+<p>예전에 아주 잠깐 React를 써본적이 있는데, 굉장히 어렵게 느껴졌엇다.</p>
+
+<p>자유도가 높은 <strong>라이브러리</strong>였지만 프론트 초심자인 나에겐 어려웠다.</p>
+
+<p>그러나 Vue는 프레임워크라서 그런지 Vue-cli로 프로젝트를 생성하면 폴더들도 자동으로 셋팅되어 있는 점이 초보자인 나에게는 무척이나 좋았다.</p>
+
+<p>그리고 러닝커브가 굉장히 쉬운편에 속해서 학습하면서도 재밌게 사용했던 기억이 난다.</p>
+
+<p>그리고 상태관리에 Vuex를 사용했는데, 이 또한 굉장히 편리하게 상태관리를 할 수 있어서 좋았다.</p>
+
+<h2 id="총평">총평</h2>
+
+<p>Go는 직관적이고 간편하며 성능이 뛰어난 언어지만 그만큼 특정 기능을 구현하기 위해서 마이크로 라이브러리들을 조합해서 사용해야하는 것은 살짝 귀찮게 느껴졌다.</p>
+
+<p>종합 선물 셋트처럼 필요한 도구들을 모두 지원해주는 스프링 프레임워크가 그리운 순간이 종종 들었던 것이 사실이다.</p>
+
+<p>하지만 그만큼 적은 코드량과 동시성 프로그래밍(고루틴)을 지원하는 점은 Go의 강점이라고 생각했다.</p>
+
+<p>그래서 만약 동시성 프로그래밍이 필요한 서비스라면 마이크로 서비스로 만들어보기에는 좋은 언어라고 생각했다.</p>
+
+<p>꼭 동시성 프로그래밍이 필요한 서비스가 아니더라도 GC가 있고, 기본적으로 성능이 뛰어난 Go를 서버사이드에서 사용하는 것은 좋은 선택일 수 있겠다고 생각했다.</p>
+
+<p>Vue도 리액트,앵귤러에 비해서 완만한 러닝커브를 갖고 있고, 백엔드 개발자라고 하더라도 쉽게 사용할 수 있어서 좋았다.</p>
+
+<p>그래서 러닝커브가 완만한 Go와 Vue를 조합해서 서비스를 만들었기 때문에 비교적 빠른 시간안에 토이프로젝트를 진행할 수 있었고, 굉장히 재밌었다.</p>
+
+<p>다음에는 스프링 부트 + Kotlin + JPA + React로 토이프로젝트를 한번 진행해보고 Go + Vue와 어떤 점이 다른지 후기를 써봐야겠다.</p>
+
+    <br />
+    <br />
+  </div>
+  
+
+</article>
+
+<!--<hr class="dingbat" />-->
+<!--
+<div class="share">
+  <h2>Share this post</h2>
+  <div class="share-body">
+    <a href="http://twitter.com/share?text=Go + Vue 토이프로젝트 후기&amp;url=http://localhost:4000/language/2020/05/30/Go-18/"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="icon-twitter">
+      </span>
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/language/2020/05/30/Go-18/"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="icon-facebook">
+      </span>
+    </a>
+  </div>
+</div>
+-->
+<br />
+
+
+
+
+<aside class="related" role="complementary">
+  <h2 class="hr">Related Posts</h2>
+
+  <ul class="related-posts">
+    
+      
+      
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/language/2021/05/27/Effective-Java-44/" data-flip="title">
+    <span>Effective Java 07 람다와 스트림</span>
+  </a>
+  <small><time datetime="2021-05-27T00:00:00+09:00">
+    27 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/language/2021/05/25/Effective-Java-43/" data-flip="title">
+    <span>Effective Java 06 - item 41 -</span>
+  </a>
+  <small><time datetime="2021-05-25T00:00:00+09:00">
+    25 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/language/2021/05/25/Effective-Java-42/" data-flip="title">
+    <span>Effective Java 06 - item 40 -</span>
+  </a>
+  <small><time datetime="2021-05-25T00:00:00+09:00">
+    25 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+      
+    
+  </ul>
+</aside>
+  <aside class="comments" role="complementary">
+  <h2>Comments</h2>
+  <hr/>
+
+  <script src="https://utteranc.es/client.js"
+    repo="minkukjo/minkukjo.github.io"
+    issue-term="title"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</aside>
+
+       <footer>
+  <hr/>
+  
+    <p>© 2022. by minkuk</p>
+
+  
+  <p>
+    <code>Powered by <a href="https://minkukjo.github.io/">minkuk</a></code>
+  </p>
+</footer>
+
+    </main>
+    <div class="right-side">
+  <div class="add-first">
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+    ></script>
+    <!-- 우측 광고 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="9124111205"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+  <br />
+  <br />
+  <div class="add-second">
+    <!-- 우측 광고2 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="5156946039"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+
+  </div>
+  <div id="_yDrawer">
+  <div id="_sidebar" class="sidebar">
+    <div class="sidebar-bg" style="background-color:#4f86aa;background-image:url(/assets/img/bg.jpg)"></div>
+    <header class="sidebar-sticky" role="banner">
+      <br/>
+      <div class="sidebar-about">
+        <h1><a id="_title" href="/">도전하는 개발자</a></h1>
+        
+
+      </div>
+
+      <br/>
+      <br/>
+      <nav class="sidebar-nav heading" role="navigation">
+        <span class="sr-only">Navigation:</span>
+<ul>
+  
+
+  
+
+  
+  
+  
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-1"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/life/">Life</a>
+       <label class="folder" for="list-item-1">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-daily/">Daily</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-review/">Review</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-books/">Books</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-2"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/computer-science/">Computer Science</a>
+       <label class="folder" for="list-item-2">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-algorithm/">Algorithm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-oop/">OOP</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-network/">Network</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-db/">Database</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-ai/">AI</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-security/">Security</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-distribution-system/">Distribution System</a>
+             </li>
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-3"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/programming-language/">Programming Language</a>
+       <label class="folder" for="list-item-3">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-kotlin/">Kotlin</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-go/">Go</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-java/">Java</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-javascript/">JavaScript</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-typescript/">TypeScript</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-4"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/framework/">Framework</a>
+       <label class="folder" for="list-item-4">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring/">Spring</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-data-jpa/">Spring Data JPA</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-security/">Spring Security</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-junit/">JUnit</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-5"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/language/">Language</a>
+       <label class="folder" for="list-item-5">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/language-english/">English</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-6"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/development/">Development</a>
+       <label class="folder" for="list-item-6">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-ddd/">DDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-tdd/">TDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-clean-code/">Clean Code</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-git/">Git</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-7"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/devops/">Devops</a>
+       <label class="folder" for="list-item-7">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-alarm/">Alarm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-ansible/">Ansible</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-cicd/">CI/CD</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-docker/">Docker</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-es/">Elasticsearch</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-k8s/">Kubernetes</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-public-cloud/">Public Cloud</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-kafka/">Kafka</a>
+             </li>
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-8"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/opensource/">Open Source</a>
+       <label class="folder" for="list-item-8">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/opensource-opensource/">Open Source</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-9"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/about/">About</a>
+       
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+</ul>
+
+      </nav>
+    <br/>
+    <br/>
+      <div class="sidebar-box">
+        
+      </div>
+      <p>매일 매일 한계를 뛰어넘기 위한 도전을 즐기는 개발자</p>
+
+      
+      
+        <div class="sidebar-social">
+          <span class="sr-only">Social:</span>
+<ul>
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://github.com/minkukjo">
+    <span class="icon-github" title="GitHub"></span>
+    <span class="sr-only">GitHub</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://www.linkedin.com/in/민국-조-567052166">
+    <span class="icon-linkedin2" title="LinkedIn"></span>
+    <span class="sr-only">LinkedIn</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:harrycode@kakao.com">
+    <span class="icon-mail" title="Email"></span>
+    <span class="sr-only">Email</span>
+  </a>
+</li>
+
+  
+</ul>
+
+        </div>
+      
+    </header>
+  </div>
+</div>
+</div>
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-158654037-1', 'auto');
+  ga('send', 'pageview');
+  loadJSDeferred('https://www.google-analytics.com/analytics.js');
+</script>
+
+
+
+
+
+<!--[if gt IE 8]><!---->
+<script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+  WebFont.load({
+    
+    google: {
+      families: 'Lato'.split('|')
+    },
+    
+
+    custom: {
+      families: ['icomoon'],
+      urls: ['/assets/icomoon/style.css']
+    }
+  });
+</script>
+<!--<![endif]-->
+
+
+  <!--[if gt IE 9]><!---->
+  
+  <script>loadJSDeferred('/assets/js/hydejack.js?v=6.4.0');</script>
+
+  
+  <!--<![endif]-->
+
+
+
+</body>
+
+</html>

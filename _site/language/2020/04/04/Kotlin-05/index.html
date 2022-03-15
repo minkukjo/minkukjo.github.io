@@ -1,0 +1,1932 @@
+<!DOCTYPE html>
+<html lang="en"><!--
+ __  __                __                                     __
+/\ \/\ \              /\ \             __                    /\ \
+\ \ \_\ \   __  __    \_\ \      __   /\_\      __       ___ \ \ \/'\
+ \ \  _  \ /\ \/\ \   /'_` \   /'__`\ \/\ \   /'__`\    /'___\\ \ , <
+  \ \ \ \ \\ \ \_\ \ /\ \L\ \ /\  __/  \ \ \ /\ \L\.\_ /\ \__/ \ \ \\`\
+   \ \_\ \_\\/`____ \\ \___,_\\ \____\ _\ \ \\ \__/.\_\\ \____\ \ \_\ \_\
+    \/_/\/_/ `/___/> \\/__,_ / \/____//\ \_\ \\/__/\/_/ \/____/  \/_/\/_/
+                /\___/                \ \____/
+                \/__/                  \/___/
+
+Powered by Hydejack v6.4.0 (https://qwtel.com/hydejack/)
+-->
+
+
+
+
+
+
+
+
+
+<head>
+  <!-- =============== -->
+<!-- META            -->
+<!-- =============== -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta
+  name="naver-site-verification"
+  content="22c5b4ef3bfda7fc6100671413989219de7a4ac8"
+/>
+<meta property="og:title" content="Kotlin In Action 5장" />
+<meta property="og:type" content="article" />
+
+<!-- =============== -->
+<!-- Google AdSense  -->
+<!-- =============== -->
+<script
+  data-ad-client="ca-pub-8247516864622650"
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+></script>
+
+ 
+<meta
+  property="og:image"
+  content="http://localhost:4000/assets//img/kotlin-logo.png"
+/>
+<br />
+
+
+<meta property="og:image:width" content="640" />
+<meta property="og:image:height" content="360" />
+ 
+<title>Kotlin In Action 5장 &middot; 도전하는 개발자</title>
+ 
+<meta
+  name="description"
+  content="람다 프로그래밍
+
+"
+/>
+<meta
+  property="og:description"
+  content="람다 프로그래밍
+
+"
+/>
+
+
+
+<!-- =============== -->
+<!-- LINKS           -->
+<!-- =============== -->
+<link rel="canonical" href="http://localhost:4000/language/2020/04/04/Kotlin-05/" />
+<meta property="og:url" content="http://localhost:4000/language/2020/04/04/Kotlin-05/" />
+
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="도전하는 개발자 Feed"
+  href="http://localhost:4000/feed.xml"
+/>
+
+
+<link rel="prev" href="http://localhost:4000/cs/2020/04/02/Database-02/" />
+ 
+<link rel="next" href="http://localhost:4000/framework/2020/04/04/Spring-63/" />
+
+
+<link
+  rel="apple-touch-icon"
+  href="http://localhost:4000/apple-touch-icon.png"
+/>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+<!-- Place favicon.ico in the root directory -->
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+<script>
+  !function(n,e){function t(n,e){n.onload=function(){this.onerror=this.onload=null,e(null,n)},n.onerror=function(){this.onerror=this.onload=null,e(new Error("Failed to load "+this.src),n)}}function o(n,e){n.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||(this.onreadystatechange=null,e(null,n))}}n._loaded=!1,n.loadJSDeferred=function(a,d){function r(){n._loaded=!0;var r=e.createElement("script");r.src=a,d&&(("onload"in r?t:o)(r,d),r.onload||t(r,d));var l=e.getElementsByTagName("script")[0];l.parentNode.insertBefore(r,l)}n._loaded?r():n.addEventListener?n.addEventListener("load",r,!1):n.attachEvent?n.attachEvent("onload",r):n.onload=r}}(window,document);
+
+  !function(e){"use strict";var n=function(n,t,o){function i(e){if(a.body)return e();setTimeout(function(){i(e)})}function r(){l.addEventListener&&l.removeEventListener("load",r),l.media=o||"all"}var d,a=e.document,l=a.createElement("link");if(t)d=t;else{var f=(a.body||a.getElementsByTagName("head")[0]).childNodes;d=f[f.length-1]}var s=a.styleSheets;l.rel="stylesheet",l.href=n,l.media="only x",i(function(){d.parentNode.insertBefore(l,t?d:d.nextSibling)});var u=function(e){for(var n=l.href,t=s.length;t--;)if(s[t].href===n)return e();setTimeout(function(){u(e)})};return l.addEventListener&&l.addEventListener("load",r),l.onloadcssdefined=u,u(r),l};"undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this);
+
+  !function(t){if(t.loadCSS){var e=loadCSS.relpreload={};if(e.support=function(){try{return t.document.createElement("link").relList.supports("preload")}catch(t){return!1}},e.poly=function(){for(var e=t.document.getElementsByTagName("link"),r=0;r<e.length;r++){var n=e[r];"preload"===n.rel&&"style"===n.getAttribute("as")&&(t.loadCSS(n.href,n,n.getAttribute("media")),n.rel=null)}},!e.support()){e.poly();var r=t.setInterval(e.poly,300);t.addEventListener&&t.addEventListener("load",function(){e.poly(),t.clearInterval(r)}),t.attachEvent&&t.attachEvent("onload",function(){t.clearInterval(r)})}}}(this);
+
+  window.disablePushState = false;
+  window.disableDrawer = false;
+</script>
+
+<!--[if lt IE 9]>
+  <script src="https://unpkg.com/html5shiv/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+<!-- =============== -->
+<!-- STYLES          -->
+<!-- =============== -->
+<!--[if gt IE 8]><!---->
+<style>
+  
+  article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}*{box-sizing:border-box}html,body{margin:0;padding:0}html{font-size:16px;line-height:1.75}body{color:#333;background-color:#fff;overflow-y:scroll}a{text-decoration:none}.lead{margin-left:-1rem;margin-right:-1rem}img,.img{display:block;max-width:100%;margin-bottom:1rem;border:none}img.lead,.img.lead{max-width:calc(100% + 2rem);width:calc(100% + 2rem)}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-weight:bold;text-rendering:optimizeLegibility}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{margin:1.6rem 0 1rem;line-height:1.6}h1,.h1{font-size:2rem;line-height:1.25}h2,.h2{font-size:1.5rem}h3,.h3{font-size:1.17em}p{margin-top:0;margin-bottom:1rem}p.lead{font-size:1.25rem;font-weight:300;padding:0 1rem}ul,ol,dl{margin-top:0;margin-bottom:1rem}ul,ol{padding-left:1.25rem}hr{position:relative;margin:1.5rem 0;border:0;border-top:1px solid #eee}.hr{padding-bottom:.5rem;border-bottom:1px solid #eee;margin-bottom:1.5rem}h4,h5,h6,.h4,.h5,.h6{margin-bottom:0.5rem;font-size:1rem}table{margin-bottom:1rem;width:100%;width:calc(100% + 2rem);margin-left:-1rem;border:1px solid #e5e5e5;border-collapse:collapse;border-spacing:0}td,th{padding:.25rem .5rem;border:1px solid #e5e5e5}td:first-child,th:first-child{padding-left:1rem}td:last-child,th:last-child{padding-right:1rem}thead+tbody,tbody+tbody,tfoot{border-top:3px double #e5e5e5}tbody tr:nth-child(odd) td,tbody tr:nth-child(odd) th{background-color:#f9f9f9}footer{margin-bottom:2rem}.page,.post{margin-bottom:3em}.page li+li,.post li+li{margin-top:.25rem}.page>header,.post>header{margin-bottom:2rem}.page-title,.post-title{margin-top:0}.post-date{display:block;margin-top:-0.5rem;margin-bottom:1rem;color:#9a9a9a}.related-posts{padding-left:0;list-style:none}.related-posts>li,.related-posts>li+li{margin-top:1rem}.related-posts>li>small,.related-posts>li+li>small{font-size:75%;color:#9a9a9a}.message{margin-bottom:1rem;padding:1rem;color:#787878;background-color:#f9f9f9;margin-left:-1rem;margin-right:-1rem}body,main{position:relative;overflow-x:hidden}@media screen{body::before{content:'';background:#e5e5e5;position:absolute;left:0;top:0;bottom:0}}@media screen and (min-width: 40em){html{font-size:17px}}@media screen and (min-width: 54em){html{font-size:16px}}@media screen and (min-width: 88em){html{font-size:17px}}@media screen and (min-width: 125em){html{font-size:18px}}.sr-only{display:none}.clearfix,.sidebar-social::after,.clearafter::after{content:"";display:table;clear:both}a,.a{position:relative;padding-bottom:.15rem;border-style:hidden}.img{overflow:hidden;background-color:#f9f9f9}.img>img{margin:0;width:100%;height:100%}.sixteen-nine{position:relative}.sixteen-nine::before{display:block;content:"";width:100%;padding-top:56.25%}.sixteen-nine>*{position:absolute;top:0;left:0;right:0;bottom:0}h1+hr,h2+hr,h3+hr,h4+hr,h5+hr,h6+hr{margin-top:0}.fade-in{animation-duration:500ms;animation-name:fade-in;animation-fill-mode:forwards}@keyframes fade-in{from{transform:translateY(-2rem);opacity:0}50%{transform:translateY(-2rem);opacity:0}to{transform:translateY(0);opacity:1}}.mb6{margin-bottom:10rem}.sidebar{color:rgba(255,255,255,0.75);text-align:left}.sidebar::before{content:"";position:absolute;z-index:2;top:0;left:0;bottom:0;right:0;background:linear-gradient(to bottom, rgba(32,32,32,0) 0%, rgba(32,32,32,0.5) 100%)}.sidebar a{color:#fff;border-bottom-color:rgba(255,255,255,0.2)}.right-side{width:100%;margin-left:auto;margin-right:auto}.right-side .ad-first{text-align:center}@media screen{.right-side{max-width:38rem;min-height:100vh}.right-side .ad-second{display:none}}@media screen and (min-width: 54em){.right-side{margin-left:20rem;margin-right:1rem;padding:4rem 1rem 12rem}.right-side .ad-second{text-align:center;display:block}}@media screen and (min-width: 72em){.right-side{margin-left:22rem;max-width:42rem}}@media screen and (min-width: 88em){.right-side{width:162px;margin-left:0rem;margin-right:0rem;padding:0rem;margin-top:10rem;display:block;float:left}}@media screen and (min-width: 96em){.right-side{width:300px;margin-right:0rem}}#_yDrawer{position:relative}@media screen{#_yDrawer{min-height:640px;min-height:100vh}}@media screen and (min-width: 54em){#_yDrawer{width:18rem;margin-left:0}}.sidebar-bg{position:absolute;height:100%;overflow:hidden;top:0;right:0;bottom:0;left:0;background:#202020 center / cover}.sidebar-box{display:flex;justify-content:center}.sidebar-sticky{position:relative;z-index:3}@media screen{.sidebar-sticky{-ms-overflow-style:none;overflow:-moz-scrollbars-none;height:100%;overflow:auto;position:absolute;padding:3rem 0rem;right:2.5rem;left:2.5rem}}.sidebar-sticky::-webkit-scrollbar{display:none}.sidebar-about>h1{color:#fff;font-size:2rem}.sidebar-nav>ul{list-style:none;padding-left:0;margin-bottom:.5rem}a.sidebar-nav-item{width:100%;font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}a.sidebar-nav-subitem{font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}@media screen{.y-drawer-scrim{z-index:2}.y-drawer-content{width:18rem;left:-18rem;z-index:3}}.sidebar-social{margin-bottom:.5rem}.sidebar-social>ul{list-style:none;padding-left:0;margin:0 -.25rem}.sidebar-social>ul>li{float:left}.sidebar-social>ul>li>a{display:inline-block;text-align:center;font-size:1.6rem;line-height:3rem;width:3.1249rem;height:4rem;padding:.5rem 0}.sidebar-social>ul li+li{margin-top:0}.fixed-top{position:fixed;top:0;left:0;width:100%;z-index:1}.navbar>.content{padding-top:0;padding-bottom:0;min-height:0;height:0}.menu{display:inline-block;padding:1.75rem 1.5rem;border-bottom:none;margin-left:-1.5rem;color:#9a9a9a !important}.menu::after{content:"\2630"}@media screen and (min-width: 54em){.menu{padding:1.25rem 1.5rem;position:absolute;left:-9999px}.menu:focus{position:static}}.animation-main{pointer-events:none}.loading{display:none}@media print{.menu{display:none}}.animation-main{opacity:0;will-change:opacity}.loading{position:absolute;top:0;right:0;padding:5.25rem 4.5rem;transform-origin:top right;transform:scale(0.33)}.content{position:relative;margin-left:auto;margin-right:auto;padding:5rem 1rem 12rem}@media screen{.content{min-height:100vh}}@media screen and (min-width: 54em){.content{padding:4rem 1rem 12rem;margin-left:19rem;margin-right:3rem}}@media screen and (min-width: 72em){.content{max-width:42rem;margin-left:21rem}}@media screen and (min-width: 88em){.content{float:left;width:100%;margin-left:22rem;margin-right:5rem}}@media screen and (min-width: 96em){.content{max-width:44rem}}@media screen and (min-width: 102em){.content{margin-left:25rem;margin-right:8rem}}.me{width:6.5rem;height:6.5rem;align-self:center;margin-right:20px;border-radius:100%;position:relative}@media screen and (min-width: 40em){.me{width:7rem;height:7rem}}@media screen and (min-width: 54em){.me{width:6.5rem;height:6.5rem}}@media screen and (min-width: 72em){.me{width:7rem;height:7rem}}main>footer{width:100%;position:absolute;bottom:0;left:0;right:0;padding:0 1rem;color:#9a9a9a;font-size:smaller;text-align:center}main>footer>p{margin-bottom:0}html{font-family:'Sans-serif'}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-family:'Sans-serif'}
+
+</style>
+
+
+<link
+  rel="preload"
+  href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0"
+  as="style"
+  onload="this.rel='stylesheet'"
+/>
+
+<style id="_pageStyle">
+
+.content a{color:#4f86aa;border-color:rgba(79,134,170,0.2)}.content a:hover{border-color:#4f86aa}:focus{outline-color:#4f86aa}::selection{color:#fff;background:#4f86aa}::-moz-selection{color:#fff;background:#4f86aa}
+
+</style>
+
+
+<noscript>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0" />
+    
+  
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Lato"
+  />
+  <style>
+    html { font-family: 'Lato', 'Sans-serif' }
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .heading { font-family: 'Lato', 'Sans-serif' }
+  </style>
+   
+  <link rel="stylesheet" href="http://localhost:4000/assets/icomoon/style.css" />
+</noscript>
+<!--<![endif]-->
+
+</head>
+
+<body>
+  <!-- =============== -->
+<!-- MENU            -->
+<!-- =============== -->
+<div class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <a id="_menu" class="menu no-hover" href="#_title">
+      <span class="sr-only">Menu</span>
+    </a>
+  </div>
+</div>
+
+<!-- =============== -->
+<!-- CONTENT         -->
+<!-- =============== -->
+<div id="_yPushState">
+  <div class="fade-in">
+    <main
+      id="_main"
+      class="content"
+      role="main"
+      data-color="#4f86aa"
+      data-image="/assets/img/bg.jpg"
+    >
+      
+
+<article id="post-language/2020/04/04/Kotlin-05" class="post" role="article">
+  <header>
+    <h1 class="post-title">
+      
+        Kotlin In Action 5장
+        
+    </h1>
+
+    <p class="post-date heading">
+      <time datetime="2020-04-04T00:00:00+09:00">04 Apr 2020</time>
+      
+
+
+
+
+
+
+
+
+
+in <a href="/category/programming-language/" data-flip="title">Programming Language</a>
+
+      
+
+
+
+
+
+
+
+
+
+on <a href="/tag/programming-language-kotlin/" data-flip="title">Kotlin</a>
+
+    </p>
+
+    
+  <div class="hr" style="padding-bottom:0"></div>
+
+
+  </header>
+  
+
+
+  
+  <div class="markdown-body">
+
+    <!-- 
+    <div class="head-image"><img src="http://localhost:4000/assets//img/kotlin-logo.png" /></div>
+    <br /> -->
+    <style>
+      .myAd1190 {
+        width: 48%;
+        height: 280px;
+      }
+
+      .myAd1290 {
+        width: 48%;
+        height: 280px;
+      }
+
+      @media(max-width: 800px) {
+        .myAd1190 {
+          display: none;
+        }
+
+        .myAd1290 {
+          width: 98%;
+        }
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 300px;
+      }
+
+      .row-center {
+        display: flex;
+        justify-content: center;
+        height: 258px;
+      }
+    </style>
+   
+    <!--<br />-->
+    <h2 id="람다-프로그래밍">람다 프로그래밍</h2>
+
+<p>람다식 또는 람다는 기본적으로 다른 함수에 넘길 수 있는 작은 코드 조각을 의미한다.</p>
+
+<p>코틀린 표준 라이브러리는 람다를 아주 많이 사용한다.</p>
+
+<p>람다를 주로 사용하는 경우는 컬렉션 처리를 예로 들 수 있겠다.</p>
+
+<p>이 장에서는 컬렉션을 처리하는 패터을 표준 라이브러리 함수에 람다로 넘기는 방식,</p>
+
+<p>자바 라이브러리와 람다를 함께 사용하는 방법도 살펴본다.</p>
+
+<p>그리고 수신 객체 지정 람다 (lambda with receiver)에 대해서도 살펴본다.</p>
+
+<h2 id="람다의-등장">람다의 등장</h2>
+
+<p>자바 8에서 가장 다이나믹하게 바뀐 점을 꼽으라면 람다의 도입과 함수형 프로그래밍이 아닐까 싶다.</p>
+
+<p>코틀린 또한 자바와 마찬가지로 람다를 지원하고 이는데, 코틀린에서는 어떻게 람다를 표현했는지 살펴보자.</p>
+
+<h2 id="람다-소개">람다 소개</h2>
+
+<p><strong>이벤트가 발생하면 이 핸들러를 실행하자!</strong> 라던지,</p>
+
+<p><strong>데이터 구조의 모든 원소에 이 연산을 적용하자!</strong>와 같은 생각을 코드로 표현하기 위해 일련의 동작을 변수에 저장하거나 다른 함수에 넘겨야하는 경우가 자주 있었다.</p>
+
+<p>자바에서는 무명 내부 클래스를 통해 이러한 목적을 달성하였으나 번거롭다는 단점이 있었다.</p>
+
+<p>함수형 프로그래밍에서는 함수를 값처럼 다루는 접근 방법 (일급 시민)을 사용함으로써 더욱 간결한 코드를 만들 수 있었다. (e.q. Scala)</p>
+
+<h2 id="람다와-컬렉션">람다와 컬렉션</h2>
+
+<p>코드에서 중복을 제거하는 것은 프로래밍 스타일을 개선하는 중요한 방법 중 하나다.</p>
+
+<p>컬렉션을 다룰 때 수행하는 대부분의 작업은 몇 가지 일반적인 패턴을 갖는다.</p>
+
+<p>따라서 이러한 패턴은 라이브러리 안에 존재해야한다. 하지만 람다가 없다면 컬렉션을 편리하게 처리할 수 있는 라이브러리를 제공하기가 어렵다.</p>
+
+<p>따라서 과거 자바에서는(8이전) 쓰기 편한 컬렉션 라이브러리가 적었고, 그에 따라 자바 개발자들은 필요한 컬렉션 기능을 직접 작성하였다.</p>
+
+<p>코틀린에서는 이러한 습관을 버려야 한다.</p>
+
+<h2 id="람다-식의-문법">람다 식의 문법</h2>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span> <span class="n">x</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">-&gt;</span> <span class="n">x</span><span class="p">+</span>  <span class="n">y</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">-&gt;</code>를 기준으로 전자와 후자로 나누었다고 가정하자.</p>
+
+<p>전자의 경우 파라미터이며, 후자의 경우 본문이라고 할 수 있다.</p>
+
+<p>여기서 우리가 기억해야할 사실은 <code class="language-plaintext highlighter-rouge">-&gt;</code>가 인자 목록과 람다 본문을 구분해준다는 사실이다.</p>
+
+<p>코틀린에서는 아주 중요한 람다 문법이 존재하는데 아래와 같다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">people</span><span class="p">.</span><span class="nf">maxBy</span><span class="p">({</span><span class="n">p</span><span class="p">:</span><span class="nc">Person</span> <span class="p">-&gt;</span> <span class="n">p</span><span class="p">.</span><span class="n">age</span><span class="p">})</span>
+</code></pre></div></div>
+
+<p>people이라는 컬렉션 내부에서 가장 나이가 많은 원소만 찾는 코드이다.</p>
+
+<p>하지만 코드가 상당히 번잡함을 알 수 있다.</p>
+
+<p>이를 개선하면 아래와 같이 표현할 수 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">people</span><span class="p">.</span><span class="nf">maxBy</span><span class="p">()</span> <span class="p">{</span><span class="n">p</span><span class="p">:</span><span class="nc">Person</span> <span class="p">-&gt;</span> <span class="n">p</span><span class="p">.</span><span class="n">age</span><span class="p">}</span>
+</code></pre></div></div>
+
+<p>코틀린에서는 함수 호출 시 맨 뒤에 있는 인자가 람다식이라면 그 람다를 괄호 밖으로 빼낼 수 있다는 <code class="language-plaintext highlighter-rouge">문법적 관습</code>이 존재한다. 즉 모르면 못쓴다는 얘기. 꼭 알아두자.</p>
+
+<p>이 코드를 한번 더 개선할 수 있는데, 람다가 어떤 함수의 <strong>유일한</strong> 인자이고 괄호 뒤에 람다를 썼다면 호출 시 빈 괄호를 없애도 된다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">people</span><span class="p">.</span><span class="nf">maxBy</span> <span class="p">{</span><span class="n">p</span><span class="p">:</span><span class="nc">Person</span> <span class="p">-&gt;</span> <span class="n">p</span><span class="p">.</span><span class="n">age</span><span class="p">}</span>
+</code></pre></div></div>
+
+<p>또한 코틀린 컴파일러는 로컬 변수와 마찬가지로 람다 파라미터의 타입도 추론이 가능하다.</p>
+
+<p>그래서 다음과 같이 타입을 명시하지 않아도 괜찮다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">people</span><span class="p">.</span><span class="nf">maxBy</span> <span class="p">{</span><span class="n">p</span> <span class="p">-&gt;</span> <span class="n">p</span><span class="p">.</span><span class="n">age</span><span class="p">}</span>
+</code></pre></div></div>
+
+<p>그리고 위의 예제와 같이 람다의 파라미터가 하나이고 컴파일러가 타입 추론이 가능한 경우라면 아래와 같이 더 간결하게 작성할 수 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">people</span><span class="p">.</span><span class="nf">maxBy</span> <span class="p">{</span><span class="n">it</span><span class="p">.</span><span class="n">age</span><span class="p">}</span>
+</code></pre></div></div>
+
+<p>it은 람다 파라미터의 디폴트 이름이다.</p>
+
+<p>람다 파라미터의 이름을 별도로 지정하지 않으면 <code class="language-plaintext highlighter-rouge">it</code>이라는 이름이 자동으로 만들어진다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">getAge</span> <span class="p">=</span> <span class="p">{</span><span class="n">p</span><span class="p">:</span><span class="nc">Person</span> <span class="p">-&gt;</span> <span class="n">p</span><span class="p">.</span><span class="n">age</span><span class="p">}</span>
+<span class="n">people</span><span class="p">.</span><span class="nf">maxBy</span><span class="p">(</span><span class="n">getAge</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>당연히 람다식 또한 함수이기 때문에 변수에 넘겨줄 수 있다.</p>
+
+<p>물론 이 경우 타입 추론이 불가능하기 때문에 타입을 명시해주어야한다.</p>
+
+<h2 id="현재-영역에-있는-변수-접근">현재 영역에 있는 변수 접근</h2>
+
+<p>자바 메소드 안에서 무명 내부 클래스를 정의할 때 메소드의 로컬 변수를 무명 내부 클래스에서 사용할 수 있었다.</p>
+
+<p>람다 안에서도 같은 일이 가능하다.</p>
+
+<p>코틀린에서는 자바와 달리 람다 내부에서 파이널 변수가 아닌 변수에 접근이 가능하며, 람다 안에서 바깥 변수를 변경해도 괜찮다.</p>
+
+<p>코틀린에서는 자바와 달리 람다 밖 함수에 있는 파이널이 아닌 변수에 접근할 수 있고, 변경도 가능하다니… 매우 편리한 기능이다.</p>
+
+<p>람다 안에서 사용하는 외부 변수를 사용하는 것을 <strong>람다가 포획</strong>(captuer)한 변수라고 부른다.</p>
+
+<p>그렇다면 이 편리한 기능을 자바에서도 동일하게 사용할 수 있다는 얘기인데,</p>
+
+<p>어떻게 구현되어있길래 final 키워드가 붙은 변수만 사용할 수 있는 자바에서도 이러한 caputure를 사용할 수 있는 것일까?</p>
+
+<p>파이널이 아닌 변수를 포획한 경우 변수를 특별한 래퍼로 감싸서 나중에 변경하거나 읽을 수 있게 한 다음, 래퍼에 대한 참조를 람다 코드와 함께 저장한다.</p>
+
+<p>그 구현 예시는 아래와 같다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Ref</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;(</span><span class="kd">var</span> <span class="py">value</span><span class="p">:</span> <span class="nc">T</span><span class="p">)</span>
+<span class="kd">val</span> <span class="py">counter</span> <span class="p">=</span> <span class="nc">Ref</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="kd">val</span> <span class="py">inc</span> <span class="p">=</span> <span class="p">{</span><span class="n">counter</span><span class="p">.</span><span class="n">value</span><span class="p">++}</span>
+</code></pre></div></div>
+
+<p>자바에서는 파이널 변수만 포획할 수 있다. 하지만 교묘한 속임수를 통해 변경가능한 변수를 포획할 수 있다.</p>
+
+<p>변경 가능한 변수를 저장하는 원소가 단 하나 뿐인 배열을 선언하거나, 변경 가능한 변수를 필드로 하는 클래스를 선언하는 것이다.</p>
+
+<p>내부 원소는 변경가능할지라도 해당 배열이나 클래스의 인스턴스에 대한 참조를 final로 만들면 자바에서도 final이 아닌 변수의 값을 참조하거나 변경하는 것이 가능한 것이다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/78420078-c752a980-7686-11ea-8536-8fa842066acc.gif" alt="jj1Jd" /></p>
+
+<p><del>만든 사람이 너무 똑똑해서 감탄만 나옴</del></p>
+
+<p>한 가지 반드시 알아둬야할 함정은 아래와 같이 람다를 이벤트 핸들러나 다른 비동기적으로 실행되는 코드로 활용하는 경우</p>
+
+<p>함수 호출이 끝난 다음에 로컬 변수가 변경될 수 있는 경우다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">tryToCountButtonClicks</span><span class="p">(</span><span class="n">button</span><span class="p">:</span><span class="nc">Button</span><span class="p">)</span> <span class="p">:</span> <span class="nc">Int</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="py">clicks</span> <span class="p">=</span> <span class="mi">0</span>
+    <span class="n">button</span><span class="p">.</span><span class="nf">onClick</span><span class="p">{</span> <span class="n">clicks</span><span class="p">++</span> <span class="p">}</span>
+    <span class="k">return</span> <span class="n">clicks</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이 함수는 항상 0을 반환한다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">onClick</code> 핸들러는 호출될 때 마다 <code class="language-plaintext highlighter-rouge">clicks</code> 변수의 값을 증가시키지만, 그 값의 변경을 관찰할 수 없다.</p>
+
+<p>핸들러는 <code class="language-plaintext highlighter-rouge">tryToCountButtonClicks</code>가 <code class="language-plaintext highlighter-rouge">clicks</code>를 반환한 다음에 호출이 되기 때문이다.</p>
+
+<h2 id="멤버-참조">멤버 참조</h2>
+
+<p>람다를 사용해 코드 블록을 다른 함수에게 인자로 넘길 수 있었다.</p>
+
+<p>하지만 넘기려는 코드가 이미 함수로 선언된 경우라면 어떻게 해야할까?</p>
+
+<p>물론 해당 함수를 호출하는 람다를 만들면되지만 이는 중복이다.</p>
+
+<p>함수를 직접 넘길 수 없을까?</p>
+
+<p>코틀린에서는 자바 8과 마찬가지로 함수를 값으로 바꿀 수 있다.</p>
+
+<p>이때 이중 콜론(::)을 사용한다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">getAge</span> <span class="p">=</span> <span class="nc">Person</span><span class="o">::</span><span class="n">age</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">::</code>를 사용하는 식을 멤버 참조라고 부른다.</p>
+
+<p>즉 <code class="language-plaintext highlighter-rouge">Person</code>은 <strong>클래스</strong>이며 <code class="language-plaintext highlighter-rouge">age</code>는 <strong>멤버</strong>이다.</p>
+
+<p>이 두 사이를 <code class="language-plaintext highlighter-rouge">::</code>으로 구분하고 있을 뿐이다.</p>
+
+<p>이러한 멤버 참조를 가장 대표적으로 사용하는 예시는 아래와 같다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">list</span><span class="p">.</span><span class="nf">forEach</span><span class="p">(</span><span class="nc">System</span><span class="p">.</span><span class="k">out</span><span class="o">::</span><span class="n">println</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">forEach</code> 람다함수 내부의 인자로 <code class="language-plaintext highlighter-rouge">System.out</code>의 <code class="language-plaintext highlighter-rouge">println</code>을 넘겨주는 모습이다.</p>
+
+<p>당연히 확장함수 또한 멤버 참조가 가능하다.</p>
+
+<h2 id="컬렉션-함수형-api">컬렉션 함수형 API</h2>
+
+<p>함수형 프로그래밍 스타일을 사용하면 컬렉션을 다룰 때 매우 편리하다.</p>
+
+<p>그래서 요즘 등장하는 인싸(?) 언어들은 기본적으로 함수형 프로그래밍을 지원하며 특히 이는 콜렉션 데이터를 다룰 때 그 진가가 발휘된다.</p>
+
+<p>간결하고 직관적이며 이해하기 쉬운 코드를 작성할 수 있는 컬렉션 함수형 API에 대해서 살펴보자.</p>
+
+<h2 id="filter-map">filter, map</h2>
+
+<p><code class="language-plaintext highlighter-rouge">filter</code>와 <code class="language-plaintext highlighter-rouge">map</code>은 컬렉션을 다룰 때 기반이 되는 가장 대표적인 함수들이다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">filter</code>를 사용하는 대표적인 예시는 아래와 같다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">list</span> <span class="p">=</span> <span class="nf">listOf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="nf">println</span><span class="p">(</span><span class="n">list</span><span class="p">.</span><span class="nf">filter</span><span class="p">{</span> <span class="n">it</span> <span class="p">%</span> <span class="mi">2</span> <span class="p">==</span> <span class="mi">0</span> <span class="p">})</span> <span class="c1">// 짝수만 남음</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[2,4]
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">map</code>을 사용하는 대표적인 예시는 아래와 같다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">list</span> <span class="p">=</span> <span class="nf">listOf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="nf">println</span><span class="p">(</span><span class="n">list</span><span class="p">.</span><span class="nf">map</span><span class="p">{</span> <span class="n">it</span> <span class="p">*</span> <span class="mi">2</span> <span class="p">})</span> <span class="c1">// 모두 2씩 곱해짐</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[2,4,6,8]
+</code></pre></div></div>
+
+<h2 id="all-any-count-find">all, any, count, find</h2>
+
+<p>컬렉션에 대해 자주 수행하는 연산으로 컬렉션의 모든 원소가 어떤 조건을 만족하는지 판단하는 연산이다.</p>
+
+<p>코틀린에서는 all과 any가 이런 연산이다.</p>
+
+<p>count는 조건을 만족하는 개수를 반환하며, find는 조건을 만족하는 첫 번째 원소를 반환한다.</p>
+
+<p>전체 조건을 만족해야 true를 반환하고 그렇지 않은 경우 false를 반환하는 <strong>all</strong> 함수는 아래와 같이 사용할 수 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Person 클래스 선언</span>
+<span class="kd">class</span> <span class="nc">Person</span><span class="p">(</span><span class="kd">val</span> <span class="py">name</span><span class="p">:</span> <span class="nc">String</span><span class="p">,</span> <span class="kd">val</span> <span class="py">age</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">people</span> <span class="p">=</span> <span class="nf">listOf</span><span class="p">(</span><span class="nc">Person</span><span class="p">(</span><span class="s">"Alice"</span><span class="p">,</span><span class="mi">27</span><span class="p">),</span> <span class="nc">Person</span><span class="p">(</span><span class="s">"Bob"</span><span class="p">,</span><span class="mi">31</span><span class="p">))</span>
+<span class="nf">println</span><span class="p">(</span><span class="n">people</span><span class="p">.</span><span class="nf">all</span><span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">age</span> <span class="p">&lt;=</span> <span class="mi">27</span><span class="p">})</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>false
+</code></pre></div></div>
+
+<p>조건 중 하나라도 만족하면 true 전체 다 만족하지 않은 경우 false를 반환하는 <strong>any</strong> 함수는 아래와 같이 사용할 수 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">people</span> <span class="p">=</span> <span class="nf">listOf</span><span class="p">(</span><span class="nc">Person</span><span class="p">(</span><span class="s">"Alice"</span><span class="p">,</span><span class="mi">27</span><span class="p">),</span> <span class="nc">Person</span><span class="p">(</span><span class="s">"Bob"</span><span class="p">,</span><span class="mi">31</span><span class="p">))</span>
+<span class="nf">println</span><span class="p">(</span><span class="n">people</span><span class="p">.</span><span class="nf">any</span><span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">age</span> <span class="p">&lt;=</span> <span class="mi">27</span><span class="p">})</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>true
+</code></pre></div></div>
+
+<p>익히 잘 알고 있는 드 모르강의 법칙에 따라 <code class="language-plaintext highlighter-rouge">!all</code>의 수행 결과는 <code class="language-plaintext highlighter-rouge">any</code>와 동일하다.</p>
+
+<p>조건을 만족하는 원소의 개수를 구하고 싶다면 <code class="language-plaintext highlighter-rouge">count</code> 함수를 사용할 수 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">people</span> <span class="p">=</span> <span class="nf">listOf</span><span class="p">(</span><span class="nc">Person</span><span class="p">(</span><span class="s">"Alice"</span><span class="p">,</span><span class="mi">27</span><span class="p">),</span> <span class="nc">Person</span><span class="p">(</span><span class="s">"Bob"</span><span class="p">,</span><span class="mi">31</span><span class="p">))</span>
+<span class="nf">println</span><span class="p">(</span><span class="n">people</span><span class="p">.</span><span class="nf">count</span><span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">age</span> <span class="p">&lt;=</span> <span class="mi">27</span><span class="p">})</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1
+</code></pre></div></div>
+
+<p>조건을 만족하는 원소를 <strong>하나</strong> 찾고 싶은 경우 <code class="language-plaintext highlighter-rouge">find</code> 함수를 사용할 수 있다.</p>
+
+<p>조건을 만족하는 원소의 개수를 구하고 싶다면 count를 사용할 수 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">people</span> <span class="p">=</span> <span class="nf">listOf</span><span class="p">(</span><span class="nc">Person</span><span class="p">(</span><span class="s">"Alice"</span><span class="p">,</span><span class="mi">27</span><span class="p">),</span> <span class="nc">Person</span><span class="p">(</span><span class="s">"Bob"</span><span class="p">,</span><span class="mi">31</span><span class="p">))</span>
+<span class="nf">println</span><span class="p">(</span><span class="n">people</span><span class="p">.</span><span class="nf">find</span><span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">age</span> <span class="p">&lt;=</span> <span class="mi">27</span><span class="p">})</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Person@2f92e0f4
+</code></pre></div></div>
+
+<p>이러한 객체의 주소를 반환하는 이유는 객체 내부에 toString이 정의되어있지 않기 때문인데, 앞 시간에 배운 <strong>data class</strong>를 활용하여 다시 시도해보자.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// data 키워드 추가</span>
+<span class="kd">data class</span> <span class="nc">Person</span><span class="p">(</span><span class="kd">val</span> <span class="py">name</span><span class="p">:</span> <span class="nc">String</span><span class="p">,</span> <span class="kd">val</span> <span class="py">age</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Person(name=Alice, age=27)
+</code></pre></div></div>
+
+<p>제대로 출력이 되는 것을 확인할 수 있다.</p>
+
+<h2 id="groupby">groupby</h2>
+
+<p>가령 컬렉션의 모든 원소를 어떤 특정에 따라 여러 그룹으로 나누고 싶은 경우가 있다고 가정하자. 생각보다 이런 경우는 꽤 많다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Person</code> 클래스에서 나이를 기준으로 <code class="language-plaintext highlighter-rouge">Map</code>으로 만들어주는 함수가 있다면 정말 편리하지 않을까?</p>
+
+<p><code class="language-plaintext highlighter-rouge">groupby</code>는 이러한 기능을 갖고 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">people</span> <span class="p">=</span> <span class="nf">listOf</span><span class="p">(</span><span class="nc">Person</span><span class="p">(</span><span class="s">"Alice"</span><span class="p">,</span><span class="mi">27</span><span class="p">),</span> <span class="nc">Person</span><span class="p">(</span><span class="s">"Bob"</span><span class="p">,</span><span class="mi">31</span><span class="p">),</span><span class="nc">Person</span><span class="p">(</span><span class="s">"Harry"</span><span class="p">,</span><span class="mi">27</span><span class="p">))</span>
+<span class="nf">println</span><span class="p">(</span><span class="n">people</span><span class="p">.</span><span class="nf">groupBy</span><span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">age</span><span class="p">})</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{27=[Person(name=Alice, age=27), Person(name=Harry, age=27)], 31=[Person(name=Bob, age=31)]}
+</code></pre></div></div>
+
+<p>출력 결과를 보면 나이를 <code class="language-plaintext highlighter-rouge">Key</code>로 갖는 <code class="language-plaintext highlighter-rouge">Map</code> 자료형이 반환되는 것을 알 수 있다.</p>
+
+<h2 id="flatmap과-flatten">flatMap과 flatten</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Book(val title: String, val authors: List&lt;String&gt;)
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">Book</code>이라는 클래스가 존재한다.</p>
+
+<p>이 책에는 여러 저자들이 기재되어 있다.</p>
+
+<p>도서관에는 이러한 책들이 여러권 존재한다.</p>
+
+<p>만약 도서관의 모든 책의 저자를 모두 모은 집합을 가져오고 싶은 경우가 있을 수 있다.</p>
+
+<p>그때 아래와 같이 <code class="language-plaintext highlighter-rouge">flatMap</code>을 사용할 수 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">books</span> <span class="p">=</span> <span class="nf">arrayOf</span><span class="p">(</span><span class="nc">Book</span><span class="p">(</span><span class="s">"harry potter"</span><span class="p">,</span><span class="nf">listOf</span><span class="p">(</span><span class="s">"a"</span><span class="p">,</span><span class="s">"b"</span><span class="p">,</span><span class="s">"c"</span><span class="p">,</span><span class="s">"d"</span><span class="p">)),</span>
+        <span class="nc">Book</span><span class="p">(</span><span class="s">"Time"</span><span class="p">,</span><span class="nf">listOf</span><span class="p">(</span><span class="s">"k"</span><span class="p">,</span><span class="s">"g"</span><span class="p">,</span><span class="s">"l"</span><span class="p">)))</span>
+<span class="nf">println</span><span class="p">(</span><span class="n">books</span><span class="p">.</span><span class="nf">flatMap</span> <span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">authors</span> <span class="p">})</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[a, b, c, d, k, g, l]
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">flatMap</code> 함수는 인자로 주어진 람다를 컬렉션의 모든 객체에 적용하고 람다를 적용한 결과 얻어지는 여러 리스트를 한 리스트로 한데 모으는 기능을 가진 함수이다.</p>
+
+<h2 id="lazy-연산">lazy 연산</h2>
+
+<p>함수형 프로그래밍을 이루는 요소 중 성능과 밀접한 관련이 있는 <code class="language-plaintext highlighter-rouge">lazy evaluation</code>에 대해 살펴보자.</p>
+
+<p>앞서 살펴본 <code class="language-plaintext highlighter-rouge">map</code>과 <code class="language-plaintext highlighter-rouge">filter</code>를 살펴보았다. 이러한 함수들은 <code class="language-plaintext highlighter-rouge">eagerly</code>(즉시) 연산을 수행한다.</p>
+
+<p>이는 다시 말해서 계산 중간 결과를 새로운 컬렉션에 임시로 담는다는 말이 된다.</p>
+
+<p><strong>Sequence</strong>를 사용하면 중간 임시 컬렉션을 사용하지 않고도 컬렉션 연산을 연쇄할 수 있다. 이는 자바의 <strong>Stream</strong>과 유사한 부분이다.</p>
+
+<p>조금 더 자세한 차이를 알고 싶다면 아래의 링크를 참조하자.</p>
+
+<p>https://proandroiddev.com/java-streams-vs-kotlin-sequences-c9ae080abfdc</p>
+
+<p>어쨌든, <strong>Sequence</strong>를 사용하면 중간 결과를 만들지 않기 때문에 원소 수백만개 짜리 컬렉션을 다루면서 연쇄 호출을 할 경우 성능상 이점을 얻을 수 있다는 말이다.</p>
+
+<p>사용 예제는 아래와 같다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">people</span><span class="p">.</span><span class="nf">asSequence</span><span class="p">()</span>
+    <span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="nc">Person</span><span class="o">::</span><span class="n">name</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">filter</span> <span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="nf">startsWith</span><span class="p">(</span><span class="s">"A"</span><span class="p">)</span> <span class="p">}</span>
+    <span class="p">.</span><span class="nf">toList</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">toList()</code>가 호출될 때 비로소 연산을 수행하기 때문에 연쇄적으로 컬렉션 구조를 다룰 때 성능상 이점을 얻을 수 있다.</p>
+
+<p>시퀀스의 연산은 <strong>중간 연산</strong>과 <strong>최종 연산</strong>으로 나누어진다.</p>
+
+<p>중간 연산은 다른 시퀀스를 반환하며 최종 연산은 결과를 반환한다.</p>
+
+<p>이는 <code class="language-plaintext highlighter-rouge">Java 8</code>의 <code class="language-plaintext highlighter-rouge">Stream</code>과 상당히 유사한 구조를 갖는다는 것을 알 수 있다.</p>
+
+<p>중간 연산은 항상 지연 계산된다.</p>
+
+<h2 id="자바-함수형-인터페이스-활용">자바 함수형 인터페이스 활용</h2>
+
+<p>함수형 인터페이스를 인자로 요구하는 자바 메소드에 람다를 전달하는 경우 어떤 일이 벌어질까? 궁금하지않은가?</p>
+
+<p>함수형 인터페이스를 인자로 원하는 자바 메소드에 코틀린 람다를 전달할 수 있다.</p>
+
+<p>가령 아래와 같은 자바 메소드가 있다고 하자.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">postponeComputation</span><span class="o">(</span><span class="kt">int</span> <span class="n">delay</span><span class="o">,</span> <span class="nc">Runnable</span> <span class="n">computation</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>코틀린에서 람다를 이 함수에 넘길 수 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">postponeComputation</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> <span class="p">{</span> <span class="nf">println</span><span class="p">(</span><span class="mi">42</span><span class="p">)}</span>
+</code></pre></div></div>
+
+<p>컴파일러는 자동으로 람다를 <strong>Runnable 인스턴스</strong>로 변환해준다.</p>
+
+<p>여기서 <strong>Runnable 인스턴스</strong>라는 말은 실제로는 <code class="language-plaintext highlighter-rouge">Runnable을 구현한 무명 클래스의 인스턴스</code>라는 뜻이다.</p>
+
+<p>컴파일러가 자동으로 그런 무명 클래스와 인스턴스를 만들어준다는 얘기다.</p>
+
+<p>물론 이전 시간에 배운 <strong>object</strong>를 사용하여 넘겨주는 것 또한 가능하다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">postponeComputation</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="kd">object</span> <span class="err">: </span><span class="nc">Runnable</span> <span class="p">{</span> <span class="c1">// 객체 식을 함수형 인터페이스 구현으로 넘긴다.</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">fun</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nf">println</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>그러나 람다와 무명 객체 사이에는 차이가 있다.</p>
+
+<p>객체를 명시적으로 선언하는 경우 메소드를 호출할 때마다 새로운 객체가 생성된다.</p>
+
+<p>람다는 다르다.</p>
+
+<p>정의가 들어있는 함수의 변수에 접근하지 않는 람다에 대응하는 무명 객체를 메소드를 호출할 때마다 반복 사용한다.</p>
+
+<p>따라서 명시적인 <code class="language-plaintext highlighter-rouge">object</code>을 사용하면서 람다와 동일한 코드는 다음과 같다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">runnable</span> <span class="p">=</span> <span class="nc">Runnable</span> <span class="p">{</span> <span class="nf">println</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span> <span class="p">}</span>
+<span class="k">fun</span> <span class="nf">handleComputation</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nf">postponeComputation</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="n">runnable</span><span class="p">)</span> <span class="c1">// 모든 handleComputation 호출에 같은 객체를 사용</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>만약 람다가 주변 영역의 변수를 포획한다면 어떨까?</p>
+
+<p>그런 경우라면 매 호출마다 같은 인스턴스를 사용할 수 없다.</p>
+
+<p>그 경우 컴파일러는 매번 주변 영역의 변수를 포획한 새로운 인스턴스를 생성한다. (성능이 떨어질 수도 있겠다.)</p>
+
+<p>대부분의 경우에서 컴파일러가 자바의 함수형 인터페이스와 코틀린의 람다를 자동으로 변환해주지만 항상 세상이 그렇게 만만하지만은 않다.</p>
+
+<p>어쩔 수 없이 수동으로 변환을 해야하는 경우가 생기는데 그 경우 어떻게 람다를 처리하는지 알아보자.</p>
+
+<h2 id="sam-생성자">SAM 생성자</h2>
+
+<p><strong>SAM 생성자</strong>는 람다를 함수형 인터페이스의 인스턴스로 변환할 수 있게 컴파일러가 자동으로 생성한 함수다.</p>
+
+<p>컴파일러가 자동으로 람다를 함수형 인터페이스 무명 클래스로 바꾸지 못하는 경우라면 <strong>SAM 생성자</strong>를 사용할 수 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">fun</span> <span class="nf">createAllDoneRunnable</span><span class="p">()</span> <span class="p">:</span> <span class="nc">Runnable</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nc">Runnable</span> <span class="p">{</span> <span class="nf">println</span><span class="p">(</span><span class="s">"All done!"</span><span class="p">)</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nf">createAllDoneRunnable</span><span class="p">().</span><span class="nf">run</span><span class="p">()</span>
+<span class="c1">// All done!</span>
+</code></pre></div></div>
+
+<p><strong>SAM 생성자</strong>의 이름은 사용하려는 함수형 인터페이스의 이름과 같다.</p>
+
+<p><strong>SAM 생성자</strong>는 함수형 인터페이스의 유일한 추상 메소드의 본문에 사용할 람다만을 인자로 받아서 함수형 인터페이스를 구현하는 클래스의 인스턴스를 반환한다.</p>
+
+<h2 id="수신-객체-지정-람다-with-apply">수신 객체 지정 람다 with, apply</h2>
+
+<p>코틀린 표준 라이브러리인 <strong>with</strong>와 <strong>apply</strong>를 살펴보자.</p>
+
+<p><strong>ScopeFunction</strong>이라고도 불리는 이 함수는 매우 편리하며 많은 사람들이 사용하는 함수이다.</p>
+
+<p>자바의 람다에는 없는 코틀린 람다의 독특한 기능은 람다 내부에서 수신 객체를 지정하지 않고 람다의 본문 안에서 다른 객체의 메소드를 호출할 수 있게 하는 것이다.</p>
+
+<p>그런 람다를 수신 객체 지정 람다라고 부른다.</p>
+
+<p>먼저 with를 살펴보자, with는 수신 객체 지정 람다를 활용한다.</p>
+
+<h2 id="with">with</h2>
+
+<p>with를 사용하는 예제를 직접 살펴보자.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">alphabet</span><span class="p">()</span> <span class="p">:</span> <span class="nc">String</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">stringBuilder</span> <span class="p">=</span> <span class="nc">StringBuilder</span><span class="p">()</span>
+    <span class="k">return</span> <span class="nf">with</span><span class="p">(</span><span class="n">stringBuilder</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 메소드를 호출 하려는 수신 객체 지정</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">letter</span> <span class="k">in</span> <span class="sc">'A'</span><span class="o">..</span><span class="sc">'Z'</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">letter</span><span class="p">)</span> <span class="c1">// this를 명시해 지정 수신 객체의 메소드 호출</span>
+        <span class="p">}</span>
+        <span class="nf">append</span><span class="p">(</span><span class="s">"\nNow I know the alphabet!"</span><span class="p">)</span> <span class="c1">// this 생략</span>
+        <span class="k">this</span><span class="p">.</span><span class="nf">toString</span><span class="p">()</span> <span class="c1">// 람다 값 반환</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>얼핏보면 with가 언어에서 제공하는 특별한 구문처럼 보이지만 이는 사실이 아니다.</p>
+
+<p>실제로는 파라미터가 2개인 함수이다. 첫 번째 파라미터는 수신 객체이며 두 번째 파라미터는 람다이다.</p>
+
+<p>마지막 파라미터가 람다인 경우 괄호 밖으로 빼낼 수 있다는 것을 우리는 앞에서 배웠다.</p>
+
+<p>물론 with(stringBuilder, {…})라고 할 수는 있지만 글쎄… 더 가독성이 떨어지니까 이렇게 사용하지는 말자.</p>
+
+<p>조금 더 리팩토링 해서 앞의 코드를 줄이면 다음과 같다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">alphabet</span><span class="p">()</span> <span class="p">=</span> <span class="nf">with</span><span class="p">(</span><span class="nc">StringBuilder</span><span class="p">())</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">letter</span> <span class="k">in</span> <span class="sc">'A'</span><span class="o">..</span><span class="sc">'Z'</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nf">append</span><span class="p">(</span><span class="n">letter</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="nf">append</span><span class="p">(</span><span class="s">"\nNow I know the alphabet!"</span><span class="p">)</span>
+    <span class="nf">toString</span><span class="p">()</span> <span class="c1">// 람다 값 반환</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">this</code>를 생략하고 함수에 with 함수를 대입하였다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">with</code>는 마지막 반환 값이 람다의 결과이다.</p>
+
+<p>그런데 반환값이 <code class="language-plaintext highlighter-rouge">수신 객체</code>가 필요한 경우가 존재한다.</p>
+
+<p>이를 위해 등장한 것이 <strong>apply</strong>이다.</p>
+
+<h2 id="apply">apply</h2>
+
+<p><code class="language-plaintext highlighter-rouge">apply</code>는 with와 거의 유사하다.</p>
+
+<p>유일한 차이는 반환 값이 자신을 전달한 수신 객체라는 점뿐이다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">alphabet</span><span class="p">()</span> <span class="p">=</span> <span class="nc">StringBuilder</span><span class="p">().</span><span class="nf">apply</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">letter</span> <span class="k">in</span> <span class="sc">'A'</span><span class="o">..</span><span class="sc">'Z'</span><span class="p">){</span>
+        <span class="nf">append</span><span class="p">(</span><span class="n">letter</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="nf">append</span><span class="p">(</span><span class="s">"\nNow I know the alphabet!"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>apply</strong>는 확장 함수로 정의되어있다.</p>
+
+<p>이 <strong>apply</strong> 함수의 경우 객체의 인스턴스를 만들면서 프로퍼티를 초기화해야하는 경우 사용하면 유용하다.</p>
+
+<p>자바에서는 보통 별도의 Builder 객체가 이를 담당한다.</p>
+
+<p>그러나 코틀린에서는 어떤 클래스가 정의돼 있는 라이브러리의 특별한 지원 없이도 그 클래스 인스턴스에 대해 <strong>apply</strong>를 활용할 수 있다.</p>
+
+<h2 id="reference">Reference</h2>
+
+<p><strong>Kotlin In Action</strong> (드미트리 제메로프, 스베트라나 이사코바)</p>
+
+    <br />
+    <br />
+  </div>
+  
+
+</article>
+
+<!--<hr class="dingbat" />-->
+<!--
+<div class="share">
+  <h2>Share this post</h2>
+  <div class="share-body">
+    <a href="http://twitter.com/share?text=Kotlin In Action 5장&amp;url=http://localhost:4000/language/2020/04/04/Kotlin-05/"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="icon-twitter">
+      </span>
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/language/2020/04/04/Kotlin-05/"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="icon-facebook">
+      </span>
+    </a>
+  </div>
+</div>
+-->
+<br />
+
+
+
+
+<aside class="related" role="complementary">
+  <h2 class="hr">Related Posts</h2>
+
+  <ul class="related-posts">
+    
+      
+      
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/language/2021/05/27/Effective-Java-44/" data-flip="title">
+    <span>Effective Java 07 람다와 스트림</span>
+  </a>
+  <small><time datetime="2021-05-27T00:00:00+09:00">
+    27 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/language/2021/05/25/Effective-Java-43/" data-flip="title">
+    <span>Effective Java 06 - item 41 -</span>
+  </a>
+  <small><time datetime="2021-05-25T00:00:00+09:00">
+    25 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/language/2021/05/25/Effective-Java-42/" data-flip="title">
+    <span>Effective Java 06 - item 40 -</span>
+  </a>
+  <small><time datetime="2021-05-25T00:00:00+09:00">
+    25 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+      
+    
+  </ul>
+</aside>
+  <aside class="comments" role="complementary">
+  <h2>Comments</h2>
+  <hr/>
+
+  <script src="https://utteranc.es/client.js"
+    repo="minkukjo/minkukjo.github.io"
+    issue-term="title"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</aside>
+
+       <footer>
+  <hr/>
+  
+    <p>© 2022. by minkuk</p>
+
+  
+  <p>
+    <code>Powered by <a href="https://minkukjo.github.io/">minkuk</a></code>
+  </p>
+</footer>
+
+    </main>
+    <div class="right-side">
+  <div class="add-first">
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+    ></script>
+    <!-- 우측 광고 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="9124111205"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+  <br />
+  <br />
+  <div class="add-second">
+    <!-- 우측 광고2 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="5156946039"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+
+  </div>
+  <div id="_yDrawer">
+  <div id="_sidebar" class="sidebar">
+    <div class="sidebar-bg" style="background-color:#4f86aa;background-image:url(/assets/img/bg.jpg)"></div>
+    <header class="sidebar-sticky" role="banner">
+      <br/>
+      <div class="sidebar-about">
+        <h1><a id="_title" href="/">도전하는 개발자</a></h1>
+        
+
+      </div>
+
+      <br/>
+      <br/>
+      <nav class="sidebar-nav heading" role="navigation">
+        <span class="sr-only">Navigation:</span>
+<ul>
+  
+
+  
+
+  
+  
+  
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-1"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/life/">Life</a>
+       <label class="folder" for="list-item-1">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-daily/">Daily</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-review/">Review</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-books/">Books</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-2"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/computer-science/">Computer Science</a>
+       <label class="folder" for="list-item-2">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-algorithm/">Algorithm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-oop/">OOP</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-network/">Network</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-db/">Database</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-ai/">AI</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-security/">Security</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-distribution-system/">Distribution System</a>
+             </li>
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-3"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/programming-language/">Programming Language</a>
+       <label class="folder" for="list-item-3">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-kotlin/">Kotlin</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-go/">Go</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-java/">Java</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-javascript/">JavaScript</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-typescript/">TypeScript</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-4"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/framework/">Framework</a>
+       <label class="folder" for="list-item-4">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring/">Spring</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-data-jpa/">Spring Data JPA</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-security/">Spring Security</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-junit/">JUnit</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-5"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/language/">Language</a>
+       <label class="folder" for="list-item-5">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/language-english/">English</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-6"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/development/">Development</a>
+       <label class="folder" for="list-item-6">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-ddd/">DDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-tdd/">TDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-clean-code/">Clean Code</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-git/">Git</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-7"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/devops/">Devops</a>
+       <label class="folder" for="list-item-7">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-alarm/">Alarm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-ansible/">Ansible</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-cicd/">CI/CD</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-docker/">Docker</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-es/">Elasticsearch</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-k8s/">Kubernetes</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-public-cloud/">Public Cloud</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-kafka/">Kafka</a>
+             </li>
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-8"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/opensource/">Open Source</a>
+       <label class="folder" for="list-item-8">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/opensource-opensource/">Open Source</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-9"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/about/">About</a>
+       
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+</ul>
+
+      </nav>
+    <br/>
+    <br/>
+      <div class="sidebar-box">
+        
+      </div>
+      <p>매일 매일 한계를 뛰어넘기 위한 도전을 즐기는 개발자</p>
+
+      
+      
+        <div class="sidebar-social">
+          <span class="sr-only">Social:</span>
+<ul>
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://github.com/minkukjo">
+    <span class="icon-github" title="GitHub"></span>
+    <span class="sr-only">GitHub</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://www.linkedin.com/in/민국-조-567052166">
+    <span class="icon-linkedin2" title="LinkedIn"></span>
+    <span class="sr-only">LinkedIn</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:harrycode@kakao.com">
+    <span class="icon-mail" title="Email"></span>
+    <span class="sr-only">Email</span>
+  </a>
+</li>
+
+  
+</ul>
+
+        </div>
+      
+    </header>
+  </div>
+</div>
+</div>
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-158654037-1', 'auto');
+  ga('send', 'pageview');
+  loadJSDeferred('https://www.google-analytics.com/analytics.js');
+</script>
+
+
+
+
+
+<!--[if gt IE 8]><!---->
+<script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+  WebFont.load({
+    
+    google: {
+      families: 'Lato'.split('|')
+    },
+    
+
+    custom: {
+      families: ['icomoon'],
+      urls: ['/assets/icomoon/style.css']
+    }
+  });
+</script>
+<!--<![endif]-->
+
+
+  <!--[if gt IE 9]><!---->
+  
+  <script>loadJSDeferred('/assets/js/hydejack.js?v=6.4.0');</script>
+
+  
+  <!--<![endif]-->
+
+
+
+</body>
+
+</html>

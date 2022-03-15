@@ -1,0 +1,2141 @@
+<!DOCTYPE html>
+<html lang="en"><!--
+ __  __                __                                     __
+/\ \/\ \              /\ \             __                    /\ \
+\ \ \_\ \   __  __    \_\ \      __   /\_\      __       ___ \ \ \/'\
+ \ \  _  \ /\ \/\ \   /'_` \   /'__`\ \/\ \   /'__`\    /'___\\ \ , <
+  \ \ \ \ \\ \ \_\ \ /\ \L\ \ /\  __/  \ \ \ /\ \L\.\_ /\ \__/ \ \ \\`\
+   \ \_\ \_\\/`____ \\ \___,_\\ \____\ _\ \ \\ \__/.\_\\ \____\ \ \_\ \_\
+    \/_/\/_/ `/___/> \\/__,_ / \/____//\ \_\ \\/__/\/_/ \/____/  \/_/\/_/
+                /\___/                \ \____/
+                \/__/                  \/___/
+
+Powered by Hydejack v6.4.0 (https://qwtel.com/hydejack/)
+-->
+
+
+
+
+
+
+
+
+
+<head>
+  <!-- =============== -->
+<!-- META            -->
+<!-- =============== -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta
+  name="naver-site-verification"
+  content="22c5b4ef3bfda7fc6100671413989219de7a4ac8"
+/>
+<meta property="og:title" content="Github Actions를 사용해서 CICD 구축해보기 실습 with GCP - 준비편" />
+<meta property="og:type" content="article" />
+
+<!-- =============== -->
+<!-- Google AdSense  -->
+<!-- =============== -->
+<script
+  data-ad-client="ca-pub-8247516864622650"
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+></script>
+
+ 
+<meta
+  property="og:image"
+  content="http://localhost:4000/assets//img/devops-logo.png"
+/>
+<br />
+
+
+<meta property="og:image:width" content="640" />
+<meta property="og:image:height" content="360" />
+ 
+<title>Github Actions를 사용해서 CICD 구축해보기 실습 with GCP - 준비편 &middot; 도전하는 개발자</title>
+ 
+<meta
+  name="description"
+  content="서론
+
+"
+/>
+<meta
+  property="og:description"
+  content="서론
+
+"
+/>
+
+
+
+<!-- =============== -->
+<!-- LINKS           -->
+<!-- =============== -->
+<link rel="canonical" href="http://localhost:4000/devops/2020/08/28/Infra-22/" />
+<meta property="og:url" content="http://localhost:4000/devops/2020/08/28/Infra-22/" />
+
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="도전하는 개발자 Feed"
+  href="http://localhost:4000/feed.xml"
+/>
+
+
+<link rel="prev" href="http://localhost:4000/cs/2020/08/15/Security-1/" />
+ 
+<link rel="next" href="http://localhost:4000/devops/2020/08/29/Infra-23/" />
+
+
+<link
+  rel="apple-touch-icon"
+  href="http://localhost:4000/apple-touch-icon.png"
+/>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+<!-- Place favicon.ico in the root directory -->
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+<script>
+  !function(n,e){function t(n,e){n.onload=function(){this.onerror=this.onload=null,e(null,n)},n.onerror=function(){this.onerror=this.onload=null,e(new Error("Failed to load "+this.src),n)}}function o(n,e){n.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||(this.onreadystatechange=null,e(null,n))}}n._loaded=!1,n.loadJSDeferred=function(a,d){function r(){n._loaded=!0;var r=e.createElement("script");r.src=a,d&&(("onload"in r?t:o)(r,d),r.onload||t(r,d));var l=e.getElementsByTagName("script")[0];l.parentNode.insertBefore(r,l)}n._loaded?r():n.addEventListener?n.addEventListener("load",r,!1):n.attachEvent?n.attachEvent("onload",r):n.onload=r}}(window,document);
+
+  !function(e){"use strict";var n=function(n,t,o){function i(e){if(a.body)return e();setTimeout(function(){i(e)})}function r(){l.addEventListener&&l.removeEventListener("load",r),l.media=o||"all"}var d,a=e.document,l=a.createElement("link");if(t)d=t;else{var f=(a.body||a.getElementsByTagName("head")[0]).childNodes;d=f[f.length-1]}var s=a.styleSheets;l.rel="stylesheet",l.href=n,l.media="only x",i(function(){d.parentNode.insertBefore(l,t?d:d.nextSibling)});var u=function(e){for(var n=l.href,t=s.length;t--;)if(s[t].href===n)return e();setTimeout(function(){u(e)})};return l.addEventListener&&l.addEventListener("load",r),l.onloadcssdefined=u,u(r),l};"undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this);
+
+  !function(t){if(t.loadCSS){var e=loadCSS.relpreload={};if(e.support=function(){try{return t.document.createElement("link").relList.supports("preload")}catch(t){return!1}},e.poly=function(){for(var e=t.document.getElementsByTagName("link"),r=0;r<e.length;r++){var n=e[r];"preload"===n.rel&&"style"===n.getAttribute("as")&&(t.loadCSS(n.href,n,n.getAttribute("media")),n.rel=null)}},!e.support()){e.poly();var r=t.setInterval(e.poly,300);t.addEventListener&&t.addEventListener("load",function(){e.poly(),t.clearInterval(r)}),t.attachEvent&&t.attachEvent("onload",function(){t.clearInterval(r)})}}}(this);
+
+  window.disablePushState = false;
+  window.disableDrawer = false;
+</script>
+
+<!--[if lt IE 9]>
+  <script src="https://unpkg.com/html5shiv/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+<!-- =============== -->
+<!-- STYLES          -->
+<!-- =============== -->
+<!--[if gt IE 8]><!---->
+<style>
+  
+  article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}*{box-sizing:border-box}html,body{margin:0;padding:0}html{font-size:16px;line-height:1.75}body{color:#333;background-color:#fff;overflow-y:scroll}a{text-decoration:none}.lead{margin-left:-1rem;margin-right:-1rem}img,.img{display:block;max-width:100%;margin-bottom:1rem;border:none}img.lead,.img.lead{max-width:calc(100% + 2rem);width:calc(100% + 2rem)}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-weight:bold;text-rendering:optimizeLegibility}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{margin:1.6rem 0 1rem;line-height:1.6}h1,.h1{font-size:2rem;line-height:1.25}h2,.h2{font-size:1.5rem}h3,.h3{font-size:1.17em}p{margin-top:0;margin-bottom:1rem}p.lead{font-size:1.25rem;font-weight:300;padding:0 1rem}ul,ol,dl{margin-top:0;margin-bottom:1rem}ul,ol{padding-left:1.25rem}hr{position:relative;margin:1.5rem 0;border:0;border-top:1px solid #eee}.hr{padding-bottom:.5rem;border-bottom:1px solid #eee;margin-bottom:1.5rem}h4,h5,h6,.h4,.h5,.h6{margin-bottom:0.5rem;font-size:1rem}table{margin-bottom:1rem;width:100%;width:calc(100% + 2rem);margin-left:-1rem;border:1px solid #e5e5e5;border-collapse:collapse;border-spacing:0}td,th{padding:.25rem .5rem;border:1px solid #e5e5e5}td:first-child,th:first-child{padding-left:1rem}td:last-child,th:last-child{padding-right:1rem}thead+tbody,tbody+tbody,tfoot{border-top:3px double #e5e5e5}tbody tr:nth-child(odd) td,tbody tr:nth-child(odd) th{background-color:#f9f9f9}footer{margin-bottom:2rem}.page,.post{margin-bottom:3em}.page li+li,.post li+li{margin-top:.25rem}.page>header,.post>header{margin-bottom:2rem}.page-title,.post-title{margin-top:0}.post-date{display:block;margin-top:-0.5rem;margin-bottom:1rem;color:#9a9a9a}.related-posts{padding-left:0;list-style:none}.related-posts>li,.related-posts>li+li{margin-top:1rem}.related-posts>li>small,.related-posts>li+li>small{font-size:75%;color:#9a9a9a}.message{margin-bottom:1rem;padding:1rem;color:#787878;background-color:#f9f9f9;margin-left:-1rem;margin-right:-1rem}body,main{position:relative;overflow-x:hidden}@media screen{body::before{content:'';background:#e5e5e5;position:absolute;left:0;top:0;bottom:0}}@media screen and (min-width: 40em){html{font-size:17px}}@media screen and (min-width: 54em){html{font-size:16px}}@media screen and (min-width: 88em){html{font-size:17px}}@media screen and (min-width: 125em){html{font-size:18px}}.sr-only{display:none}.clearfix,.sidebar-social::after,.clearafter::after{content:"";display:table;clear:both}a,.a{position:relative;padding-bottom:.15rem;border-style:hidden}.img{overflow:hidden;background-color:#f9f9f9}.img>img{margin:0;width:100%;height:100%}.sixteen-nine{position:relative}.sixteen-nine::before{display:block;content:"";width:100%;padding-top:56.25%}.sixteen-nine>*{position:absolute;top:0;left:0;right:0;bottom:0}h1+hr,h2+hr,h3+hr,h4+hr,h5+hr,h6+hr{margin-top:0}.fade-in{animation-duration:500ms;animation-name:fade-in;animation-fill-mode:forwards}@keyframes fade-in{from{transform:translateY(-2rem);opacity:0}50%{transform:translateY(-2rem);opacity:0}to{transform:translateY(0);opacity:1}}.mb6{margin-bottom:10rem}.sidebar{color:rgba(255,255,255,0.75);text-align:left}.sidebar::before{content:"";position:absolute;z-index:2;top:0;left:0;bottom:0;right:0;background:linear-gradient(to bottom, rgba(32,32,32,0) 0%, rgba(32,32,32,0.5) 100%)}.sidebar a{color:#fff;border-bottom-color:rgba(255,255,255,0.2)}.right-side{width:100%;margin-left:auto;margin-right:auto}.right-side .ad-first{text-align:center}@media screen{.right-side{max-width:38rem;min-height:100vh}.right-side .ad-second{display:none}}@media screen and (min-width: 54em){.right-side{margin-left:20rem;margin-right:1rem;padding:4rem 1rem 12rem}.right-side .ad-second{text-align:center;display:block}}@media screen and (min-width: 72em){.right-side{margin-left:22rem;max-width:42rem}}@media screen and (min-width: 88em){.right-side{width:162px;margin-left:0rem;margin-right:0rem;padding:0rem;margin-top:10rem;display:block;float:left}}@media screen and (min-width: 96em){.right-side{width:300px;margin-right:0rem}}#_yDrawer{position:relative}@media screen{#_yDrawer{min-height:640px;min-height:100vh}}@media screen and (min-width: 54em){#_yDrawer{width:18rem;margin-left:0}}.sidebar-bg{position:absolute;height:100%;overflow:hidden;top:0;right:0;bottom:0;left:0;background:#202020 center / cover}.sidebar-box{display:flex;justify-content:center}.sidebar-sticky{position:relative;z-index:3}@media screen{.sidebar-sticky{-ms-overflow-style:none;overflow:-moz-scrollbars-none;height:100%;overflow:auto;position:absolute;padding:3rem 0rem;right:2.5rem;left:2.5rem}}.sidebar-sticky::-webkit-scrollbar{display:none}.sidebar-about>h1{color:#fff;font-size:2rem}.sidebar-nav>ul{list-style:none;padding-left:0;margin-bottom:.5rem}a.sidebar-nav-item{width:100%;font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}a.sidebar-nav-subitem{font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}@media screen{.y-drawer-scrim{z-index:2}.y-drawer-content{width:18rem;left:-18rem;z-index:3}}.sidebar-social{margin-bottom:.5rem}.sidebar-social>ul{list-style:none;padding-left:0;margin:0 -.25rem}.sidebar-social>ul>li{float:left}.sidebar-social>ul>li>a{display:inline-block;text-align:center;font-size:1.6rem;line-height:3rem;width:3.1249rem;height:4rem;padding:.5rem 0}.sidebar-social>ul li+li{margin-top:0}.fixed-top{position:fixed;top:0;left:0;width:100%;z-index:1}.navbar>.content{padding-top:0;padding-bottom:0;min-height:0;height:0}.menu{display:inline-block;padding:1.75rem 1.5rem;border-bottom:none;margin-left:-1.5rem;color:#9a9a9a !important}.menu::after{content:"\2630"}@media screen and (min-width: 54em){.menu{padding:1.25rem 1.5rem;position:absolute;left:-9999px}.menu:focus{position:static}}.animation-main{pointer-events:none}.loading{display:none}@media print{.menu{display:none}}.animation-main{opacity:0;will-change:opacity}.loading{position:absolute;top:0;right:0;padding:5.25rem 4.5rem;transform-origin:top right;transform:scale(0.33)}.content{position:relative;margin-left:auto;margin-right:auto;padding:5rem 1rem 12rem}@media screen{.content{min-height:100vh}}@media screen and (min-width: 54em){.content{padding:4rem 1rem 12rem;margin-left:19rem;margin-right:3rem}}@media screen and (min-width: 72em){.content{max-width:42rem;margin-left:21rem}}@media screen and (min-width: 88em){.content{float:left;width:100%;margin-left:22rem;margin-right:5rem}}@media screen and (min-width: 96em){.content{max-width:44rem}}@media screen and (min-width: 102em){.content{margin-left:25rem;margin-right:8rem}}.me{width:6.5rem;height:6.5rem;align-self:center;margin-right:20px;border-radius:100%;position:relative}@media screen and (min-width: 40em){.me{width:7rem;height:7rem}}@media screen and (min-width: 54em){.me{width:6.5rem;height:6.5rem}}@media screen and (min-width: 72em){.me{width:7rem;height:7rem}}main>footer{width:100%;position:absolute;bottom:0;left:0;right:0;padding:0 1rem;color:#9a9a9a;font-size:smaller;text-align:center}main>footer>p{margin-bottom:0}html{font-family:'Sans-serif'}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-family:'Sans-serif'}
+
+</style>
+
+
+<link
+  rel="preload"
+  href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0"
+  as="style"
+  onload="this.rel='stylesheet'"
+/>
+
+<style id="_pageStyle">
+
+.content a{color:#4f86aa;border-color:rgba(79,134,170,0.2)}.content a:hover{border-color:#4f86aa}:focus{outline-color:#4f86aa}::selection{color:#fff;background:#4f86aa}::-moz-selection{color:#fff;background:#4f86aa}
+
+</style>
+
+
+<noscript>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0" />
+    
+  
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Lato"
+  />
+  <style>
+    html { font-family: 'Lato', 'Sans-serif' }
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .heading { font-family: 'Lato', 'Sans-serif' }
+  </style>
+   
+  <link rel="stylesheet" href="http://localhost:4000/assets/icomoon/style.css" />
+</noscript>
+<!--<![endif]-->
+
+</head>
+
+<body>
+  <!-- =============== -->
+<!-- MENU            -->
+<!-- =============== -->
+<div class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <a id="_menu" class="menu no-hover" href="#_title">
+      <span class="sr-only">Menu</span>
+    </a>
+  </div>
+</div>
+
+<!-- =============== -->
+<!-- CONTENT         -->
+<!-- =============== -->
+<div id="_yPushState">
+  <div class="fade-in">
+    <main
+      id="_main"
+      class="content"
+      role="main"
+      data-color="#4f86aa"
+      data-image="/assets/img/bg.jpg"
+    >
+      
+
+<article id="post-devops/2020/08/28/Infra-22" class="post" role="article">
+  <header>
+    <h1 class="post-title">
+      
+        Github Actions를 사용해서 CICD 구축해보기 실습 with GCP - 준비편
+        
+    </h1>
+
+    <p class="post-date heading">
+      <time datetime="2020-08-28T00:00:00+09:00">28 Aug 2020</time>
+      
+
+
+
+
+
+
+
+
+
+in <a href="/category/devops/" data-flip="title">Devops</a>
+
+      
+
+
+
+
+
+
+
+
+
+on <a href="/tag/devops-cicd/" data-flip="title">CI/CD</a>
+
+    </p>
+
+    
+  <div class="hr" style="padding-bottom:0"></div>
+
+
+  </header>
+  
+
+
+  
+  <div class="markdown-body">
+
+    <!-- 
+    <div class="head-image"><img src="http://localhost:4000/assets//img/devops-logo.png" /></div>
+    <br /> -->
+    <style>
+      .myAd1190 {
+        width: 48%;
+        height: 280px;
+      }
+
+      .myAd1290 {
+        width: 48%;
+        height: 280px;
+      }
+
+      @media(max-width: 800px) {
+        .myAd1190 {
+          display: none;
+        }
+
+        .myAd1290 {
+          width: 98%;
+        }
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 300px;
+      }
+
+      .row-center {
+        display: flex;
+        justify-content: center;
+        height: 258px;
+      }
+    </style>
+   
+    <!--<br />-->
+    <h2 id="서론">서론</h2>
+
+<p>원래 나누어서 쓸 생각이 없었는데 글을 쓰다보니 길어져서 준비편, 실행편으로 나누게 되었다.</p>
+
+<p>이 글은 대학생, 취준생 또는 백엔드를 전혀 모르는 개발자를 대상으로 스프링 애플리케이션이 뭔지, CI/CD가 뭔지, 클라우드 플랫폼이 뭔지 모르는 분들에게 따라하면서 백엔드 개발의 프로세스를 경험할 수 있게 하는 것을 목적으로 작성되었다.</p>
+
+<h3 id="지금부턴-약간의-tmi">지금부턴 약간의 TMI</h3>
+
+<p>이 글을 쓰게 된 계기는 얼마 전 Google Developer Groups Campus에서 대학생,취준생들을 대상으로 나의 인턴 경험담을 발표를 했었던게 계기가 되었다.</p>
+
+<p>거기서 나는 최대한 과거의 나를 상상하며 학생들의 눈높이에 맞춰 발표를 준비했었다.</p>
+
+<p>최대한 학생들이 공감할 수 있을만한 내용으로 준비하고 싶어서 몇 번이고 피피티를 지웠다 다시 만들었는지 모를 정도로 열심히 준비를 해갔다.</p>
+
+<p>발표 후 운영진 분들께서 발표에대한 피드백을 메일로 보내주셨는데 그 내용은 발표를 들었던 사람들이 어떤 세션의 발표가 좋았는지를 투표한 그래프를 보여주셨다.</p>
+
+<p>그런데 그 그래프에서 놀랍게도 98%의 인원이 내 발표에 만족했다는 투표를 해주셨다.</p>
+
+<p>그게 무척이나 기뻤고 감동적이었어서 지금 이 글을 쓰게된 계기가 되었다.</p>
+
+<p>피드백을 받고 나서 왜 그분들이 나의 발표에 좋은 평가를 해주셨는지 곰곰히 생각해보니 발표가 학생들의 눈높이를 맞춘 것에 만족해주시지 않았나 생각이 들었다.</p>
+
+<p>나 역시 학교다닐 때는 실제 개발자들은 어떻게 일하는지? 어떤 기술을 쓰는지? 어떤 것에 관심이있어하는지 늘 궁금하고 알고 싶어서 현직 개발자들의 발표를 찾았던 기억이 난다.</p>
+
+<p>그러나 유튜브나 세미나에서 실제 개발자들의 발표를 들어봤아도 학부생인 내가 듣기에는 통 이해하기 어려운 내용들이 많았었던 기억이 난다.</p>
+
+<p>마치 더하기 빼기도 못하는 사람이 미적분 강의를 듣는 느낌이랄까?</p>
+
+<p>지금은 내가 개발자가 되었고 (비록 0년차지만) 개발자가 되고 싶어하는 사람들에게 도움을 줄 수 있는 일이 뭐가 있을까 곰곰히 생각해보다가 백엔드 개발의 일련의 프로세스를 공유하면 참 좋을 것 같다는 생각까지 미치게 되었다.</p>
+
+<p>Github Actions를 소개하는 글이지만, A to Z까지 백엔드 개발자가 애플리케이션을 만들고, 배포, 자동화까지 하는 일련의 과정을 모두 포함하고 있으니 즐겁게 읽어주셨으면 좋겠다!</p>
+
+<p>그리고 지금부터 이 글을 하나 하나 잘 따라오면 Github Actions를 이용해 멋진 CI/CD 과정을 경험해볼 수 있게 될 것이다!</p>
+
+<h2 id="github-actions란">Github Actions란</h2>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/91465898-588e1b00-e8c9-11ea-8b69-2ccafb1b4b69.png" alt="android-github-actions-setup-image-35b6a79fea4a7289acb6796cd4ad05b4" /></p>
+
+<p>Github Actions은 MS에서 만든 CI/CD 도구이다.</p>
+
+<p>CI/CD란 지속적 통합/지속적 제공이라는 뜻으로, 애플리케이션의 빌드와 배포를 자동화하는 기술을 의미한다.</p>
+
+<p>소프트웨어의 특성상 변경이 잦고, 잦은 배포를 해야하는 점을 미루어 보았을 때 이러한 빌드 - 배포 과정을 손으로 직접하게되면 시간도 많이 걸리고 비효율적이다.</p>
+
+<p>개발자는 더 많은 일들을 해야하기 때문에 이러한 자동화 기술에 관심을 가지는 것은 필수인데, 이 CI/CD를 도와주는 전통적인 도구 중 대표적인 도구가 바로 <strong>Jenkins</strong>다.</p>
+
+<p>필자의 팀 또한 Jekins를 주로 CI/CD 도구로 사용하고 있으며 옆 팀에서는 CI는 젠킨스를, CD로는 <strong>Spinnaker</strong>를 사용하는 팀도 있으니 CI/CD 도구가 꽤 다양하다는 것을 알 수 있다. (그 외에도 트래비스, 밤부 같은 CI/CD 도구도 존재)</p>
+
+<p>특히 젠킨스의 경우 개인적으로는 UI가 좀 올드하다고 느껴졌고 Jenkinsfile에 대한 적절한 예제를 찾기가 좀 어려웠어서 초보자가 사용하기에는 다소 어려움이 있다고 느껴졌다.</p>
+
+<p>또한 젠킨스 서버를 별도로 설치해야하는 귀차니즘은 덤.</p>
+
+<p>Github Actions는 이러한 전통적 CI/CD 도구들에 비해 별도의 설치 없이 yaml 파일 작성 하나로 모든 CI/CD를 끝낼 수 있을 정도로 간단하면서 강력한 기능을 제공하는 도구이다.</p>
+
+<p>그리고 다양한 클라우드 플랫폼에 대한 예제를 제공하고 있으며, 그 문서에 대한 설명도 따로 깃허브 페이지로 존재할 정도로 굉장히 신경을 많이 쓴 모습을 느낄 수 있어서 배우기도 쉬웠다.</p>
+
+<p>가격 정책의 경우 20인 이하의 프로젝트에서는 완전 무료이다. ( 그 이상은 요금을 내야한다. 요금표는 여기 <a href="https://docs.github.com/en/actions/getting-started-with-github-actions/about-github-actions#:~:text=Additional%20Product%20Terms.-,About%20billing%20for%20GitHub%20Actions,About%20billing%20for%20GitHub%20Actions.%22">요금표</a>)</p>
+
+<p>그렇기에 토이프로젝트를 하는 개발자들이나 대학생들에게 아주 안성맞춤인 서비스라고 할 수 있겠다.</p>
+
+<p>필자 또한 사이드 프로젝트에서 이 도구를 처음 사용해보았는데 무척 간편하고 좋아서 좀 더 많은 사람들에게 알리고자 이 글을 쓰기로 마음먹었다.</p>
+
+<p>추후에는 Jenkins를 비롯한 CI/CD 도구들을 완전히 대체할 수 있지 않을까 라는 발칙한 상상을 하게 만들 만큼 좋은 도구라고 느꼈고 카카오 깃허브에서도 Github Actions가 추가되었으면 하는 바램이 있다.</p>
+
+<h2 id="뭘-해볼-것인가">뭘 해볼 것인가</h2>
+
+<p>이번 글에서는 간단한 Springboot 애플리케이션을 도커를 사용해 구글 클라우드 플랫폼에서 제공하는 GCE에 배포해보고,</p>
+
+<p>Github Actions를 사용해 CI/CD를 구축하는 실습을 해볼 예정이다.</p>
+
+<p>( 해석 : GCE는 쉽게 말해 구글 클라우드 플랫폼에서 제공하는 클라우드 컴퓨터 1대라고 생각하면 된다.)</p>
+
+<h2 id="본격적으로-실습-준비">본격적으로 실습 준비</h2>
+
+<p>이번 실습을 위해 준비해야할 것은 다음과 같다.</p>
+
+<ul>
+  <li>
+    <p>Intellij</p>
+  </li>
+  <li>
+    <p>OpenJDK 11 사용</p>
+  </li>
+  <li>
+    <p>Springboot 프로젝트를 개발할 수 있는 IDE, 여기서는 Intellij 사용</p>
+  </li>
+  <li>
+    <p>Docker <a href="https://www.docker.com/">다운 링크</a></p>
+  </li>
+  <li>
+    <p>Google Cloud Platform 회원가입 <a href="https://cloud.google.com/gcp">구글 클라우드 플랫폼</a></p>
+  </li>
+</ul>
+
+<p>Goole Cloud Platform(이하 GCP)는 처음 가입시 300달러의 1년간 무료 크레딧을 제공하기 때문에 토이프로젝트를 하는 개발자가 쉽게 사용하기 좋다. ( 정정 : 정책의 변경으로 1년에서 3개월로 바뀌었다. ㅜㅜ )</p>
+
+<h2 id="실습-시작---스프링-부트-설정--">실습 시작 - 스프링 부트 설정 -</h2>
+
+<p>자 실습에 앞서 먼저 스프링 부트 프로젝트를 만들어보겠다.</p>
+
+<p>JVM 버전은 11을 사용할건데 설치는 쉬우니까 따로 설명하지 않겠다. (구글에 자바 11 설치법 검색)</p>
+
+<p><a href="https://start.spring.io/">https://start.spring.io/</a></p>
+
+<p>위 사이트에 접속하면 스프링 부트 애플리케이션을 만들 수 있다.</p>
+
+<p><img width="1495" alt="스크린샷 2020-08-28 오전 1 14 32" src="https://user-images.githubusercontent.com/43809168/91467677-dc490700-e8cb-11ea-9df5-2ce5be5bac48.png" /></p>
+
+<p>위 그림과 동일한 설정으로 만들면 된다.</p>
+
+<p>설정이 끝나면 아래의 Generate를 누르면 .zip 파일이 생성될 것이다.</p>
+
+<p>적당한 위치에 알집을 풀어주자.</p>
+
+<p>(언어의 경우 Java를 선택해도 무관하다. Kotlin을 고른 이유는 필자가 가장 익숙한 언어라서)</p>
+
+<p><img width="451" alt="스크린샷 2020-08-28 오전 1 13 35" src="https://user-images.githubusercontent.com/43809168/91467613-c50a1980-e8cb-11ea-90de-85e72c5c9d41.png" /></p>
+
+<p>인텔리제이를 켜서 open or Import로 새로운 프로젝트의 경로를 찾아주자.</p>
+
+<p><img width="955" alt="스크린샷 2020-08-28 오전 1 15 42" src="https://user-images.githubusercontent.com/43809168/91467788-00a4e380-e8cc-11ea-9384-ced52bca6e36.png" /></p>
+
+<p>그럼 대략 이런 형태의 프로젝트가 만들어질 것이다.</p>
+
+<p>여기서 간단한 Controller를 하나 만들거고, 사용자가 루트페이지로 접근하면</p>
+
+<p><strong>Welcome</strong>을 출력하게 할 것이다.</p>
+
+<p><img width="1067" alt="스크린샷 2020-08-28 오전 1 17 11" src="https://user-images.githubusercontent.com/43809168/91467921-35b13600-e8cc-11ea-896c-17d3e9ea1358.png" /></p>
+
+<p>controller 패키지를 하나 만들고 거기에 RootController 클래스를 만들었다.</p>
+
+<p>이 클래스의 welcome 메소드는 루트로 들어오는 요청에 welcome이라는 메시지를 반환하는 핸들러이다.</p>
+
+<p><img width="239" alt="스크린샷 2020-08-28 오전 1 18 19" src="https://user-images.githubusercontent.com/43809168/91468037-61342080-e8cc-11ea-8bb5-66d91d792d6a.png" /></p>
+
+<p>인텔리제이 상단 구석에 나뭇잎 모양에 뭔가 시동 마크가 박힌 것을 선택하고 재생 버튼을 눌러보자.</p>
+
+<p><img width="1472" alt="스크린샷 2020-08-28 오전 1 19 03" src="https://user-images.githubusercontent.com/43809168/91468108-77da7780-e8cc-11ea-9ba7-5affe60326ce.png" /></p>
+
+<p>큰 문제없이 실행됐다면 위와 같이 콘솔 로그가 찍히는 것을 확인할 수 있다.</p>
+
+<p><img width="469" alt="스크린샷 2020-08-28 오전 1 19 42" src="https://user-images.githubusercontent.com/43809168/91468194-9c365400-e8cc-11ea-8969-e25c88821eba.png" /></p>
+
+<p>그 후 브라우저에 localhost:8080을 입력하면 <strong>welcome</strong>이라는 반가운 문구를 확인할 수 있게 된다.</p>
+
+<p>자 만약 이 서버가 이미 어떤 물리장비 혹은 클라우드에 배포가 되어있다고 가정하고, 저 <code class="language-plaintext highlighter-rouge">welcome</code> 문구를 <code class="language-plaintext highlighter-rouge">hello bro</code>라고 바꿔달라는 요청이 있다고 가정해보자.</p>
+
+<p>지금은 IDE의 도움을 받아서 비교적 편하게 실행했지만, 만약 다른 물리 장비나 클라우드에 접속해서 CLI에서 작업해야하는 경우라면 이야기는 달라진다.</p>
+
+<p>build도 직접 해야하고, 빌드 결과로 나온 jar 파일도 직접 실행해주어야한다.</p>
+
+<p>이러한 과정을 매 수정마다 한다고 생각해보라</p>
+
+<p>얼마나 짜증날까? 이것이 CI/CD가 필요한 이유이다.</p>
+
+<p>개발자는 깃허브에 커밋 그리고 푸시만 하면 알아서 빌드 - 배포의 과정을 자동화 해주게 된다.</p>
+
+<p>이러한 기술은 개발자의 귀한 시간을 아끼고 더 가치있는 곳에 쓸 수 있게 해주는 선순환의 구조가 되므로 반드시 익혀야 한다.</p>
+
+<p>그래서 우리는 지금부터 이 서비스를 도커 이미지로 만들고, GCP에 푸시 후 그 이미지를 실행시키는 장비를 만들어 볼 것이다.</p>
+
+<h2 id="도커와-vm">도커와 VM</h2>
+
+<p>도커는 컨테이너 기반의 가상화 플랫폼을 의미한다.</p>
+
+<p>혹시 VirtualBox를 써본 경험이 있는가?</p>
+
+<p>VirtualBox를 사용해봤다면 실행하는데 굉장히 느리고 무겁다는 느낌을 받을 수 있다.</p>
+
+<p>그 이유는 버츄얼 박스와 같은 VM(Virtual Machine) 솔루션들은 하드웨어를 가상화하는 방식이기 때문에 OS 레이어 위에 추가로 Hypervisor가 올라가기 때문이다.</p>
+
+<p>이러한 가상머신은 호스트 OS 위에 새로운 레이어가 자리잡기 때문에 매우 무겁고 느려서 실제 서비스 환경에서 사용하기엔 다소 무리가 있었다.</p>
+
+<p>그러나 이 때 컨테이너 기반의 가상화를 제공하는 도커가 등장했고 (물론 리눅스 컨테이너가 최초긴 하지만 자세한 역사는 생략하자) 프로세스를 격리하는 방식을 사용함으로써 더 빠르고 가볍게 가상화 기술을 사용할 수 있게 되었다.</p>
+
+<h2 id="도커-컨테이너와-이미지-간단하게">도커 컨테이너와 이미지 (간단하게)</h2>
+
+<p>이미지 : 애플리케이션을 빌드하면 이미지가 된다. 이미지를 실행하면 컨테이너가 된다.</p>
+
+<p>컨테이너 : 이미지가 실행 되서 실제 프로세스에 자원을 할당받은 상태</p>
+
+<h2 id="도커-이미지화">도커 이미지화</h2>
+
+<p>우리는 지금부터 우리가 방금 만든 스프링 프로젝트를 도커 이미지로 만들어서 GCP에 존재하는 이미지 저장소에 우리의 도커 이미지를 푸시할 것이다.</p>
+
+<p>도커 이미지는 다음과 같이 프로젝트 내부에 <strong>Dockerfile</strong>을 정의해서 만들어줄 수 있다.</p>
+
+<p><img width="1103" alt="스크린샷 2020-08-28 오전 1 52 28" src="https://user-images.githubusercontent.com/43809168/91471484-2385c680-e8d1-11ea-94dd-b962152b98d9.png" /></p>
+
+<div class="language-Dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">FROM</span><span class="s"> adoptopenjdk/openjdk11:latest AS TEMP_BUILD_IMAGE</span>
+<span class="k">ENV</span><span class="s"> APP_HOME=/usr/app/</span>
+<span class="k">WORKDIR</span><span class="s"> $APP_HOME</span>
+<span class="k">COPY</span><span class="s"> build.gradle.kts settings.gradle.kts gradlew $APP_HOME/</span>
+<span class="k">COPY</span><span class="s"> gradle $APP_HOME/gradle/</span>
+<span class="k">RUN </span>./gradlew <span class="nt">-x</span> <span class="nb">test</span> <span class="nt">--info</span> <span class="o">||</span> <span class="k">return </span>0
+<span class="k">COPY</span><span class="s"> . .</span>
+<span class="k">RUN </span>./gradlew <span class="nt">-x</span> <span class="nb">test </span>build
+
+<span class="k">FROM</span><span class="s"> adoptopenjdk/openjdk11:latest</span>
+<span class="k">ENV</span><span class="s"> ARTIFACT_NAME=harry.jar</span>
+<span class="k">ENV</span><span class="s"> APP_HOME=/usr/app/</span>
+<span class="k">WORKDIR</span><span class="s"> $APP_HOME</span>
+<span class="k">COPY</span><span class="s"> --from=TEMP_BUILD_IMAGE $APP_HOME/build/libs/$ARTIFACT_NAME .</span>
+
+<span class="k">EXPOSE</span><span class="s"> 8080</span>
+<span class="k">ENTRYPOINT</span><span class="s"> java -jar $ARTIFACT_NAME</span>
+</code></pre></div></div>
+
+<p>(Dockerfile 작성에 대한 자세한 설명은 이 글에선 생략하도록 하겠다)</p>
+
+<p>도커 파일은 간단하다. 앞서 우리는 JDK 11을 사용한 프로젝트를 개발하고 있으므로 같은 이미지를 도커허브로 부터 내려받는다.</p>
+
+<p>도커 허브는 도커 이미지들이 저장된 저장소이다.</p>
+
+<p>그 후 jar파일 이름을 명시해줘야하는데, 우리는 아직 jar 파일 이름을 명시하지않았다.</p>
+
+<p><img width="1099" alt="스크린샷 2020-08-28 오후 3 11 47" src="https://user-images.githubusercontent.com/43809168/91527488-d3dee380-e940-11ea-9863-9e6619c75761.png" /></p>
+
+<p>build.gradle.kts에 다음과 같이 테스크를 추가해주자.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tasks</span><span class="p">.</span><span class="nf">bootJar</span> <span class="p">{</span>
+    <span class="n">mainClassName</span> <span class="p">=</span> <span class="s">"me.harry.example.ExampleApplicationKt"</span>
+    <span class="n">archiveFileName</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="s">"harry.jar"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>필자와 똑같은 이름의 패키지 명을 사용했다면 그대로 복-붙 해도 되지만 다른 이름을 사용했다면 수정해주도록 하자.</p>
+
+<p>archiveFileName에서 빌드될 jar파일의 이름을 명시해줄 수 있다.</p>
+
+<p>이제 빌드하면 harry.jar라는 jar 파일이 생성된다.</p>
+
+<p>여기서 왜 ExampleApplication이 아니라 끝에 Kt가 붙는지 궁금한 사람이 있을 수 있다. (사소한 것에도 의문을 가지는 것은 개발자의 좋은 자세다!)</p>
+
+<p>그 이유는 코틀린의 경우 컴파일이 되면 자바와 마찬가지로 .class 파일이 생성 된다. (이것이 코틀린이 자바와 100% 상호 운용될 수 있는 비밀이다)</p>
+
+<p>이 때 .Kt 파일에 포함된 static 메소드들은 .Kt 파일의 이름 + 접미사로 Kt가 붙게 된다.</p>
+
+<p><img width="449" alt="스크린샷 2020-08-28 오후 3 13 42" src="https://user-images.githubusercontent.com/43809168/91527626-12749e00-e941-11ea-8429-5cea18bee6ba.png" /></p>
+
+<p>잘 보면 알겠지만, ExampleApplication이 메소드로 main을 갖고 있는 것이 아니다.</p>
+
+<p>main은 static 메소드이다.</p>
+
+<p>자바의 경우 static 메소드라고 하더라도 클래스가 감싸고 있어야하는데 코틀린에서는</p>
+
+<p><strong>컴파일 시점에 파일이름 + Kt라는 클래스를 생성하고, 그 클래스가 스태틱 메소드</strong>를 갖게 한다.</p>
+
+<p>이제 왜 우리가 Gradle Task에서 mainClassName의 메인 클래스이름 마지막에 Kt를 붙이는지 이해가 됐기를 바란다.</p>
+
+<p>이제 애플리케이션을 빌드할 준비는 끝났다!</p>
+
+<p>다음으로는 도커 커맨드라인 명령어로 방금 만든 Dockerfile을 빌드해서 이미지로 만들어주자.</p>
+
+<h2 id="주의">주의</h2>
+
+<p>빌드 하기 전에 반드시 디펜던시 매니지먼트 플러그인의 버전을 1.0.9로 맞춰야한다.</p>
+
+<p>현재 스프링 부트 프로젝트를 생성하면 디펜던시 매니지먼트 플러그인 버전이 1.0.10으로 설정되어있는데 이 경우 에러가 나고 있으므로 버전을 다운그레이드 해주자.</p>
+
+<p><img width="663" alt="스크린샷 2020-08-28 오전 1 55 07" src="https://user-images.githubusercontent.com/43809168/91471802-824b4000-e8d1-11ea-94a2-7d1e8637c0e6.png" /></p>
+
+<p>버전을 1.0.10 -&gt; 1.0.9로 낮춰주고 인텔리제이 상단에 보이는 코끼리 모양을 눌러 의존성 변경을 반영해주자.</p>
+
+<p>필자의 노트북에서만 문제일 수도 있으나 Gradle 빌드에도 다음과 같은 에러가 발생하고 있다.</p>
+
+<p>gradlew 파일과 gradlew.bat 파일을 아래에 있는 내용으로 덮어쓰기 해주자.</p>
+
+<h3 id="gradlew">gradlew</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/usr/bin/env sh</span>
+
+<span class="c">#</span>
+<span class="c"># Copyright 2015 the original author or authors.</span>
+<span class="c">#</span>
+<span class="c"># Licensed under the Apache License, Version 2.0 (the "License");</span>
+<span class="c"># you may not use this file except in compliance with the License.</span>
+<span class="c"># You may obtain a copy of the License at</span>
+<span class="c">#</span>
+<span class="c">#      https://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c">#</span>
+<span class="c"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c"># distributed under the License is distributed on an "AS IS" BASIS,</span>
+<span class="c"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c"># See the License for the specific language governing permissions and</span>
+<span class="c"># limitations under the License.</span>
+<span class="c">#</span>
+
+<span class="c">##############################################################################</span>
+<span class="c">##</span>
+<span class="c">##  Gradle start up script for UN*X</span>
+<span class="c">##</span>
+<span class="c">##############################################################################</span>
+
+<span class="c"># Attempt to set APP_HOME</span>
+<span class="c"># Resolve links: $0 may be a link</span>
+<span class="nv">PRG</span><span class="o">=</span><span class="s2">"</span><span class="nv">$0</span><span class="s2">"</span>
+<span class="c"># Need this for relative symlinks.</span>
+<span class="k">while</span> <span class="o">[</span> <span class="nt">-h</span> <span class="s2">"</span><span class="nv">$PRG</span><span class="s2">"</span> <span class="o">]</span> <span class="p">;</span> <span class="k">do
+    </span><span class="nb">ls</span><span class="o">=</span><span class="sb">`</span><span class="nb">ls</span> <span class="nt">-ld</span> <span class="s2">"</span><span class="nv">$PRG</span><span class="s2">"</span><span class="sb">`</span>
+    <span class="nb">link</span><span class="o">=</span><span class="sb">`</span><span class="nb">expr</span> <span class="s2">"</span><span class="nv">$ls</span><span class="s2">"</span> : <span class="s1">'.*-&gt; \(.*\)$'</span><span class="sb">`</span>
+    <span class="k">if </span><span class="nb">expr</span> <span class="s2">"</span><span class="nv">$link</span><span class="s2">"</span> : <span class="s1">'/.*'</span> <span class="o">&gt;</span> /dev/null<span class="p">;</span> <span class="k">then
+        </span><span class="nv">PRG</span><span class="o">=</span><span class="s2">"</span><span class="nv">$link</span><span class="s2">"</span>
+    <span class="k">else
+        </span><span class="nv">PRG</span><span class="o">=</span><span class="sb">`</span><span class="nb">dirname</span> <span class="s2">"</span><span class="nv">$PRG</span><span class="s2">"</span><span class="sb">`</span><span class="s2">"/</span><span class="nv">$link</span><span class="s2">"</span>
+    <span class="k">fi
+done
+</span><span class="nv">SAVED</span><span class="o">=</span><span class="s2">"</span><span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span><span class="s2">"</span>
+<span class="nb">cd</span> <span class="s2">"</span><span class="sb">`</span><span class="nb">dirname</span> <span class="se">\"</span><span class="nv">$PRG</span><span class="se">\"</span><span class="sb">`</span><span class="s2">/"</span> <span class="o">&gt;</span>/dev/null
+<span class="nv">APP_HOME</span><span class="o">=</span><span class="s2">"</span><span class="sb">`</span><span class="nb">pwd</span> <span class="nt">-P</span><span class="sb">`</span><span class="s2">"</span>
+<span class="nb">cd</span> <span class="s2">"</span><span class="nv">$SAVED</span><span class="s2">"</span> <span class="o">&gt;</span>/dev/null
+
+<span class="nv">APP_NAME</span><span class="o">=</span><span class="s2">"Gradle"</span>
+<span class="nv">APP_BASE_NAME</span><span class="o">=</span><span class="sb">`</span><span class="nb">basename</span> <span class="s2">"</span><span class="nv">$0</span><span class="s2">"</span><span class="sb">`</span>
+
+<span class="c"># Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.</span>
+<span class="nv">DEFAULT_JVM_OPTS</span><span class="o">=</span><span class="s1">'"-Xmx64m" "-Xms64m"'</span>
+
+<span class="c"># Use the maximum available, or set MAX_FD != -1 to use that value.</span>
+<span class="nv">MAX_FD</span><span class="o">=</span><span class="s2">"maximum"</span>
+
+warn <span class="o">()</span> <span class="o">{</span>
+    <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$*</span><span class="s2">"</span>
+<span class="o">}</span>
+
+die <span class="o">()</span> <span class="o">{</span>
+    <span class="nb">echo
+    echo</span> <span class="s2">"</span><span class="nv">$*</span><span class="s2">"</span>
+    <span class="nb">echo
+    exit </span>1
+<span class="o">}</span>
+
+<span class="c"># OS specific support (must be 'true' or 'false').</span>
+<span class="nv">cygwin</span><span class="o">=</span><span class="nb">false
+</span><span class="nv">msys</span><span class="o">=</span><span class="nb">false
+</span><span class="nv">darwin</span><span class="o">=</span><span class="nb">false
+</span><span class="nv">nonstop</span><span class="o">=</span><span class="nb">false
+</span><span class="k">case</span> <span class="s2">"</span><span class="sb">`</span><span class="nb">uname</span><span class="sb">`</span><span class="s2">"</span> <span class="k">in
+  </span>CYGWIN<span class="k">*</span> <span class="p">)</span>
+    <span class="nv">cygwin</span><span class="o">=</span><span class="nb">true</span>
+    <span class="p">;;</span>
+  Darwin<span class="k">*</span> <span class="p">)</span>
+    <span class="nv">darwin</span><span class="o">=</span><span class="nb">true</span>
+    <span class="p">;;</span>
+  MINGW<span class="k">*</span> <span class="p">)</span>
+    <span class="nv">msys</span><span class="o">=</span><span class="nb">true</span>
+    <span class="p">;;</span>
+  NONSTOP<span class="k">*</span> <span class="p">)</span>
+    <span class="nv">nonstop</span><span class="o">=</span><span class="nb">true</span>
+    <span class="p">;;</span>
+<span class="k">esac</span>
+
+<span class="nv">CLASSPATH</span><span class="o">=</span><span class="nv">$APP_HOME</span>/gradle/wrapper/gradle-wrapper.jar
+
+
+<span class="c"># Determine the Java command to use to start the JVM.</span>
+<span class="k">if</span> <span class="o">[</span> <span class="nt">-n</span> <span class="s2">"</span><span class="nv">$JAVA_HOME</span><span class="s2">"</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then
+    if</span> <span class="o">[</span> <span class="nt">-x</span> <span class="s2">"</span><span class="nv">$JAVA_HOME</span><span class="s2">/jre/sh/java"</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
+        <span class="c"># IBM's JDK on AIX uses strange locations for the executables</span>
+        <span class="nv">JAVACMD</span><span class="o">=</span><span class="s2">"</span><span class="nv">$JAVA_HOME</span><span class="s2">/jre/sh/java"</span>
+    <span class="k">else
+        </span><span class="nv">JAVACMD</span><span class="o">=</span><span class="s2">"</span><span class="nv">$JAVA_HOME</span><span class="s2">/bin/java"</span>
+    <span class="k">fi
+    if</span> <span class="o">[</span> <span class="o">!</span> <span class="nt">-x</span> <span class="s2">"</span><span class="nv">$JAVACMD</span><span class="s2">"</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then
+        </span>die <span class="s2">"ERROR: JAVA_HOME is set to an invalid directory: </span><span class="nv">$JAVA_HOME</span><span class="s2">
+
+Please set the JAVA_HOME variable in your environment to match the
+location of your Java installation."</span>
+    <span class="k">fi
+else
+    </span><span class="nv">JAVACMD</span><span class="o">=</span><span class="s2">"java"</span>
+    which java <span class="o">&gt;</span>/dev/null 2&gt;&amp;1 <span class="o">||</span> die <span class="s2">"ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.
+
+Please set the JAVA_HOME variable in your environment to match the
+location of your Java installation."</span>
+<span class="k">fi</span>
+
+<span class="c"># Increase the maximum file descriptors if we can.</span>
+<span class="k">if</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$cygwin</span><span class="s2">"</span> <span class="o">=</span> <span class="s2">"false"</span> <span class="nt">-a</span> <span class="s2">"</span><span class="nv">$darwin</span><span class="s2">"</span> <span class="o">=</span> <span class="s2">"false"</span> <span class="nt">-a</span> <span class="s2">"</span><span class="nv">$nonstop</span><span class="s2">"</span> <span class="o">=</span> <span class="s2">"false"</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then
+    </span><span class="nv">MAX_FD_LIMIT</span><span class="o">=</span><span class="sb">`</span><span class="nb">ulimit</span> <span class="nt">-H</span> <span class="nt">-n</span><span class="sb">`</span>
+    <span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> <span class="nt">-eq</span> 0 <span class="o">]</span> <span class="p">;</span> <span class="k">then
+        if</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$MAX_FD</span><span class="s2">"</span> <span class="o">=</span> <span class="s2">"maximum"</span> <span class="nt">-o</span> <span class="s2">"</span><span class="nv">$MAX_FD</span><span class="s2">"</span> <span class="o">=</span> <span class="s2">"max"</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then
+            </span><span class="nv">MAX_FD</span><span class="o">=</span><span class="s2">"</span><span class="nv">$MAX_FD_LIMIT</span><span class="s2">"</span>
+        <span class="k">fi
+        </span><span class="nb">ulimit</span> <span class="nt">-n</span> <span class="nv">$MAX_FD</span>
+        <span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> <span class="nt">-ne</span> 0 <span class="o">]</span> <span class="p">;</span> <span class="k">then
+            </span>warn <span class="s2">"Could not set maximum file descriptor limit: </span><span class="nv">$MAX_FD</span><span class="s2">"</span>
+        <span class="k">fi
+    else
+        </span>warn <span class="s2">"Could not query maximum file descriptor limit: </span><span class="nv">$MAX_FD_LIMIT</span><span class="s2">"</span>
+    <span class="k">fi
+fi</span>
+
+<span class="c"># For Darwin, add options to specify how the application appears in the dock</span>
+<span class="k">if</span> <span class="nv">$darwin</span><span class="p">;</span> <span class="k">then
+    </span><span class="nv">GRADLE_OPTS</span><span class="o">=</span><span class="s2">"</span><span class="nv">$GRADLE_OPTS</span><span class="s2"> </span><span class="se">\"</span><span class="s2">-Xdock:name=</span><span class="nv">$APP_NAME</span><span class="se">\"</span><span class="s2"> </span><span class="se">\"</span><span class="s2">-Xdock:icon=</span><span class="nv">$APP_HOME</span><span class="s2">/media/gradle.icns</span><span class="se">\"</span><span class="s2">"</span>
+<span class="k">fi</span>
+
+<span class="c"># For Cygwin or MSYS, switch paths to Windows format before running java</span>
+<span class="k">if</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$cygwin</span><span class="s2">"</span> <span class="o">=</span> <span class="s2">"true"</span> <span class="nt">-o</span> <span class="s2">"</span><span class="nv">$msys</span><span class="s2">"</span> <span class="o">=</span> <span class="s2">"true"</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then
+    </span><span class="nv">APP_HOME</span><span class="o">=</span><span class="sb">`</span>cygpath <span class="nt">--path</span> <span class="nt">--mixed</span> <span class="s2">"</span><span class="nv">$APP_HOME</span><span class="s2">"</span><span class="sb">`</span>
+    <span class="nv">CLASSPATH</span><span class="o">=</span><span class="sb">`</span>cygpath <span class="nt">--path</span> <span class="nt">--mixed</span> <span class="s2">"</span><span class="nv">$CLASSPATH</span><span class="s2">"</span><span class="sb">`</span>
+
+    <span class="nv">JAVACMD</span><span class="o">=</span><span class="sb">`</span>cygpath <span class="nt">--unix</span> <span class="s2">"</span><span class="nv">$JAVACMD</span><span class="s2">"</span><span class="sb">`</span>
+
+    <span class="c"># We build the pattern for arguments to be converted via cygpath</span>
+    <span class="nv">ROOTDIRSRAW</span><span class="o">=</span><span class="sb">`</span>find <span class="nt">-L</span> / <span class="nt">-maxdepth</span> 1 <span class="nt">-mindepth</span> 1 <span class="nt">-type</span> d 2&gt;/dev/null<span class="sb">`</span>
+    <span class="nv">SEP</span><span class="o">=</span><span class="s2">""</span>
+    <span class="k">for </span><span class="nb">dir </span><span class="k">in</span> <span class="nv">$ROOTDIRSRAW</span> <span class="p">;</span> <span class="k">do
+        </span><span class="nv">ROOTDIRS</span><span class="o">=</span><span class="s2">"</span><span class="nv">$ROOTDIRS$SEP$dir</span><span class="s2">"</span>
+        <span class="nv">SEP</span><span class="o">=</span><span class="s2">"|"</span>
+    <span class="k">done
+    </span><span class="nv">OURCYGPATTERN</span><span class="o">=</span><span class="s2">"(^(</span><span class="nv">$ROOTDIRS</span><span class="s2">))"</span>
+    <span class="c"># Add a user-defined pattern to the cygpath arguments</span>
+    <span class="k">if</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$GRADLE_CYGPATTERN</span><span class="s2">"</span> <span class="o">!=</span> <span class="s2">""</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then
+        </span><span class="nv">OURCYGPATTERN</span><span class="o">=</span><span class="s2">"</span><span class="nv">$OURCYGPATTERN</span><span class="s2">|(</span><span class="nv">$GRADLE_CYGPATTERN</span><span class="s2">)"</span>
+    <span class="k">fi</span>
+    <span class="c"># Now convert the arguments - kludge to limit ourselves to /bin/sh</span>
+    <span class="nv">i</span><span class="o">=</span>0
+    <span class="k">for </span>arg <span class="k">in</span> <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span> <span class="p">;</span> <span class="k">do
+        </span><span class="nv">CHECK</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$arg</span><span class="s2">"</span>|egrep <span class="nt">-c</span> <span class="s2">"</span><span class="nv">$OURCYGPATTERN</span><span class="s2">"</span> -<span class="sb">`</span>
+        <span class="nv">CHECK2</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$arg</span><span class="s2">"</span>|egrep <span class="nt">-c</span> <span class="s2">"^-"</span><span class="sb">`</span>                                 <span class="c">### Determine if an option</span>
+
+        <span class="k">if</span> <span class="o">[</span> <span class="nv">$CHECK</span> <span class="nt">-ne</span> 0 <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> <span class="nv">$CHECK2</span> <span class="nt">-eq</span> 0 <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>                    <span class="c">### Added a condition</span>
+            <span class="nb">eval</span> <span class="sb">`</span><span class="nb">echo </span>args<span class="nv">$i</span><span class="sb">`</span><span class="o">=</span><span class="sb">`</span>cygpath <span class="nt">--path</span> <span class="nt">--ignore</span> <span class="nt">--mixed</span> <span class="s2">"</span><span class="nv">$arg</span><span class="s2">"</span><span class="sb">`</span>
+        <span class="k">else
+            </span><span class="nb">eval</span> <span class="sb">`</span><span class="nb">echo </span>args<span class="nv">$i</span><span class="sb">`</span><span class="o">=</span><span class="s2">"</span><span class="se">\"</span><span class="nv">$arg</span><span class="se">\"</span><span class="s2">"</span>
+        <span class="k">fi
+        </span><span class="nv">i</span><span class="o">=</span><span class="sb">`</span><span class="nb">expr</span> <span class="nv">$i</span> + 1<span class="sb">`</span>
+    <span class="k">done
+    case</span> <span class="nv">$i</span> <span class="k">in
+        </span>0<span class="p">)</span> <span class="nb">set</span> <span class="nt">--</span> <span class="p">;;</span>
+        1<span class="p">)</span> <span class="nb">set</span> <span class="nt">--</span> <span class="s2">"</span><span class="nv">$args0</span><span class="s2">"</span> <span class="p">;;</span>
+        2<span class="p">)</span> <span class="nb">set</span> <span class="nt">--</span> <span class="s2">"</span><span class="nv">$args0</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$args1</span><span class="s2">"</span> <span class="p">;;</span>
+        3<span class="p">)</span> <span class="nb">set</span> <span class="nt">--</span> <span class="s2">"</span><span class="nv">$args0</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$args1</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$args2</span><span class="s2">"</span> <span class="p">;;</span>
+        4<span class="p">)</span> <span class="nb">set</span> <span class="nt">--</span> <span class="s2">"</span><span class="nv">$args0</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$args1</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$args2</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$args3</span><span class="s2">"</span> <span class="p">;;</span>
+        5<span class="p">)</span> <span class="nb">set</span> <span class="nt">--</span> <span class="s2">"</span><span class="nv">$args0</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$args1</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$args2</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$args3</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$args4</span><span class="s2">"</span> <span class="p">;;</span>
+        6<span class="p">)</span> <span class="nb">set</span> <span class="nt">--</span> <span class="s2">"</span><span class="nv">$args0</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$args1</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$args2</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$args3</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$args4</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$args5</span><span class="s2">"</span> <span class="p">;;</span>
+        7<span class="p">)</span> <span class="nb">set</span> <span class="nt">--</span> <span class="s2">"</span><span class="nv">$args0</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$args1</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$args2</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$args3</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$args4</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$args5</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$args6</span><span class="s2">"</span> <span class="p">;;</span>
+        8<span class="p">)</span> <span class="nb">set</span> <span class="nt">--</span> <span class="s2">"</span><span class="nv">$args0</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$args1</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$args2</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$args3</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$args4</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$args5</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$args6</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$args7</span><span class="s2">"</span> <span class="p">;;</span>
+        9<span class="p">)</span> <span class="nb">set</span> <span class="nt">--</span> <span class="s2">"</span><span class="nv">$args0</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$args1</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$args2</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$args3</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$args4</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$args5</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$args6</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$args7</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$args8</span><span class="s2">"</span> <span class="p">;;</span>
+    <span class="k">esac</span>
+<span class="k">fi</span>
+
+<span class="c"># Escape application args</span>
+save <span class="o">()</span> <span class="o">{</span>
+    <span class="k">for </span>i <span class="k">do </span><span class="nb">printf</span> %s<span class="se">\\</span>n <span class="s2">"</span><span class="nv">$i</span><span class="s2">"</span> | <span class="nb">sed</span> <span class="s2">"s/'/'</span><span class="se">\\\\</span><span class="s2">''/g;1s/^/'/;</span><span class="se">\$</span><span class="s2">s/</span><span class="se">\$</span><span class="s2">/' </span><span class="se">\\\\</span><span class="s2">/"</span> <span class="p">;</span> <span class="k">done
+    </span><span class="nb">echo</span> <span class="s2">" "</span>
+<span class="o">}</span>
+<span class="nv">APP_ARGS</span><span class="o">=</span><span class="sb">`</span>save <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span><span class="sb">`</span>
+
+<span class="c"># Collect all arguments for the java command, following the shell quoting and substitution rules</span>
+<span class="nb">eval set</span> <span class="nt">--</span> <span class="nv">$DEFAULT_JVM_OPTS</span> <span class="nv">$JAVA_OPTS</span> <span class="nv">$GRADLE_OPTS</span> <span class="s2">"</span><span class="se">\"</span><span class="s2">-Dorg.gradle.appname=</span><span class="nv">$APP_BASE_NAME</span><span class="se">\"</span><span class="s2">"</span> <span class="nt">-classpath</span> <span class="s2">"</span><span class="se">\"</span><span class="nv">$CLASSPATH</span><span class="se">\"</span><span class="s2">"</span> org.gradle.wrapper.GradleWrapperMain <span class="s2">"</span><span class="nv">$APP_ARGS</span><span class="s2">"</span>
+
+<span class="nb">exec</span> <span class="s2">"</span><span class="nv">$JAVACMD</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<h3 id="gradlewbat">gradlew.bat</h3>
+
+<div class="language-bat highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">@rem</span>
+<span class="c">@rem Copyright 2015 the original author or authors.</span>
+<span class="c">@rem</span>
+<span class="c">@rem Licensed under the Apache License, Version 2.0 (the "License");</span>
+<span class="c">@rem you may not use this file except in compliance with the License.</span>
+<span class="c">@rem You may obtain a copy of the License at</span>
+<span class="c">@rem</span>
+<span class="c">@rem      https://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c">@rem</span>
+<span class="c">@rem Unless required by applicable law or agreed to in writing, software</span>
+<span class="c">@rem distributed under the License is distributed on an "AS IS" BASIS,</span>
+<span class="c">@rem WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c">@rem See the License for the specific language governing permissions and</span>
+<span class="c">@rem limitations under the License.</span>
+<span class="c">@rem</span>
+
+@if <span class="s2">"</span><span class="nv">%DEBUG%</span><span class="s2">"</span> <span class="o">==</span> <span class="s2">""</span> @echo <span class="na">off</span>
+<span class="c">@rem ##########################################################################</span>
+<span class="c">@rem</span>
+<span class="c">@rem  Gradle startup script for Windows</span>
+<span class="c">@rem</span>
+<span class="c">@rem ##########################################################################</span>
+
+<span class="c">@rem Set local scope for the variables with windows NT shell</span>
+<span class="k">if</span> <span class="s2">"</span><span class="nv">%OS%</span><span class="s2">"</span><span class="o">==</span><span class="s2">"Windows_NT"</span> <span class="nb">setlocal</span>
+
+<span class="kd">set</span> <span class="kd">DIRNAME</span><span class="o">=</span><span class="vm">%~dp0</span>
+<span class="k">if</span> <span class="s2">"</span><span class="nv">%DIRNAME%</span><span class="s2">"</span> <span class="o">==</span> <span class="s2">""</span> <span class="kd">set</span> <span class="kd">DIRNAME</span><span class="o">=</span>.
+<span class="kd">set</span> <span class="kd">APP_BASE_NAME</span><span class="o">=</span><span class="vm">%~n0</span>
+<span class="kd">set</span> <span class="kd">APP_HOME</span><span class="o">=</span><span class="nv">%DIRNAME%</span>
+
+<span class="c">@rem Resolve any "." and ".." in APP_HOME to make it shorter.</span>
+<span class="k">for</span> <span class="vm">%%i</span> <span class="k">in</span> <span class="o">(</span><span class="s2">"</span><span class="nv">%APP_HOME%</span><span class="s2">"</span><span class="o">)</span> <span class="k">do</span> <span class="kd">set</span> <span class="kd">APP_HOME</span><span class="o">=</span><span class="vm">%%~fi</span>
+
+<span class="c">@rem Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.</span>
+<span class="kd">set</span> <span class="kd">DEFAULT_JVM_OPTS</span><span class="o">=</span><span class="s2">"-Xmx64m"</span> <span class="s2">"-Xms64m"</span>
+
+<span class="c">@rem Find java.exe</span>
+<span class="k">if</span> <span class="ow">defined</span> <span class="kd">JAVA_HOME</span> <span class="k">goto</span> <span class="kd">findJavaFromJavaHome</span>
+
+<span class="kd">set</span> <span class="kd">JAVA_EXE</span><span class="o">=</span><span class="kd">java</span><span class="err">.exe</span>
+<span class="nv">%JAVA_EXE%</span> <span class="na">-version </span><span class="o">&gt;</span><span class="kd">NUL</span> <span class="m">2</span><span class="o">&gt;&amp;</span><span class="m">1</span>
+<span class="k">if</span> <span class="s2">"</span><span class="nv">%ERRORLEVEL%</span><span class="s2">"</span> <span class="o">==</span> <span class="s2">"0"</span> <span class="k">goto</span> <span class="kd">init</span>
+
+<span class="nb">echo</span>.
+<span class="nb">echo</span> <span class="kd">ERROR</span>: <span class="kd">JAVA_HOME</span> <span class="kd">is</span> <span class="ow">not</span> <span class="kd">set</span> <span class="kd">and</span> <span class="kd">no</span> <span class="s1">'java'</span> <span class="kd">command</span> <span class="kd">could</span> <span class="kd">be</span> <span class="kd">found</span> <span class="k">in</span> <span class="kd">your</span> <span class="kd">PATH</span>.
+<span class="nb">echo</span>.
+<span class="nb">echo</span> <span class="kd">Please</span> <span class="kd">set</span> <span class="kd">the</span> <span class="kd">JAVA_HOME</span> <span class="kd">variable</span> <span class="k">in</span> <span class="kd">your</span> <span class="kd">environment</span> <span class="kd">to</span> <span class="kd">match</span> <span class="kd">the</span>
+<span class="nb">echo</span> <span class="kd">location</span> <span class="kd">of</span> <span class="kd">your</span> <span class="kd">Java</span> <span class="kd">installation</span>.
+
+<span class="k">goto</span> <span class="kd">fail</span>
+
+<span class="nl">:findJavaFromJavaHome</span>
+<span class="kd">set</span> <span class="kd">JAVA_HOME</span><span class="o">=</span><span class="vm">%JAVA</span>_HOME:<span class="s2">"=</span><span class="err">%</span><span class="s2">
+set JAVA_EXE=</span><span class="nv">%JAVA_HOME%</span><span class="s2">/bin/java.exe
+
+if exist "</span><span class="nv">%JAVA_EXE%</span><span class="s2">" goto init
+
+echo.
+echo ERROR: JAVA_HOME is set to an invalid directory: </span><span class="nv">%JAVA_HOME%</span><span class="s2">
+echo.
+echo Please set the JAVA_HOME variable in your environment to match the
+echo location of your Java installation.
+
+goto fail
+
+:init
+@rem Get command-line arguments, handling Windows variants
+
+if not "</span><span class="nv">%OS%</span><span class="s2">" == "</span><span class="kd">Windows_NT</span><span class="s2">" goto win9xME_args
+
+:win9xME_args
+@rem Slurp the command line arguments.
+set CMD_LINE_ARGS=
+set _SKIP=2
+
+:win9xME_args_slurp
+if "</span><span class="kd">x</span><span class="err">%</span><span class="o">~</span><span class="m">1</span><span class="s2">" == "</span><span class="kd">x</span><span class="s2">" goto execute
+
+set CMD_LINE_ARGS=</span><span class="err">%</span><span class="s2">*
+
+:execute
+@rem Setup the command line
+
+set CLASSPATH=</span><span class="nv">%APP_HOME%</span><span class="s2">\gradle\wrapper\gradle-wrapper.jar
+
+
+@rem Execute Gradle
+"</span><span class="nv">%JAVA_EXE%</span><span class="s2">" </span><span class="nv">%DEFAULT_JVM_OPTS%</span><span class="s2"> </span><span class="nv">%JAVA_OPTS%</span><span class="s2"> </span><span class="nv">%GRADLE_OPTS%</span><span class="s2"> "</span><span class="na">-Dorg</span>.gradle.appname<span class="o">=</span><span class="nv">%APP_BASE_NAME%</span><span class="s2">" -classpath "</span><span class="nv">%CLASSPATH%</span><span class="s2">" org.gradle.wrapper.GradleWrapperMain </span><span class="nv">%CMD_LINE_ARGS%</span><span class="s2">
+
+:end
+@rem End local scope for the variables with windows NT shell
+if "</span><span class="nv">%ERRORLEVEL%</span><span class="s2">"=="</span><span class="m">0</span><span class="s2">" goto mainEnd
+
+:fail
+rem Set variable GRADLE_EXIT_CONSOLE if you need the _script_ return code instead of
+rem the _cmd.exe /c_ return code</span><span class="err">!</span><span class="s2">
+if  not "" == "</span><span class="nv">%GRADLE_EXIT_CONSOLE%</span><span class="s2">" exit 1
+exit /b 1
+
+:mainEnd
+if "</span><span class="nv">%OS%</span><span class="s2">"=="</span><span class="kd">Windows_NT</span><span class="s2">" endlocal
+
+:omega
+</span></code></pre></div></div>
+
+<h2 id="도커-이미지-빌드-시작">도커 이미지 빌드 시작</h2>
+
+<p><img width="809" alt="스크린샷 2020-08-28 오전 1 40 40" src="https://user-images.githubusercontent.com/43809168/91470293-7d858c80-e8cf-11ea-9c69-66495dbab94c.png" /></p>
+
+<p>인텔리제이에서는 자체 터미널을 제공한다.</p>
+
+<p>이 터미널을 사용해 도커 이미지를 빌드해주자.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build -t test .
+</code></pre></div></div>
+
+<p>빌드가 잘 완료됐다면 다음 명령어를 입력하여 컨테이너를 실행해보자.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker -it run /bin/bash
+</code></pre></div></div>
+
+<p>그러면 스프링 로그가 찍히면서 서버가 뜨는 것을 확인할 수 있을 것이다.</p>
+
+<p>여기까지 했다면 성공이다.</p>
+
+<p>이제 방금 만든 이미지를 GCP 도커 이미지 저장소로 푸시해야한다.</p>
+
+<p>그러기 위해선 GCP에 프로젝트를 만들어야한다.</p>
+
+<p>GCP에 접속하자.</p>
+
+<h2 id="gcp-셋팅">GCP 셋팅</h2>
+
+<p><a href="https://cloud.google.com/gcp">https://cloud.google.com/gcp</a></p>
+
+<p>여기서 몇 가지 셋팅을 마치면 GCP에서 사용할 수 있는 크레딧 300달러를 준다.</p>
+
+<p>GCP 콘솔로 진입했다면 다음과 같은 화면이 나올 것이다.</p>
+
+<p>이곳이 메인 화면이다.</p>
+
+<p><img width="1792" alt="스크린샷 2020-08-28 오후 3 41 36" src="https://user-images.githubusercontent.com/43809168/91529827-f83cbf00-e944-11ea-847f-44e4d33986be.png" /></p>
+
+<p>여기서 상단에 보이는 하얀색 박스를 선택해보자</p>
+
+<p><img width="428" alt="스크린샷 2020-08-28 오후 3 40 55" src="https://user-images.githubusercontent.com/43809168/91529781-e3602b80-e944-11ea-921f-84f4b966eb2a.png" /></p>
+
+<p>여기서 진입할 프로젝트를 변경하거나 선택할 수 있다.</p>
+
+<p>아마 최초 사용자라면 프로젝트명을 정했을테니 그 프로젝트가 선택되어있을 것이다.</p>
+
+<p>GCP에 도커 이미지를 푸시하기 위해서는 다음과 같은 명령어 규칙을 따른다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker push [HOSTNAME]/[PROJECT-ID]/[IMAGE]
+</code></pre></div></div>
+
+<p>Project ID는 프로젝트를 눌러보면 옆에 Project-id라고 별도의 고유값이 생성되는 것을 확인할 수 있다.</p>
+
+<p><img width="606" alt="스크린샷 2020-08-28 오후 3 47 15" src="https://user-images.githubusercontent.com/43809168/91530287-d2fc8080-e945-11ea-9f7e-c37228c9b491.png" /></p>
+
+<p>이미지는 우리가 설정한 도커 이미지 이름이다. 우리의 경우 test가 되겠다.</p>
+
+<p>자 이제 GCP의 우리 프로젝트 도커 이미지 저장소에 이미지를 푸시해보자.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker push gcr.io/depromeet-285004/test
+</code></pre></div></div>
+
+<p>그러면 다음과 같은 오류가 발생할 것이다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The push refers to repository [gcr.io/depromeet-285004/test]
+An image does not exist locally with the tag: gcr.io/depromeet-285004/test
+</code></pre></div></div>
+
+<p>이는 우리가 도커 이미지를 위와 같은 방식으로 태깅을 해줘야하기 때문이다.</p>
+
+<p>다시 빌드를 해주자.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build -t gcr.io/depromeet-285004/test .
+</code></pre></div></div>
+
+<p>그리고 나서 다시 푸시를 시도하자.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker push gcr.io/depromeet-285004/test
+</code></pre></div></div>
+
+<p>그러면 푸시가 잘되는 듯 싶다가 다음과 같은 에러가 나올 것이다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>unauthorized: You don't have the needed permissions to perform this operation, and you may have invalid credentials. To authenticate your request, follow the steps in: https://cloud.google.com/container-registry/docs/advanced-authentication
+</code></pre></div></div>
+
+<p>그렇다 인생도 코딩도 역시 호락호락하지 않다.</p>
+
+<p>저 링크를 따라 들어가보면, gcloud 명령어를 사용해 사용자 인증을 하는 방식을 권장하는 것을 알 수 있다.</p>
+
+<p>gcloud는 한글로 된 가이드가 친절하게 잘 나와있다. (역시 구글)</p>
+
+<p>이 부분은 공식 가이드가 워낙 친절하니까 따라해서 설치만 하면 된다. (압축풀고 쉘스크립트 실행하는 정도 수준)</p>
+
+<p><a href="https://cloud.google.com/sdk/docs">https://cloud.google.com/sdk/docs</a></p>
+
+<p><img width="935" alt="스크린샷 2020-08-28 오후 3 57 50" src="https://user-images.githubusercontent.com/43809168/91531138-3d61f080-e947-11ea-99fb-5250e734014b.png" /></p>
+
+<p>필자도 gcloud가 없어서 설치했더니 이렇게 잘 설치됐다고 친절하게 알려주기까지 한다. (역시 구글)</p>
+
+<p>여기서 각자 OS에 맞는 gcloud를 설치한 뒤 gcloud를 통해 인증을 해주자.</p>
+
+<p><img width="557" alt="스크린샷 2020-08-28 오후 4 01 05" src="https://user-images.githubusercontent.com/43809168/91531397-b5c8b180-e947-11ea-922c-92c96f24c5fa.png" /></p>
+
+<p>그러면 대략 zone을 설정하라는 말이 나오는데, 필자는 us-central1-a로 했다.</p>
+
+<p>존의 경우 클라우드 장비들이 설치될 위치를 지정하는 건데, 필자의 경우 이미 물리장비를 만들어놓은게 있어서 여기로 설정했다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gcloud auth login
+</code></pre></div></div>
+
+<p>입력하면 구글 로그인 창이 뜬다. 프로젝트를 생성해둔 계정으로 로그인하자.</p>
+
+<p>그리고 나서</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gcloud auth configure-docker
+</code></pre></div></div>
+
+<p>입력해서 설정을 저장해주자.</p>
+
+<p>여기까지 하고 다시</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker push gcr.io/depromeet-285004/test
+</code></pre></div></div>
+
+<p>푸시를 해주면 이제 정상적으로 이미지가 푸시된 것을 확인할 수 있다.</p>
+
+<h2 id="만약-위와-같은-방법으로도-오류가-발생한다면">만약 위와 같은 방법으로도 오류가 발생한다면?</h2>
+
+<ol>
+  <li>
+    <p>로컬에 도커가 설치되어있는지 다시 한번 확인</p>
+  </li>
+  <li>
+    <p>Container Registry API가 사용중인지 확인하자</p>
+  </li>
+</ol>
+
+<p><a href="https://console.cloud.google.com/apis/library/containerregistry.googleapis.com">Container Registry API</a></p>
+
+<h2 id="gcp-컨테이너-저장소에-도커-이미지-업로드-확인">GCP 컨테이너 저장소에 도커 이미지 업로드 확인</h2>
+
+<p><img width="709" alt="스크린샷 2020-08-28 오후 4 08 38" src="https://user-images.githubusercontent.com/43809168/91532083-bf9ee480-e948-11ea-8d14-efa30d6c194b.png" /></p>
+
+<p>그러면 GCP 컨테이너 저장소에 우리의 도커 이미지가 잘 업로드된 것을 확인할 수 있다.</p>
+
+<p>여기까지하면 거의 다 했다고 할 수 있다.</p>
+
+<p>이제 남은 것은 우리가 방금 올린 이미지를 기반으로 한 Compute Engine (컴퓨터)를 생성하고 그 장비가 우리의 스프링 애플리케이션을 실행하게 하는 것이다.</p>
+
+<p>이제 다음 과정인 장비 생성과 대망의 깃허브 CI/CD 구축은 다음 글에서 설명하도록 하겠다.</p>
+
+    <br />
+    <br />
+  </div>
+  
+
+</article>
+
+<!--<hr class="dingbat" />-->
+<!--
+<div class="share">
+  <h2>Share this post</h2>
+  <div class="share-body">
+    <a href="http://twitter.com/share?text=Github Actions를 사용해서 CICD 구축해보기 실습 with GCP - 준비편&amp;url=http://localhost:4000/devops/2020/08/28/Infra-22/"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="icon-twitter">
+      </span>
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/devops/2020/08/28/Infra-22/"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="icon-facebook">
+      </span>
+    </a>
+  </div>
+</div>
+-->
+<br />
+
+
+
+
+<aside class="related" role="complementary">
+  <h2 class="hr">Related Posts</h2>
+
+  <ul class="related-posts">
+    
+      
+      
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/devops/2021/05/16/Kafka-04/" data-flip="title">
+    <span>Kafka 내부 메커니즘</span>
+  </a>
+  <small><time datetime="2021-05-16T00:00:00+09:00">
+    16 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/devops/2021/05/13/CKA-51/" data-flip="title">
+    <span>신입 개발자인 나는 왜 CKA 자격증을 땄을까?</span>
+  </a>
+  <small><time datetime="2021-05-13T00:00:00+09:00">
+    13 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/devops/2021/05/06/Kafka-03/" data-flip="title">
+    <span>Kafka Consumer</span>
+  </a>
+  <small><time datetime="2021-05-06T00:00:00+09:00">
+    06 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+      
+    
+  </ul>
+</aside>
+  <aside class="comments" role="complementary">
+  <h2>Comments</h2>
+  <hr/>
+
+  <script src="https://utteranc.es/client.js"
+    repo="minkukjo/minkukjo.github.io"
+    issue-term="title"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</aside>
+
+       <footer>
+  <hr/>
+  
+    <p>© 2022. by minkuk</p>
+
+  
+  <p>
+    <code>Powered by <a href="https://minkukjo.github.io/">minkuk</a></code>
+  </p>
+</footer>
+
+    </main>
+    <div class="right-side">
+  <div class="add-first">
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+    ></script>
+    <!-- 우측 광고 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="9124111205"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+  <br />
+  <br />
+  <div class="add-second">
+    <!-- 우측 광고2 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="5156946039"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+
+  </div>
+  <div id="_yDrawer">
+  <div id="_sidebar" class="sidebar">
+    <div class="sidebar-bg" style="background-color:#4f86aa;background-image:url(/assets/img/bg.jpg)"></div>
+    <header class="sidebar-sticky" role="banner">
+      <br/>
+      <div class="sidebar-about">
+        <h1><a id="_title" href="/">도전하는 개발자</a></h1>
+        
+
+      </div>
+
+      <br/>
+      <br/>
+      <nav class="sidebar-nav heading" role="navigation">
+        <span class="sr-only">Navigation:</span>
+<ul>
+  
+
+  
+
+  
+  
+  
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-1"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/life/">Life</a>
+       <label class="folder" for="list-item-1">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-daily/">Daily</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-review/">Review</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-books/">Books</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-2"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/computer-science/">Computer Science</a>
+       <label class="folder" for="list-item-2">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-algorithm/">Algorithm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-oop/">OOP</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-network/">Network</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-db/">Database</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-ai/">AI</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-security/">Security</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-distribution-system/">Distribution System</a>
+             </li>
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-3"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/programming-language/">Programming Language</a>
+       <label class="folder" for="list-item-3">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-kotlin/">Kotlin</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-go/">Go</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-java/">Java</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-javascript/">JavaScript</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-typescript/">TypeScript</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-4"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/framework/">Framework</a>
+       <label class="folder" for="list-item-4">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring/">Spring</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-data-jpa/">Spring Data JPA</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-security/">Spring Security</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-junit/">JUnit</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-5"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/language/">Language</a>
+       <label class="folder" for="list-item-5">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/language-english/">English</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-6"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/development/">Development</a>
+       <label class="folder" for="list-item-6">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-ddd/">DDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-tdd/">TDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-clean-code/">Clean Code</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-git/">Git</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-7"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/devops/">Devops</a>
+       <label class="folder" for="list-item-7">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-alarm/">Alarm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-ansible/">Ansible</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-cicd/">CI/CD</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-docker/">Docker</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-es/">Elasticsearch</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-k8s/">Kubernetes</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-public-cloud/">Public Cloud</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-kafka/">Kafka</a>
+             </li>
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-8"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/opensource/">Open Source</a>
+       <label class="folder" for="list-item-8">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/opensource-opensource/">Open Source</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-9"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/about/">About</a>
+       
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+</ul>
+
+      </nav>
+    <br/>
+    <br/>
+      <div class="sidebar-box">
+        
+      </div>
+      <p>매일 매일 한계를 뛰어넘기 위한 도전을 즐기는 개발자</p>
+
+      
+      
+        <div class="sidebar-social">
+          <span class="sr-only">Social:</span>
+<ul>
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://github.com/minkukjo">
+    <span class="icon-github" title="GitHub"></span>
+    <span class="sr-only">GitHub</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://www.linkedin.com/in/민국-조-567052166">
+    <span class="icon-linkedin2" title="LinkedIn"></span>
+    <span class="sr-only">LinkedIn</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:harrycode@kakao.com">
+    <span class="icon-mail" title="Email"></span>
+    <span class="sr-only">Email</span>
+  </a>
+</li>
+
+  
+</ul>
+
+        </div>
+      
+    </header>
+  </div>
+</div>
+</div>
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-158654037-1', 'auto');
+  ga('send', 'pageview');
+  loadJSDeferred('https://www.google-analytics.com/analytics.js');
+</script>
+
+
+
+
+
+<!--[if gt IE 8]><!---->
+<script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+  WebFont.load({
+    
+    google: {
+      families: 'Lato'.split('|')
+    },
+    
+
+    custom: {
+      families: ['icomoon'],
+      urls: ['/assets/icomoon/style.css']
+    }
+  });
+</script>
+<!--<![endif]-->
+
+
+  <!--[if gt IE 9]><!---->
+  
+  <script>loadJSDeferred('/assets/js/hydejack.js?v=6.4.0');</script>
+
+  
+  <!--<![endif]-->
+
+
+
+</body>
+
+</html>

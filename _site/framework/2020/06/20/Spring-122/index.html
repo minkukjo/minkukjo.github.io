@@ -1,0 +1,2144 @@
+<!DOCTYPE html>
+<html lang="en"><!--
+ __  __                __                                     __
+/\ \/\ \              /\ \             __                    /\ \
+\ \ \_\ \   __  __    \_\ \      __   /\_\      __       ___ \ \ \/'\
+ \ \  _  \ /\ \/\ \   /'_` \   /'__`\ \/\ \   /'__`\    /'___\\ \ , <
+  \ \ \ \ \\ \ \_\ \ /\ \L\ \ /\  __/  \ \ \ /\ \L\.\_ /\ \__/ \ \ \\`\
+   \ \_\ \_\\/`____ \\ \___,_\\ \____\ _\ \ \\ \__/.\_\\ \____\ \ \_\ \_\
+    \/_/\/_/ `/___/> \\/__,_ / \/____//\ \_\ \\/__/\/_/ \/____/  \/_/\/_/
+                /\___/                \ \____/
+                \/__/                  \/___/
+
+Powered by Hydejack v6.4.0 (https://qwtel.com/hydejack/)
+-->
+
+
+
+
+
+
+
+
+
+<head>
+  <!-- =============== -->
+<!-- META            -->
+<!-- =============== -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta
+  name="naver-site-verification"
+  content="22c5b4ef3bfda7fc6100671413989219de7a4ac8"
+/>
+<meta property="og:title" content="토비의 스프링 1.1 ~ 1.3" />
+<meta property="og:type" content="article" />
+
+<!-- =============== -->
+<!-- Google AdSense  -->
+<!-- =============== -->
+<script
+  data-ad-client="ca-pub-8247516864622650"
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+></script>
+
+ 
+<meta
+  property="og:image"
+  content="http://localhost:4000/assets//img/spring-logo.png"
+/>
+<br />
+
+
+<meta property="og:image:width" content="640" />
+<meta property="og:image:height" content="360" />
+ 
+<title>토비의 스프링 1.1 ~ 1.3 &middot; 도전하는 개발자</title>
+ 
+<meta
+  name="description"
+  content="What is Spring
+
+"
+/>
+<meta
+  property="og:description"
+  content="What is Spring
+
+"
+/>
+
+
+
+<!-- =============== -->
+<!-- LINKS           -->
+<!-- =============== -->
+<link rel="canonical" href="http://localhost:4000/framework/2020/06/20/Spring-122/" />
+<meta property="og:url" content="http://localhost:4000/framework/2020/06/20/Spring-122/" />
+
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="도전하는 개발자 Feed"
+  href="http://localhost:4000/feed.xml"
+/>
+
+
+<link rel="prev" href="http://localhost:4000/framework/2020/06/20/Spring-121/" />
+ 
+<link rel="next" href="http://localhost:4000/framework/2020/06/21/Spring-123/" />
+
+
+<link
+  rel="apple-touch-icon"
+  href="http://localhost:4000/apple-touch-icon.png"
+/>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+<!-- Place favicon.ico in the root directory -->
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+<script>
+  !function(n,e){function t(n,e){n.onload=function(){this.onerror=this.onload=null,e(null,n)},n.onerror=function(){this.onerror=this.onload=null,e(new Error("Failed to load "+this.src),n)}}function o(n,e){n.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||(this.onreadystatechange=null,e(null,n))}}n._loaded=!1,n.loadJSDeferred=function(a,d){function r(){n._loaded=!0;var r=e.createElement("script");r.src=a,d&&(("onload"in r?t:o)(r,d),r.onload||t(r,d));var l=e.getElementsByTagName("script")[0];l.parentNode.insertBefore(r,l)}n._loaded?r():n.addEventListener?n.addEventListener("load",r,!1):n.attachEvent?n.attachEvent("onload",r):n.onload=r}}(window,document);
+
+  !function(e){"use strict";var n=function(n,t,o){function i(e){if(a.body)return e();setTimeout(function(){i(e)})}function r(){l.addEventListener&&l.removeEventListener("load",r),l.media=o||"all"}var d,a=e.document,l=a.createElement("link");if(t)d=t;else{var f=(a.body||a.getElementsByTagName("head")[0]).childNodes;d=f[f.length-1]}var s=a.styleSheets;l.rel="stylesheet",l.href=n,l.media="only x",i(function(){d.parentNode.insertBefore(l,t?d:d.nextSibling)});var u=function(e){for(var n=l.href,t=s.length;t--;)if(s[t].href===n)return e();setTimeout(function(){u(e)})};return l.addEventListener&&l.addEventListener("load",r),l.onloadcssdefined=u,u(r),l};"undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this);
+
+  !function(t){if(t.loadCSS){var e=loadCSS.relpreload={};if(e.support=function(){try{return t.document.createElement("link").relList.supports("preload")}catch(t){return!1}},e.poly=function(){for(var e=t.document.getElementsByTagName("link"),r=0;r<e.length;r++){var n=e[r];"preload"===n.rel&&"style"===n.getAttribute("as")&&(t.loadCSS(n.href,n,n.getAttribute("media")),n.rel=null)}},!e.support()){e.poly();var r=t.setInterval(e.poly,300);t.addEventListener&&t.addEventListener("load",function(){e.poly(),t.clearInterval(r)}),t.attachEvent&&t.attachEvent("onload",function(){t.clearInterval(r)})}}}(this);
+
+  window.disablePushState = false;
+  window.disableDrawer = false;
+</script>
+
+<!--[if lt IE 9]>
+  <script src="https://unpkg.com/html5shiv/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+<!-- =============== -->
+<!-- STYLES          -->
+<!-- =============== -->
+<!--[if gt IE 8]><!---->
+<style>
+  
+  article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}*{box-sizing:border-box}html,body{margin:0;padding:0}html{font-size:16px;line-height:1.75}body{color:#333;background-color:#fff;overflow-y:scroll}a{text-decoration:none}.lead{margin-left:-1rem;margin-right:-1rem}img,.img{display:block;max-width:100%;margin-bottom:1rem;border:none}img.lead,.img.lead{max-width:calc(100% + 2rem);width:calc(100% + 2rem)}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-weight:bold;text-rendering:optimizeLegibility}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{margin:1.6rem 0 1rem;line-height:1.6}h1,.h1{font-size:2rem;line-height:1.25}h2,.h2{font-size:1.5rem}h3,.h3{font-size:1.17em}p{margin-top:0;margin-bottom:1rem}p.lead{font-size:1.25rem;font-weight:300;padding:0 1rem}ul,ol,dl{margin-top:0;margin-bottom:1rem}ul,ol{padding-left:1.25rem}hr{position:relative;margin:1.5rem 0;border:0;border-top:1px solid #eee}.hr{padding-bottom:.5rem;border-bottom:1px solid #eee;margin-bottom:1.5rem}h4,h5,h6,.h4,.h5,.h6{margin-bottom:0.5rem;font-size:1rem}table{margin-bottom:1rem;width:100%;width:calc(100% + 2rem);margin-left:-1rem;border:1px solid #e5e5e5;border-collapse:collapse;border-spacing:0}td,th{padding:.25rem .5rem;border:1px solid #e5e5e5}td:first-child,th:first-child{padding-left:1rem}td:last-child,th:last-child{padding-right:1rem}thead+tbody,tbody+tbody,tfoot{border-top:3px double #e5e5e5}tbody tr:nth-child(odd) td,tbody tr:nth-child(odd) th{background-color:#f9f9f9}footer{margin-bottom:2rem}.page,.post{margin-bottom:3em}.page li+li,.post li+li{margin-top:.25rem}.page>header,.post>header{margin-bottom:2rem}.page-title,.post-title{margin-top:0}.post-date{display:block;margin-top:-0.5rem;margin-bottom:1rem;color:#9a9a9a}.related-posts{padding-left:0;list-style:none}.related-posts>li,.related-posts>li+li{margin-top:1rem}.related-posts>li>small,.related-posts>li+li>small{font-size:75%;color:#9a9a9a}.message{margin-bottom:1rem;padding:1rem;color:#787878;background-color:#f9f9f9;margin-left:-1rem;margin-right:-1rem}body,main{position:relative;overflow-x:hidden}@media screen{body::before{content:'';background:#e5e5e5;position:absolute;left:0;top:0;bottom:0}}@media screen and (min-width: 40em){html{font-size:17px}}@media screen and (min-width: 54em){html{font-size:16px}}@media screen and (min-width: 88em){html{font-size:17px}}@media screen and (min-width: 125em){html{font-size:18px}}.sr-only{display:none}.clearfix,.sidebar-social::after,.clearafter::after{content:"";display:table;clear:both}a,.a{position:relative;padding-bottom:.15rem;border-style:hidden}.img{overflow:hidden;background-color:#f9f9f9}.img>img{margin:0;width:100%;height:100%}.sixteen-nine{position:relative}.sixteen-nine::before{display:block;content:"";width:100%;padding-top:56.25%}.sixteen-nine>*{position:absolute;top:0;left:0;right:0;bottom:0}h1+hr,h2+hr,h3+hr,h4+hr,h5+hr,h6+hr{margin-top:0}.fade-in{animation-duration:500ms;animation-name:fade-in;animation-fill-mode:forwards}@keyframes fade-in{from{transform:translateY(-2rem);opacity:0}50%{transform:translateY(-2rem);opacity:0}to{transform:translateY(0);opacity:1}}.mb6{margin-bottom:10rem}.sidebar{color:rgba(255,255,255,0.75);text-align:left}.sidebar::before{content:"";position:absolute;z-index:2;top:0;left:0;bottom:0;right:0;background:linear-gradient(to bottom, rgba(32,32,32,0) 0%, rgba(32,32,32,0.5) 100%)}.sidebar a{color:#fff;border-bottom-color:rgba(255,255,255,0.2)}.right-side{width:100%;margin-left:auto;margin-right:auto}.right-side .ad-first{text-align:center}@media screen{.right-side{max-width:38rem;min-height:100vh}.right-side .ad-second{display:none}}@media screen and (min-width: 54em){.right-side{margin-left:20rem;margin-right:1rem;padding:4rem 1rem 12rem}.right-side .ad-second{text-align:center;display:block}}@media screen and (min-width: 72em){.right-side{margin-left:22rem;max-width:42rem}}@media screen and (min-width: 88em){.right-side{width:162px;margin-left:0rem;margin-right:0rem;padding:0rem;margin-top:10rem;display:block;float:left}}@media screen and (min-width: 96em){.right-side{width:300px;margin-right:0rem}}#_yDrawer{position:relative}@media screen{#_yDrawer{min-height:640px;min-height:100vh}}@media screen and (min-width: 54em){#_yDrawer{width:18rem;margin-left:0}}.sidebar-bg{position:absolute;height:100%;overflow:hidden;top:0;right:0;bottom:0;left:0;background:#202020 center / cover}.sidebar-box{display:flex;justify-content:center}.sidebar-sticky{position:relative;z-index:3}@media screen{.sidebar-sticky{-ms-overflow-style:none;overflow:-moz-scrollbars-none;height:100%;overflow:auto;position:absolute;padding:3rem 0rem;right:2.5rem;left:2.5rem}}.sidebar-sticky::-webkit-scrollbar{display:none}.sidebar-about>h1{color:#fff;font-size:2rem}.sidebar-nav>ul{list-style:none;padding-left:0;margin-bottom:.5rem}a.sidebar-nav-item{width:100%;font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}a.sidebar-nav-subitem{font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}@media screen{.y-drawer-scrim{z-index:2}.y-drawer-content{width:18rem;left:-18rem;z-index:3}}.sidebar-social{margin-bottom:.5rem}.sidebar-social>ul{list-style:none;padding-left:0;margin:0 -.25rem}.sidebar-social>ul>li{float:left}.sidebar-social>ul>li>a{display:inline-block;text-align:center;font-size:1.6rem;line-height:3rem;width:3.1249rem;height:4rem;padding:.5rem 0}.sidebar-social>ul li+li{margin-top:0}.fixed-top{position:fixed;top:0;left:0;width:100%;z-index:1}.navbar>.content{padding-top:0;padding-bottom:0;min-height:0;height:0}.menu{display:inline-block;padding:1.75rem 1.5rem;border-bottom:none;margin-left:-1.5rem;color:#9a9a9a !important}.menu::after{content:"\2630"}@media screen and (min-width: 54em){.menu{padding:1.25rem 1.5rem;position:absolute;left:-9999px}.menu:focus{position:static}}.animation-main{pointer-events:none}.loading{display:none}@media print{.menu{display:none}}.animation-main{opacity:0;will-change:opacity}.loading{position:absolute;top:0;right:0;padding:5.25rem 4.5rem;transform-origin:top right;transform:scale(0.33)}.content{position:relative;margin-left:auto;margin-right:auto;padding:5rem 1rem 12rem}@media screen{.content{min-height:100vh}}@media screen and (min-width: 54em){.content{padding:4rem 1rem 12rem;margin-left:19rem;margin-right:3rem}}@media screen and (min-width: 72em){.content{max-width:42rem;margin-left:21rem}}@media screen and (min-width: 88em){.content{float:left;width:100%;margin-left:22rem;margin-right:5rem}}@media screen and (min-width: 96em){.content{max-width:44rem}}@media screen and (min-width: 102em){.content{margin-left:25rem;margin-right:8rem}}.me{width:6.5rem;height:6.5rem;align-self:center;margin-right:20px;border-radius:100%;position:relative}@media screen and (min-width: 40em){.me{width:7rem;height:7rem}}@media screen and (min-width: 54em){.me{width:6.5rem;height:6.5rem}}@media screen and (min-width: 72em){.me{width:7rem;height:7rem}}main>footer{width:100%;position:absolute;bottom:0;left:0;right:0;padding:0 1rem;color:#9a9a9a;font-size:smaller;text-align:center}main>footer>p{margin-bottom:0}html{font-family:'Sans-serif'}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-family:'Sans-serif'}
+
+</style>
+
+
+<link
+  rel="preload"
+  href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0"
+  as="style"
+  onload="this.rel='stylesheet'"
+/>
+
+<style id="_pageStyle">
+
+.content a{color:#4f86aa;border-color:rgba(79,134,170,0.2)}.content a:hover{border-color:#4f86aa}:focus{outline-color:#4f86aa}::selection{color:#fff;background:#4f86aa}::-moz-selection{color:#fff;background:#4f86aa}
+
+</style>
+
+
+<noscript>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0" />
+    
+  
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Lato"
+  />
+  <style>
+    html { font-family: 'Lato', 'Sans-serif' }
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .heading { font-family: 'Lato', 'Sans-serif' }
+  </style>
+   
+  <link rel="stylesheet" href="http://localhost:4000/assets/icomoon/style.css" />
+</noscript>
+<!--<![endif]-->
+
+</head>
+
+<body>
+  <!-- =============== -->
+<!-- MENU            -->
+<!-- =============== -->
+<div class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <a id="_menu" class="menu no-hover" href="#_title">
+      <span class="sr-only">Menu</span>
+    </a>
+  </div>
+</div>
+
+<!-- =============== -->
+<!-- CONTENT         -->
+<!-- =============== -->
+<div id="_yPushState">
+  <div class="fade-in">
+    <main
+      id="_main"
+      class="content"
+      role="main"
+      data-color="#4f86aa"
+      data-image="/assets/img/bg.jpg"
+    >
+      
+
+<article id="post-framework/2020/06/20/Spring-122" class="post" role="article">
+  <header>
+    <h1 class="post-title">
+      
+        토비의 스프링 1.1 ~ 1.3
+        
+    </h1>
+
+    <p class="post-date heading">
+      <time datetime="2020-06-20T00:00:00+09:00">20 Jun 2020</time>
+      
+
+
+
+
+
+
+
+
+
+in <a href="/category/framework/" data-flip="title">Framework</a>
+
+      
+
+
+
+
+
+
+
+
+
+on <a href="/tag/framework-spring/" data-flip="title">Spring</a>
+
+    </p>
+
+    
+  <div class="hr" style="padding-bottom:0"></div>
+
+
+  </header>
+  
+
+
+  
+  <div class="markdown-body">
+
+    <!-- 
+    <div class="head-image"><img src="http://localhost:4000/assets//img/spring-logo.png" /></div>
+    <br /> -->
+    <style>
+      .myAd1190 {
+        width: 48%;
+        height: 280px;
+      }
+
+      .myAd1290 {
+        width: 48%;
+        height: 280px;
+      }
+
+      @media(max-width: 800px) {
+        .myAd1190 {
+          display: none;
+        }
+
+        .myAd1290 {
+          width: 98%;
+        }
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 300px;
+      }
+
+      .row-center {
+        display: flex;
+        justify-content: center;
+        height: 258px;
+      }
+    </style>
+   
+    <!--<br />-->
+    <h2 id="what-is-spring">What is Spring</h2>
+
+<p>스프링은 자바 엔터프라이즈 애플리케이션 개발에 사용되는 애플리케이션 프레임워크이다.</p>
+
+<h2 id="스프링-컨테이너">스프링 컨테이너</h2>
+
+<p>스프링은 스프링 컨테이너 또는 애플리케이션 컨텍스트라 불리는 스프링 런타임 엔진을 제공한다.</p>
+
+<p>스프링 컨테이너는 설정정보를 참고로 해서 애플리케이션을 구성하는 객체를 생성하고 관리한다.</p>
+
+<p>스프링 컨테이너는 독립적으로 동작할 수 있지만 보통은 웹 모듈에서 동작하는 서비스나 서블릿으로 등록해서 사용한다.</p>
+
+<h2 id="iocdi-서비스-추상화-aop">IoC/DI, 서비스 추상화, AOP</h2>
+
+<ul>
+  <li>
+    <p>IoC/DI 의존성 관리를 위해 제공되는 스프링의 핵심</p>
+  </li>
+  <li>
+    <p>스프링을 사용하면 환경, 서버, 특정 기술에 종속되지 않고 이식성이 뛰어나고 유연한 애플리케이션을 만들 수 있다. (스프링의 철학인 비침투성)</p>
+  </li>
+  <li>
+    <p>AOP는 애플리케이션 단에서 사용되는 반복적인 코드를 줄여주고 깔끔한 코드를 유지할 수 있게 해주는 스프링의 또 다른 핵심 기술이다.</p>
+  </li>
+</ul>
+
+<h2 id="기술-api">기술 API</h2>
+
+<p>스프링에는 엔터프라이즈 애플리케이션을 개발에 도움이 되는 다양한 영역의 방대한 기술 API를 제공한다.</p>
+
+<p>비즈니스 서비스, 웹 프레젠테이션, 기반 서비스, 도메인 계층, 데이터 액세스 등의 기술들을 스프링에서 일관된 방식으로 사용할 수 있도록 지원해주는 기능과 전략 클래스 등을 제공한다.</p>
+
+<p>스프링의 모든 기술은 표준 자바 엔터프라이즈 플랫폼 JavaEE에 기반을 두고 있다.</p>
+
+<h2 id="스프링은-어떻게-성공했을까">스프링은 어떻게 성공했을까?</h2>
+
+<ul>
+  <li>
+    <p>스프링은 Node.js처럼 똑똑한 개발자가 혼자 뚝딱 개발한 것이 아님, 많은 개발자들이 오랜 시간에 걸쳐 자바를 통해 엔터프라이즈 시스템을 개발할 수 있도록 고민하고 노력한 결정체임.</p>
+  </li>
+  <li>
+    <p>대한민국 전자 정부 표준 프레임워크이기도 하다.</p>
+  </li>
+  <li>
+    <p>스프링은 사실상 자바 엔터프라이즈 표준 기술</p>
+  </li>
+  <li>어캐 성공 했노?
+    <ul>
+      <li>스프링을 사용함으로써 자바와 엔터프라이즈 개발의 기본에 충실한 베스트 프랙티스 적용 가능</li>
+      <li>이상적인 개발 철학과 프로그래밍 모델을 이해할 수 있음</li>
+      <li>결과적으로 좋은 개발 습관을 체득</li>
+    </ul>
+  </li>
+  <li>스프링의 강점 두 가지
+    <ul>
+      <li>단순함
+        <ul>
+          <li>스프링은 EJB라는 꼰대 표준 기술을 비판하며 등장</li>
+          <li>문제를 해결하는데 있어 EJB는 불필요하게 복잡했고 스프링은 반대로 가장 단순하고 명쾌하게 접근함</li>
+          <li>과거 자바는 이상적인 객체지향 언어로 찬양받았지만 자바 기술이 점점 더 복잡해지면서 그 특징을 잃어버리기 시작함</li>
+          <li>스프링은 잃어버린 객체지향 언어의 장점을 다시 살리면서 가장 단순한 객체지향 개발 모델인 POJO 프로그래밍을 강력히 주장함</li>
+        </ul>
+      </li>
+      <li>유연성
+        <ul>
+          <li>스프링은 다른 많은 프레임워크와 편리하게 접목될 수 있음</li>
+          <li>스프링만큼 많은 서드파티 프레임워크의 지원을 받는 기술도 없을 정도</li>
+          <li>스프링은 프레임워크를 위한 프레임워크이자 접착(glue) 프레임워크라고도 불리움</li>
+          <li>스프링 개발 철학 중 하나는 <strong>항상 프레임워크 기반의 접근 방법을 사용하라</strong></li>
+          <li>스프링은 개발자들에게 스프링을 확장해 사용하도록 권장</li>
+          <li>스프링은 지난 7년(책 기준) 단 한번도 코드 베이스를 흔들거나 새로 만드는 일 없이 기존 아키텍처와 설계, 코드를 유지하며 안정적으로 발전해왔음</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="스프링-학습과-활용의-어려움">스프링 학습과 활용의 어려움</h2>
+
+<p>스프링의 가치를 제대로 누리며 개발하기 위해서는 스프링을 <strong>제대로</strong> 공부해야한다.</p>
+
+<p>다른 프레임워크도 마찬가지이지만 스프링은 특히 프레임워크가 지향하는 가치와 프로그래밍 모델을 충분히 이해하지 못하고는 제대로 활용하기가 어려움.</p>
+
+<p>반면 한번 원리와 개발 사상을 이해하면 이후 새로운 기능이 아무리 많이 추가되더라도 빠르고 쉽게 학습할 수 있음.</p>
+
+<p>우리는 다음의 세 가지를 주안점을 두고 스프링을 공부해야함.</p>
+
+<ol>
+  <li>스프링의 핵심 가치와 원리에 대한 이해
+    <ul>
+      <li>스프링에서 가장 중요한 핵심 가치와 그것이 가능하도록 도와주는 세 가지 핵심 기술을 이해해야함</li>
+    </ul>
+  </li>
+  <li>스프링의 기술에 대한 지식과 선택 기준 정립
+    <ul>
+      <li>스프링의 기본 원리를 이해했으면 스프링이 어떻게 다양한 방법으로 확장하고 적용했는지 살펴봐야함.</li>
+    </ul>
+  </li>
+  <li>스프링의 적용과 확장
+    <ul>
+      <li>스프링을 효과적으로 사용하기 위해서는 스프링을 기반으로 한 프레임워크를 만들어서 사용함.</li>
+      <li>프레임워크를 만든다는 것이 스프링을 내부로 감춘다는 뜻이 아니라 스프링을 효과적으로 사용할 수 있도록 프레임워크 형태로 개발하여 이용할 수 있게 해주는 것을 의미함</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="저자의-조언">저자의 조언</h2>
+
+<ul>
+  <li>
+    <p>스프링은 러닝 커브가 완만한 기술이 아니다.</p>
+  </li>
+  <li>
+    <p>스프링을 학습하고 난 뒤에는 자신이 좀 <strong>더 나은 개발자</strong>가 되었는지 스스로 확인해보아야 한다.</p>
+  </li>
+  <li>
+    <p>코드가 깔끔한지, 객체지향 원칙에 충실했는지 등을 끊임없이 확인하고 검증하자</p>
+  </li>
+  <li>
+    <p>더 많은 테스트코드를 작성하고 있는지, 유연하고 확장하기 쉬운 애플리케이션을 만들고 있는지 스스로에게 물어보자</p>
+  </li>
+  <li>
+    <p>가급적이면 이 책을 공부할 때 예제도 같이 타이핑해보라</p>
+  </li>
+</ul>
+
+<h2 id="1부--이해">1부 : 이해</h2>
+
+<p><strong>오브젝트와 의존관계</strong></p>
+
+<p>스프링이 자바에서 가장 중요하게 가치를 두는 점은 <strong>객체지향 프로그래밍</strong>이 가능한 언어라는 것이다.</p>
+
+<p>그래서 스프링은 객체에 관심이 많다.</p>
+
+<p>객체지향 설계의 기초와 원칙, 다양한 목적을 위해 재활용 가능한 설계 방법인 디자인 패턴, 더 깔끔한 구조가 되도록 지속적으로 개선해나가는 작업인 리팩토링, 객체가 기대한 대로 동작하고 있는지를 효과적으로 검증하는데 쓰이는 단위 테스트와 같이 객체 설계와 구현에 관한 여러가지 응용 기술과 지식이 요구된다.</p>
+
+<h2 id="뭘-해볼까">뭘 해볼까?</h2>
+
+<p>사용자 정보를 JDBC API를 사용해 DB에 저장하고 조회할 수 있는 간단한 DAO를 하나 만들어보자.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">User</span><span class="p">(</span>
+        <span class="kd">val</span> <span class="py">id</span><span class="p">:</span> <span class="nc">Long</span><span class="p">,</span>
+        <span class="kd">val</span> <span class="py">name</span><span class="p">:</span> <span class="nc">String</span><span class="p">,</span>
+        <span class="kd">val</span> <span class="py">password</span><span class="p">:</span><span class="nc">String</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>여기서 id는 PK가 될 것이다.</p>
+
+<p>다음으로는 사용자의 정보를 DB로 부터 가져오고 넣기 위해 DAO 클래스를 만들어 볼 것이다.</p>
+
+<p>간단하게 CRUD 기능을 하는 DAO 클래스를 만들어보도록 하겠다.</p>
+
+<p>JDBC를 사용하는 작업은 일반적으로 다음과 같은 과정을 거친다.</p>
+
+<ol>
+  <li>
+    <p>DB 연결을 위한 Connection을 가져온다.</p>
+  </li>
+  <li>
+    <p>SQL을 담은 Statement(또는 PreparedStatement)를 만든다.</p>
+  </li>
+  <li>
+    <p>만들어진 Statement를 실행한다.</p>
+  </li>
+  <li>
+    <p>조회의 경우 SQL 쿼리의 실행 결과를 ResultSet으로 받아서 정보를 저장할 오브젝트에 옮겨준다.</p>
+  </li>
+  <li>
+    <p>작업 중에 생성된 Connection, Statement, ResultSet 같은 리소스는 작업을 마친 후 반드시 닫아준다.</p>
+  </li>
+  <li>
+    <p>JDBC API가 만들어내는 예외를 잡아서 직접 처리하거나, 예외 발생시 throw를 통해 예외를 던져준다.</p>
+  </li>
+</ol>
+
+<h2 id="초난감-dao-등장">초난감 DAO 등장</h2>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">UserDao</span><span class="p">{</span>
+    <span class="nf">init</span> <span class="p">{</span>
+        <span class="nc">Class</span><span class="p">.</span><span class="nf">forName</span><span class="p">(</span><span class="s">"org.h2.Driver"</span><span class="p">)</span>
+        <span class="kd">val</span> <span class="py">connection</span> <span class="p">=</span> <span class="nc">DriverManager</span><span class="p">.</span><span class="nf">getConnection</span><span class="p">(</span><span class="s">"jdbc:h2:mem:testdb"</span><span class="p">,</span> <span class="s">"sa"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
+
+        <span class="kd">val</span> <span class="py">prepareStatement</span> <span class="p">=</span> <span class="n">connection</span><span class="p">.</span><span class="nf">prepareStatement</span><span class="p">(</span>
+                <span class="s">"CREATE TABLE IF NOT EXISTS user(id INT,name varchar(30),password varchar(30))"</span>
+        <span class="p">)</span>
+
+        <span class="n">prepareStatement</span><span class="p">.</span><span class="nf">execute</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="k">fun</span> <span class="nf">addUser</span><span class="p">(</span><span class="n">user</span><span class="p">:</span><span class="nc">User</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nc">Class</span><span class="p">.</span><span class="nf">forName</span><span class="p">(</span><span class="s">"org.h2.Driver"</span><span class="p">)</span>
+        <span class="kd">val</span> <span class="py">connection</span> <span class="p">=</span> <span class="nc">DriverManager</span><span class="p">.</span><span class="nf">getConnection</span><span class="p">(</span><span class="s">"jdbc:h2:mem:testdb"</span><span class="p">,</span> <span class="s">"sa"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
+
+        <span class="n">connection</span><span class="p">.</span><span class="nf">prepareStatement</span><span class="p">(</span>
+                <span class="s">"CREATE TABLE IF NOT EXISTS user(id INT,name varchar(30),password varchar(30))"</span>
+        <span class="p">)</span>
+
+        <span class="kd">val</span> <span class="py">preparedStatement</span> <span class="p">=</span> <span class="n">connection</span><span class="p">.</span><span class="nf">prepareStatement</span><span class="p">(</span>
+                <span class="s">"insert into user(id,name,password) values(?,?,?)"</span>
+        <span class="p">)</span>
+        <span class="n">preparedStatement</span><span class="p">.</span><span class="nf">setLong</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">user</span><span class="p">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="n">preparedStatement</span><span class="p">.</span><span class="nf">setString</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">user</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">preparedStatement</span><span class="p">.</span><span class="nf">setString</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">user</span><span class="p">.</span><span class="n">password</span><span class="p">)</span>
+
+        <span class="n">preparedStatement</span><span class="p">.</span><span class="nf">execute</span><span class="p">()</span>
+        <span class="n">preparedStatement</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
+        <span class="n">connection</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="k">fun</span> <span class="nf">getUser</span><span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="nc">Long</span><span class="p">):</span> <span class="nc">User</span> <span class="p">{</span>
+        <span class="nc">Class</span><span class="p">.</span><span class="nf">forName</span><span class="p">(</span><span class="s">"org.h2.Driver"</span><span class="p">)</span>
+        <span class="kd">val</span> <span class="py">connection</span> <span class="p">=</span> <span class="nc">DriverManager</span><span class="p">.</span><span class="nf">getConnection</span><span class="p">(</span><span class="s">"jdbc:h2:mem:testdb"</span><span class="p">,</span> <span class="s">"sa"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
+
+        <span class="kd">val</span> <span class="py">preparedStatement</span> <span class="p">=</span> <span class="n">connection</span><span class="p">.</span><span class="nf">prepareStatement</span><span class="p">(</span>
+                <span class="s">"select * from user where id = ?"</span>
+        <span class="p">)</span>
+        <span class="n">preparedStatement</span><span class="p">.</span><span class="nf">setLong</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">id</span><span class="p">)</span>
+
+        <span class="kd">val</span> <span class="py">resultSet</span> <span class="p">=</span> <span class="n">preparedStatement</span><span class="p">.</span><span class="nf">executeQuery</span><span class="p">()</span>
+        <span class="n">resultSet</span><span class="p">.</span><span class="nf">next</span><span class="p">()</span>
+        <span class="kd">val</span> <span class="py">user</span> <span class="p">=</span> <span class="nc">User</span><span class="p">(</span>
+                <span class="n">resultSet</span><span class="p">.</span><span class="nf">getLong</span><span class="p">(</span><span class="s">"id"</span><span class="p">),</span>
+                <span class="n">resultSet</span><span class="p">.</span><span class="nf">getString</span><span class="p">(</span><span class="s">"name"</span><span class="p">),</span>
+                <span class="n">resultSet</span><span class="p">.</span><span class="nf">getString</span><span class="p">(</span><span class="s">"password"</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="n">resultSet</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
+        <span class="n">preparedStatement</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
+        <span class="n">connection</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">user</span>
+
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>위에서 언급한 작업을 수행하는 UserDAO이다.</p>
+
+<p>얼핏 봐도 코드가 길고 복잡해보인다.</p>
+
+<p>이 코드를 테스트할 수 있는 가장 좋은 방법은 테스트 코드를 짜는 것이다.</p>
+
+<p>테스트 코드를 작성해보자.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class UserDaoTest {
+    @Test
+    fun crud() {
+        // given
+        val userDao = UserDao()
+        val user = User(
+                123,
+                "harry",
+                "code"
+        )
+
+        // when
+        userDao.addUser(user)
+        val findUser = userDao.getUser(user.id)
+
+        // then
+        assertEquals(user.name,findUser.name)
+        assertEquals(user.password,findUser.password)
+    }
+}
+</code></pre></div></div>
+
+<p>참고로 테스트 코드의 중요성에 대해 잠깐 언급하자면,</p>
+
+<p>백기선님의 경우 면접시에 구직자의 포트폴리오를 볼 때 테스트 코드가 없으면 거기서 부터 포트폴리오를 안보신다고 한다.</p>
+
+<p>그러니 우리도 꼭 꼭 테스트 코드를 작성하도록 하자.</p>
+
+<p>위는 BDD 스타일로 작성된 테스트코드이다.</p>
+
+<p>위 테스트코드는 문제 없이 작동한다.</p>
+
+<p>우리의 요구사항은 만족하였으나 앞서 작성한 Dao 클래스는 회사에서 짤리기 딱 좋은 코드이다.</p>
+
+<p>우리의 요구 사항을 정상적으로 만족했고 동작도 문제없이 잘 되지만 이 클래스에는 심각한 문제들이 많이 숨어있다.</p>
+
+<h2 id="dao의-분리-관심사의-분리">DAO의 분리, 관심사의 분리</h2>
+
+<p>객체지향의 세계에서 모든 것은 변한다.</p>
+
+<p>오브젝트에 대한 설계와 이를 구현한 코드는 계속해서 변한다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">소프트웨어 개발에서 끝이라는 개념은 없다. by toby</code></p>
+
+<p>여기서 프로그래밍 기초 개념 중 중요한 개념인 Separation of Concerns라는 개념이 등장한다.</p>
+
+<p>이를 객체지향에 적용해서 관심이 있는 것 끼리는 모이게 하고, 관심 밖 객체는 따로 떨어지게 나누어서 서로 영향을 주지 않도록 분리하는 것이라고 생각할 수 있다.</p>
+
+<p>그럼 지금부터 변화를 유연하게 수용할 수 있는 코드로 Dao 클래스를 재작성해보자.</p>
+
+<h2 id="커넥션-만드는-것-부터-뽑아내보자">커넥션 만드는 것 부터 뽑아내보자</h2>
+
+<p>UserDao에 구현된 메소드들을 잘 살펴보면 add 메소드 하나에서만 적어도 세 가지 관심사항을 발견할 수 있다.</p>
+
+<ol>
+  <li>
+    <p>DB 연결을 위한 커넧견을 가져오는 방법에 대한 관심이다. 더 세분화해보면 어떤 DB를 사용할지, 어떤 드라이버를 사용할지 등 구체화할 수 있다.</p>
+  </li>
+  <li>
+    <p>사용자 등록을 위해 SQL 문장을 담을 Statement를 만들고 실행하는 것이다. 여기서의 관심사는 파라미터로 넘어온 사용자 정보를 Statement에 바인딩시키고 Statement에 담긴 SQL을 DB를 통해 실행시키는 방법이다.</p>
+  </li>
+  <li>
+    <p>작업이 끝나면 사용한 리소스인 Statement와 Connection 오브젝트를 닫아줘서 리소르를 반환해주어야한다.</p>
+  </li>
+</ol>
+
+<p>(생각해보니 초난감이라는 말도 되게 촌스러운 유행어네 지금보니까)</p>
+
+<h2 id="중복-코드의-메소드를-추출하자">중복 코드의 메소드를 추출하자</h2>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">UserDao</span> <span class="p">{</span>
+
+    <span class="nf">init</span> <span class="p">{</span>
+        <span class="kd">val</span> <span class="py">connection</span> <span class="p">=</span> <span class="nf">getConnection</span><span class="p">()</span>
+
+        <span class="kd">val</span> <span class="py">prepareStatement</span> <span class="p">=</span> <span class="n">connection</span><span class="p">.</span><span class="nf">prepareStatement</span><span class="p">(</span>
+                <span class="s">"CREATE TABLE IF NOT EXISTS user(id INT,name varchar(30),password varchar(30))"</span>
+        <span class="p">)</span>
+
+        <span class="n">prepareStatement</span><span class="p">.</span><span class="nf">execute</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="k">fun</span> <span class="nf">addUser</span><span class="p">(</span><span class="n">user</span><span class="p">:</span> <span class="nc">User</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="kd">val</span> <span class="py">connection</span> <span class="p">=</span> <span class="nf">getConnection</span><span class="p">()</span>
+
+        <span class="kd">val</span> <span class="py">prepareStatement</span> <span class="p">=</span> <span class="n">connection</span><span class="p">.</span><span class="nf">prepareStatement</span><span class="p">(</span>
+                <span class="s">"insert into user(id,name,password) values(?,?,?)"</span>
+        <span class="p">)</span>
+        <span class="n">prepareStatement</span><span class="p">.</span><span class="nf">setLong</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">user</span><span class="p">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="n">prepareStatement</span><span class="p">.</span><span class="nf">setString</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">user</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">prepareStatement</span><span class="p">.</span><span class="nf">setString</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">user</span><span class="p">.</span><span class="n">password</span><span class="p">)</span>
+
+        <span class="n">prepareStatement</span><span class="p">.</span><span class="nf">execute</span><span class="p">()</span>
+        <span class="n">prepareStatement</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
+        <span class="n">connection</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="k">fun</span> <span class="nf">getUser</span><span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="nc">Long</span><span class="p">):</span> <span class="nc">User</span> <span class="p">{</span>
+
+        <span class="kd">val</span> <span class="py">connection</span> <span class="p">=</span> <span class="nf">getConnection</span><span class="p">()</span>
+
+        <span class="kd">val</span> <span class="py">preparedStatement</span> <span class="p">=</span> <span class="n">connection</span><span class="p">.</span><span class="nf">prepareStatement</span><span class="p">(</span>
+                <span class="s">"select * from user where id = ?"</span>
+        <span class="p">)</span>
+        <span class="n">preparedStatement</span><span class="p">.</span><span class="nf">setLong</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">id</span><span class="p">)</span>
+
+        <span class="kd">val</span> <span class="py">resultSet</span> <span class="p">=</span> <span class="n">preparedStatement</span><span class="p">.</span><span class="nf">executeQuery</span><span class="p">()</span>
+        <span class="n">resultSet</span><span class="p">.</span><span class="nf">next</span><span class="p">()</span>
+        <span class="kd">val</span> <span class="py">user</span> <span class="p">=</span> <span class="nc">User</span><span class="p">(</span>
+                <span class="n">resultSet</span><span class="p">.</span><span class="nf">getLong</span><span class="p">(</span><span class="s">"id"</span><span class="p">),</span>
+                <span class="n">resultSet</span><span class="p">.</span><span class="nf">getString</span><span class="p">(</span><span class="s">"name"</span><span class="p">),</span>
+                <span class="n">resultSet</span><span class="p">.</span><span class="nf">getString</span><span class="p">(</span><span class="s">"password"</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="n">resultSet</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
+        <span class="n">preparedStatement</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
+        <span class="n">connection</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">user</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="k">fun</span> <span class="nf">getConnection</span><span class="p">():</span> <span class="nc">Connection</span> <span class="p">{</span>
+        <span class="nc">Class</span><span class="p">.</span><span class="nf">forName</span><span class="p">(</span><span class="s">"org.h2.Driver"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nc">DriverManager</span><span class="p">.</span><span class="nf">getConnection</span><span class="p">(</span><span class="s">"jdbc:h2:mem:testdb"</span><span class="p">,</span> <span class="s">"sa"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이처럼 공통된 중복 코드를 함수로 뽑아내는 것을 extract method 기법이라고 부른다.</p>
+
+<p>그리고 이처럼 코드를 깔끔하게 만드는 과정을 리팩토링이라고 부르며 반드시 익혀야하는 기법이기도 하다. (리팩토링 2판 나왔던데 사야겠다.)</p>
+
+<h2 id="db-커넥션-만들기를-아예-별도로-독립시켜버리자">DB 커넥션 만들기를 아예 별도로 독립시켜버리자</h2>
+
+<p>UserDao를 조금 더 유연한 구조로 갖기 위해서는 getConnection 메소드를 추상 메소드로 만들 수 있다.</p>
+
+<p>그 후 UserDao를 상속받은 클래스들이 getConnection 메소드를 구현하게 하여 어떤 DB를 사용하던지 유연하게 대처하게 할 수 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">abstract</span> <span class="kd">class</span> <span class="nc">UserDao</span> <span class="p">{</span>
+
+    <span class="nf">init</span> <span class="p">{</span>
+        <span class="kd">val</span> <span class="py">connection</span> <span class="p">=</span> <span class="nf">getConnection</span><span class="p">()</span>
+
+        <span class="kd">val</span> <span class="py">prepareStatement</span> <span class="p">=</span> <span class="n">connection</span><span class="p">.</span><span class="nf">prepareStatement</span><span class="p">(</span>
+                <span class="s">"CREATE TABLE IF NOT EXISTS user(id INT,name varchar(30),password varchar(30))"</span>
+        <span class="p">)</span>
+
+        <span class="n">prepareStatement</span><span class="p">.</span><span class="nf">execute</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="k">fun</span> <span class="nf">addUser</span><span class="p">(</span><span class="n">user</span><span class="p">:</span> <span class="nc">User</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="kd">val</span> <span class="py">connection</span> <span class="p">=</span> <span class="nf">getConnection</span><span class="p">()</span>
+
+        <span class="kd">val</span> <span class="py">prepareStatement</span> <span class="p">=</span> <span class="n">connection</span><span class="p">.</span><span class="nf">prepareStatement</span><span class="p">(</span>
+                <span class="s">"insert into user(id,name,password) values(?,?,?)"</span>
+        <span class="p">)</span>
+        <span class="n">prepareStatement</span><span class="p">.</span><span class="nf">setLong</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">user</span><span class="p">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="n">prepareStatement</span><span class="p">.</span><span class="nf">setString</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">user</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">prepareStatement</span><span class="p">.</span><span class="nf">setString</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">user</span><span class="p">.</span><span class="n">password</span><span class="p">)</span>
+
+        <span class="n">prepareStatement</span><span class="p">.</span><span class="nf">execute</span><span class="p">()</span>
+        <span class="n">prepareStatement</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
+        <span class="n">connection</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="k">fun</span> <span class="nf">getUser</span><span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="nc">Long</span><span class="p">):</span> <span class="nc">User</span> <span class="p">{</span>
+
+        <span class="kd">val</span> <span class="py">connection</span> <span class="p">=</span> <span class="nf">getConnection</span><span class="p">()</span>
+
+        <span class="kd">val</span> <span class="py">preparedStatement</span> <span class="p">=</span> <span class="n">connection</span><span class="p">.</span><span class="nf">prepareStatement</span><span class="p">(</span>
+                <span class="s">"select * from user where id = ?"</span>
+        <span class="p">)</span>
+        <span class="n">preparedStatement</span><span class="p">.</span><span class="nf">setLong</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">id</span><span class="p">)</span>
+
+        <span class="kd">val</span> <span class="py">resultSet</span> <span class="p">=</span> <span class="n">preparedStatement</span><span class="p">.</span><span class="nf">executeQuery</span><span class="p">()</span>
+        <span class="n">resultSet</span><span class="p">.</span><span class="nf">next</span><span class="p">()</span>
+        <span class="kd">val</span> <span class="py">user</span> <span class="p">=</span> <span class="nc">User</span><span class="p">(</span>
+                <span class="n">resultSet</span><span class="p">.</span><span class="nf">getLong</span><span class="p">(</span><span class="s">"id"</span><span class="p">),</span>
+                <span class="n">resultSet</span><span class="p">.</span><span class="nf">getString</span><span class="p">(</span><span class="s">"name"</span><span class="p">),</span>
+                <span class="n">resultSet</span><span class="p">.</span><span class="nf">getString</span><span class="p">(</span><span class="s">"password"</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="n">resultSet</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
+        <span class="n">preparedStatement</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
+        <span class="n">connection</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">user</span>
+    <span class="p">}</span>
+
+    <span class="k">abstract</span> <span class="k">fun</span> <span class="nf">getConnection</span><span class="p">():</span> <span class="nc">Connection</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">KakaoUserDao</span><span class="p">:</span> <span class="nc">UserDao</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">getConnection</span><span class="p">():</span> <span class="nc">Connection</span> <span class="p">{</span>
+        <span class="nc">Class</span><span class="p">.</span><span class="nf">forName</span><span class="p">(</span><span class="s">"org.h2.Driver"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nc">DriverManager</span><span class="p">.</span><span class="nf">getConnection</span><span class="p">(</span><span class="s">"jdbc:h2:mem:testdb"</span><span class="p">,</span> <span class="s">"sa"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">NaverUserDao</span><span class="p">:</span> <span class="nc">UserDao</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">getConnection</span><span class="p">():</span> <span class="nc">Connection</span> <span class="p">{</span>
+        <span class="nc">TODO</span><span class="p">(</span><span class="s">"Naver DB Connection 생성코드"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이제 DAO의 핵심 기능인 데이터를 등록하고 가져올 것인가에 대한 관심사인 UserDao와 DB 연결을 어떻게 할 것인가라는 관심을 갖고 있는 KakaoUserDao와 NaverUserDao가 클래스 레벨로 구분이 되고 있다.</p>
+
+<p>이제 UserDao는 변경이 용이한 수준을 넘어 확장 가능한 구조를 갖게 되었다.</p>
+
+<p>위와 같이 슈퍼 클래스에 로직의 흐름을 정의하고 기능의 일부를 추상 메소드나 오버라이딩이 가능한 메소드로 만든 뒤 서브 클래스에서 정의하는 방식을 디자인 패턴에서 <strong>템플릿 메소드 패턴</strong>이라고 부른다.</p>
+
+<p>템플릿 메소드 패턴은 스프링에서 애용되는 디자인 패턴이다.</p>
+
+<p>UserDao의 리턴 타입인 Connection 클래스는 UserDao를 구현하는 구현체들이 어떤 방식으로 Connection 객체를 만들어내는지도 순전히 NaverUserDao와 KakaoUserDao의 관심사인 것이다.</p>
+
+<p>그렇다면 이러한 팩토리 메소드 패턴의 단점은 무엇일까?</p>
+
+<p>컴퓨터 사이언스는 모든 것들이 <code class="language-plaintext highlighter-rouge">trade-off</code> 관계에 있다.</p>
+
+<p>비슷한 문구로 <code class="language-plaintext highlighter-rouge">No Silver Bullet</code>이라는 문구와 비슷한 용어이기도 하다.</p>
+
+<p>즉, 모든 것들은 장단점이 있기 마련이고 모든 것을 관통하는 <strong>은총알</strong>이라는 것은 소프트웨어에서는 존재하지 않는다.</p>
+
+<p>결국 여기서는 상속을 사용했다는 것이 단점이다.</p>
+
+<p>자바는 기본적으로 다중상속을 지원하지 않으며, 자바의 상속은 문제점이 많기때문에(제임스 고슬링의 후회) 상속을 가급적 사용하지 않는 방법으로 구조를 잡아야한다.</p>
+
+<h2 id="dao의-확장">DAO의 확장</h2>
+
+<p>모든 객체는 변한다.</p>
+
+<p>지금까지는 데이터 액세스 로직에 대한 관심사와 DB 연결을 어떤 방법으로 할 것인가라는 두 개의 관심을 상속 관계로 표현하였다.</p>
+
+<p>추상 클래스를 만들고 이를 상속한 서브클래스에서 변화가 필요한 부분을 바꿔서 쓸 수 있게 만든 이유는 이런 변화의 성격이 다른 것을 분리하여</p>
+
+<p>서로 영향을 주지 않은 채로 각각 필요한 시점에 독립적으로 변경할 수 있게 하기 위해서이다.</p>
+
+<p>그러나 단점이 더 많은 상속이라는 방법을 사용했다는 것이 문제라고 할 수 있겠다.</p>
+
+<p>그럼 아예 클래스를 분리해버리는 것은 어떨까?</p>
+
+<p>지금부터는 getConnection을 추상메소드가 아닌, 독립된 클래스로 만들고 이 객체가 Connection을 반환하는 책임을 갖게 설계해볼 것이다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">SimpleConnectionMaker</span> <span class="p">{</span>
+
+    <span class="k">fun</span> <span class="nf">makeConnection</span><span class="p">():</span> <span class="nc">Connection</span> <span class="p">{</span>
+        <span class="nc">Class</span><span class="p">.</span><span class="nf">forName</span><span class="p">(</span><span class="s">"org.h2.Driver"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nc">DriverManager</span><span class="p">.</span><span class="nf">getConnection</span><span class="p">(</span><span class="s">"jdbc:h2:mem:testdb"</span><span class="p">,</span> <span class="s">"sa"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">open</span> <span class="kd">class</span> <span class="nc">UserDao</span> <span class="p">{</span>
+
+    <span class="k">private</span> <span class="kd">val</span> <span class="py">simpleConnectionMaker</span> <span class="p">=</span> <span class="nc">SimpleConnectionMaker</span><span class="p">()</span>
+
+    <span class="nf">init</span> <span class="p">{</span>
+        <span class="kd">val</span> <span class="py">connection</span> <span class="p">=</span> <span class="n">simpleConnectionMaker</span><span class="p">.</span><span class="nf">makeConnection</span><span class="p">()</span>
+
+        <span class="kd">val</span> <span class="py">prepareStatement</span> <span class="p">=</span> <span class="n">connection</span><span class="p">.</span><span class="nf">prepareStatement</span><span class="p">(</span>
+                <span class="s">"CREATE TABLE IF NOT EXISTS user(id INT,name varchar(30),password varchar(30))"</span>
+        <span class="p">)</span>
+
+        <span class="n">prepareStatement</span><span class="p">.</span><span class="nf">execute</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="k">fun</span> <span class="nf">addUser</span><span class="p">(</span><span class="n">user</span><span class="p">:</span> <span class="nc">User</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="kd">val</span> <span class="py">connection</span> <span class="p">=</span> <span class="n">simpleConnectionMaker</span><span class="p">.</span><span class="nf">makeConnection</span><span class="p">()</span>
+
+        <span class="kd">val</span> <span class="py">prepareStatement</span> <span class="p">=</span> <span class="n">connection</span><span class="p">.</span><span class="nf">prepareStatement</span><span class="p">(</span>
+                <span class="s">"insert into user(id,name,password) values(?,?,?)"</span>
+        <span class="p">)</span>
+        <span class="n">prepareStatement</span><span class="p">.</span><span class="nf">setLong</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">user</span><span class="p">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="n">prepareStatement</span><span class="p">.</span><span class="nf">setString</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">user</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">prepareStatement</span><span class="p">.</span><span class="nf">setString</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">user</span><span class="p">.</span><span class="n">password</span><span class="p">)</span>
+
+        <span class="n">prepareStatement</span><span class="p">.</span><span class="nf">execute</span><span class="p">()</span>
+        <span class="n">prepareStatement</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
+        <span class="n">connection</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="k">fun</span> <span class="nf">getUser</span><span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="nc">Long</span><span class="p">):</span> <span class="nc">User</span> <span class="p">{</span>
+
+        <span class="kd">val</span> <span class="py">connection</span> <span class="p">=</span> <span class="n">simpleConnectionMaker</span><span class="p">.</span><span class="nf">makeConnection</span><span class="p">()</span>
+
+        <span class="kd">val</span> <span class="py">preparedStatement</span> <span class="p">=</span> <span class="n">connection</span><span class="p">.</span><span class="nf">prepareStatement</span><span class="p">(</span>
+                <span class="s">"select * from user where id = ?"</span>
+        <span class="p">)</span>
+        <span class="n">preparedStatement</span><span class="p">.</span><span class="nf">setLong</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">id</span><span class="p">)</span>
+
+        <span class="kd">val</span> <span class="py">resultSet</span> <span class="p">=</span> <span class="n">preparedStatement</span><span class="p">.</span><span class="nf">executeQuery</span><span class="p">()</span>
+        <span class="n">resultSet</span><span class="p">.</span><span class="nf">next</span><span class="p">()</span>
+        <span class="kd">val</span> <span class="py">user</span> <span class="p">=</span> <span class="nc">User</span><span class="p">(</span>
+                <span class="n">resultSet</span><span class="p">.</span><span class="nf">getLong</span><span class="p">(</span><span class="s">"id"</span><span class="p">),</span>
+                <span class="n">resultSet</span><span class="p">.</span><span class="nf">getString</span><span class="p">(</span><span class="s">"name"</span><span class="p">),</span>
+                <span class="n">resultSet</span><span class="p">.</span><span class="nf">getString</span><span class="p">(</span><span class="s">"password"</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="n">resultSet</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
+        <span class="n">preparedStatement</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
+        <span class="n">connection</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">user</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>UserDao 클래스는 더 이상 추상 클래스가 아니며 SimpleConnectionMaker가 Connection을 반환할 책임을 갖게 된다.</p>
+
+<p>테스트 코드는 여전히 잘 작동하며 바뀐 것은 없고 내부 설계를 변경해서 코드만 개선했을 뿐이다.</p>
+
+<p>문제는 DB 커넥션 기능을 확장하는게 불가능해졌다.</p>
+
+<p>다시 처음의 문제로 되돌아와버린 것이다.</p>
+
+<p>이 경우 상속을 사용했을 때와 마찬가지로 자유로운 확장이 가능하게 하려면 결국 <strong>두 가지</strong> 문제를 해결해야한다.</p>
+
+<ol>
+  <li>SimpleConnectionMaker의 메소드의 문제를 해결해야한다.
+    <ul>
+      <li>만약 Naver가 openConnection()이라는 이름을 사용하면 UserDao의 addUser(), getUser() 내부 코드를 다 변경해야한다.</li>
+    </ul>
+  </li>
+  <li>DB 커넥션을 제공하는 클래스가 어떤 것인지를 UserDao가 구체적으로 알아야한다.
+    <ul>
+      <li>Kakao가 다른 클래스를 구현하려면 어쩔 수 없이 UserDao 자체를 다시 수정해야한다.</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="인터페이스를-도입하여-확장해보자">인터페이스를 도입하여 확장해보자</h2>
+
+<p>앞서 언급한 문제를 가장 쉽게 풀 수 있는 방법은 <strong>추상화</strong>이다.</p>
+
+<p>ConnectionMaker를 인터페이스로 두고 Kakao와 Naver가 각각 이 인터페이스를 구현하게 하면 된다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">interface</span> <span class="nc">ConnectionMaker</span> <span class="p">{</span>
+
+    <span class="k">fun</span> <span class="nf">makeConnection</span><span class="p">():</span><span class="nc">Connection</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">KakaoConnectionMaker</span><span class="p">:</span><span class="nc">ConnectionMaker</span> <span class="p">{</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">makeConnection</span><span class="p">():</span> <span class="nc">Connection</span> <span class="p">{</span>
+        <span class="nc">Class</span><span class="p">.</span><span class="nf">forName</span><span class="p">(</span><span class="s">"org.h2.Driver"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nc">DriverManager</span><span class="p">.</span><span class="nf">getConnection</span><span class="p">(</span><span class="s">"jdbc:h2:mem:testdb"</span><span class="p">,</span> <span class="s">"sa"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class NaverConnectionMaker:ConnectionMaker {
+    override fun makeConnection(): Connection {
+        TODO("Naver에서만 사용하는 독자적 DB Connection 생성코드")
+    }
+}
+</code></pre></div></div>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">open</span> <span class="kd">class</span> <span class="nc">UserDao</span> <span class="p">{</span>
+
+    <span class="k">private</span> <span class="kd">val</span> <span class="py">simpleConnectionMaker</span><span class="p">:</span><span class="nc">ConnectionMaker</span> <span class="p">=</span> <span class="nc">KakaoConnectionMaker</span><span class="p">()</span>
+
+    <span class="nf">init</span> <span class="p">{</span>
+        <span class="kd">val</span> <span class="py">connection</span> <span class="p">=</span> <span class="n">simpleConnectionMaker</span><span class="p">.</span><span class="nf">makeConnection</span><span class="p">()</span>
+
+        <span class="kd">val</span> <span class="py">prepareStatement</span> <span class="p">=</span> <span class="n">connection</span><span class="p">.</span><span class="nf">prepareStatement</span><span class="p">(</span>
+                <span class="s">"CREATE TABLE IF NOT EXISTS user(id INT,name varchar(30),password varchar(30))"</span>
+        <span class="p">)</span>
+
+        <span class="n">prepareStatement</span><span class="p">.</span><span class="nf">execute</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="o">..</span><span class="p">.</span> <span class="err">중략</span>
+
+</code></pre></div></div>
+
+<p>이제 ConnectionMaker 인터페이스의 구현체들을 사용하면 UserDao 클래스를 바꾸는 일은 없을 것 같다.</p>
+
+<p>그런데 문제는 KakaoConnectionMaker 클래스가 여전히 보인다.</p>
+
+<p>인터페이스를 이용해서 UserDao의 수정을 줄이고 싶었는데 또 다시 원점이다.</p>
+
+<h2 id="관계-설정-책임의-분리">관계 설정 책임의 분리</h2>
+
+<p>UserDao와 ConnectionMaker로 화끈하게 나눴는데도 불구하고 여전히 ConnectionMaker의 구현체를 알아야한다는 문제점이 남아있다.</p>
+
+<p>이 문제점은 UserDao의 코드를 변경해야한다는 원초적인 문제를 여전히 해결하지 못했다.</p>
+
+<p>그런데 가만 생각해보면 결국 이 UserDao를 사용하는 클라이언트가 분명히 존재할 것이다.</p>
+
+<p>그렇다면 우리는 UserDao의 클라이언트가 이 구현체를 결정하게 해두면 될 일이다.</p>
+
+<p><img width="589" alt="스크린샷 2020-06-21 오전 12 54 51" src="https://user-images.githubusercontent.com/43809168/85205983-d5e16080-b359-11ea-836f-a0d1b1d047a2.png" /></p>
+
+<p>현재 구조는 UserDao가 ConnectionMaker의 구현체에 의존관계를 갖는 형태를 띄고 있다.</p>
+
+<p>이는 우리가 원하는 바가 아니며 이러한 관계를 나누기 위해 클라이언트가 이 ConnectionMaker의 구현체를 정하게 해주도록 하겠다.</p>
+
+<p>지금 같은 경우 UserDao의 클라이언트는 테스트코드라고 할 수 있겠다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">open</span> <span class="kd">class</span> <span class="nc">UserDao</span><span class="p">(</span>
+        <span class="k">private</span> <span class="kd">val</span> <span class="py">connectionMaker</span><span class="p">:</span><span class="nc">ConnectionMaker</span>
+<span class="p">)</span> <span class="p">{</span>
+
+    <span class="nf">init</span> <span class="p">{</span>
+        <span class="kd">val</span> <span class="py">connection</span> <span class="p">=</span> <span class="n">connectionMaker</span><span class="p">.</span><span class="nf">makeConnection</span><span class="p">()</span>
+
+        <span class="kd">val</span> <span class="py">prepareStatement</span> <span class="p">=</span> <span class="n">connection</span><span class="p">.</span><span class="nf">prepareStatement</span><span class="p">(</span>
+                <span class="s">"CREATE TABLE IF NOT EXISTS user(id INT,name varchar(30),password varchar(30))"</span>
+        <span class="p">)</span>
+
+        <span class="n">prepareStatement</span><span class="p">.</span><span class="nf">execute</span><span class="p">()</span>
+    <span class="p">}</span>
+    <span class="o">..</span><span class="p">.</span> <span class="err">중략</span>
+</code></pre></div></div>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">UserDaoTest</span> <span class="p">{</span>
+    <span class="nd">@Test</span>
+    <span class="k">fun</span> <span class="nf">crud</span><span class="p">()</span> <span class="p">{</span>
+
+        <span class="c1">// given</span>
+
+        <span class="kd">val</span> <span class="py">userDao</span> <span class="p">=</span> <span class="nc">UserDao</span><span class="p">(</span><span class="nc">KakaoConnectionMaker</span><span class="p">())</span> <span class="c1">// 테스트코드가 구현체를 정의했다.</span>
+
+        <span class="kd">val</span> <span class="py">user</span> <span class="p">=</span> <span class="nc">User</span><span class="p">(</span>
+                <span class="mi">123</span><span class="p">,</span>
+                <span class="s">"harry"</span><span class="p">,</span>
+                <span class="s">"code"</span>
+        <span class="p">)</span>
+
+        <span class="c1">// when</span>
+        <span class="n">userDao</span><span class="p">.</span><span class="nf">addUser</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+        <span class="kd">val</span> <span class="py">findUser</span> <span class="p">=</span> <span class="n">userDao</span><span class="p">.</span><span class="nf">getUser</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="n">id</span><span class="p">)</span>
+
+        <span class="nf">assertEquals</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="n">findUser</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="nf">assertEquals</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="n">password</span><span class="p">,</span><span class="n">findUser</span><span class="p">.</span><span class="n">password</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이처럼 구현체를 런타임에 의존하게 함으로써 UserDao와 ConnectionMaker를 완전히 분리하고 변화에 능동적인 구조를 만들었다.</p>
+
+<p>이렇게 인터페이스를 만들고 클라이언트의 도움을 받는 방법은 상속보다 훨씬 유연하다.</p>
+
+<p><img width="572" alt="스크린샷 2020-06-21 오전 1 00 10" src="https://user-images.githubusercontent.com/43809168/85206090-91a29000-b35a-11ea-97d4-1fb161cdb95e.png" /></p>
+
+<h2 id="원칙과-패턴">원칙과 패턴</h2>
+
+<p>개방 폐쇄 원칙을 이용하면 지금까지 해온 리팩토링 작업의 특징과 최종적으로 개선된 설계와 코드의 장점이 무엇인지 효과적으로 설명할 수 있다.</p>
+
+<p>여기서 사용된 원칙과 패턴을 간략하게 정리해두고 글을 마치도록 하겠다.</p>
+
+<ul>
+  <li>
+    <p>객체지향 5 원칙 SOLID</p>
+  </li>
+  <li>
+    <p>템플릿 메소드 패턴 ( 추상 클래스를 상속받아 구현하는 구조의 디자인 패턴 )</p>
+  </li>
+  <li>
+    <p>전략 패턴( UserDaoTest - UserDao - ConnectionMkaer 구조의 디자인 패턴 )</p>
+  </li>
+</ul>
+
+<h2 id="reference">Reference</h2>
+
+<p>토비의 스프링 - 이일민</p>
+
+    <br />
+    <br />
+  </div>
+  
+
+</article>
+
+<!--<hr class="dingbat" />-->
+<!--
+<div class="share">
+  <h2>Share this post</h2>
+  <div class="share-body">
+    <a href="http://twitter.com/share?text=토비의 스프링 1.1 ~ 1.3&amp;url=http://localhost:4000/framework/2020/06/20/Spring-122/"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="icon-twitter">
+      </span>
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/framework/2020/06/20/Spring-122/"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="icon-facebook">
+      </span>
+    </a>
+  </div>
+</div>
+-->
+<br />
+
+
+
+
+<aside class="related" role="complementary">
+  <h2 class="hr">Related Posts</h2>
+
+  <ul class="related-posts">
+    
+      
+      
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/framework/2022/03/16/JPA-31/" data-flip="title">
+    <span>시간 관련 트러블 슈팅</span>
+  </a>
+  <small><time datetime="2022-03-16T00:00:00+09:00">
+    16 Mar 2022
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/framework/2021/05/23/Spring/" data-flip="title">
+    <span>Spring의 @Transactional과 AOP 그리고 CGLib와 Dynamic Proxy(JDK Proxy)</span>
+  </a>
+  <small><time datetime="2021-05-23T00:00:00+09:00">
+    23 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/framework/2021/05/22/Spring/" data-flip="title">
+    <span>Springboot 테스트 코드 한글 깨짐 현상 (feat. JUnit 5)</span>
+  </a>
+  <small><time datetime="2021-05-22T00:00:00+09:00">
+    22 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+      
+    
+  </ul>
+</aside>
+  <aside class="comments" role="complementary">
+  <h2>Comments</h2>
+  <hr/>
+
+  <script src="https://utteranc.es/client.js"
+    repo="minkukjo/minkukjo.github.io"
+    issue-term="title"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</aside>
+
+       <footer>
+  <hr/>
+  
+    <p>© 2022. by minkuk</p>
+
+  
+  <p>
+    <code>Powered by <a href="https://minkukjo.github.io/">minkuk</a></code>
+  </p>
+</footer>
+
+    </main>
+    <div class="right-side">
+  <div class="add-first">
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+    ></script>
+    <!-- 우측 광고 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="9124111205"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+  <br />
+  <br />
+  <div class="add-second">
+    <!-- 우측 광고2 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="5156946039"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+
+  </div>
+  <div id="_yDrawer">
+  <div id="_sidebar" class="sidebar">
+    <div class="sidebar-bg" style="background-color:#4f86aa;background-image:url(/assets/img/bg.jpg)"></div>
+    <header class="sidebar-sticky" role="banner">
+      <br/>
+      <div class="sidebar-about">
+        <h1><a id="_title" href="/">도전하는 개발자</a></h1>
+        
+
+      </div>
+
+      <br/>
+      <br/>
+      <nav class="sidebar-nav heading" role="navigation">
+        <span class="sr-only">Navigation:</span>
+<ul>
+  
+
+  
+
+  
+  
+  
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-1"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/life/">Life</a>
+       <label class="folder" for="list-item-1">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-daily/">Daily</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-review/">Review</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-books/">Books</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-2"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/computer-science/">Computer Science</a>
+       <label class="folder" for="list-item-2">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-algorithm/">Algorithm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-oop/">OOP</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-network/">Network</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-db/">Database</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-ai/">AI</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-security/">Security</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-distribution-system/">Distribution System</a>
+             </li>
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-3"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/programming-language/">Programming Language</a>
+       <label class="folder" for="list-item-3">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-kotlin/">Kotlin</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-go/">Go</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-java/">Java</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-javascript/">JavaScript</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-typescript/">TypeScript</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-4"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/framework/">Framework</a>
+       <label class="folder" for="list-item-4">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring/">Spring</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-data-jpa/">Spring Data JPA</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-security/">Spring Security</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-junit/">JUnit</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-5"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/language/">Language</a>
+       <label class="folder" for="list-item-5">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/language-english/">English</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-6"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/development/">Development</a>
+       <label class="folder" for="list-item-6">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-ddd/">DDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-tdd/">TDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-clean-code/">Clean Code</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-git/">Git</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-7"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/devops/">Devops</a>
+       <label class="folder" for="list-item-7">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-alarm/">Alarm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-ansible/">Ansible</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-cicd/">CI/CD</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-docker/">Docker</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-es/">Elasticsearch</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-k8s/">Kubernetes</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-public-cloud/">Public Cloud</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-kafka/">Kafka</a>
+             </li>
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-8"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/opensource/">Open Source</a>
+       <label class="folder" for="list-item-8">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/opensource-opensource/">Open Source</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-9"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/about/">About</a>
+       
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+</ul>
+
+      </nav>
+    <br/>
+    <br/>
+      <div class="sidebar-box">
+        
+      </div>
+      <p>매일 매일 한계를 뛰어넘기 위한 도전을 즐기는 개발자</p>
+
+      
+      
+        <div class="sidebar-social">
+          <span class="sr-only">Social:</span>
+<ul>
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://github.com/minkukjo">
+    <span class="icon-github" title="GitHub"></span>
+    <span class="sr-only">GitHub</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://www.linkedin.com/in/민국-조-567052166">
+    <span class="icon-linkedin2" title="LinkedIn"></span>
+    <span class="sr-only">LinkedIn</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:harrycode@kakao.com">
+    <span class="icon-mail" title="Email"></span>
+    <span class="sr-only">Email</span>
+  </a>
+</li>
+
+  
+</ul>
+
+        </div>
+      
+    </header>
+  </div>
+</div>
+</div>
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-158654037-1', 'auto');
+  ga('send', 'pageview');
+  loadJSDeferred('https://www.google-analytics.com/analytics.js');
+</script>
+
+
+
+
+
+<!--[if gt IE 8]><!---->
+<script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+  WebFont.load({
+    
+    google: {
+      families: 'Lato'.split('|')
+    },
+    
+
+    custom: {
+      families: ['icomoon'],
+      urls: ['/assets/icomoon/style.css']
+    }
+  });
+</script>
+<!--<![endif]-->
+
+
+  <!--[if gt IE 9]><!---->
+  
+  <script>loadJSDeferred('/assets/js/hydejack.js?v=6.4.0');</script>
+
+  
+  <!--<![endif]-->
+
+
+
+</body>
+
+</html>

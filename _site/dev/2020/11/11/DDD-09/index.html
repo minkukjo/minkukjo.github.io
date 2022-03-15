@@ -1,0 +1,1687 @@
+<!DOCTYPE html>
+<html lang="en"><!--
+ __  __                __                                     __
+/\ \/\ \              /\ \             __                    /\ \
+\ \ \_\ \   __  __    \_\ \      __   /\_\      __       ___ \ \ \/'\
+ \ \  _  \ /\ \/\ \   /'_` \   /'__`\ \/\ \   /'__`\    /'___\\ \ , <
+  \ \ \ \ \\ \ \_\ \ /\ \L\ \ /\  __/  \ \ \ /\ \L\.\_ /\ \__/ \ \ \\`\
+   \ \_\ \_\\/`____ \\ \___,_\\ \____\ _\ \ \\ \__/.\_\\ \____\ \ \_\ \_\
+    \/_/\/_/ `/___/> \\/__,_ / \/____//\ \_\ \\/__/\/_/ \/____/  \/_/\/_/
+                /\___/                \ \____/
+                \/__/                  \/___/
+
+Powered by Hydejack v6.4.0 (https://qwtel.com/hydejack/)
+-->
+
+
+
+
+
+
+
+
+
+<head>
+  <!-- =============== -->
+<!-- META            -->
+<!-- =============== -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta
+  name="naver-site-verification"
+  content="22c5b4ef3bfda7fc6100671413989219de7a4ac8"
+/>
+<meta property="og:title" content="DDD 도메인 주도 설계 9장" />
+<meta property="og:type" content="article" />
+
+<!-- =============== -->
+<!-- Google AdSense  -->
+<!-- =============== -->
+<script
+  data-ad-client="ca-pub-8247516864622650"
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+></script>
+
+ 
+<meta property="og:image" content="http://localhost:4000/assets/img/logo.png" />
+
+
+<meta property="og:image:width" content="640" />
+<meta property="og:image:height" content="360" />
+ 
+<title>DDD 도메인 주도 설계 9장 &middot; 도전하는 개발자</title>
+ 
+<meta
+  name="description"
+  content="DDD - 도메인 주도 설계
+
+"
+/>
+<meta
+  property="og:description"
+  content="DDD - 도메인 주도 설계
+
+"
+/>
+
+
+
+<!-- =============== -->
+<!-- LINKS           -->
+<!-- =============== -->
+<link rel="canonical" href="http://localhost:4000/dev/2020/11/11/DDD-09/" />
+<meta property="og:url" content="http://localhost:4000/dev/2020/11/11/DDD-09/" />
+
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="도전하는 개발자 Feed"
+  href="http://localhost:4000/feed.xml"
+/>
+
+
+<link rel="prev" href="http://localhost:4000/dev/2020/11/04/DDD-03/" />
+ 
+<link rel="next" href="http://localhost:4000/dev/2020/11/18/DDD-06/" />
+
+
+<link
+  rel="apple-touch-icon"
+  href="http://localhost:4000/apple-touch-icon.png"
+/>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+<!-- Place favicon.ico in the root directory -->
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+<script>
+  !function(n,e){function t(n,e){n.onload=function(){this.onerror=this.onload=null,e(null,n)},n.onerror=function(){this.onerror=this.onload=null,e(new Error("Failed to load "+this.src),n)}}function o(n,e){n.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||(this.onreadystatechange=null,e(null,n))}}n._loaded=!1,n.loadJSDeferred=function(a,d){function r(){n._loaded=!0;var r=e.createElement("script");r.src=a,d&&(("onload"in r?t:o)(r,d),r.onload||t(r,d));var l=e.getElementsByTagName("script")[0];l.parentNode.insertBefore(r,l)}n._loaded?r():n.addEventListener?n.addEventListener("load",r,!1):n.attachEvent?n.attachEvent("onload",r):n.onload=r}}(window,document);
+
+  !function(e){"use strict";var n=function(n,t,o){function i(e){if(a.body)return e();setTimeout(function(){i(e)})}function r(){l.addEventListener&&l.removeEventListener("load",r),l.media=o||"all"}var d,a=e.document,l=a.createElement("link");if(t)d=t;else{var f=(a.body||a.getElementsByTagName("head")[0]).childNodes;d=f[f.length-1]}var s=a.styleSheets;l.rel="stylesheet",l.href=n,l.media="only x",i(function(){d.parentNode.insertBefore(l,t?d:d.nextSibling)});var u=function(e){for(var n=l.href,t=s.length;t--;)if(s[t].href===n)return e();setTimeout(function(){u(e)})};return l.addEventListener&&l.addEventListener("load",r),l.onloadcssdefined=u,u(r),l};"undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this);
+
+  !function(t){if(t.loadCSS){var e=loadCSS.relpreload={};if(e.support=function(){try{return t.document.createElement("link").relList.supports("preload")}catch(t){return!1}},e.poly=function(){for(var e=t.document.getElementsByTagName("link"),r=0;r<e.length;r++){var n=e[r];"preload"===n.rel&&"style"===n.getAttribute("as")&&(t.loadCSS(n.href,n,n.getAttribute("media")),n.rel=null)}},!e.support()){e.poly();var r=t.setInterval(e.poly,300);t.addEventListener&&t.addEventListener("load",function(){e.poly(),t.clearInterval(r)}),t.attachEvent&&t.attachEvent("onload",function(){t.clearInterval(r)})}}}(this);
+
+  window.disablePushState = false;
+  window.disableDrawer = false;
+</script>
+
+<!--[if lt IE 9]>
+  <script src="https://unpkg.com/html5shiv/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+<!-- =============== -->
+<!-- STYLES          -->
+<!-- =============== -->
+<!--[if gt IE 8]><!---->
+<style>
+  
+  article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}*{box-sizing:border-box}html,body{margin:0;padding:0}html{font-size:16px;line-height:1.75}body{color:#333;background-color:#fff;overflow-y:scroll}a{text-decoration:none}.lead{margin-left:-1rem;margin-right:-1rem}img,.img{display:block;max-width:100%;margin-bottom:1rem;border:none}img.lead,.img.lead{max-width:calc(100% + 2rem);width:calc(100% + 2rem)}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-weight:bold;text-rendering:optimizeLegibility}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{margin:1.6rem 0 1rem;line-height:1.6}h1,.h1{font-size:2rem;line-height:1.25}h2,.h2{font-size:1.5rem}h3,.h3{font-size:1.17em}p{margin-top:0;margin-bottom:1rem}p.lead{font-size:1.25rem;font-weight:300;padding:0 1rem}ul,ol,dl{margin-top:0;margin-bottom:1rem}ul,ol{padding-left:1.25rem}hr{position:relative;margin:1.5rem 0;border:0;border-top:1px solid #eee}.hr{padding-bottom:.5rem;border-bottom:1px solid #eee;margin-bottom:1.5rem}h4,h5,h6,.h4,.h5,.h6{margin-bottom:0.5rem;font-size:1rem}table{margin-bottom:1rem;width:100%;width:calc(100% + 2rem);margin-left:-1rem;border:1px solid #e5e5e5;border-collapse:collapse;border-spacing:0}td,th{padding:.25rem .5rem;border:1px solid #e5e5e5}td:first-child,th:first-child{padding-left:1rem}td:last-child,th:last-child{padding-right:1rem}thead+tbody,tbody+tbody,tfoot{border-top:3px double #e5e5e5}tbody tr:nth-child(odd) td,tbody tr:nth-child(odd) th{background-color:#f9f9f9}footer{margin-bottom:2rem}.page,.post{margin-bottom:3em}.page li+li,.post li+li{margin-top:.25rem}.page>header,.post>header{margin-bottom:2rem}.page-title,.post-title{margin-top:0}.post-date{display:block;margin-top:-0.5rem;margin-bottom:1rem;color:#9a9a9a}.related-posts{padding-left:0;list-style:none}.related-posts>li,.related-posts>li+li{margin-top:1rem}.related-posts>li>small,.related-posts>li+li>small{font-size:75%;color:#9a9a9a}.message{margin-bottom:1rem;padding:1rem;color:#787878;background-color:#f9f9f9;margin-left:-1rem;margin-right:-1rem}body,main{position:relative;overflow-x:hidden}@media screen{body::before{content:'';background:#e5e5e5;position:absolute;left:0;top:0;bottom:0}}@media screen and (min-width: 40em){html{font-size:17px}}@media screen and (min-width: 54em){html{font-size:16px}}@media screen and (min-width: 88em){html{font-size:17px}}@media screen and (min-width: 125em){html{font-size:18px}}.sr-only{display:none}.clearfix,.sidebar-social::after,.clearafter::after{content:"";display:table;clear:both}a,.a{position:relative;padding-bottom:.15rem;border-style:hidden}.img{overflow:hidden;background-color:#f9f9f9}.img>img{margin:0;width:100%;height:100%}.sixteen-nine{position:relative}.sixteen-nine::before{display:block;content:"";width:100%;padding-top:56.25%}.sixteen-nine>*{position:absolute;top:0;left:0;right:0;bottom:0}h1+hr,h2+hr,h3+hr,h4+hr,h5+hr,h6+hr{margin-top:0}.fade-in{animation-duration:500ms;animation-name:fade-in;animation-fill-mode:forwards}@keyframes fade-in{from{transform:translateY(-2rem);opacity:0}50%{transform:translateY(-2rem);opacity:0}to{transform:translateY(0);opacity:1}}.mb6{margin-bottom:10rem}.sidebar{color:rgba(255,255,255,0.75);text-align:left}.sidebar::before{content:"";position:absolute;z-index:2;top:0;left:0;bottom:0;right:0;background:linear-gradient(to bottom, rgba(32,32,32,0) 0%, rgba(32,32,32,0.5) 100%)}.sidebar a{color:#fff;border-bottom-color:rgba(255,255,255,0.2)}.right-side{width:100%;margin-left:auto;margin-right:auto}.right-side .ad-first{text-align:center}@media screen{.right-side{max-width:38rem;min-height:100vh}.right-side .ad-second{display:none}}@media screen and (min-width: 54em){.right-side{margin-left:20rem;margin-right:1rem;padding:4rem 1rem 12rem}.right-side .ad-second{text-align:center;display:block}}@media screen and (min-width: 72em){.right-side{margin-left:22rem;max-width:42rem}}@media screen and (min-width: 88em){.right-side{width:162px;margin-left:0rem;margin-right:0rem;padding:0rem;margin-top:10rem;display:block;float:left}}@media screen and (min-width: 96em){.right-side{width:300px;margin-right:0rem}}#_yDrawer{position:relative}@media screen{#_yDrawer{min-height:640px;min-height:100vh}}@media screen and (min-width: 54em){#_yDrawer{width:18rem;margin-left:0}}.sidebar-bg{position:absolute;height:100%;overflow:hidden;top:0;right:0;bottom:0;left:0;background:#202020 center / cover}.sidebar-box{display:flex;justify-content:center}.sidebar-sticky{position:relative;z-index:3}@media screen{.sidebar-sticky{-ms-overflow-style:none;overflow:-moz-scrollbars-none;height:100%;overflow:auto;position:absolute;padding:3rem 0rem;right:2.5rem;left:2.5rem}}.sidebar-sticky::-webkit-scrollbar{display:none}.sidebar-about>h1{color:#fff;font-size:2rem}.sidebar-nav>ul{list-style:none;padding-left:0;margin-bottom:.5rem}a.sidebar-nav-item{width:100%;font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}a.sidebar-nav-subitem{font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}@media screen{.y-drawer-scrim{z-index:2}.y-drawer-content{width:18rem;left:-18rem;z-index:3}}.sidebar-social{margin-bottom:.5rem}.sidebar-social>ul{list-style:none;padding-left:0;margin:0 -.25rem}.sidebar-social>ul>li{float:left}.sidebar-social>ul>li>a{display:inline-block;text-align:center;font-size:1.6rem;line-height:3rem;width:3.1249rem;height:4rem;padding:.5rem 0}.sidebar-social>ul li+li{margin-top:0}.fixed-top{position:fixed;top:0;left:0;width:100%;z-index:1}.navbar>.content{padding-top:0;padding-bottom:0;min-height:0;height:0}.menu{display:inline-block;padding:1.75rem 1.5rem;border-bottom:none;margin-left:-1.5rem;color:#9a9a9a !important}.menu::after{content:"\2630"}@media screen and (min-width: 54em){.menu{padding:1.25rem 1.5rem;position:absolute;left:-9999px}.menu:focus{position:static}}.animation-main{pointer-events:none}.loading{display:none}@media print{.menu{display:none}}.animation-main{opacity:0;will-change:opacity}.loading{position:absolute;top:0;right:0;padding:5.25rem 4.5rem;transform-origin:top right;transform:scale(0.33)}.content{position:relative;margin-left:auto;margin-right:auto;padding:5rem 1rem 12rem}@media screen{.content{min-height:100vh}}@media screen and (min-width: 54em){.content{padding:4rem 1rem 12rem;margin-left:19rem;margin-right:3rem}}@media screen and (min-width: 72em){.content{max-width:42rem;margin-left:21rem}}@media screen and (min-width: 88em){.content{float:left;width:100%;margin-left:22rem;margin-right:5rem}}@media screen and (min-width: 96em){.content{max-width:44rem}}@media screen and (min-width: 102em){.content{margin-left:25rem;margin-right:8rem}}.me{width:6.5rem;height:6.5rem;align-self:center;margin-right:20px;border-radius:100%;position:relative}@media screen and (min-width: 40em){.me{width:7rem;height:7rem}}@media screen and (min-width: 54em){.me{width:6.5rem;height:6.5rem}}@media screen and (min-width: 72em){.me{width:7rem;height:7rem}}main>footer{width:100%;position:absolute;bottom:0;left:0;right:0;padding:0 1rem;color:#9a9a9a;font-size:smaller;text-align:center}main>footer>p{margin-bottom:0}html{font-family:'Sans-serif'}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-family:'Sans-serif'}
+
+</style>
+
+
+<link
+  rel="preload"
+  href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0"
+  as="style"
+  onload="this.rel='stylesheet'"
+/>
+
+<style id="_pageStyle">
+
+.content a{color:#4f86aa;border-color:rgba(79,134,170,0.2)}.content a:hover{border-color:#4f86aa}:focus{outline-color:#4f86aa}::selection{color:#fff;background:#4f86aa}::-moz-selection{color:#fff;background:#4f86aa}
+
+</style>
+
+
+<noscript>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0" />
+    
+  
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Lato"
+  />
+  <style>
+    html { font-family: 'Lato', 'Sans-serif' }
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .heading { font-family: 'Lato', 'Sans-serif' }
+  </style>
+   
+  <link rel="stylesheet" href="http://localhost:4000/assets/icomoon/style.css" />
+</noscript>
+<!--<![endif]-->
+
+</head>
+
+<body>
+  <!-- =============== -->
+<!-- MENU            -->
+<!-- =============== -->
+<div class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <a id="_menu" class="menu no-hover" href="#_title">
+      <span class="sr-only">Menu</span>
+    </a>
+  </div>
+</div>
+
+<!-- =============== -->
+<!-- CONTENT         -->
+<!-- =============== -->
+<div id="_yPushState">
+  <div class="fade-in">
+    <main
+      id="_main"
+      class="content"
+      role="main"
+      data-color="#4f86aa"
+      data-image="/assets/img/bg.jpg"
+    >
+      
+
+<article id="post-dev/2020/11/11/DDD-09" class="post" role="article">
+  <header>
+    <h1 class="post-title">
+      
+        DDD 도메인 주도 설계 9장
+        
+    </h1>
+
+    <p class="post-date heading">
+      <time datetime="2020-11-11T00:00:00+09:00">11 Nov 2020</time>
+      
+
+
+
+
+
+
+
+
+
+in <a href="/category/development/" data-flip="title">Development</a>
+
+      
+
+
+
+
+
+
+
+
+
+on <a href="/tag/development-ddd/" data-flip="title">DDD</a>
+
+    </p>
+
+    
+  <div class="hr" style="padding-bottom:0"></div>
+
+
+  </header>
+  
+
+
+  
+  <div class="markdown-body">
+
+    <!--  -->
+    <style>
+      .myAd1190 {
+        width: 48%;
+        height: 280px;
+      }
+
+      .myAd1290 {
+        width: 48%;
+        height: 280px;
+      }
+
+      @media(max-width: 800px) {
+        .myAd1190 {
+          display: none;
+        }
+
+        .myAd1290 {
+          width: 98%;
+        }
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 300px;
+      }
+
+      .row-center {
+        display: flex;
+        justify-content: center;
+        height: 258px;
+      }
+    </style>
+   
+    <!--<br />-->
+    <h2 id="ddd---도메인-주도-설계">DDD - 도메인 주도 설계</h2>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/97804402-04b9fc80-1c93-11eb-8e3f-271400a8633e.jpeg" alt="DDD" /></p>
+
+<p>앞으로 적어갈 글은 최범균님의 저서 <strong>DDD START</strong>!를 읽고 요약 - 정리한 글입니다.</p>
+
+<h2 id="제-9장--도메인-모델과-bounded-context">제 9장 : 도메인 모델과 BOUNDED CONTEXT</h2>
+
+<p>제 9장 도메인 모델과 BOUNDED CONTEXT</p>
+
+<h2 id="도메인-모델과-경계">도메인 모델과 경계</h2>
+
+<ul>
+  <li>
+    <p>처음 도메인 모델을 만들 때 빠지기 쉬운 함정은 <strong>도메인을 완벽하게 표현하는 단일 모델</strong>을 만드는 시도를 하는 것이다.</p>
+  </li>
+  <li>
+    <p>한 도메인은 다시 여러 도메인으로 구분된다.</p>
+
+    <ul>
+      <li>하나의 모델로 여러 하위 도메인을 표현하려고 하면 모든 하위 도메인에 맞지 않는 모델을 만들게 된다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>상품이라는 모델이 있다고 가정하자.</p>
+
+    <ul>
+      <li>카탈로그에서의 상품</li>
+      <li>재고 관리에서의 상품</li>
+      <li>주문에서의 상품</li>
+      <li>배송에서의 상품</li>
+    </ul>
+  </li>
+  <li>
+    <p>위의 상품들은 이름만 같지 실제 의미하는 것이 다르다.</p>
+  </li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/98814430-00e36280-2469-11eb-828b-043450bc9712.png" alt="스크린샷 2020-11-11 오후 9 57 48" /></p>
+
+<ul>
+  <li>
+    <p>반대로 시스템을 사용하는 사람을 회원 도메인에서는 <strong>회원</strong>이라 부르지만 주문 도메인에서는 <strong>주문자</strong>라고 부르며, 배송 도메인에서는 <strong>보내는 사람</strong>이라고 부른다.</p>
+  </li>
+  <li>
+    <p>논리적으로 같은 존재처럼 보이지만 하위 도메인에 따라 다른 용어를 사용하는 경우도 있다.</p>
+  </li>
+  <li>
+    <p>하위 도메인 마다 같은 용어라도 의미가 다르며, 같은 대상이라도 지칭하는 용어가 다를 수 있으므로 하나의 모델로 모든 하위 도메인을 표현하는 시도는 올바른 방법도 아니며 불가능하다.</p>
+  </li>
+  <li>
+    <p>모델은 특정한 컨텍스트하에서 비로소 완전한 의미를 갖는다.</p>
+  </li>
+  <li>
+    <p>같은 제품이라도 카탈로그 컨텍스트와 재고 컨텍스트에서 의미가 서로 다르다.</p>
+  </li>
+  <li>
+    <p>이렇게 구분되는 경계를 갖는 컨텍스트를 DDD에서는 BOUNDED CONTEXT라고 부른다.</p>
+  </li>
+</ul>
+
+<h2 id="bounded-context">BOUNDED CONTEXT</h2>
+
+<ul>
+  <li>
+    <p>BOUNDED CONTEXT는 모델의 경계를 결정하며 한 개의 BOUNDED CONTEXT는 논리적으로 한 개의 모델을 갖는다.</p>
+  </li>
+  <li>
+    <p>BOUNDED CONTEXT는 용어를 기준으로 구분한다.</p>
+  </li>
+  <li>
+    <p>이상적으로는 하위 도메인과 BOUNDED CONTEXT가 1:1 관계를 갖으면 좋겠지만 현실은 그렇지가 않다.</p>
+  </li>
+  <li>
+    <p>BOUNDED CONTEXT는 기업의 팀 구조에 따라 결정되기도 한다.</p>
+  </li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/98814818-93840180-2469-11eb-9c42-8bd99bc5a0e8.png" alt="스크린샷 2020-11-11 오후 10 00 59" /></p>
+
+<ul>
+  <li>
+    <p>큰 기업에서는 하나의 도메인 안에 두 하위 도메인을 두 BOUNDED CONTEXT로 나눠서 개발한다.</p>
+  </li>
+  <li>
+    <p>작은 기업에서는 두 하위 도메인을 하나의 BOUNDED CONTEXT에서 구현하기도 한다.</p>
+  </li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/98815005-d9d96080-2469-11eb-9a9b-8086ddeca016.png" alt="스크린샷 2020-11-11 오후 10 04 18" /></p>
+
+<ul>
+  <li>
+    <p>만약 온라인 쇼핑이라는 BOUNDED CONTEXT에서 여러 개의 하위 도메인들을 BOUNDED CONTEXT로 나눌 때는 패키지를 활용해서 BOUNDED CONTEXT를 만들도록 한다.</p>
+  </li>
+  <li>
+    <p>이처럼 BOUNDED CONTEXT를 나누지 않으면 하위 도메인 모델이 서로 뒤섞여서 결과적으로는 도메인별 기능 확장이 어려워지게 된다.</p>
+  </li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/98815024-e2319b80-2469-11eb-88ae-8908132d059f.png" alt="스크린샷 2020-11-11 오후 10 04 33" /></p>
+
+<h2 id="bounded-context의-구현">BOUNDED CONTEXT의 구현</h2>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/98815084-f83f5c00-2469-11eb-8bf6-2b67ab318e69.png" alt="스크린샷 2020-11-11 오후 10 05 10" /></p>
+
+<ul>
+  <li>
+    <p>BOUNDED CONTEXT가 항상 도메인 모델만 포함하는 것은 아니다.</p>
+  </li>
+  <li>
+    <p>도메인 기능을 사용자에게 제공하기 위한 표현, 응용 서비스, 도메인, 인프라스트럭처 모두를 포함한다.</p>
+  </li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/98815245-2e7cdb80-246a-11eb-8c56-18654f3c8469.png" alt="스크린샷 2020-11-11 오후 10 06 39" /></p>
+
+<ul>
+  <li>모든 BOUNDED CONTEXT를 도메인 주도로 개발할 필요는 없다.
+    <ul>
+      <li>가령 상품의 리뷰처럼 간단한 도메인 로직이라면 CRUD 방식으로 구현해도 상관이 없다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="bounded-context-간-통합">BOUNDED CONTEXT 간 통합</h2>
+
+<ul>
+  <li>
+    <p>카탈로그 하위 도메인에 개인화 추천 기능을 도입하기로 결정했다고 가정해보자.</p>
+  </li>
+  <li>
+    <p>기존 카탈로그 시스템을 개발하던 팀과 별도로 추천 시스템을 담당하는 팀이 새로 생겨서 이 팀에서 주도적으로 추천 시스템을 만든다면?</p>
+  </li>
+  <li>
+    <p>카탈로그 하위 도메인에는 기존 카탈로그를 위한 BOUNDED CONTEXT와 추천 기능을 위한 BOUNDED CONTEXT가 생기게 된다.</p>
+  </li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/98815446-7c91df00-246a-11eb-815f-d6c2b340aa24.png" alt="스크린샷 2020-11-11 오후 10 08 51" /></p>
+
+<ul>
+  <li>
+    <p>두 팀이 관련된 BOUNDED CONTEXT를 개발하면 자연스럽게 통합이 발생한다.</p>
+  </li>
+  <li>
+    <p>카탈로그 시스템은 추천 시스템으로부터 추천 데이터를 받아오기는 하지만, 카탈로그 시스템에서는 추천의 도메인 모델이 아닌 <strong>카탈로그 도메인 모델</strong>을 사용해서 추천 상품을 표현해야한다.</p>
+  </li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/98815536-a0552500-246a-11eb-894e-ec55004f2e2a.png" alt="스크린샷 2020-11-11 오후 10 09 50" /></p>
+
+<ul>
+  <li>그러면 카탈로그 시스템에서는 추천 시스템으로 API 요청을 보내 데이터를 받아오게 될 텐데, 이 데이터는 카탈로그 도메인에 맞지 않을 것이므로 변환 작업이 필요하다.</li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/98815760-fd50db00-246a-11eb-8d34-2941f5908d97.png" alt="스크린샷 2020-11-11 오후 10 12 27" /></p>
+
+<ul>
+  <li>
+    <p>만약 두 모델 간의 변환 작업이 복잡하다면 변환 처리를 위한 별도 클래스를 만들고 이 클래스에서 변환을 처리해도 된다.</p>
+  </li>
+  <li>
+    <p>HTTP는 두 BOUNDED CONTEXT를 직접 통합하는 방법이다.</p>
+  </li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/98815854-1eb1c700-246b-11eb-9762-7f66c365156b.png" alt="스크린샷 2020-11-11 오후 10 13 23" /></p>
+
+<ul>
+  <li>직접 통합 대신 간접 통합을 하려면 어떻게 해야할까? 그런 경우라면 메시지 큐를 사용할 수 있다.</li>
+</ul>
+
+<h2 id="마이크로-서비스와-bounded-context">마이크로 서비스와 BOUNDED CONTEXT</h2>
+
+<p>여기까지 보면 BOUNDED CONTEXT를 나누는 것은 어찌보면 MSA와도 유사해보인다.</p>
+
+<p>MSA의 특징은 BOUNDED CONTEXT와 매우 잘 어울린다.</p>
+
+<p>BOUNDED CONTEXT는 독립적으로 배포하고 모니털이하고 확장하게 되는데 이는 MSA의 특징이기도 하다.</p>
+
+<h2 id="bounded-context-간-관계">BOUNDED CONTEXT 간 관계</h2>
+
+<ul>
+  <li>
+    <p>BOUNDED CONTEXT는 어떤 식으로 연결된다.</p>
+  </li>
+  <li>
+    <p>두 BOUNDED CONTEXT 간 관계 중 가장 흔한 관계는 한쪽에서 API를 제공하고 다른 한쪽에서 그 API를 호출하는 관계다.</p>
+  </li>
+  <li>
+    <p>이때 API를 사용하는 BOUNDED CONTEXT는 API를 제공하는 BOUNDED CONTEXT에 의존하게 된다.</p>
+  </li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/98816310-d3e47f00-246b-11eb-89d7-573b17a2b2e7.png" alt="스크린샷 2020-11-11 오후 10 18 26" /></p>
+
+<ul>
+  <li>
+    <p>여기서 카탈로그는 downstream 컴포넌트이며 추천은 upstream 컴포넌트가 된다.</p>
+  </li>
+  <li>
+    <p>상류 컴포넌트가 하류 컴포넌트에서 사용할 수 있는 통신 프로토콜을 정의하고 이를 공개한다. 이를 공개 호스트 서비스라고 부른다.</p>
+  </li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/98816561-32116200-246c-11eb-96a5-d7c8bab3710b.png" alt="스크린샷 2020-11-11 오후 10 21 05" /></p>
+
+<ul>
+  <li>
+    <p>가장 대표적인 예가 바로 검색이다.</p>
+  </li>
+  <li>
+    <p>이러한 서비스들은 API를 통해 통신하는데 만약 RestTemplate과 같은 HTTP 클라이언트를 사용했다면 이 RestTemplate이 외부 시스템이 내 도메인 모델을 침범하지 않도록 막아주는 Anticorruption Layer가 된다.</p>
+  </li>
+  <li>
+    <p>공유 커널이라고 해서 두 팀이 하나의 모델을 공유함으로써 중복 개발을 막을 수 있는 모델이 존재한다.</p>
+  </li>
+  <li>
+    <p>장점은 중복을 줄여주는 것이오 단점은 두 팀이 밀접하게 협업하지 않으면 모델이 깨지므로 개발이 지연되는 문제가 발생할 수 있다는 점이다.</p>
+  </li>
+  <li>
+    <p>마지막으로는 SEPARATE WAY, 독립 방식 관계가 존재한다.</p>
+  </li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/98816896-ac41e680-246c-11eb-90d3-a13bb328bbef.png" alt="스크린샷 2020-11-11 오후 10 24 30" /></p>
+
+<ul>
+  <li>
+    <p>위는 극단적인 SEPARATE WAY의 예시이다.</p>
+  </li>
+  <li>
+    <p>수동으로 하는 방식이 나쁜것은 아니지만 규모가 커질수록 수동 통합에는 한계가 존재하기 마련이다.</p>
+  </li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/98816957-c4196a80-246c-11eb-9be3-621b08dfdc5f.png" alt="스크린샷 2020-11-11 오후 10 25 10" /></p>
+
+<ul>
+  <li>그래서 일반적으로는 두 독립적인 BOUNDED CONTEXT를 통합하기 위해 중간 다리를 놓기도 한다.</li>
+</ul>
+
+<h2 id="컨텍스트-맵">컨텍스트 맵</h2>
+
+<ul>
+  <li>
+    <p>개별 BOUNDED CONTEXT에 매몰되어서 전체를 못보게 되는 경우가 종종 있다.</p>
+  </li>
+  <li>
+    <p>나무가 아닌 숲을 보기 위해 전체 비즈니스를 조망할 수 있는 지도가 바로 <strong>컨텍스트 맵</strong>이다.</p>
+  </li>
+  <li>
+    <p>컨텍스트 맵을 그리는 규칙은 없다. 화이트보드, PPT, Whatever it is!</p>
+  </li>
+  <li>
+    <p>컨텍스트 맵은 시스템의 전체 구조를 보여준다.</p>
+  </li>
+  <li>
+    <p>BOUNDED CONTEXT를 조절하고 사업의 핵심 도메인을 위해 조직 역량을 어떤 BOUNDED CONTEXT에 집중할지 파악하는데 도움이 된다.</p>
+  </li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/98817218-22464d80-246d-11eb-822a-61c78ebb59e3.png" alt="스크린샷 2020-11-11 오후 10 27 46" /></p>
+
+<h2 id="reference">Reference</h2>
+
+<p>DDD START! - 최범균님 -</p>
+
+    <br />
+    <br />
+  </div>
+  
+
+</article>
+
+<!--<hr class="dingbat" />-->
+<!--
+<div class="share">
+  <h2>Share this post</h2>
+  <div class="share-body">
+    <a href="http://twitter.com/share?text=DDD 도메인 주도 설계 9장&amp;url=http://localhost:4000/dev/2020/11/11/DDD-09/"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="icon-twitter">
+      </span>
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/dev/2020/11/11/DDD-09/"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="icon-facebook">
+      </span>
+    </a>
+  </div>
+</div>
+-->
+<br />
+
+
+
+
+<aside class="related" role="complementary">
+  <h2 class="hr">Related Posts</h2>
+
+  <ul class="related-posts">
+    
+      
+      
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/dev/2021/08/17/Git/" data-flip="title">
+    <span>Github Access Token 사용하는 법</span>
+  </a>
+  <small><time datetime="2021-08-17T00:00:00+09:00">
+    17 Aug 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/dev/2020/12/03/CleanCode/" data-flip="title">
+    <span>Clean Code 스터디 회고</span>
+  </a>
+  <small><time datetime="2020-12-03T00:00:00+09:00">
+    03 Dec 2020
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/dev/2020/11/24/DDD-11/" data-flip="title">
+    <span>DDD 도메인 주도 설계 11장</span>
+  </a>
+  <small><time datetime="2020-11-24T00:00:00+09:00">
+    24 Nov 2020
+  </time></small>
+</li>
+
+        
+      
+        
+        
+      
+    
+  </ul>
+</aside>
+  <aside class="comments" role="complementary">
+  <h2>Comments</h2>
+  <hr/>
+
+  <script src="https://utteranc.es/client.js"
+    repo="minkukjo/minkukjo.github.io"
+    issue-term="title"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</aside>
+
+       <footer>
+  <hr/>
+  
+    <p>© 2022. by minkuk</p>
+
+  
+  <p>
+    <code>Powered by <a href="https://minkukjo.github.io/">minkuk</a></code>
+  </p>
+</footer>
+
+    </main>
+    <div class="right-side">
+  <div class="add-first">
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+    ></script>
+    <!-- 우측 광고 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="9124111205"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+  <br />
+  <br />
+  <div class="add-second">
+    <!-- 우측 광고2 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="5156946039"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+
+  </div>
+  <div id="_yDrawer">
+  <div id="_sidebar" class="sidebar">
+    <div class="sidebar-bg" style="background-color:#4f86aa;background-image:url(/assets/img/bg.jpg)"></div>
+    <header class="sidebar-sticky" role="banner">
+      <br/>
+      <div class="sidebar-about">
+        <h1><a id="_title" href="/">도전하는 개발자</a></h1>
+        
+
+      </div>
+
+      <br/>
+      <br/>
+      <nav class="sidebar-nav heading" role="navigation">
+        <span class="sr-only">Navigation:</span>
+<ul>
+  
+
+  
+
+  
+  
+  
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-1"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/life/">Life</a>
+       <label class="folder" for="list-item-1">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-daily/">Daily</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-review/">Review</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-books/">Books</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-2"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/computer-science/">Computer Science</a>
+       <label class="folder" for="list-item-2">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-algorithm/">Algorithm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-oop/">OOP</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-network/">Network</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-db/">Database</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-ai/">AI</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-security/">Security</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-distribution-system/">Distribution System</a>
+             </li>
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-3"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/programming-language/">Programming Language</a>
+       <label class="folder" for="list-item-3">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-kotlin/">Kotlin</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-go/">Go</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-java/">Java</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-javascript/">JavaScript</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-typescript/">TypeScript</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-4"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/framework/">Framework</a>
+       <label class="folder" for="list-item-4">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring/">Spring</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-data-jpa/">Spring Data JPA</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-security/">Spring Security</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-junit/">JUnit</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-5"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/language/">Language</a>
+       <label class="folder" for="list-item-5">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/language-english/">English</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-6"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/development/">Development</a>
+       <label class="folder" for="list-item-6">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-ddd/">DDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-tdd/">TDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-clean-code/">Clean Code</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-git/">Git</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-7"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/devops/">Devops</a>
+       <label class="folder" for="list-item-7">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-alarm/">Alarm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-ansible/">Ansible</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-cicd/">CI/CD</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-docker/">Docker</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-es/">Elasticsearch</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-k8s/">Kubernetes</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-public-cloud/">Public Cloud</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-kafka/">Kafka</a>
+             </li>
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-8"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/opensource/">Open Source</a>
+       <label class="folder" for="list-item-8">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/opensource-opensource/">Open Source</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-9"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/about/">About</a>
+       
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+</ul>
+
+      </nav>
+    <br/>
+    <br/>
+      <div class="sidebar-box">
+        
+      </div>
+      <p>매일 매일 한계를 뛰어넘기 위한 도전을 즐기는 개발자</p>
+
+      
+      
+        <div class="sidebar-social">
+          <span class="sr-only">Social:</span>
+<ul>
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://github.com/minkukjo">
+    <span class="icon-github" title="GitHub"></span>
+    <span class="sr-only">GitHub</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://www.linkedin.com/in/민국-조-567052166">
+    <span class="icon-linkedin2" title="LinkedIn"></span>
+    <span class="sr-only">LinkedIn</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:harrycode@kakao.com">
+    <span class="icon-mail" title="Email"></span>
+    <span class="sr-only">Email</span>
+  </a>
+</li>
+
+  
+</ul>
+
+        </div>
+      
+    </header>
+  </div>
+</div>
+</div>
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-158654037-1', 'auto');
+  ga('send', 'pageview');
+  loadJSDeferred('https://www.google-analytics.com/analytics.js');
+</script>
+
+
+
+
+
+<!--[if gt IE 8]><!---->
+<script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+  WebFont.load({
+    
+    google: {
+      families: 'Lato'.split('|')
+    },
+    
+
+    custom: {
+      families: ['icomoon'],
+      urls: ['/assets/icomoon/style.css']
+    }
+  });
+</script>
+<!--<![endif]-->
+
+
+  <!--[if gt IE 9]><!---->
+  
+  <script>loadJSDeferred('/assets/js/hydejack.js?v=6.4.0');</script>
+
+  
+  <!--<![endif]-->
+
+
+
+</body>
+
+</html>

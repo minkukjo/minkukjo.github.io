@@ -1,0 +1,1679 @@
+<!DOCTYPE html>
+<html lang="en"><!--
+ __  __                __                                     __
+/\ \/\ \              /\ \             __                    /\ \
+\ \ \_\ \   __  __    \_\ \      __   /\_\      __       ___ \ \ \/'\
+ \ \  _  \ /\ \/\ \   /'_` \   /'__`\ \/\ \   /'__`\    /'___\\ \ , <
+  \ \ \ \ \\ \ \_\ \ /\ \L\ \ /\  __/  \ \ \ /\ \L\.\_ /\ \__/ \ \ \\`\
+   \ \_\ \_\\/`____ \\ \___,_\\ \____\ _\ \ \\ \__/.\_\\ \____\ \ \_\ \_\
+    \/_/\/_/ `/___/> \\/__,_ / \/____//\ \_\ \\/__/\/_/ \/____/  \/_/\/_/
+                /\___/                \ \____/
+                \/__/                  \/___/
+
+Powered by Hydejack v6.4.0 (https://qwtel.com/hydejack/)
+-->
+
+
+
+
+
+
+
+
+
+<head>
+  <!-- =============== -->
+<!-- META            -->
+<!-- =============== -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta
+  name="naver-site-verification"
+  content="22c5b4ef3bfda7fc6100671413989219de7a4ac8"
+/>
+<meta property="og:title" content="Spring DI Pattern" />
+<meta property="og:type" content="article" />
+
+<!-- =============== -->
+<!-- Google AdSense  -->
+<!-- =============== -->
+<script
+  data-ad-client="ca-pub-8247516864622650"
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+></script>
+
+ 
+<meta
+  property="og:image"
+  content="http://localhost:4000/assets//img/spring-logo.png"
+/>
+<br />
+
+
+<meta property="og:image:width" content="640" />
+<meta property="og:image:height" content="360" />
+ 
+<title>Spring DI Pattern &middot; 도전하는 개발자</title>
+ 
+<meta
+  name="description"
+  content="Spring DI Pattern에 대하여
+
+"
+/>
+<meta
+  property="og:description"
+  content="Spring DI Pattern에 대하여
+
+"
+/>
+
+
+
+<!-- =============== -->
+<!-- LINKS           -->
+<!-- =============== -->
+<link rel="canonical" href="http://localhost:4000/framework/2020/02/19/Spring/" />
+<meta property="og:url" content="http://localhost:4000/framework/2020/02/19/Spring/" />
+
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="도전하는 개발자 Feed"
+  href="http://localhost:4000/feed.xml"
+/>
+
+
+<link rel="prev" href="http://localhost:4000/cs/2020/02/18/Network-03/" />
+ 
+<link rel="next" href="http://localhost:4000/cs/2020/02/21/OOP-01/" />
+
+
+<link
+  rel="apple-touch-icon"
+  href="http://localhost:4000/apple-touch-icon.png"
+/>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+<!-- Place favicon.ico in the root directory -->
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+<script>
+  !function(n,e){function t(n,e){n.onload=function(){this.onerror=this.onload=null,e(null,n)},n.onerror=function(){this.onerror=this.onload=null,e(new Error("Failed to load "+this.src),n)}}function o(n,e){n.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||(this.onreadystatechange=null,e(null,n))}}n._loaded=!1,n.loadJSDeferred=function(a,d){function r(){n._loaded=!0;var r=e.createElement("script");r.src=a,d&&(("onload"in r?t:o)(r,d),r.onload||t(r,d));var l=e.getElementsByTagName("script")[0];l.parentNode.insertBefore(r,l)}n._loaded?r():n.addEventListener?n.addEventListener("load",r,!1):n.attachEvent?n.attachEvent("onload",r):n.onload=r}}(window,document);
+
+  !function(e){"use strict";var n=function(n,t,o){function i(e){if(a.body)return e();setTimeout(function(){i(e)})}function r(){l.addEventListener&&l.removeEventListener("load",r),l.media=o||"all"}var d,a=e.document,l=a.createElement("link");if(t)d=t;else{var f=(a.body||a.getElementsByTagName("head")[0]).childNodes;d=f[f.length-1]}var s=a.styleSheets;l.rel="stylesheet",l.href=n,l.media="only x",i(function(){d.parentNode.insertBefore(l,t?d:d.nextSibling)});var u=function(e){for(var n=l.href,t=s.length;t--;)if(s[t].href===n)return e();setTimeout(function(){u(e)})};return l.addEventListener&&l.addEventListener("load",r),l.onloadcssdefined=u,u(r),l};"undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this);
+
+  !function(t){if(t.loadCSS){var e=loadCSS.relpreload={};if(e.support=function(){try{return t.document.createElement("link").relList.supports("preload")}catch(t){return!1}},e.poly=function(){for(var e=t.document.getElementsByTagName("link"),r=0;r<e.length;r++){var n=e[r];"preload"===n.rel&&"style"===n.getAttribute("as")&&(t.loadCSS(n.href,n,n.getAttribute("media")),n.rel=null)}},!e.support()){e.poly();var r=t.setInterval(e.poly,300);t.addEventListener&&t.addEventListener("load",function(){e.poly(),t.clearInterval(r)}),t.attachEvent&&t.attachEvent("onload",function(){t.clearInterval(r)})}}}(this);
+
+  window.disablePushState = false;
+  window.disableDrawer = false;
+</script>
+
+<!--[if lt IE 9]>
+  <script src="https://unpkg.com/html5shiv/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+<!-- =============== -->
+<!-- STYLES          -->
+<!-- =============== -->
+<!--[if gt IE 8]><!---->
+<style>
+  
+  article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}*{box-sizing:border-box}html,body{margin:0;padding:0}html{font-size:16px;line-height:1.75}body{color:#333;background-color:#fff;overflow-y:scroll}a{text-decoration:none}.lead{margin-left:-1rem;margin-right:-1rem}img,.img{display:block;max-width:100%;margin-bottom:1rem;border:none}img.lead,.img.lead{max-width:calc(100% + 2rem);width:calc(100% + 2rem)}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-weight:bold;text-rendering:optimizeLegibility}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{margin:1.6rem 0 1rem;line-height:1.6}h1,.h1{font-size:2rem;line-height:1.25}h2,.h2{font-size:1.5rem}h3,.h3{font-size:1.17em}p{margin-top:0;margin-bottom:1rem}p.lead{font-size:1.25rem;font-weight:300;padding:0 1rem}ul,ol,dl{margin-top:0;margin-bottom:1rem}ul,ol{padding-left:1.25rem}hr{position:relative;margin:1.5rem 0;border:0;border-top:1px solid #eee}.hr{padding-bottom:.5rem;border-bottom:1px solid #eee;margin-bottom:1.5rem}h4,h5,h6,.h4,.h5,.h6{margin-bottom:0.5rem;font-size:1rem}table{margin-bottom:1rem;width:100%;width:calc(100% + 2rem);margin-left:-1rem;border:1px solid #e5e5e5;border-collapse:collapse;border-spacing:0}td,th{padding:.25rem .5rem;border:1px solid #e5e5e5}td:first-child,th:first-child{padding-left:1rem}td:last-child,th:last-child{padding-right:1rem}thead+tbody,tbody+tbody,tfoot{border-top:3px double #e5e5e5}tbody tr:nth-child(odd) td,tbody tr:nth-child(odd) th{background-color:#f9f9f9}footer{margin-bottom:2rem}.page,.post{margin-bottom:3em}.page li+li,.post li+li{margin-top:.25rem}.page>header,.post>header{margin-bottom:2rem}.page-title,.post-title{margin-top:0}.post-date{display:block;margin-top:-0.5rem;margin-bottom:1rem;color:#9a9a9a}.related-posts{padding-left:0;list-style:none}.related-posts>li,.related-posts>li+li{margin-top:1rem}.related-posts>li>small,.related-posts>li+li>small{font-size:75%;color:#9a9a9a}.message{margin-bottom:1rem;padding:1rem;color:#787878;background-color:#f9f9f9;margin-left:-1rem;margin-right:-1rem}body,main{position:relative;overflow-x:hidden}@media screen{body::before{content:'';background:#e5e5e5;position:absolute;left:0;top:0;bottom:0}}@media screen and (min-width: 40em){html{font-size:17px}}@media screen and (min-width: 54em){html{font-size:16px}}@media screen and (min-width: 88em){html{font-size:17px}}@media screen and (min-width: 125em){html{font-size:18px}}.sr-only{display:none}.clearfix,.sidebar-social::after,.clearafter::after{content:"";display:table;clear:both}a,.a{position:relative;padding-bottom:.15rem;border-style:hidden}.img{overflow:hidden;background-color:#f9f9f9}.img>img{margin:0;width:100%;height:100%}.sixteen-nine{position:relative}.sixteen-nine::before{display:block;content:"";width:100%;padding-top:56.25%}.sixteen-nine>*{position:absolute;top:0;left:0;right:0;bottom:0}h1+hr,h2+hr,h3+hr,h4+hr,h5+hr,h6+hr{margin-top:0}.fade-in{animation-duration:500ms;animation-name:fade-in;animation-fill-mode:forwards}@keyframes fade-in{from{transform:translateY(-2rem);opacity:0}50%{transform:translateY(-2rem);opacity:0}to{transform:translateY(0);opacity:1}}.mb6{margin-bottom:10rem}.sidebar{color:rgba(255,255,255,0.75);text-align:left}.sidebar::before{content:"";position:absolute;z-index:2;top:0;left:0;bottom:0;right:0;background:linear-gradient(to bottom, rgba(32,32,32,0) 0%, rgba(32,32,32,0.5) 100%)}.sidebar a{color:#fff;border-bottom-color:rgba(255,255,255,0.2)}.right-side{width:100%;margin-left:auto;margin-right:auto}.right-side .ad-first{text-align:center}@media screen{.right-side{max-width:38rem;min-height:100vh}.right-side .ad-second{display:none}}@media screen and (min-width: 54em){.right-side{margin-left:20rem;margin-right:1rem;padding:4rem 1rem 12rem}.right-side .ad-second{text-align:center;display:block}}@media screen and (min-width: 72em){.right-side{margin-left:22rem;max-width:42rem}}@media screen and (min-width: 88em){.right-side{width:162px;margin-left:0rem;margin-right:0rem;padding:0rem;margin-top:10rem;display:block;float:left}}@media screen and (min-width: 96em){.right-side{width:300px;margin-right:0rem}}#_yDrawer{position:relative}@media screen{#_yDrawer{min-height:640px;min-height:100vh}}@media screen and (min-width: 54em){#_yDrawer{width:18rem;margin-left:0}}.sidebar-bg{position:absolute;height:100%;overflow:hidden;top:0;right:0;bottom:0;left:0;background:#202020 center / cover}.sidebar-box{display:flex;justify-content:center}.sidebar-sticky{position:relative;z-index:3}@media screen{.sidebar-sticky{-ms-overflow-style:none;overflow:-moz-scrollbars-none;height:100%;overflow:auto;position:absolute;padding:3rem 0rem;right:2.5rem;left:2.5rem}}.sidebar-sticky::-webkit-scrollbar{display:none}.sidebar-about>h1{color:#fff;font-size:2rem}.sidebar-nav>ul{list-style:none;padding-left:0;margin-bottom:.5rem}a.sidebar-nav-item{width:100%;font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}a.sidebar-nav-subitem{font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}@media screen{.y-drawer-scrim{z-index:2}.y-drawer-content{width:18rem;left:-18rem;z-index:3}}.sidebar-social{margin-bottom:.5rem}.sidebar-social>ul{list-style:none;padding-left:0;margin:0 -.25rem}.sidebar-social>ul>li{float:left}.sidebar-social>ul>li>a{display:inline-block;text-align:center;font-size:1.6rem;line-height:3rem;width:3.1249rem;height:4rem;padding:.5rem 0}.sidebar-social>ul li+li{margin-top:0}.fixed-top{position:fixed;top:0;left:0;width:100%;z-index:1}.navbar>.content{padding-top:0;padding-bottom:0;min-height:0;height:0}.menu{display:inline-block;padding:1.75rem 1.5rem;border-bottom:none;margin-left:-1.5rem;color:#9a9a9a !important}.menu::after{content:"\2630"}@media screen and (min-width: 54em){.menu{padding:1.25rem 1.5rem;position:absolute;left:-9999px}.menu:focus{position:static}}.animation-main{pointer-events:none}.loading{display:none}@media print{.menu{display:none}}.animation-main{opacity:0;will-change:opacity}.loading{position:absolute;top:0;right:0;padding:5.25rem 4.5rem;transform-origin:top right;transform:scale(0.33)}.content{position:relative;margin-left:auto;margin-right:auto;padding:5rem 1rem 12rem}@media screen{.content{min-height:100vh}}@media screen and (min-width: 54em){.content{padding:4rem 1rem 12rem;margin-left:19rem;margin-right:3rem}}@media screen and (min-width: 72em){.content{max-width:42rem;margin-left:21rem}}@media screen and (min-width: 88em){.content{float:left;width:100%;margin-left:22rem;margin-right:5rem}}@media screen and (min-width: 96em){.content{max-width:44rem}}@media screen and (min-width: 102em){.content{margin-left:25rem;margin-right:8rem}}.me{width:6.5rem;height:6.5rem;align-self:center;margin-right:20px;border-radius:100%;position:relative}@media screen and (min-width: 40em){.me{width:7rem;height:7rem}}@media screen and (min-width: 54em){.me{width:6.5rem;height:6.5rem}}@media screen and (min-width: 72em){.me{width:7rem;height:7rem}}main>footer{width:100%;position:absolute;bottom:0;left:0;right:0;padding:0 1rem;color:#9a9a9a;font-size:smaller;text-align:center}main>footer>p{margin-bottom:0}html{font-family:'Sans-serif'}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-family:'Sans-serif'}
+
+</style>
+
+
+<link
+  rel="preload"
+  href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0"
+  as="style"
+  onload="this.rel='stylesheet'"
+/>
+
+<style id="_pageStyle">
+
+.content a{color:#4f86aa;border-color:rgba(79,134,170,0.2)}.content a:hover{border-color:#4f86aa}:focus{outline-color:#4f86aa}::selection{color:#fff;background:#4f86aa}::-moz-selection{color:#fff;background:#4f86aa}
+
+</style>
+
+
+<noscript>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0" />
+    
+  
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Lato"
+  />
+  <style>
+    html { font-family: 'Lato', 'Sans-serif' }
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .heading { font-family: 'Lato', 'Sans-serif' }
+  </style>
+   
+  <link rel="stylesheet" href="http://localhost:4000/assets/icomoon/style.css" />
+</noscript>
+<!--<![endif]-->
+
+</head>
+
+<body>
+  <!-- =============== -->
+<!-- MENU            -->
+<!-- =============== -->
+<div class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <a id="_menu" class="menu no-hover" href="#_title">
+      <span class="sr-only">Menu</span>
+    </a>
+  </div>
+</div>
+
+<!-- =============== -->
+<!-- CONTENT         -->
+<!-- =============== -->
+<div id="_yPushState">
+  <div class="fade-in">
+    <main
+      id="_main"
+      class="content"
+      role="main"
+      data-color="#4f86aa"
+      data-image="/assets/img/bg.jpg"
+    >
+      
+
+<article id="post-framework/2020/02/19/Spring" class="post" role="article">
+  <header>
+    <h1 class="post-title">
+      
+        Spring DI Pattern
+        
+    </h1>
+
+    <p class="post-date heading">
+      <time datetime="2020-02-19T00:00:00+09:00">19 Feb 2020</time>
+      
+
+
+
+
+
+
+
+
+
+in <a href="/category/framework/" data-flip="title">Framework</a>
+
+      
+
+
+
+
+
+
+
+
+
+on <a href="/tag/framework-spring/" data-flip="title">Spring</a>
+
+    </p>
+
+    
+  <div class="hr" style="padding-bottom:0"></div>
+
+
+  </header>
+  
+
+
+  
+  <div class="markdown-body">
+
+    <!-- 
+    <div class="head-image"><img src="http://localhost:4000/assets//img/spring-logo.png" /></div>
+    <br /> -->
+    <style>
+      .myAd1190 {
+        width: 48%;
+        height: 280px;
+      }
+
+      .myAd1290 {
+        width: 48%;
+        height: 280px;
+      }
+
+      @media(max-width: 800px) {
+        .myAd1190 {
+          display: none;
+        }
+
+        .myAd1290 {
+          width: 98%;
+        }
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 300px;
+      }
+
+      .row-center {
+        display: flex;
+        justify-content: center;
+        height: 258px;
+      }
+    </style>
+   
+    <!--<br />-->
+    <h2 id="spring-di-pattern에-대하여">Spring DI Pattern에 대하여</h2>
+
+<p>Dependency Injection에 대해서는 Spring 개발자라면 한번쯤 들어봤을법 하다.</p>
+
+<p>DI는 Spring IoC Container가 관리하는 빈들을 필요한 시점에 의존성 주입 시 사용하는 기술의 이름이다.</p>
+
+<p>DI를 하는 가장 큰 목적은 객체간의 <strong>결합도를 낮추기 위함</strong>이다.</p>
+
+<p>Spring IoC Container가 @Bean으로 등록된 객체들을 싱글톤으로 관리하고 있다가 런타임시에 의존성을 주입함으로써 객체간 유연한 구조를 만드는 것이 가능하다.</p>
+
+<p>SOLID 원칙의 O에 해당하는 Open Closed Principle을 지키기 위해 디자인 패턴 중 하나인 <strong>Strategy Pattern</strong>을 사용한다.</p>
+
+<p>전략 패턴은 DI의 3가지 방법 중 생성자 주입을 사용할 시 사용하게 되는데, 인터페이스 객체를 만들고 생성자의 매개변수로 구체적인 구현체를 외부에서 주입하는 방식을 사용한다.</p>
+
+<h2 id="constructor-based-injection-good">Constructor based Injection (Good!)</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span><span class="o">{</span>
+  <span class="nc">PersianCat</span> <span class="n">cat</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PersianCat</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>위와 같이 직접 객체를 생성할 수 있지만 이 경우 객체간의 결합도가 높아지게 된다.</p>
+
+<p>이러한 객체간의 결합도를 낮추기 위해 우리는 <strong>Dependency Injection</strong>이라는 기술을 사용하는 것이다.</p>
+
+<p>이러한 DI의 방법에는 3가지 방법이 있는데 그 중 첫번째 방법인 생성자 주입 방식을 보도록 하자</p>
+
+<p>아래의 코드를 보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span><span class="o">{</span>
+  <span class="nc">ICat</span> <span class="n">cat</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="nf">Person</span><span class="o">(</span><span class="nc">ICat</span> <span class="n">cat</span><span class="o">){</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">cat</span> <span class="o">=</span> <span class="n">cat</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="nc">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Person</span><span class="o">(</span><span class="k">new</span> <span class="nc">PersianCat</span><span class="o">());</span>
+</code></pre></div></div>
+
+<p>외부에서 의존성 주입을 하고 있고, 생성자를 통해 외부로부터 받아온 의존성을 주입하고 있다.</p>
+
+<p>결론부터 이야기하면 위의 생성자를 통한 주입 방법이 가장 <strong>추천하는 방법</strong>이다.</p>
+
+<p>Spring 또한 DI는 생성자 주입 방법을 사용할 것을 권장하고 있다.</p>
+
+<p>그렇다면 왜 이 방법을 가장 추천하는 걸까?</p>
+
+<p>기존 Spring 개발자라면 생성자 주입 방식을 가장 권장한다는 말이 조금 낯설게 들릴지도 모르겠다.</p>
+
+<p>필자 또한 <strong>Field Injection</strong>을 주로 사용해 왔기 때문에 더더욱 궁금했다.</p>
+
+<p>왜 Field Injection 보다 코드량도 많아서 작성하기도 귀찮은 생성자 주입 방법을 권장하는 걸까?</p>
+
+<p>그 이유는 아래의 <strong>Setter Injection</strong>과 <strong>Field Injection</strong>이 가진 문제점을 보며 이해해보도록 하자.</p>
+
+<h2 id="setter-injection-ugly">Setter Injection (Ugly)</h2>
+
+<p>수정자 주입 방법은 아래와 같이 사용한다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span><span class="o">{</span>
+  <span class="nc">ICat</span> <span class="n">cat</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="nf">setCat</span><span class="o">(</span><span class="nc">ICat</span> <span class="n">cat</span><span class="o">){</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">cat</span> <span class="o">=</span> <span class="n">cat</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">touch</span><span class="o">(){</span>
+    <span class="n">cat</span><span class="o">.</span><span class="na">meow</span><span class="o">();</span>
+  <span class="o">}</span>
+
+<span class="o">}</span>
+
+<span class="nc">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Person</span><span class="o">();</span>
+
+<span class="n">person</span><span class="o">.</span><span class="na">setCat</span><span class="o">(</span><span class="k">new</span> <span class="nc">PersianCat</span><span class="o">());</span>
+<span class="n">person</span><span class="o">.</span><span class="na">setCat</span><span class="o">(</span><span class="k">new</span> <span class="nc">RussianBlueCat</span><span class="o">());</span>
+
+</code></pre></div></div>
+
+<p>수정자 주입 방법은 <strong>어떤 구현체이든 ICat을 구현하기만 하면 된다</strong>는 신박한 방법을 사용한다.</p>
+
+<p>수정자 주입으로 의존관계 주입은 런타임시에 할 수 있기 때문에 <strong>낮은 결합도</strong>를 갖는다.</p>
+
+<p>그러나 Person 객체가 생성되고 난 이후 ICat의 구현체를 주입하지 않더라도 touch() 메소드를 호출할 수 있게 되고 이는 <strong>NullPointException</strong>이 발생하는 문제를 초래하게 된다.</p>
+
+<p>주입이 필요한 객체가 주입이 되지 않더라도 생성할 수 있는 문제가 있다.</p>
+
+<p>때문에 이 방법은 좋은 방법이 아니다.</p>
+
+<h2 id="field-injection-bad">Field Injection (Bad)</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Service</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CatServiceImpl</span> <span class="kd">implements</span> <span class="nc">CatService</span><span class="o">{</span>
+
+  <span class="nd">@Autowired</span>
+  <span class="kd">private</span> <span class="nc">DogService</span> <span class="n">dog</span><span class="o">;</span>
+
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">meow</span><span class="o">(){</span>
+    <span class="n">dog</span><span class="o">.</span><span class="na">bark</span><span class="o">();</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>그렇다면 Field Injection은 어떨까?</p>
+
+<p>스프링을 써봤다면 Field Injection을 사용해서 주로 DI를 했을 것이다.</p>
+
+<p>앞서 언급한 방법 중 의존성 주입을 하기에 가장 편한 방법이다.</p>
+
+<p>필자 또한 별 의구심없이 Field Injection을 주로 사용했었다.</p>
+
+<p>실제 이전 회사의 서비스 중인 코드도 Field Injection을 사용하고 있었다.</p>
+
+<p>Field Injection은 위에서 언급한 방법 중 <strong>가장 나쁜 DI Pattern</strong>이다.</p>
+
+<p>왜일까? 이렇게 편리하고 간단하게 작성할 수 있는데도 Field Injection을 사용하면 안된다니…</p>
+
+<p>Field Injection는 치명적인 두가지 단점이 있다.</p>
+
+<ol>
+  <li>테스트가 어렵다.</li>
+  <li>순환 참조가 발생하기 쉽다.</li>
+</ol>
+
+<p>1번의 경우 아주 간단한 이유인데 단위테스트 시 의존 관계를 가지는 객체를 생성해서 주입할 수 있는 방법이 없다.</p>
+
+<p>Mock 객체를 만들어야 하는데 DI 컨테이너에 의존하는 바람에 독립적으로 인스턴스화가 불가능한 문제가 발생한다.</p>
+
+<p>DI 컨테이너에서 관리되는 클래스는 특정 컨테이너에 의존하지 않고 POJO여야 한다.</p>
+
+<p>DI 컨테이너를 사용하지 않고도 인스턴스화 할 수 있어야 하며, 단위 테스트도 가능해야하고, 다른 DI 프레임 워크로 전환할 수 있어야한다.</p>
+
+<p>그러나 지금 Field Injection의 경우는 어떤가?</p>
+
+<p>DI 컨테이너와 밀접하게 결합되면서 인스턴스화를 할 수 있는 방법이 없다.</p>
+
+<p>즉, <strong>테스트가 어려워졌다</strong></p>
+
+<p>2번의 경우는 조금 더 복잡한 문제이다.</p>
+
+<p>Field Injection을 사용하면 순환참조가 발생하기 쉬운데 순환 참조가 무엇인지는 아래의 코드를 봐보도록 하자.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Service</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CatServiceImpl</span> <span class="kd">implements</span> <span class="nc">CatService</span><span class="o">{</span>
+
+  <span class="nd">@Autowired</span>
+  <span class="kd">private</span> <span class="nc">DogService</span> <span class="n">dog</span><span class="o">;</span>
+
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">meow</span><span class="o">(){</span>
+    <span class="n">dog</span><span class="o">.</span><span class="na">bark</span><span class="o">();</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Service</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DogServiceImpl</span> <span class="kd">implements</span> <span class="nc">DogService</span><span class="o">{</span>
+
+  <span class="nd">@Autowired</span>
+  <span class="kd">private</span> <span class="nc">CatService</span> <span class="n">cat</span><span class="o">;</span>
+
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">bark</span><span class="o">(){</span>
+    <span class="n">cat</span><span class="o">.</span><span class="na">meow</span><span class="o">();</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>위의 두 코드를 실행하면 어떤일이 벌어질까?</p>
+
+<p><strong>CatServiceImpl</strong>은 <strong>DogService</strong>의 bark()를 호출하고,</p>
+
+<p><strong>DogServiceImpl</strong>은 <strong>CatService</strong>의 meow()를 호출할 것이다.</p>
+
+<p>서로서로 계속 호출 하다가 결국 <strong>StackOverflow</strong>를 발생시키고 죽는다.</p>
+
+<p>이러한 순환 참조의 문제는 실제 코드가 호출되기 전까지 컴파일 단계에서 이를 알아차릴 방법이 없다.</p>
+
+<p>Field Injection의 치명적인 문제는 <strong>필드 주입이나 수정자 주입의 경우 객체 생성 시점에서 순환참조가 일어나는지 확인할 수 있는 방법이 없다</strong>는 점이다.</p>
+
+<p>때문에 Field Injection은 가장 <strong>지양</strong>해야하는 DI Pattern임에도 불구하고 사용하기가 간단하다는 이유로 많이 사용하고 있다.</p>
+
+<h2 id="다시-보니-선녀-같다">다시 보니 선녀 같다!</h2>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/74764628-6719cb00-52c5-11ea-889d-fdf157b765d6.jpg" alt="01" />
+<img src="https://user-images.githubusercontent.com/43809168/74764633-68e38e80-52c5-11ea-8278-d436de541d08.jpg" alt="02" />
+<img src="https://user-images.githubusercontent.com/43809168/74764635-6aad5200-52c5-11ea-820b-439fee0b61e9.jpg" alt="03" />
+<img src="https://user-images.githubusercontent.com/43809168/74764636-6b45e880-52c5-11ea-88c2-2afb1902b010.jpg" alt="04" />
+<img src="https://user-images.githubusercontent.com/43809168/74764637-6bde7f00-52c5-11ea-93fc-21e9d160e86a.jpg" alt="05" />
+<img src="https://user-images.githubusercontent.com/43809168/74764638-6bde7f00-52c5-11ea-9956-64b9659ed06d.jpg" alt="06" />
+<img src="https://user-images.githubusercontent.com/43809168/74764640-6c771580-52c5-11ea-85b9-d04e6b1595fa.jpg" alt="07" />
+<img src="https://user-images.githubusercontent.com/43809168/74764641-6d0fac00-52c5-11ea-93f4-4aef06ed633b.jpg" alt="08" />
+<img src="https://user-images.githubusercontent.com/43809168/74764645-6da84280-52c5-11ea-80f3-cc8d1bcfaa14.jpg" alt="09" />
+<img src="https://user-images.githubusercontent.com/43809168/74764648-6da84280-52c5-11ea-95de-3048e1d37c23.jpg" alt="10" />
+<img src="https://user-images.githubusercontent.com/43809168/74764649-6e40d900-52c5-11ea-9b68-af5d76e6177c.jpg" alt="11" />
+<img src="https://user-images.githubusercontent.com/43809168/74764650-6ed96f80-52c5-11ea-8713-6740c16f8282.jpg" alt="12" /></p>
+
+<p><br />
+<br />
+<br />
+<br /></p>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/74764651-6ed96f80-52c5-11ea-8e82-a86c08be3219.jpg" alt="13" /></p>
+
+<p><br />
+<br />
+<br />
+<br /></p>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/74764653-6f720600-52c5-11ea-9edd-e2d4bbf2a86d.jpg" alt="14" />
+<img src="https://user-images.githubusercontent.com/43809168/74764654-700a9c80-52c5-11ea-9431-d175dd0bf4a8.jpg" alt="15" />
+<img src="https://user-images.githubusercontent.com/43809168/74764656-700a9c80-52c5-11ea-96f8-7936324efb64.jpg" alt="16" /></p>
+
+<p>DI Pattern에 대해서 깊게 고민해보지 못했는데 이번 계기로 왜 생성자 패턴을 써야하는지 이해하게 되었다.</p>
+
+<h2 id="생성자-주입-방식의-장점">생성자 주입 방식의 장점</h2>
+
+<h3 id="테스트-코드-작성-용이">테스트 코드 작성 용이</h3>
+
+<p>외부에서 인스턴스 주입이 가능하기 때문에 Mock 객체를 만들 수 있다.</p>
+
+<p>또한 DI 컨테이너와 독립성을 갖게 된다.</p>
+
+<h3 id="순환-참조-감지-가능">순환 참조 감지 가능</h3>
+
+<p>순환 의존성을 가질 경우 <code class="language-plaintext highlighter-rouge">BeanCurrentlyCreationExcepiton</code>를 발생시켜 미리 알 수 있다.</p>
+
+<h3 id="불변-객체">불변 객체</h3>
+
+<p>생성자 주입 방식에서 필드는 final로 선언 가능하다.</p>
+
+<p>하지만 필드 주입 방식에서는 final로 선언할 수 없기 때문에 <strong>객체가 변경 가능한 상태</strong>가 된다.</p>
+
+<h3 id="npe-방지">NPE 방지</h3>
+
+<p>생성자 주입 방식은 의존관계 설정이 되지 않으면 객체생성이 불가능하다.</p>
+
+<p>즉, <strong>NPE</strong>를 방지할 수 있다.</p>
+
+<h2 id="결론">결론</h2>
+
+<p>생성자 주입을 쓰자</p>
+
+<h2 id="reference">Reference</h2>
+
+<p>https://dzone.com/articles/spring-di-patterns-the-good-the-bad-and-the-ugly</p>
+
+<p>https://yaboong.github.io/spring/2019/08/29/why-field-injection-is-bad/</p>
+
+<p>https://stackoverflow.com/questions/4176520/what-is-the-difference-between-strategy-pattern-and-dependency-injection</p>
+
+<p>https://n1tjrgns.tistory.com/230</p>
+
+    <br />
+    <br />
+  </div>
+  
+
+</article>
+
+<!--<hr class="dingbat" />-->
+<!--
+<div class="share">
+  <h2>Share this post</h2>
+  <div class="share-body">
+    <a href="http://twitter.com/share?text=Spring DI Pattern&amp;url=http://localhost:4000/framework/2020/02/19/Spring/"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="icon-twitter">
+      </span>
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/framework/2020/02/19/Spring/"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="icon-facebook">
+      </span>
+    </a>
+  </div>
+</div>
+-->
+<br />
+
+
+
+
+<aside class="related" role="complementary">
+  <h2 class="hr">Related Posts</h2>
+
+  <ul class="related-posts">
+    
+      
+      
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/framework/2022/03/16/JPA-31/" data-flip="title">
+    <span>시간 관련 트러블 슈팅</span>
+  </a>
+  <small><time datetime="2022-03-16T00:00:00+09:00">
+    16 Mar 2022
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/framework/2021/05/23/Spring/" data-flip="title">
+    <span>Spring의 @Transactional과 AOP 그리고 CGLib와 Dynamic Proxy(JDK Proxy)</span>
+  </a>
+  <small><time datetime="2021-05-23T00:00:00+09:00">
+    23 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/framework/2021/05/22/Spring/" data-flip="title">
+    <span>Springboot 테스트 코드 한글 깨짐 현상 (feat. JUnit 5)</span>
+  </a>
+  <small><time datetime="2021-05-22T00:00:00+09:00">
+    22 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+      
+    
+  </ul>
+</aside>
+  <aside class="comments" role="complementary">
+  <h2>Comments</h2>
+  <hr/>
+
+  <script src="https://utteranc.es/client.js"
+    repo="minkukjo/minkukjo.github.io"
+    issue-term="title"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</aside>
+
+       <footer>
+  <hr/>
+  
+    <p>© 2022. by minkuk</p>
+
+  
+  <p>
+    <code>Powered by <a href="https://minkukjo.github.io/">minkuk</a></code>
+  </p>
+</footer>
+
+    </main>
+    <div class="right-side">
+  <div class="add-first">
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+    ></script>
+    <!-- 우측 광고 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="9124111205"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+  <br />
+  <br />
+  <div class="add-second">
+    <!-- 우측 광고2 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="5156946039"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+
+  </div>
+  <div id="_yDrawer">
+  <div id="_sidebar" class="sidebar">
+    <div class="sidebar-bg" style="background-color:#4f86aa;background-image:url(/assets/img/bg.jpg)"></div>
+    <header class="sidebar-sticky" role="banner">
+      <br/>
+      <div class="sidebar-about">
+        <h1><a id="_title" href="/">도전하는 개발자</a></h1>
+        
+
+      </div>
+
+      <br/>
+      <br/>
+      <nav class="sidebar-nav heading" role="navigation">
+        <span class="sr-only">Navigation:</span>
+<ul>
+  
+
+  
+
+  
+  
+  
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-1"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/life/">Life</a>
+       <label class="folder" for="list-item-1">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-daily/">Daily</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-review/">Review</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-books/">Books</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-2"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/computer-science/">Computer Science</a>
+       <label class="folder" for="list-item-2">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-algorithm/">Algorithm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-oop/">OOP</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-network/">Network</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-db/">Database</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-ai/">AI</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-security/">Security</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-distribution-system/">Distribution System</a>
+             </li>
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-3"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/programming-language/">Programming Language</a>
+       <label class="folder" for="list-item-3">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-kotlin/">Kotlin</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-go/">Go</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-java/">Java</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-javascript/">JavaScript</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-typescript/">TypeScript</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-4"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/framework/">Framework</a>
+       <label class="folder" for="list-item-4">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring/">Spring</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-data-jpa/">Spring Data JPA</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-security/">Spring Security</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-junit/">JUnit</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-5"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/language/">Language</a>
+       <label class="folder" for="list-item-5">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/language-english/">English</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-6"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/development/">Development</a>
+       <label class="folder" for="list-item-6">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-ddd/">DDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-tdd/">TDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-clean-code/">Clean Code</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-git/">Git</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-7"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/devops/">Devops</a>
+       <label class="folder" for="list-item-7">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-alarm/">Alarm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-ansible/">Ansible</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-cicd/">CI/CD</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-docker/">Docker</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-es/">Elasticsearch</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-k8s/">Kubernetes</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-public-cloud/">Public Cloud</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-kafka/">Kafka</a>
+             </li>
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-8"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/opensource/">Open Source</a>
+       <label class="folder" for="list-item-8">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/opensource-opensource/">Open Source</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-9"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/about/">About</a>
+       
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+</ul>
+
+      </nav>
+    <br/>
+    <br/>
+      <div class="sidebar-box">
+        
+      </div>
+      <p>매일 매일 한계를 뛰어넘기 위한 도전을 즐기는 개발자</p>
+
+      
+      
+        <div class="sidebar-social">
+          <span class="sr-only">Social:</span>
+<ul>
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://github.com/minkukjo">
+    <span class="icon-github" title="GitHub"></span>
+    <span class="sr-only">GitHub</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://www.linkedin.com/in/민국-조-567052166">
+    <span class="icon-linkedin2" title="LinkedIn"></span>
+    <span class="sr-only">LinkedIn</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:harrycode@kakao.com">
+    <span class="icon-mail" title="Email"></span>
+    <span class="sr-only">Email</span>
+  </a>
+</li>
+
+  
+</ul>
+
+        </div>
+      
+    </header>
+  </div>
+</div>
+</div>
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-158654037-1', 'auto');
+  ga('send', 'pageview');
+  loadJSDeferred('https://www.google-analytics.com/analytics.js');
+</script>
+
+
+
+
+
+<!--[if gt IE 8]><!---->
+<script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+  WebFont.load({
+    
+    google: {
+      families: 'Lato'.split('|')
+    },
+    
+
+    custom: {
+      families: ['icomoon'],
+      urls: ['/assets/icomoon/style.css']
+    }
+  });
+</script>
+<!--<![endif]-->
+
+
+  <!--[if gt IE 9]><!---->
+  
+  <script>loadJSDeferred('/assets/js/hydejack.js?v=6.4.0');</script>
+
+  
+  <!--<![endif]-->
+
+
+
+</body>
+
+</html>

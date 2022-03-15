@@ -1,0 +1,1805 @@
+<!DOCTYPE html>
+<html lang="en"><!--
+ __  __                __                                     __
+/\ \/\ \              /\ \             __                    /\ \
+\ \ \_\ \   __  __    \_\ \      __   /\_\      __       ___ \ \ \/'\
+ \ \  _  \ /\ \/\ \   /'_` \   /'__`\ \/\ \   /'__`\    /'___\\ \ , <
+  \ \ \ \ \\ \ \_\ \ /\ \L\ \ /\  __/  \ \ \ /\ \L\.\_ /\ \__/ \ \ \\`\
+   \ \_\ \_\\/`____ \\ \___,_\\ \____\ _\ \ \\ \__/.\_\\ \____\ \ \_\ \_\
+    \/_/\/_/ `/___/> \\/__,_ / \/____//\ \_\ \\/__/\/_/ \/____/  \/_/\/_/
+                /\___/                \ \____/
+                \/__/                  \/___/
+
+Powered by Hydejack v6.4.0 (https://qwtel.com/hydejack/)
+-->
+
+
+
+
+
+
+
+
+
+<head>
+  <!-- =============== -->
+<!-- META            -->
+<!-- =============== -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta
+  name="naver-site-verification"
+  content="22c5b4ef3bfda7fc6100671413989219de7a4ac8"
+/>
+<meta property="og:title" content="Github Actions를 사용해서 CICD 구축해보기 실습 with GCP - 실행편" />
+<meta property="og:type" content="article" />
+
+<!-- =============== -->
+<!-- Google AdSense  -->
+<!-- =============== -->
+<script
+  data-ad-client="ca-pub-8247516864622650"
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+></script>
+
+ 
+<meta
+  property="og:image"
+  content="http://localhost:4000/assets//img/devops-logo.png"
+/>
+<br />
+
+
+<meta property="og:image:width" content="640" />
+<meta property="og:image:height" content="360" />
+ 
+<title>Github Actions를 사용해서 CICD 구축해보기 실습 with GCP - 실행편 &middot; 도전하는 개발자</title>
+ 
+<meta
+  name="description"
+  content="서론
+
+"
+/>
+<meta
+  property="og:description"
+  content="서론
+
+"
+/>
+
+
+
+<!-- =============== -->
+<!-- LINKS           -->
+<!-- =============== -->
+<link rel="canonical" href="http://localhost:4000/devops/2020/08/29/Infra-23/" />
+<meta property="og:url" content="http://localhost:4000/devops/2020/08/29/Infra-23/" />
+
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="도전하는 개발자 Feed"
+  href="http://localhost:4000/feed.xml"
+/>
+
+
+<link rel="prev" href="http://localhost:4000/devops/2020/08/28/Infra-22/" />
+ 
+<link rel="next" href="http://localhost:4000/life/2020/08/30/daily/" />
+
+
+<link
+  rel="apple-touch-icon"
+  href="http://localhost:4000/apple-touch-icon.png"
+/>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+<!-- Place favicon.ico in the root directory -->
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+<script>
+  !function(n,e){function t(n,e){n.onload=function(){this.onerror=this.onload=null,e(null,n)},n.onerror=function(){this.onerror=this.onload=null,e(new Error("Failed to load "+this.src),n)}}function o(n,e){n.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||(this.onreadystatechange=null,e(null,n))}}n._loaded=!1,n.loadJSDeferred=function(a,d){function r(){n._loaded=!0;var r=e.createElement("script");r.src=a,d&&(("onload"in r?t:o)(r,d),r.onload||t(r,d));var l=e.getElementsByTagName("script")[0];l.parentNode.insertBefore(r,l)}n._loaded?r():n.addEventListener?n.addEventListener("load",r,!1):n.attachEvent?n.attachEvent("onload",r):n.onload=r}}(window,document);
+
+  !function(e){"use strict";var n=function(n,t,o){function i(e){if(a.body)return e();setTimeout(function(){i(e)})}function r(){l.addEventListener&&l.removeEventListener("load",r),l.media=o||"all"}var d,a=e.document,l=a.createElement("link");if(t)d=t;else{var f=(a.body||a.getElementsByTagName("head")[0]).childNodes;d=f[f.length-1]}var s=a.styleSheets;l.rel="stylesheet",l.href=n,l.media="only x",i(function(){d.parentNode.insertBefore(l,t?d:d.nextSibling)});var u=function(e){for(var n=l.href,t=s.length;t--;)if(s[t].href===n)return e();setTimeout(function(){u(e)})};return l.addEventListener&&l.addEventListener("load",r),l.onloadcssdefined=u,u(r),l};"undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this);
+
+  !function(t){if(t.loadCSS){var e=loadCSS.relpreload={};if(e.support=function(){try{return t.document.createElement("link").relList.supports("preload")}catch(t){return!1}},e.poly=function(){for(var e=t.document.getElementsByTagName("link"),r=0;r<e.length;r++){var n=e[r];"preload"===n.rel&&"style"===n.getAttribute("as")&&(t.loadCSS(n.href,n,n.getAttribute("media")),n.rel=null)}},!e.support()){e.poly();var r=t.setInterval(e.poly,300);t.addEventListener&&t.addEventListener("load",function(){e.poly(),t.clearInterval(r)}),t.attachEvent&&t.attachEvent("onload",function(){t.clearInterval(r)})}}}(this);
+
+  window.disablePushState = false;
+  window.disableDrawer = false;
+</script>
+
+<!--[if lt IE 9]>
+  <script src="https://unpkg.com/html5shiv/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+<!-- =============== -->
+<!-- STYLES          -->
+<!-- =============== -->
+<!--[if gt IE 8]><!---->
+<style>
+  
+  article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}*{box-sizing:border-box}html,body{margin:0;padding:0}html{font-size:16px;line-height:1.75}body{color:#333;background-color:#fff;overflow-y:scroll}a{text-decoration:none}.lead{margin-left:-1rem;margin-right:-1rem}img,.img{display:block;max-width:100%;margin-bottom:1rem;border:none}img.lead,.img.lead{max-width:calc(100% + 2rem);width:calc(100% + 2rem)}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-weight:bold;text-rendering:optimizeLegibility}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{margin:1.6rem 0 1rem;line-height:1.6}h1,.h1{font-size:2rem;line-height:1.25}h2,.h2{font-size:1.5rem}h3,.h3{font-size:1.17em}p{margin-top:0;margin-bottom:1rem}p.lead{font-size:1.25rem;font-weight:300;padding:0 1rem}ul,ol,dl{margin-top:0;margin-bottom:1rem}ul,ol{padding-left:1.25rem}hr{position:relative;margin:1.5rem 0;border:0;border-top:1px solid #eee}.hr{padding-bottom:.5rem;border-bottom:1px solid #eee;margin-bottom:1.5rem}h4,h5,h6,.h4,.h5,.h6{margin-bottom:0.5rem;font-size:1rem}table{margin-bottom:1rem;width:100%;width:calc(100% + 2rem);margin-left:-1rem;border:1px solid #e5e5e5;border-collapse:collapse;border-spacing:0}td,th{padding:.25rem .5rem;border:1px solid #e5e5e5}td:first-child,th:first-child{padding-left:1rem}td:last-child,th:last-child{padding-right:1rem}thead+tbody,tbody+tbody,tfoot{border-top:3px double #e5e5e5}tbody tr:nth-child(odd) td,tbody tr:nth-child(odd) th{background-color:#f9f9f9}footer{margin-bottom:2rem}.page,.post{margin-bottom:3em}.page li+li,.post li+li{margin-top:.25rem}.page>header,.post>header{margin-bottom:2rem}.page-title,.post-title{margin-top:0}.post-date{display:block;margin-top:-0.5rem;margin-bottom:1rem;color:#9a9a9a}.related-posts{padding-left:0;list-style:none}.related-posts>li,.related-posts>li+li{margin-top:1rem}.related-posts>li>small,.related-posts>li+li>small{font-size:75%;color:#9a9a9a}.message{margin-bottom:1rem;padding:1rem;color:#787878;background-color:#f9f9f9;margin-left:-1rem;margin-right:-1rem}body,main{position:relative;overflow-x:hidden}@media screen{body::before{content:'';background:#e5e5e5;position:absolute;left:0;top:0;bottom:0}}@media screen and (min-width: 40em){html{font-size:17px}}@media screen and (min-width: 54em){html{font-size:16px}}@media screen and (min-width: 88em){html{font-size:17px}}@media screen and (min-width: 125em){html{font-size:18px}}.sr-only{display:none}.clearfix,.sidebar-social::after,.clearafter::after{content:"";display:table;clear:both}a,.a{position:relative;padding-bottom:.15rem;border-style:hidden}.img{overflow:hidden;background-color:#f9f9f9}.img>img{margin:0;width:100%;height:100%}.sixteen-nine{position:relative}.sixteen-nine::before{display:block;content:"";width:100%;padding-top:56.25%}.sixteen-nine>*{position:absolute;top:0;left:0;right:0;bottom:0}h1+hr,h2+hr,h3+hr,h4+hr,h5+hr,h6+hr{margin-top:0}.fade-in{animation-duration:500ms;animation-name:fade-in;animation-fill-mode:forwards}@keyframes fade-in{from{transform:translateY(-2rem);opacity:0}50%{transform:translateY(-2rem);opacity:0}to{transform:translateY(0);opacity:1}}.mb6{margin-bottom:10rem}.sidebar{color:rgba(255,255,255,0.75);text-align:left}.sidebar::before{content:"";position:absolute;z-index:2;top:0;left:0;bottom:0;right:0;background:linear-gradient(to bottom, rgba(32,32,32,0) 0%, rgba(32,32,32,0.5) 100%)}.sidebar a{color:#fff;border-bottom-color:rgba(255,255,255,0.2)}.right-side{width:100%;margin-left:auto;margin-right:auto}.right-side .ad-first{text-align:center}@media screen{.right-side{max-width:38rem;min-height:100vh}.right-side .ad-second{display:none}}@media screen and (min-width: 54em){.right-side{margin-left:20rem;margin-right:1rem;padding:4rem 1rem 12rem}.right-side .ad-second{text-align:center;display:block}}@media screen and (min-width: 72em){.right-side{margin-left:22rem;max-width:42rem}}@media screen and (min-width: 88em){.right-side{width:162px;margin-left:0rem;margin-right:0rem;padding:0rem;margin-top:10rem;display:block;float:left}}@media screen and (min-width: 96em){.right-side{width:300px;margin-right:0rem}}#_yDrawer{position:relative}@media screen{#_yDrawer{min-height:640px;min-height:100vh}}@media screen and (min-width: 54em){#_yDrawer{width:18rem;margin-left:0}}.sidebar-bg{position:absolute;height:100%;overflow:hidden;top:0;right:0;bottom:0;left:0;background:#202020 center / cover}.sidebar-box{display:flex;justify-content:center}.sidebar-sticky{position:relative;z-index:3}@media screen{.sidebar-sticky{-ms-overflow-style:none;overflow:-moz-scrollbars-none;height:100%;overflow:auto;position:absolute;padding:3rem 0rem;right:2.5rem;left:2.5rem}}.sidebar-sticky::-webkit-scrollbar{display:none}.sidebar-about>h1{color:#fff;font-size:2rem}.sidebar-nav>ul{list-style:none;padding-left:0;margin-bottom:.5rem}a.sidebar-nav-item{width:100%;font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}a.sidebar-nav-subitem{font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}@media screen{.y-drawer-scrim{z-index:2}.y-drawer-content{width:18rem;left:-18rem;z-index:3}}.sidebar-social{margin-bottom:.5rem}.sidebar-social>ul{list-style:none;padding-left:0;margin:0 -.25rem}.sidebar-social>ul>li{float:left}.sidebar-social>ul>li>a{display:inline-block;text-align:center;font-size:1.6rem;line-height:3rem;width:3.1249rem;height:4rem;padding:.5rem 0}.sidebar-social>ul li+li{margin-top:0}.fixed-top{position:fixed;top:0;left:0;width:100%;z-index:1}.navbar>.content{padding-top:0;padding-bottom:0;min-height:0;height:0}.menu{display:inline-block;padding:1.75rem 1.5rem;border-bottom:none;margin-left:-1.5rem;color:#9a9a9a !important}.menu::after{content:"\2630"}@media screen and (min-width: 54em){.menu{padding:1.25rem 1.5rem;position:absolute;left:-9999px}.menu:focus{position:static}}.animation-main{pointer-events:none}.loading{display:none}@media print{.menu{display:none}}.animation-main{opacity:0;will-change:opacity}.loading{position:absolute;top:0;right:0;padding:5.25rem 4.5rem;transform-origin:top right;transform:scale(0.33)}.content{position:relative;margin-left:auto;margin-right:auto;padding:5rem 1rem 12rem}@media screen{.content{min-height:100vh}}@media screen and (min-width: 54em){.content{padding:4rem 1rem 12rem;margin-left:19rem;margin-right:3rem}}@media screen and (min-width: 72em){.content{max-width:42rem;margin-left:21rem}}@media screen and (min-width: 88em){.content{float:left;width:100%;margin-left:22rem;margin-right:5rem}}@media screen and (min-width: 96em){.content{max-width:44rem}}@media screen and (min-width: 102em){.content{margin-left:25rem;margin-right:8rem}}.me{width:6.5rem;height:6.5rem;align-self:center;margin-right:20px;border-radius:100%;position:relative}@media screen and (min-width: 40em){.me{width:7rem;height:7rem}}@media screen and (min-width: 54em){.me{width:6.5rem;height:6.5rem}}@media screen and (min-width: 72em){.me{width:7rem;height:7rem}}main>footer{width:100%;position:absolute;bottom:0;left:0;right:0;padding:0 1rem;color:#9a9a9a;font-size:smaller;text-align:center}main>footer>p{margin-bottom:0}html{font-family:'Sans-serif'}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-family:'Sans-serif'}
+
+</style>
+
+
+<link
+  rel="preload"
+  href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0"
+  as="style"
+  onload="this.rel='stylesheet'"
+/>
+
+<style id="_pageStyle">
+
+.content a{color:#4f86aa;border-color:rgba(79,134,170,0.2)}.content a:hover{border-color:#4f86aa}:focus{outline-color:#4f86aa}::selection{color:#fff;background:#4f86aa}::-moz-selection{color:#fff;background:#4f86aa}
+
+</style>
+
+
+<noscript>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0" />
+    
+  
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Lato"
+  />
+  <style>
+    html { font-family: 'Lato', 'Sans-serif' }
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .heading { font-family: 'Lato', 'Sans-serif' }
+  </style>
+   
+  <link rel="stylesheet" href="http://localhost:4000/assets/icomoon/style.css" />
+</noscript>
+<!--<![endif]-->
+
+</head>
+
+<body>
+  <!-- =============== -->
+<!-- MENU            -->
+<!-- =============== -->
+<div class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <a id="_menu" class="menu no-hover" href="#_title">
+      <span class="sr-only">Menu</span>
+    </a>
+  </div>
+</div>
+
+<!-- =============== -->
+<!-- CONTENT         -->
+<!-- =============== -->
+<div id="_yPushState">
+  <div class="fade-in">
+    <main
+      id="_main"
+      class="content"
+      role="main"
+      data-color="#4f86aa"
+      data-image="/assets/img/bg.jpg"
+    >
+      
+
+<article id="post-devops/2020/08/29/Infra-23" class="post" role="article">
+  <header>
+    <h1 class="post-title">
+      
+        Github Actions를 사용해서 CICD 구축해보기 실습 with GCP - 실행편
+        
+    </h1>
+
+    <p class="post-date heading">
+      <time datetime="2020-08-29T00:00:00+09:00">29 Aug 2020</time>
+      
+
+
+
+
+
+
+
+
+
+in <a href="/category/devops/" data-flip="title">Devops</a>
+
+      
+
+
+
+
+
+
+
+
+
+on <a href="/tag/devops-cicd/" data-flip="title">CI/CD</a>
+
+    </p>
+
+    
+  <div class="hr" style="padding-bottom:0"></div>
+
+
+  </header>
+  
+
+
+  
+  <div class="markdown-body">
+
+    <!-- 
+    <div class="head-image"><img src="http://localhost:4000/assets//img/devops-logo.png" /></div>
+    <br /> -->
+    <style>
+      .myAd1190 {
+        width: 48%;
+        height: 280px;
+      }
+
+      .myAd1290 {
+        width: 48%;
+        height: 280px;
+      }
+
+      @media(max-width: 800px) {
+        .myAd1190 {
+          display: none;
+        }
+
+        .myAd1290 {
+          width: 98%;
+        }
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 300px;
+      }
+
+      .row-center {
+        display: flex;
+        justify-content: center;
+        height: 258px;
+      }
+    </style>
+   
+    <!--<br />-->
+    <h2 id="서론">서론</h2>
+
+<p>이전 시간에 우리는 Springboot로 만든 애플리케이션을 도커 이미지로 만들고 그 이미지를 GCP의 컨테이너 저장소에 푸시하는 것까지 성공하였다.</p>
+
+<p>이번 시간에는 우리가 로컬에 만든 프로젝트를 깃허브 원격 저장소에 등록하고 거기서 Github Actions를 사용해 마스터 브랜치로 push를 할 경우 자동 빌드와 자동 배포를 하도록 설정해볼 것이다.</p>
+
+<h2 id="gce-google-compute-engine">GCE (Google Compute Engine)</h2>
+
+<p>GCP에서는 사용자가 간편하게 사용할 수 있는 VM 인스턴스를 생성할 수 있는 서비스를 제공하고 있다.</p>
+
+<p>그러한 VM(가상머신)의 이름을 GCP에서는 GCE라고 부른다.</p>
+
+<p>우리는 지금부터 이 GCE를 만들 것이다. 단, 우리가 이전 시간에 올려뒀던 이미지를 실행시키는 용도로써 말이다.</p>
+
+<h2 id="gce-만들어보기">GCE 만들어보기</h2>
+
+<p><img width="705" alt="스크린샷 2020-08-29 오후 6 02 59" src="https://user-images.githubusercontent.com/43809168/91633271-e0873880-ea21-11ea-8549-0a2f31bbd964.png" /></p>
+
+<p>Compute Engine 탭에서 인스턴스 만들기를 클릭</p>
+
+<p><img width="469" alt="스크린샷 2020-08-29 오후 6 04 25" src="https://user-images.githubusercontent.com/43809168/91633298-14625e00-ea22-11ea-93ec-bdd8a41e0e4b.png" /></p>
+
+<p>인스턴스 이름은 아무거나 편한걸로, 필자는 test로 했다</p>
+
+<p>머신 구성은 아무래도 싼게 좋으니까(?) CPU 2개에 1기가 메모리로 골랐다.</p>
+
+<p>어차피 현재 배포할 애플리케이션은 컴퓨팅 파워가 그렇게 중요하지는 않으니 싼걸로 하자.</p>
+
+<p><img width="493" alt="스크린샷 2020-08-29 오후 6 05 37" src="https://user-images.githubusercontent.com/43809168/91633318-3f4cb200-ea22-11ea-8d84-28ae9e8d2ecf.png" /></p>
+
+<p>가장 중요한 옵션인 컨테이너 배포를 체크하자.</p>
+
+<p>컨테이너 이미지에 방금 우리가 올린 이미지를 넣어주어야한다.</p>
+
+<p><img width="524" alt="스크린샷 2020-08-29 오후 6 07 33" src="https://user-images.githubusercontent.com/43809168/91633350-83d84d80-ea22-11ea-8347-1f0696097d45.png" /></p>
+
+<p>앞서 우리가 푸시해놓은 이미지 이름을 옆에 마우스를 대면 복사 기능이 나온다</p>
+
+<p><img width="547" alt="스크린샷 2020-08-29 오후 6 07 39" src="https://user-images.githubusercontent.com/43809168/91633351-876bd480-ea22-11ea-979e-710cc300fe4b.png" /></p>
+
+<p>이미지 저장소 이름을 복붙해주자</p>
+
+<p><img width="525" alt="스크린샷 2020-08-29 오후 6 08 45" src="https://user-images.githubusercontent.com/43809168/91633360-af5b3800-ea22-11ea-934e-4d4f298f7ec5.png" /></p>
+
+<p>그리고 나서 HTTP 트래픽 허용에 체크하고 모든 액세스 허용을 한 다음 생성을 해보자.</p>
+
+<p>인스턴스가 생성고 나면 해당 인스턴스에 대한 유동 IP가 발급되게 된다.</p>
+
+<p>그 전에 우리가 셋팅해줄게 있다.</p>
+
+<p><img width="438" alt="스크린샷 2020-08-29 오후 6 09 52" src="https://user-images.githubusercontent.com/43809168/91633386-d6b20500-ea22-11ea-9799-667626d2841f.png" /></p>
+
+<p>메뉴 탭에서 방화벽을 눌러서 방화벽을 해제해주어야한다.</p>
+
+<p><img width="501" alt="스크린샷 2020-08-29 오후 6 10 19" src="https://user-images.githubusercontent.com/43809168/91633395-e6c9e480-ea22-11ea-917f-72fda6cf4aae.png" />
+<img width="573" alt="스크린샷 2020-08-29 오후 6 10 46" src="https://user-images.githubusercontent.com/43809168/91633401-f6e1c400-ea22-11ea-87bd-bd14ea952709.png" /></p>
+
+<p>다음과 같이 모든 IP와 포트에 대한 방화벽 설정을 해제해주어야 우리가 해당 인스턴스에 브라우저로 접근이 가능하다.</p>
+
+<p><img width="853" alt="스크린샷 2020-08-29 오후 6 11 34" src="https://user-images.githubusercontent.com/43809168/91633422-1d9ffa80-ea23-11ea-91e2-8ad8fee951c4.png" /></p>
+
+<p>외부 IP가 생성되었을 것이고 이 IP에 포트번호 8080를 브라우저에 입력하면?</p>
+
+<p><img width="384" alt="스크린샷 2020-08-29 오후 6 11 44" src="https://user-images.githubusercontent.com/43809168/91633419-1a0c7380-ea23-11ea-98df-6af9bec6eb28.png" /></p>
+
+<p>짜잔 우리가 만든 웹서비스가 잘 배포되었는 것을 확인할 수 있다.</p>
+
+<p><img width="515" alt="스크린샷 2020-08-29 오후 6 13 24" src="https://user-images.githubusercontent.com/43809168/91633458-550ea700-ea23-11ea-989c-0fbf0524df06.png" />
+<img width="898" alt="스크린샷 2020-08-29 오후 6 13 30" src="https://user-images.githubusercontent.com/43809168/91633465-5d66e200-ea23-11ea-8137-00da82327621.png" />
+<img width="277" alt="스크린샷 2020-08-29 오후 6 13 48" src="https://user-images.githubusercontent.com/43809168/91633470-66f04a00-ea23-11ea-88c3-76e89e5e8f77.png" /></p>
+
+<p>그리고 아까 방화벽 설정한 VPC 네트워크에서 외부 IP 주소 탭을 누르면 우리가 만든 인스턴스의 IP를 볼 수 있는데 유동 IP를 고정 IP로 등록해놓자.</p>
+
+<p>이제 준비는 끝났다 오랜만에 Intellij 프로젝트를 열어 해당 프로젝트를 깃허브에 저장소를 만들자.</p>
+
+<h2 id="깃허브-원격-저장소에-프로젝트-등록-with-intellij">깃허브 원격 저장소에 프로젝트 등록 With Intellij</h2>
+
+<p>로컬 프로젝트를 원격 저장소에 등록하는 여러가지 방법이 있지만, 필자의 경우 인텔리제이에서 제공하는 깃허브를 주로 사용하는 편이다.</p>
+
+<p><img width="750" alt="스크린샷 2020-08-29 오후 6 17 18" src="https://user-images.githubusercontent.com/43809168/91633526-e1b96500-ea23-11ea-9ff3-59dbba00b007.png" /></p>
+
+<p>인텔리제이 환경설정 탭에서 git을 검색하면 github라는 탭이 있는데 여기에 자신의 깃 계정을 추가해주자.</p>
+
+<p><img width="1221" alt="스크린샷 2020-08-29 오후 6 18 13" src="https://user-images.githubusercontent.com/43809168/91633542-01e92400-ea24-11ea-9e8f-72619427b175.png" /></p>
+
+<p>그리고 나서 상단 탭에 보이는 share on github를 눌러 원격 저장소에 내 로컬 프로젝트를 공유하도록 하자.</p>
+
+<p><img width="446" alt="스크린샷 2020-08-29 오후 6 19 44" src="https://user-images.githubusercontent.com/43809168/91633560-3957d080-ea24-11ea-9cb5-f31a624df36f.png" /></p>
+
+<p>필자는 대충 이런 이름으로 만들었다.</p>
+
+<p><img width="1011" alt="스크린샷 2020-08-29 오후 6 24 20" src="https://user-images.githubusercontent.com/43809168/91633617-dca8e580-ea24-11ea-9f7f-abce832f4b4a.png" /></p>
+
+<p>그럼 깃허브 원격 저장소에 잘 올라와있을 것이고, 이제부터 본격적으로 Github Actions를 사용해 CI/CD를 구축해보자.</p>
+
+<h2 id="github-actions를-사용하기-위한-서비스-계정-생성-및-등록">Github Actions를 사용하기 위한 서비스 계정 생성 및 등록</h2>
+
+<p>Github Actions는 사용하기가 정말 쉽다.</p>
+
+<p><img width="1247" alt="스크린샷 2020-08-29 오후 6 25 33" src="https://user-images.githubusercontent.com/43809168/91633639-082bd000-ea25-11ea-8a54-ee7580ac7cb7.png" /></p>
+
+<p>우선, Github Actions 탭에서 마우스 휠을 슥슥 내리다보면 이미 다양한 클라우드에 배포할 수 있는 예제들이 많은 것을 확인할 수 있다.</p>
+
+<p>그런데 대표 예제중에 <strong>GCE</strong> 배포 예제 스크립트는 보이지 않는 것 같다.</p>
+
+<p>구글에 부랴부랴 검색을 해보면 구글에서 별도의 저장소로 GCE 배포에 대한 예제 스크립트를 제공하고 있는 것을 확인할 수 있다.</p>
+
+<p><a href="https://github.com/GoogleCloudPlatform/github-actions">https://github.com/GoogleCloudPlatform/github-actions</a></p>
+
+<p>그리고 (역시 구글) 아주 친절하게 사용법이 나와있다.</p>
+
+<p><a href="https://github.com/GoogleCloudPlatform/github-actions/blob/master/example-workflows/gce/README.md">https://github.com/GoogleCloudPlatform/github-actions/blob/master/example-workflows/gce/README.md</a></p>
+
+<p>그러나 영어 울렁증이 있는 사람들은 대략 머리가 어지럽고 멍해질 것이라 생각해 필자가 하나씩 알려줄 것이니 너무 걱정하지 말자.</p>
+
+<p>우선 Github Actions와 GCP를 연동하기 위해서는 서비스 계정이라는 것을 만들어두어야한다.</p>
+
+<p>이 서비스 계정에 대한 정보를 yaml 파일에 입력함으로써 Github Actions가 내 GCP 프로젝트에 접근 권한을 갖게 하는 플로우인 것 같다. (이 부분은 필자의 뇌피셜이니 신뢰하지 말자)</p>
+
+<p>결과부터 말하자면 위의 서비스 계정 발급 절차를 통해 우리는 최종적으로 .json 파일을 하나 얻는게 목적이다.</p>
+
+<p>아래의 링크로 접속하자.</p>
+
+<p><a href="https://cloud.google.com/iam/docs/creating-managing-service-accounts">https://cloud.google.com/iam/docs/creating-managing-service-accounts</a></p>
+
+<p><img width="939" alt="스크린샷 2020-08-29 오후 6 31 27" src="https://user-images.githubusercontent.com/43809168/91633759-dcf5b080-ea25-11ea-9539-661c03740ff6.png" /></p>
+
+<p>그러면 서비스 계정 페이지로 이동이라는 버튼을 눌러 서비스 계정을 하나 만들자.</p>
+
+<p><img width="673" alt="스크린샷 2020-08-29 오후 6 33 16" src="https://user-images.githubusercontent.com/43809168/91633790-1b8b6b00-ea26-11ea-8921-87a1c831f797.png" />
+<img width="812" alt="스크린샷 2020-08-29 오후 6 33 26" src="https://user-images.githubusercontent.com/43809168/91633796-21814c00-ea26-11ea-8eee-d4165fec03d6.png" />
+<img width="1052" alt="스크린샷 2020-08-29 오후 6 34 39" src="https://user-images.githubusercontent.com/43809168/91633816-4d043680-ea26-11ea-8358-38abf3c75242.png" /></p>
+
+<p>우리는 여기서 생성될 서비스 계정에 총 세 가지 권한을 주어야한다.</p>
+
+<ul>
+  <li>
+    <p>Compute Instance Admin - GCE MV 접근 권한</p>
+  </li>
+  <li>
+    <p>Storage Admin - 컨테이너 저장소 푸시 권한</p>
+  </li>
+  <li>
+    <p>Service Account User - 컴퓨팅 스토리지 권한으로 명령 실행 권한</p>
+  </li>
+</ul>
+
+<p>이 세 권한을 잘 넣어서 만들어주면 다음과 같은 모습이 나온다. 잘 따라고 있기를 바란다.</p>
+
+<p><img width="633" alt="스크린샷 2020-08-29 오후 7 26 36" src="https://user-images.githubusercontent.com/43809168/91634728-8ee4ab00-ea2d-11ea-87c6-f12e26573626.png" /></p>
+
+<p>(편집자 권한은 권장하는 권한은 아니다. 그러나 계속 서비스 계정 권한 에러가 나서 편집자 권한을 넣어버렸다. 어떤 권한을 넣어줘야하는지 잘 아는 사람이 있다면 댓글로 알려주시길… ㅜㅜ)</p>
+
+<p><img width="1060" alt="스크린샷 2020-08-29 오후 6 42 41" src="https://user-images.githubusercontent.com/43809168/91633937-6c4f9380-ea27-11ea-9190-73c14e886731.png" /></p>
+
+<p>(빈 칸으로 둔 채 무시하고 완료)</p>
+
+<p><img width="1423" alt="스크린샷 2020-08-29 오후 6 43 12" src="https://user-images.githubusercontent.com/43809168/91633950-7ec9cd00-ea27-11ea-810f-5ce98bf525b7.png" /></p>
+
+<p>그러면 서비스 계정이 완성된 것을 확인할 수 있다.</p>
+
+<p><img width="584" alt="스크린샷 2020-08-29 오후 6 43 52" src="https://user-images.githubusercontent.com/43809168/91633958-9e60f580-ea27-11ea-8285-c60a27d8d5e9.png" />
+<img width="532" alt="스크린샷 2020-08-29 오후 6 43 56" src="https://user-images.githubusercontent.com/43809168/91633959-a02ab900-ea27-11ea-8769-d9408f077bf3.png" /></p>
+
+<p>처음 생성하면 키가 없을텐데 점 세개 (뭐라고 부르지 이걸?)를 클릭해서 키 만들기를 눌러 JSON 키를 생성해주자.</p>
+
+<p>그러면 키 JSON 파일이 생성될텐데 이 파일을 잘 보관해두자.</p>
+
+<p>그리고 나서 깃허브에 시크릿 키를 등록하러 가자.</p>
+
+<p><img width="1077" alt="스크린샷 2020-08-29 오후 6 45 48" src="https://user-images.githubusercontent.com/43809168/91634006-dbc58300-ea27-11ea-8cad-7d17471965fc.png" /></p>
+
+<p>생성한 프로젝트에 Settings 탭에서 Secrets를 클릭해보자.</p>
+
+<p><img width="1274" alt="스크린샷 2020-08-29 오후 6 46 15" src="https://user-images.githubusercontent.com/43809168/91634010-ebdd6280-ea27-11ea-9f88-b39664b7e67e.png" /></p>
+
+<p>여기서 New Secret을 클릭해 새로운 시크릿 키를 생성하자.</p>
+
+<p>우리가 생성해야하는 시크릿 키는 총 두개이다.</p>
+
+<ul>
+  <li>
+    <p>GCE_PROJECT: 프로젝트 ID, 저번 시간에도 사용했으니 기억 날 것이다.</p>
+  </li>
+  <li>
+    <p>GCE_SA_KEY: 아까 로컬에 다운받아진 JSON 파일을 그대로 복-붙 해서 넣어주면 된다.</p>
+  </li>
+</ul>
+
+<p><img width="1092" alt="스크린샷 2020-08-29 오후 6 47 51" src="https://user-images.githubusercontent.com/43809168/91634028-25ae6900-ea28-11ea-9d74-1086934cf209.png" />
+<img width="506" alt="스크린샷 2020-08-29 오후 6 48 18" src="https://user-images.githubusercontent.com/43809168/91634038-37900c00-ea28-11ea-9cbd-51430d02bfae.png" /></p>
+
+<p>그러면 다음과 같이 두 개의 시크릿키가 생성된 것을 확인할 수 있다.</p>
+
+<p><img width="1579" alt="스크린샷 2020-08-29 오후 6 48 33" src="https://user-images.githubusercontent.com/43809168/91634040-3e1e8380-ea28-11ea-8317-4d6be0c594bc.png" /></p>
+
+<p>자 이제 준비는 끝났다.</p>
+
+<p>혹시나 못찾을까봐 workflow .yaml 파일을 아래에 첨부해두겠다.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Copyright 2020 Google, LLC.</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the "License");</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#    http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an "AS IS" BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="na">name</span><span class="pi">:</span> <span class="s">Build and Deploy to Google Compute Engine</span>
+
+<span class="na">on</span><span class="pi">:</span>
+  <span class="na">push</span><span class="pi">:</span>
+    <span class="na">branches</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">master</span>
+
+<span class="na">env</span><span class="pi">:</span>
+  <span class="na">PROJECT_ID</span><span class="pi">:</span> <span class="s">$</span>
+  <span class="na">GCE_INSTANCE</span><span class="pi">:</span> <span class="s">my-githubactions-vm</span> <span class="c1"># TODO: update to instance name</span>
+  <span class="na">GCE_INSTANCE_ZONE</span><span class="pi">:</span> <span class="s">us-central1-a</span> <span class="c1"># TODO: update to instance zone</span>
+
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">setup-build-publish-deploy</span><span class="pi">:</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">Setup, Build, Publish, and Deploy</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Checkout</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v2</span>
+
+      <span class="c1"># Setup gcloud CLI</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">GoogleCloudPlatform/github-actions/setup-gcloud@master</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">290.0.1'</span>
+          <span class="na">service_account_key</span><span class="pi">:</span> <span class="s">$</span>
+          <span class="na">project_id</span><span class="pi">:</span> <span class="s">$</span>
+
+      <span class="c1"># Configure Docker to use the gcloud command-line tool as a credential</span>
+      <span class="c1"># helper for authentication</span>
+      <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span> <span class="pi">|-</span>
+          <span class="s">gcloud --quiet auth configure-docker</span>
+      <span class="c1"># Build the Docker image</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Build</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="pi">|-</span>
+          <span class="s">docker build --tag "gcr.io/$PROJECT_ID/$GCE_INSTANCE-image:$GITHUB_SHA" .</span>
+      <span class="c1"># Push the Docker image to Google Container Registry</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Publish</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="pi">|-</span>
+          <span class="s">docker push "gcr.io/$PROJECT_ID/$GCE_INSTANCE-image:$GITHUB_SHA"</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Deploy</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="pi">|-</span>
+          <span class="s">gcloud compute instances update-container "$GCE_INSTANCE" \</span>
+            <span class="s">--zone "$GCE_INSTANCE_ZONE" \</span>
+            <span class="s">--container-image "gcr.io/$PROJECT_ID/$GCE_INSTANCE-image:$GITHUB_SHA"</span>
+</code></pre></div></div>
+
+<h2 id="gce-인스턴스에-서비스-계정-등록">GCE 인스턴스에 서비스 계정 등록</h2>
+
+<p>앞서 우리가 만든 GCE 인스턴스에 서비스 계정이 등록되어있지 않았으므로 등록해주자.</p>
+
+<p><img width="1369" alt="스크린샷 2020-08-29 오후 6 53 02" src="https://user-images.githubusercontent.com/43809168/91634123-df0d3e80-ea28-11ea-8a81-a832f3317ae8.png" /></p>
+
+<p>등록을 위해서 우선 장비를 정지해야한다.</p>
+
+<p><img width="519" alt="스크린샷 2020-08-29 오후 6 56 08" src="https://user-images.githubusercontent.com/43809168/91634173-4e832e00-ea29-11ea-93a7-cb711ab27500.png" /></p>
+
+<p>서비스 계정을 방금 만들어둔 서비스 계정으로 수정하고 인스턴스를 다시 시작해주자.</p>
+
+<h2 id="github-actions를-사용해-gcp에-cicd-구축">Github Actions를 사용해 GCP에 CI/CD 구축</h2>
+
+<p>이제 본격적으로 위 yaml을 수정해 CI/CD를 구축할 것인데 보일러 플레이트 코드가 너무나 완벽하기 때문에 우리는 환경변수만 몇개 수정해주면 되니 너무 걱정하지 말자.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">Build and Deploy to Google Compute Engine</span>
+
+<span class="na">on</span><span class="pi">:</span>
+  <span class="na">push</span><span class="pi">:</span>
+    <span class="na">branches</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">master</span>
+
+<span class="na">env</span><span class="pi">:</span>
+  <span class="na">PROJECT_ID</span><span class="pi">:</span> <span class="s">$</span>
+  <span class="na">GCE_INSTANCE</span><span class="pi">:</span> <span class="s">test</span> <span class="c1"># TODO: update to instance name</span>
+  <span class="na">GCE_INSTANCE_ZONE</span><span class="pi">:</span> <span class="s">us-central1-a</span> <span class="c1"># TODO: update to instance zone</span>
+</code></pre></div></div>
+
+<p>사실상 이 부분만 수정하면 된다.</p>
+
+<p>yaml 주석에도 나와있듯이 GCE 인스턴스 이름을 적어주자 필자의 경우 test였다.</p>
+
+<p>그리고 GCE 인스턴스 ZONE을 적어주면 되는데 필자와 동일한 설정을 가져갔다면 us-central1-a일 것이고 다른 존이라면 그 존 이름을 적어주면 된다.</p>
+
+<p>이거면 끝이다!</p>
+
+<p>너무 간단해서 놀랐겠지만 진짜다.</p>
+
+<p><img width="1038" alt="스크린샷 2020-08-29 오후 6 57 51" src="https://user-images.githubusercontent.com/43809168/91634201-8b4f2500-ea29-11ea-8b59-80d96969f561.png" /></p>
+
+<p>Actions 탭에 진입해서 set up a workflow yourself를 클릭해서 아까 만들어둔 .yaml을 복사해주자.</p>
+
+<p>파일 이름이 디폴트가 main인데 필자는 test로 바꿔보았다.</p>
+
+<p><img width="1108" alt="스크린샷 2020-08-29 오후 6 58 34" src="https://user-images.githubusercontent.com/43809168/91634214-a457d600-ea29-11ea-9056-527f6177466e.png" /></p>
+
+<p>이렇게 하면 준비가 끝났다.</p>
+
+<p>GCP와 연동하는게 조금 번거로워서 그렇지 깃허브 액션 자체는 사용하는 것이 크게 어렵지 않다.</p>
+
+<p>그리고 클라우드 플랫폼에서 Github Actions에 대한 예제들이 많고 설명이 친절해서 쉽게 적용할 수 있다는 큰 장점이 있다. (진입 장벽이 낮다)</p>
+
+<p>자 이제 우리의 인스턴스가 잘 살아있는지 확인해보자.</p>
+
+<p><img width="467" alt="스크린샷 2020-08-29 오후 7 00 45" src="https://user-images.githubusercontent.com/43809168/91634255-f26cd980-ea29-11ea-9066-5d7fe298ac0a.png" /></p>
+
+<p>아까 중지해뒀던 인스턴스가 다시 재시작이 잘 됐다면 welcome을 반환할 것이다.</p>
+
+<p>이제 우리의 기획 요구사항이 바뀌어서 웰컴 페이지에서 <strong>welcome</strong> 대신 <strong>hello bro</strong>로 수정하라는 니즈가 생겼다고 가정해보자.</p>
+
+<p>우리가 할일은 아주 간단하다.</p>
+
+<p>인텔리제이를 키고 <strong>welcome</strong>을 <strong>hello bro</strong>로 바꾼 뒤 커밋-푸시 해주자</p>
+
+<p>인텔리제이에서 깃허브 연동을 해두었기 때문에 Git Commit, Push를 위한 UI가 활성화 된 것을 확인할 수 있다.</p>
+
+<p>필자가 자주 애용하는 기능이며 여러분들도 써보기를 바란다.</p>
+
+<p>사용법은 아래와 같다.</p>
+
+<p><img width="972" alt="스크린샷 2020-08-29 오후 7 02 26" src="https://user-images.githubusercontent.com/43809168/91634285-4a0b4500-ea2a-11ea-877e-27b1b25b4c8f.png" /></p>
+
+<p>애플리케이션 코드를 수정해주면 수정된 파일이 파랗게 표시된다. 원격 저장소와 변경사항이 발생했다는 것을 보여준다.</p>
+
+<p><img width="164" alt="스크린샷 2020-08-29 오후 7 02 34" src="https://user-images.githubusercontent.com/43809168/91634286-4aa3db80-ea2a-11ea-8be9-7cfae16b635b.png" />
+<img width="632" alt="스크린샷 2020-08-29 오후 7 02 52" src="https://user-images.githubusercontent.com/43809168/91634287-4b3c7200-ea2a-11ea-8cbd-843e3e90c6ed.png" /></p>
+
+<p>Commit 버튼(체크 버튼)을 누르면 커밋 로그를 입력할 수 있는 창이 나오고 커밋 할 수 있다.</p>
+
+<p><img width="229" alt="스크린샷 2020-08-29 오후 7 03 00" src="https://user-images.githubusercontent.com/43809168/91634288-4bd50880-ea2a-11ea-92dc-65ac4b7bbd26.png" /></p>
+
+<p>그리고 옆에 있는 화살표, 딱 봐도 뭔가 밖으로 나갈 것 같이 생긴 친구를 클릭하면 푸시가 가능하다.</p>
+
+<p><img width="824" alt="스크린샷 2020-08-29 오후 7 03 04" src="https://user-images.githubusercontent.com/43809168/91634289-4c6d9f00-ea2a-11ea-9eaf-6701319435c9.png" /></p>
+
+<p>원격 저장소로 푸시해주자.</p>
+
+<p>푸시를 할 때 마다 깃허브 액션이 알아서 CI/CD 과정을 진행해준다.</p>
+
+<p><img width="1301" alt="스크린샷 2020-08-29 오후 7 30 04" src="https://user-images.githubusercontent.com/43809168/91634787-0adef300-ea2e-11ea-8ff0-cecce70dc55e.png" /></p>
+
+<p>( 에러의 흔적… )</p>
+
+<p>이제 잘 배포가 되었는지 확인해보자.</p>
+
+<p><img width="394" alt="스크린샷 2020-08-29 오후 7 31 19" src="https://user-images.githubusercontent.com/43809168/91634809-382ba100-ea2e-11ea-81d7-a58bfedfbbc2.png" /></p>
+
+<p>잘 바뀌었다!</p>
+
+<p>어떤가 엄청 편리하지 않은가?</p>
+
+<p>조금 귀찮지만 프로젝트 초반에 CI/CD를 구축해놓으면 개발하면서 바뀌는 부분을 깃허브에 커밋만 하는 것으로 배포까지 해주니 매우 매우 편리하다는 것을 느낄 수 있을 것이다.</p>
+
+<p>필자도 Github Actions를 사용해 사이드 프로젝트를 진행했었는데 변경 사항이 바로 바로 반영되니까 무척이나 편리함을 느꼈었다.</p>
+
+<p>덧붙여서 PR이 올라갈 때 테스트 코드를 자동으로 빌드하게 만들 수도 있는데 이 부분은 크게 어렵지 않으므로 만들어둔 .yaml 파일을 공유하면서 글을 마무리하도록 하겠다.</p>
+
+<p><a href="https://github.com/depromeet/8th-warming-up-backend-2team/blob/develop/.github/workflows/pull_request.yml">https://github.com/depromeet/8th-warming-up-backend-2team/blob/develop/.github/workflows/pull_request.yml</a></p>
+
+<h2 id="마치며">마치며</h2>
+
+<p>드디어 몇일에 걸려 쓰던 글을 마무리했다.</p>
+
+<p>설명이 미흡한 부분이 있다면 댓글로 알려주길 바라며 여러분들의 사이드 프로젝트에 Github Actions를 도입하여 생산성 증대를 느껴보길 바란다!</p>
+
+<p>GCP와 도커, k8s를 알려주신 Google 개발자 정명훈님 감사합니다.</p>
+
+<p><del>GCP 만세</del></p>
+
+    <br />
+    <br />
+  </div>
+  
+
+</article>
+
+<!--<hr class="dingbat" />-->
+<!--
+<div class="share">
+  <h2>Share this post</h2>
+  <div class="share-body">
+    <a href="http://twitter.com/share?text=Github Actions를 사용해서 CICD 구축해보기 실습 with GCP - 실행편&amp;url=http://localhost:4000/devops/2020/08/29/Infra-23/"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="icon-twitter">
+      </span>
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/devops/2020/08/29/Infra-23/"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="icon-facebook">
+      </span>
+    </a>
+  </div>
+</div>
+-->
+<br />
+
+
+
+
+<aside class="related" role="complementary">
+  <h2 class="hr">Related Posts</h2>
+
+  <ul class="related-posts">
+    
+      
+      
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/devops/2021/05/16/Kafka-04/" data-flip="title">
+    <span>Kafka 내부 메커니즘</span>
+  </a>
+  <small><time datetime="2021-05-16T00:00:00+09:00">
+    16 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/devops/2021/05/13/CKA-51/" data-flip="title">
+    <span>신입 개발자인 나는 왜 CKA 자격증을 땄을까?</span>
+  </a>
+  <small><time datetime="2021-05-13T00:00:00+09:00">
+    13 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/devops/2021/05/06/Kafka-03/" data-flip="title">
+    <span>Kafka Consumer</span>
+  </a>
+  <small><time datetime="2021-05-06T00:00:00+09:00">
+    06 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+      
+    
+  </ul>
+</aside>
+  <aside class="comments" role="complementary">
+  <h2>Comments</h2>
+  <hr/>
+
+  <script src="https://utteranc.es/client.js"
+    repo="minkukjo/minkukjo.github.io"
+    issue-term="title"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</aside>
+
+       <footer>
+  <hr/>
+  
+    <p>© 2022. by minkuk</p>
+
+  
+  <p>
+    <code>Powered by <a href="https://minkukjo.github.io/">minkuk</a></code>
+  </p>
+</footer>
+
+    </main>
+    <div class="right-side">
+  <div class="add-first">
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+    ></script>
+    <!-- 우측 광고 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="9124111205"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+  <br />
+  <br />
+  <div class="add-second">
+    <!-- 우측 광고2 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="5156946039"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+
+  </div>
+  <div id="_yDrawer">
+  <div id="_sidebar" class="sidebar">
+    <div class="sidebar-bg" style="background-color:#4f86aa;background-image:url(/assets/img/bg.jpg)"></div>
+    <header class="sidebar-sticky" role="banner">
+      <br/>
+      <div class="sidebar-about">
+        <h1><a id="_title" href="/">도전하는 개발자</a></h1>
+        
+
+      </div>
+
+      <br/>
+      <br/>
+      <nav class="sidebar-nav heading" role="navigation">
+        <span class="sr-only">Navigation:</span>
+<ul>
+  
+
+  
+
+  
+  
+  
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-1"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/life/">Life</a>
+       <label class="folder" for="list-item-1">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-daily/">Daily</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-review/">Review</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-books/">Books</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-2"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/computer-science/">Computer Science</a>
+       <label class="folder" for="list-item-2">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-algorithm/">Algorithm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-oop/">OOP</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-network/">Network</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-db/">Database</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-ai/">AI</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-security/">Security</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-distribution-system/">Distribution System</a>
+             </li>
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-3"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/programming-language/">Programming Language</a>
+       <label class="folder" for="list-item-3">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-kotlin/">Kotlin</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-go/">Go</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-java/">Java</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-javascript/">JavaScript</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-typescript/">TypeScript</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-4"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/framework/">Framework</a>
+       <label class="folder" for="list-item-4">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring/">Spring</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-data-jpa/">Spring Data JPA</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-security/">Spring Security</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-junit/">JUnit</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-5"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/language/">Language</a>
+       <label class="folder" for="list-item-5">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/language-english/">English</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-6"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/development/">Development</a>
+       <label class="folder" for="list-item-6">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-ddd/">DDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-tdd/">TDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-clean-code/">Clean Code</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-git/">Git</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-7"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/devops/">Devops</a>
+       <label class="folder" for="list-item-7">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-alarm/">Alarm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-ansible/">Ansible</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-cicd/">CI/CD</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-docker/">Docker</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-es/">Elasticsearch</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-k8s/">Kubernetes</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-public-cloud/">Public Cloud</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-kafka/">Kafka</a>
+             </li>
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-8"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/opensource/">Open Source</a>
+       <label class="folder" for="list-item-8">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/opensource-opensource/">Open Source</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-9"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/about/">About</a>
+       
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+</ul>
+
+      </nav>
+    <br/>
+    <br/>
+      <div class="sidebar-box">
+        
+      </div>
+      <p>매일 매일 한계를 뛰어넘기 위한 도전을 즐기는 개발자</p>
+
+      
+      
+        <div class="sidebar-social">
+          <span class="sr-only">Social:</span>
+<ul>
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://github.com/minkukjo">
+    <span class="icon-github" title="GitHub"></span>
+    <span class="sr-only">GitHub</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://www.linkedin.com/in/민국-조-567052166">
+    <span class="icon-linkedin2" title="LinkedIn"></span>
+    <span class="sr-only">LinkedIn</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:harrycode@kakao.com">
+    <span class="icon-mail" title="Email"></span>
+    <span class="sr-only">Email</span>
+  </a>
+</li>
+
+  
+</ul>
+
+        </div>
+      
+    </header>
+  </div>
+</div>
+</div>
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-158654037-1', 'auto');
+  ga('send', 'pageview');
+  loadJSDeferred('https://www.google-analytics.com/analytics.js');
+</script>
+
+
+
+
+
+<!--[if gt IE 8]><!---->
+<script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+  WebFont.load({
+    
+    google: {
+      families: 'Lato'.split('|')
+    },
+    
+
+    custom: {
+      families: ['icomoon'],
+      urls: ['/assets/icomoon/style.css']
+    }
+  });
+</script>
+<!--<![endif]-->
+
+
+  <!--[if gt IE 9]><!---->
+  
+  <script>loadJSDeferred('/assets/js/hydejack.js?v=6.4.0');</script>
+
+  
+  <!--<![endif]-->
+
+
+
+</body>
+
+</html>

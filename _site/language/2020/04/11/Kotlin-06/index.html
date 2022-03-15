@@ -1,0 +1,2009 @@
+<!DOCTYPE html>
+<html lang="en"><!--
+ __  __                __                                     __
+/\ \/\ \              /\ \             __                    /\ \
+\ \ \_\ \   __  __    \_\ \      __   /\_\      __       ___ \ \ \/'\
+ \ \  _  \ /\ \/\ \   /'_` \   /'__`\ \/\ \   /'__`\    /'___\\ \ , <
+  \ \ \ \ \\ \ \_\ \ /\ \L\ \ /\  __/  \ \ \ /\ \L\.\_ /\ \__/ \ \ \\`\
+   \ \_\ \_\\/`____ \\ \___,_\\ \____\ _\ \ \\ \__/.\_\\ \____\ \ \_\ \_\
+    \/_/\/_/ `/___/> \\/__,_ / \/____//\ \_\ \\/__/\/_/ \/____/  \/_/\/_/
+                /\___/                \ \____/
+                \/__/                  \/___/
+
+Powered by Hydejack v6.4.0 (https://qwtel.com/hydejack/)
+-->
+
+
+
+
+
+
+
+
+
+<head>
+  <!-- =============== -->
+<!-- META            -->
+<!-- =============== -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta
+  name="naver-site-verification"
+  content="22c5b4ef3bfda7fc6100671413989219de7a4ac8"
+/>
+<meta property="og:title" content="Kotlin In Action 6장" />
+<meta property="og:type" content="article" />
+
+<!-- =============== -->
+<!-- Google AdSense  -->
+<!-- =============== -->
+<script
+  data-ad-client="ca-pub-8247516864622650"
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+></script>
+
+ 
+<meta
+  property="og:image"
+  content="http://localhost:4000/assets//img/kotlin-logo.png"
+/>
+<br />
+
+
+<meta property="og:image:width" content="640" />
+<meta property="og:image:height" content="360" />
+ 
+<title>Kotlin In Action 6장 &middot; 도전하는 개발자</title>
+ 
+<meta
+  name="description"
+  content="코틀린 타입 시스템
+
+"
+/>
+<meta
+  property="og:description"
+  content="코틀린 타입 시스템
+
+"
+/>
+
+
+
+<!-- =============== -->
+<!-- LINKS           -->
+<!-- =============== -->
+<link rel="canonical" href="http://localhost:4000/language/2020/04/11/Kotlin-06/" />
+<meta property="og:url" content="http://localhost:4000/language/2020/04/11/Kotlin-06/" />
+
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="도전하는 개발자 Feed"
+  href="http://localhost:4000/feed.xml"
+/>
+
+
+<link rel="prev" href="http://localhost:4000/framework/2020/04/10/Spring-81/" />
+ 
+<link rel="next" href="http://localhost:4000/framework/2020/04/11/Spring-82/" />
+
+
+<link
+  rel="apple-touch-icon"
+  href="http://localhost:4000/apple-touch-icon.png"
+/>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+<!-- Place favicon.ico in the root directory -->
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+<script>
+  !function(n,e){function t(n,e){n.onload=function(){this.onerror=this.onload=null,e(null,n)},n.onerror=function(){this.onerror=this.onload=null,e(new Error("Failed to load "+this.src),n)}}function o(n,e){n.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||(this.onreadystatechange=null,e(null,n))}}n._loaded=!1,n.loadJSDeferred=function(a,d){function r(){n._loaded=!0;var r=e.createElement("script");r.src=a,d&&(("onload"in r?t:o)(r,d),r.onload||t(r,d));var l=e.getElementsByTagName("script")[0];l.parentNode.insertBefore(r,l)}n._loaded?r():n.addEventListener?n.addEventListener("load",r,!1):n.attachEvent?n.attachEvent("onload",r):n.onload=r}}(window,document);
+
+  !function(e){"use strict";var n=function(n,t,o){function i(e){if(a.body)return e();setTimeout(function(){i(e)})}function r(){l.addEventListener&&l.removeEventListener("load",r),l.media=o||"all"}var d,a=e.document,l=a.createElement("link");if(t)d=t;else{var f=(a.body||a.getElementsByTagName("head")[0]).childNodes;d=f[f.length-1]}var s=a.styleSheets;l.rel="stylesheet",l.href=n,l.media="only x",i(function(){d.parentNode.insertBefore(l,t?d:d.nextSibling)});var u=function(e){for(var n=l.href,t=s.length;t--;)if(s[t].href===n)return e();setTimeout(function(){u(e)})};return l.addEventListener&&l.addEventListener("load",r),l.onloadcssdefined=u,u(r),l};"undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this);
+
+  !function(t){if(t.loadCSS){var e=loadCSS.relpreload={};if(e.support=function(){try{return t.document.createElement("link").relList.supports("preload")}catch(t){return!1}},e.poly=function(){for(var e=t.document.getElementsByTagName("link"),r=0;r<e.length;r++){var n=e[r];"preload"===n.rel&&"style"===n.getAttribute("as")&&(t.loadCSS(n.href,n,n.getAttribute("media")),n.rel=null)}},!e.support()){e.poly();var r=t.setInterval(e.poly,300);t.addEventListener&&t.addEventListener("load",function(){e.poly(),t.clearInterval(r)}),t.attachEvent&&t.attachEvent("onload",function(){t.clearInterval(r)})}}}(this);
+
+  window.disablePushState = false;
+  window.disableDrawer = false;
+</script>
+
+<!--[if lt IE 9]>
+  <script src="https://unpkg.com/html5shiv/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+<!-- =============== -->
+<!-- STYLES          -->
+<!-- =============== -->
+<!--[if gt IE 8]><!---->
+<style>
+  
+  article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}*{box-sizing:border-box}html,body{margin:0;padding:0}html{font-size:16px;line-height:1.75}body{color:#333;background-color:#fff;overflow-y:scroll}a{text-decoration:none}.lead{margin-left:-1rem;margin-right:-1rem}img,.img{display:block;max-width:100%;margin-bottom:1rem;border:none}img.lead,.img.lead{max-width:calc(100% + 2rem);width:calc(100% + 2rem)}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-weight:bold;text-rendering:optimizeLegibility}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{margin:1.6rem 0 1rem;line-height:1.6}h1,.h1{font-size:2rem;line-height:1.25}h2,.h2{font-size:1.5rem}h3,.h3{font-size:1.17em}p{margin-top:0;margin-bottom:1rem}p.lead{font-size:1.25rem;font-weight:300;padding:0 1rem}ul,ol,dl{margin-top:0;margin-bottom:1rem}ul,ol{padding-left:1.25rem}hr{position:relative;margin:1.5rem 0;border:0;border-top:1px solid #eee}.hr{padding-bottom:.5rem;border-bottom:1px solid #eee;margin-bottom:1.5rem}h4,h5,h6,.h4,.h5,.h6{margin-bottom:0.5rem;font-size:1rem}table{margin-bottom:1rem;width:100%;width:calc(100% + 2rem);margin-left:-1rem;border:1px solid #e5e5e5;border-collapse:collapse;border-spacing:0}td,th{padding:.25rem .5rem;border:1px solid #e5e5e5}td:first-child,th:first-child{padding-left:1rem}td:last-child,th:last-child{padding-right:1rem}thead+tbody,tbody+tbody,tfoot{border-top:3px double #e5e5e5}tbody tr:nth-child(odd) td,tbody tr:nth-child(odd) th{background-color:#f9f9f9}footer{margin-bottom:2rem}.page,.post{margin-bottom:3em}.page li+li,.post li+li{margin-top:.25rem}.page>header,.post>header{margin-bottom:2rem}.page-title,.post-title{margin-top:0}.post-date{display:block;margin-top:-0.5rem;margin-bottom:1rem;color:#9a9a9a}.related-posts{padding-left:0;list-style:none}.related-posts>li,.related-posts>li+li{margin-top:1rem}.related-posts>li>small,.related-posts>li+li>small{font-size:75%;color:#9a9a9a}.message{margin-bottom:1rem;padding:1rem;color:#787878;background-color:#f9f9f9;margin-left:-1rem;margin-right:-1rem}body,main{position:relative;overflow-x:hidden}@media screen{body::before{content:'';background:#e5e5e5;position:absolute;left:0;top:0;bottom:0}}@media screen and (min-width: 40em){html{font-size:17px}}@media screen and (min-width: 54em){html{font-size:16px}}@media screen and (min-width: 88em){html{font-size:17px}}@media screen and (min-width: 125em){html{font-size:18px}}.sr-only{display:none}.clearfix,.sidebar-social::after,.clearafter::after{content:"";display:table;clear:both}a,.a{position:relative;padding-bottom:.15rem;border-style:hidden}.img{overflow:hidden;background-color:#f9f9f9}.img>img{margin:0;width:100%;height:100%}.sixteen-nine{position:relative}.sixteen-nine::before{display:block;content:"";width:100%;padding-top:56.25%}.sixteen-nine>*{position:absolute;top:0;left:0;right:0;bottom:0}h1+hr,h2+hr,h3+hr,h4+hr,h5+hr,h6+hr{margin-top:0}.fade-in{animation-duration:500ms;animation-name:fade-in;animation-fill-mode:forwards}@keyframes fade-in{from{transform:translateY(-2rem);opacity:0}50%{transform:translateY(-2rem);opacity:0}to{transform:translateY(0);opacity:1}}.mb6{margin-bottom:10rem}.sidebar{color:rgba(255,255,255,0.75);text-align:left}.sidebar::before{content:"";position:absolute;z-index:2;top:0;left:0;bottom:0;right:0;background:linear-gradient(to bottom, rgba(32,32,32,0) 0%, rgba(32,32,32,0.5) 100%)}.sidebar a{color:#fff;border-bottom-color:rgba(255,255,255,0.2)}.right-side{width:100%;margin-left:auto;margin-right:auto}.right-side .ad-first{text-align:center}@media screen{.right-side{max-width:38rem;min-height:100vh}.right-side .ad-second{display:none}}@media screen and (min-width: 54em){.right-side{margin-left:20rem;margin-right:1rem;padding:4rem 1rem 12rem}.right-side .ad-second{text-align:center;display:block}}@media screen and (min-width: 72em){.right-side{margin-left:22rem;max-width:42rem}}@media screen and (min-width: 88em){.right-side{width:162px;margin-left:0rem;margin-right:0rem;padding:0rem;margin-top:10rem;display:block;float:left}}@media screen and (min-width: 96em){.right-side{width:300px;margin-right:0rem}}#_yDrawer{position:relative}@media screen{#_yDrawer{min-height:640px;min-height:100vh}}@media screen and (min-width: 54em){#_yDrawer{width:18rem;margin-left:0}}.sidebar-bg{position:absolute;height:100%;overflow:hidden;top:0;right:0;bottom:0;left:0;background:#202020 center / cover}.sidebar-box{display:flex;justify-content:center}.sidebar-sticky{position:relative;z-index:3}@media screen{.sidebar-sticky{-ms-overflow-style:none;overflow:-moz-scrollbars-none;height:100%;overflow:auto;position:absolute;padding:3rem 0rem;right:2.5rem;left:2.5rem}}.sidebar-sticky::-webkit-scrollbar{display:none}.sidebar-about>h1{color:#fff;font-size:2rem}.sidebar-nav>ul{list-style:none;padding-left:0;margin-bottom:.5rem}a.sidebar-nav-item{width:100%;font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}a.sidebar-nav-subitem{font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}@media screen{.y-drawer-scrim{z-index:2}.y-drawer-content{width:18rem;left:-18rem;z-index:3}}.sidebar-social{margin-bottom:.5rem}.sidebar-social>ul{list-style:none;padding-left:0;margin:0 -.25rem}.sidebar-social>ul>li{float:left}.sidebar-social>ul>li>a{display:inline-block;text-align:center;font-size:1.6rem;line-height:3rem;width:3.1249rem;height:4rem;padding:.5rem 0}.sidebar-social>ul li+li{margin-top:0}.fixed-top{position:fixed;top:0;left:0;width:100%;z-index:1}.navbar>.content{padding-top:0;padding-bottom:0;min-height:0;height:0}.menu{display:inline-block;padding:1.75rem 1.5rem;border-bottom:none;margin-left:-1.5rem;color:#9a9a9a !important}.menu::after{content:"\2630"}@media screen and (min-width: 54em){.menu{padding:1.25rem 1.5rem;position:absolute;left:-9999px}.menu:focus{position:static}}.animation-main{pointer-events:none}.loading{display:none}@media print{.menu{display:none}}.animation-main{opacity:0;will-change:opacity}.loading{position:absolute;top:0;right:0;padding:5.25rem 4.5rem;transform-origin:top right;transform:scale(0.33)}.content{position:relative;margin-left:auto;margin-right:auto;padding:5rem 1rem 12rem}@media screen{.content{min-height:100vh}}@media screen and (min-width: 54em){.content{padding:4rem 1rem 12rem;margin-left:19rem;margin-right:3rem}}@media screen and (min-width: 72em){.content{max-width:42rem;margin-left:21rem}}@media screen and (min-width: 88em){.content{float:left;width:100%;margin-left:22rem;margin-right:5rem}}@media screen and (min-width: 96em){.content{max-width:44rem}}@media screen and (min-width: 102em){.content{margin-left:25rem;margin-right:8rem}}.me{width:6.5rem;height:6.5rem;align-self:center;margin-right:20px;border-radius:100%;position:relative}@media screen and (min-width: 40em){.me{width:7rem;height:7rem}}@media screen and (min-width: 54em){.me{width:6.5rem;height:6.5rem}}@media screen and (min-width: 72em){.me{width:7rem;height:7rem}}main>footer{width:100%;position:absolute;bottom:0;left:0;right:0;padding:0 1rem;color:#9a9a9a;font-size:smaller;text-align:center}main>footer>p{margin-bottom:0}html{font-family:'Sans-serif'}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-family:'Sans-serif'}
+
+</style>
+
+
+<link
+  rel="preload"
+  href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0"
+  as="style"
+  onload="this.rel='stylesheet'"
+/>
+
+<style id="_pageStyle">
+
+.content a{color:#4f86aa;border-color:rgba(79,134,170,0.2)}.content a:hover{border-color:#4f86aa}:focus{outline-color:#4f86aa}::selection{color:#fff;background:#4f86aa}::-moz-selection{color:#fff;background:#4f86aa}
+
+</style>
+
+
+<noscript>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0" />
+    
+  
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Lato"
+  />
+  <style>
+    html { font-family: 'Lato', 'Sans-serif' }
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .heading { font-family: 'Lato', 'Sans-serif' }
+  </style>
+   
+  <link rel="stylesheet" href="http://localhost:4000/assets/icomoon/style.css" />
+</noscript>
+<!--<![endif]-->
+
+</head>
+
+<body>
+  <!-- =============== -->
+<!-- MENU            -->
+<!-- =============== -->
+<div class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <a id="_menu" class="menu no-hover" href="#_title">
+      <span class="sr-only">Menu</span>
+    </a>
+  </div>
+</div>
+
+<!-- =============== -->
+<!-- CONTENT         -->
+<!-- =============== -->
+<div id="_yPushState">
+  <div class="fade-in">
+    <main
+      id="_main"
+      class="content"
+      role="main"
+      data-color="#4f86aa"
+      data-image="/assets/img/bg.jpg"
+    >
+      
+
+<article id="post-language/2020/04/11/Kotlin-06" class="post" role="article">
+  <header>
+    <h1 class="post-title">
+      
+        Kotlin In Action 6장
+        
+    </h1>
+
+    <p class="post-date heading">
+      <time datetime="2020-04-11T00:00:00+09:00">11 Apr 2020</time>
+      
+
+
+
+
+
+
+
+
+
+in <a href="/category/programming-language/" data-flip="title">Programming Language</a>
+
+      
+
+
+
+
+
+
+
+
+
+on <a href="/tag/programming-language-kotlin/" data-flip="title">Kotlin</a>
+
+    </p>
+
+    
+  <div class="hr" style="padding-bottom:0"></div>
+
+
+  </header>
+  
+
+
+  
+  <div class="markdown-body">
+
+    <!-- 
+    <div class="head-image"><img src="http://localhost:4000/assets//img/kotlin-logo.png" /></div>
+    <br /> -->
+    <style>
+      .myAd1190 {
+        width: 48%;
+        height: 280px;
+      }
+
+      .myAd1290 {
+        width: 48%;
+        height: 280px;
+      }
+
+      @media(max-width: 800px) {
+        .myAd1190 {
+          display: none;
+        }
+
+        .myAd1290 {
+          width: 98%;
+        }
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 300px;
+      }
+
+      .row-center {
+        display: flex;
+        justify-content: center;
+        height: 258px;
+      }
+    </style>
+   
+    <!--<br />-->
+    <h2 id="코틀린-타입-시스템">코틀린 타입 시스템</h2>
+
+<p>코틀린 타입 시스템에서 자바와 가장 큰 차이를 보이는 부분은 <strong>Nullable Type</strong>과 <strong>읽기 전용 컬렉션</strong>일 것이다.</p>
+
+<p>지금부터 코틀린의 타입 시스템에 대해서 조금 더 자세히 살펴보자.</p>
+
+<h2 id="널-가능성">널 가능성</h2>
+
+<p>코틀린에서는 기본적으로 모든 데이터 타입이 <strong>Non-Nullable Data Type</strong>이다.</p>
+
+<p>이는 자바 개발자들에게 고통을 안겨준 <strong>NPE</strong>를 방지하기 위함이다.</p>
+
+<p>그리고 이러한 <strong>Nullable Checking</strong>이 <strong>NPE</strong>의 발생 위험을 컴파일 시점에 알아차릴 수 있게 해준다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">a</span><span class="p">:</span> <span class="nc">String</span> <span class="p">=</span> <span class="k">null</span> <span class="c1">// error!</span>
+<span class="kd">val</span> <span class="py">b</span><span class="p">:</span> <span class="nc">String</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span> <span class="c1">// OK!</span>
+</code></pre></div></div>
+
+<p><strong>?</strong> (물음표)를 붙여야 <strong>Nullable Type</strong>으로 선언할 수 있다.</p>
+
+<h2 id="타입의-의미">타입의 의미</h2>
+
+<p>그러면 조금 더 철학적인 질문을 던져보자.</p>
+
+<p>타입이란 무엇이며 왜 변수에 타입을 지정해야할까?</p>
+
+<p>위키피디아에서는 타입의 의미에 대해 다음과 같이 적혀있다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>타입은 분류 (classification)로 타입은 어떤 값들이 가능한지와 그 타입에 대해 수행할 수 있는 연산의 종류를 결정한다.
+</code></pre></div></div>
+
+<p>이 정의를 자바에 적용해보자.</p>
+
+<p>자바의 <strong>double</strong> 타입을 예를 들어, <strong>double</strong> 타입은 64비트 부동소수점 수를 표현할 수 있는 자료형이다.</p>
+
+<p><strong>double</strong> 타입은 일반 수학 연산을 수행할 수 있다.</p>
+
+<p>따라서 <strong>double</strong> 타입의 변수에 대한 연산을 컴파일러가 통과시킨 경우 그 연산이 성공적으로 실행되리란 사실을 확인할 수 있다.</p>
+
+<p>자 그러면 <strong>String</strong>과 <strong>double</strong>을 비교해보자.</p>
+
+<p>누구나 알듯이 <strong>String</strong>과 <strong>double</strong>은 완전히 다른 값을 지원한다.</p>
+
+<p><strong>String</strong> 타입의 변수에는 문자열이나 <code class="language-plaintext highlighter-rouge">null</code>을 대입할 수 있다.</p>
+
+<p>그러나 이 두 종류의 값은 완전히 다르다. 심지어 자바의 instanceof 연산자도 <code class="language-plaintext highlighter-rouge">null</code>이 <strong>String</strong>이 아니라고 판단한다.</p>
+
+<p>그리고 <strong>String</strong>이 들어간 변수의 경우 <strong>String</strong> 클래스에 정의된 모든 메소드를 호출할 수 있다.</p>
+
+<p>하지만 <strong>null</strong>이 들어있는 경우 사용할 수 있는 메소드가 많지 않다.</p>
+
+<p>이는 자바의 타입 시스템이 널을 제대로 다루지 못한다는 뜻이다.</p>
+
+<p>즉, 자바는 타입 시스템 자체에서 널을 판별할 수 없기 때문이다.</p>
+
+<p>물론 자바 8에서 <strong>Optional</strong>이 추가되며 <strong>null</strong>을 감싸는 래퍼 타입을 활용할 수 있기는 하다.</p>
+
+<p>그러나 <strong>Optional</strong>의 경우 그 한계가 매우 명확하다.</p>
+
+<p>가령 코드가 매우 지저분해지며 래퍼가 추가됨에 따라 실행 시점에 성능이 저하되고, 전체 에코 시스템에서 일관성있게 사용하기가 어렵다.</p>
+
+<p>우리가 작성하고 있는 코드에서 <strong>Optional</strong>을 사용해 널을 처리하더라도 JDK 메소드나 다른 프레임워크에서 제공하는 기능이나 써드파티 라이버르리에서 반환되는 널을 여전히 처리해야만 한다.</p>
+
+<h2 id="안전한-호출-연산자-">안전한 호출 연산자 ?.</h2>
+
+<p>코틀린이 제공하는 가장 유용한 도구 중 하나가 바로 안전한 호출 연산자인 <strong>?.</strong>이다.</p>
+
+<p><strong>?.</strong>은 null 검사와 메소드 호출을 한번의 연산으로 수행하기 때문에 더욱 더 직관적이고 간결한 코드를 작성할 수 있다.</p>
+
+<p>가령 <strong>foo?.bar()</strong>를 호출했을 때 <strong>foo</strong>가 <code class="language-plaintext highlighter-rouge">null</code>이 아니라면 <strong>foo.bar()</strong>를 호출할 것이고, 만약 <strong>foo</strong>가 <code class="language-plaintext highlighter-rouge">null</code>이라면 뒤의 <code class="language-plaintext highlighter-rouge">bar()</code> 메소드는 수행하지 않고 그대로 <code class="language-plaintext highlighter-rouge">null</code>을 반환하게 된다.</p>
+
+<h2 id="엘비스-연산자-">엘비스 연산자 ?:</h2>
+
+<p>엘비스 연산자는 연산의 결과가 <code class="language-plaintext highlighter-rouge">null</code>인 경우 별도의 처리를 위해 사용한다.</p>
+
+<p>앞서 <strong>foo?.bar()</strong>를 예로 들어보자.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">foo</span><span class="o">?.</span><span class="nf">bar</span><span class="p">()</span> <span class="o">?:</span> <span class="nf">println</span><span class="p">(</span><span class="s">"Null!"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>엘비스 연산자를 사용하여 <strong>foo</strong>가 <code class="language-plaintext highlighter-rouge">null</code>이 되는 경우 <strong>Null!</strong>을 출력하는 처리가 가능하게 되었다.</p>
+
+<p>이런식으로 엘비스 연산자는 <code class="language-plaintext highlighter-rouge">null</code>을 스마트하게 처리할 수 있는 기능을 제공하고 있기 때문에 많이 사용된다.</p>
+
+<h2 id="안전한-캐스트-as">안전한 캐스트 as?</h2>
+
+<p>2장에서 타입 캐스트 연산자인 as에 대해 살펴보았다.</p>
+
+<p>as 역시 안전한 처리가 가능한데, 다음을 보자</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">foo</span> <span class="p">=</span> <span class="n">foo</span> <span class="k">as</span><span class="p">?</span> <span class="nc">Int</span>
+<span class="c1">// if foo is Int, foo cast Int</span>
+<span class="c1">// but foo is not Int, it will retunn null</span>
+</code></pre></div></div>
+
+<h2 id="널-아님-단언-">널 아님 단언 !!</h2>
+
+<p>널 단언은 코틀린에서 널이 될 수 있는 타입의 값을 다룰 때 사용할 수 있는 도구 중 가장 단순하면서 무딘 도구다.</p>
+
+<p>어떤 값이든 널이 될 수 없는 타입으로 강제로 바꿀 수 있다.</p>
+
+<p>가령 <strong>foo</strong>가 Nullable 타입이라고 하더라도, <code class="language-plaintext highlighter-rouge">!!</code>를 사용하여 컴파일러의 경고를 무시할 수 있다.</p>
+
+<p>우리는 <code class="language-plaintext highlighter-rouge">!!</code>가 약간은 무례하다고 느낄지도 모른다.</p>
+
+<p>하지만 이는 코틀린 개발자들이 의도한 바이다.</p>
+
+<p>그들은 <code class="language-plaintext highlighter-rouge">!!</code>기호가 마치 컴파일러에게 소리를 지르는 것 같은 느낌을 들게 만든다.</p>
+
+<p>코틀린 설계자들은 컴파일러가 검증할 수 없는 단언을 사용하기 보다는 더 나은 방법을 찾아보라는 의도를 넌지시 표현하고자 <code class="language-plaintext highlighter-rouge">!!</code>라는 못생긴 기호를 사용했다.</p>
+
+<p>그렇기 때문에 <code class="language-plaintext highlighter-rouge">!!</code>는 남발하지 않는 편이 좋다는 것 또한 알 수 있다.</p>
+
+<h2 id="let-함수">let 함수</h2>
+
+<p><code class="language-plaintext highlighter-rouge">let</code> 함수를 함께 사용하면 널이 될 수 있는 식을 더 쉽게 다룰 수 있다.</p>
+
+<p>가령 앞서 본 <strong>foo</strong> 예제의 경우 다음과 같이 사용할 수 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">foo</span><span class="o">?.</span><span class="nf">let</span> <span class="p">{</span>
+    <span class="nf">println</span><span class="p">(</span><span class="s">"Not Null!"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>foo가 널이 아닌 경우라면 let 함수 내부의 블럭을 실행한다.</p>
+
+<p>이는 엘비스 연산자와 조합하여 더욱 우아하게 사용할 수 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">foo</span><span class="o">?.</span><span class="nf">let</span> <span class="p">{</span>
+    <span class="nf">println</span><span class="p">(</span><span class="s">"Not Null!"</span><span class="p">)</span>
+<span class="p">}</span> <span class="o">?:</span> <span class="nf">println</span><span class="p">(</span><span class="s">"Null!"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="나중에-초기화할-프로퍼티">나중에 초기화할 프로퍼티</h2>
+
+<p>객체를 일단 선언한 다음 나중에 초기화하는 프레임워크가 많다.</p>
+
+<p>가장 대표적으로 Spring의 인터페이스 빈 주입이 그런 경우일 것이다.</p>
+
+<p>하지만 코틀린에서는 클래스 안의 널이 될 수 없는 프로퍼티를 생성자 안에서 초기화하지않고 특별한 메소드 안에서 초기화할 수 없다.</p>
+
+<p>코틀린에서는 일반적으로 생성자에서 모든 프로퍼티를 초기화해야한다.</p>
+
+<p>게다가 프로퍼티 타입이 널이 될 수 없는 타임이라면 반드시 널이 아닌 값으로 그 프로퍼티를 초기화해야한다.</p>
+
+<p>그런 초기화 값을 제공할 수 없는 경우라면 널이 될 수 있는 타입을 사용할 수 밖에 없는 것이다.</p>
+
+<p>하지만 널이 될 수 있는 타입을 사용하면 모든 프로퍼티 접근에 널 검사나 <code class="language-plaintext highlighter-rouge">!!</code> 연산자를 사용해야한다.</p>
+
+<p>코틀린도 이를 알고 특별한 키워드를 제공하고 있는데, 그것은 <strong>lateinit</strong>이다.</p>
+
+<p><strong>lateinit</strong> 변경자를 붙이면 <strong>Non-Nullable Type</strong>도 프로퍼티를 나중에 초기화 할 수 있다.</p>
+
+<h2 id="널이-될-수-있는-타입-확장">널이 될 수 있는 타입 확장</h2>
+
+<p>널이 될 수 있는 타입에 대한 확장 함수를 정의하면 <code class="language-plaintext highlighter-rouge">null</code>을 다루는 강력한 도구로 활용할 수 있다.</p>
+
+<p>널이 될 수 있는 타입의 변수가 널이 될 수 있는 타입의 확장 함수를 사용할 때 안전한 호출 없이도 호출이 가능한 것이다.</p>
+
+<h2 id="코틀린에선-어떻게-널이될-수-있는-타입의-확장함수를-선언하면-이를-알아차릴-수-있는-것일까">코틀린에선 어떻게 널이될 수 있는 타입의 확장함수를 선언하면 이를 알아차릴 수 있는 것일까?</h2>
+
+<p><img width="302" alt="스크린샷 2020-04-12 오후 6 45 51" src="https://user-images.githubusercontent.com/43809168/79065830-403cab80-7cee-11ea-881f-1d2529e9a752.png" />
+<img width="761" alt="스크린샷 2020-04-12 오후 6 45 07" src="https://user-images.githubusercontent.com/43809168/79065831-42066f00-7cee-11ea-9dd5-94c454420c27.png" /></p>
+
+<p>실험을 위해 <code class="language-plaintext highlighter-rouge">hello</code>라는 확장함수를 만들고 호출해보았다.</p>
+
+<p>결과는 예상대로 <code class="language-plaintext highlighter-rouge">Hello Harry</code>가 출력되는 것을 볼 수 있다.</p>
+
+<p>그리고 확장함수인 hello는 <code class="language-plaintext highlighter-rouge">static final</code> 메소드로 선언이되며 <code class="language-plaintext highlighter-rouge">@Nullable</code> 애노테이션이 붙어 있는 것을 볼 수 있다.</p>
+
+<p>즉, 호출 시 호출 객체가 null이더라도 받아줄 수 있게 되어있다는 뜻이다.</p>
+
+<p>다음은 null을 넣어서 호출한 코드이다.</p>
+
+<p><img width="315" alt="스크린샷 2020-04-12 오후 6 45 45" src="https://user-images.githubusercontent.com/43809168/79065878-91e53600-7cee-11ea-9502-32a63a6464e5.png" />
+<img width="758" alt="스크린샷 2020-04-12 오후 6 46 16" src="https://user-images.githubusercontent.com/43809168/79065881-93aef980-7cee-11ea-825c-108de2831448.png" /></p>
+
+<p>자바에서는 <code class="language-plaintext highlighter-rouge">Nullabe</code>과 <code class="language-plaintext highlighter-rouge">Non-Nullable</code>을 구분하지 않기 때문에 확장 함수에서는 별도의 <code class="language-plaintext highlighter-rouge">Null Checking</code> 없이도 확장 함수를 사용할 수 있는 것이다.</p>
+
+<h2 id="타입-파라미터의-널-가능성">타입 파라미터의 널 가능성</h2>
+
+<p>타입 파라미터 <code class="language-plaintext highlighter-rouge">T</code>를 클래스나 함수 안에서 타입 이름으로 사용하면 이름 끝에 물음표가 없더라도 <code class="language-plaintext highlighter-rouge">T</code>가 널이 될 수 있는 타입이다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;</span> <span class="nf">printHashCode</span><span class="p">(</span><span class="n">t</span><span class="p">:</span> <span class="nc">T</span><span class="p">){</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">t</span><span class="o">?.</span><span class="nf">hashCode</span><span class="p">())</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">T</code>는 추론한 타입이 널이 될 수 있는 <strong>Any?</strong> 타입이다.</p>
+
+<p>t 파라미터의 타입 이름 <code class="language-plaintext highlighter-rouge">T</code>에는 물음표가 없지만 t는 <code class="language-plaintext highlighter-rouge">null</code>을 받을 수 있다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">T</code>를 사용하면서 널이 될 수 없음을 명시하고 싶은 경우라면 타입 상한을 지정해야한다.</p>
+
+<p>다음과 같이 가능하다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="p">&lt;</span><span class="nc">T</span><span class="p">:</span> <span class="nc">Any</span><span class="p">&gt;</span> <span class="nf">printHashCode</span><span class="p">(</span><span class="n">t</span><span class="p">:</span> <span class="nc">T</span><span class="p">){</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="nf">hashCode</span><span class="p">())</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="널-가능성과-자바">널 가능성과 자바</h2>
+
+<p>자바에서는 널 가능성을 지원하지 않는다.</p>
+
+<p>그러면 자바와 코틀린을 조합하면 어떤 일이 생길까?</p>
+
+<p>그 둘을 조합한 프로그램은 안전하지 않게 될까?</p>
+
+<p>자바 코드에서는 애노테이션으로 널 가능성 정보를 표현할 수 있다.</p>
+
+<p><strong>@Nullable</strong>이 그것이다.</p>
+
+<p>가령 자바에서 <strong>@Nullable String</strong>이라는 타입이 존재한다면 이는 코틀린에서 봤을 때 <code class="language-plaintext highlighter-rouge">String?</code>와 같은 의미를 갖는다.</p>
+
+<p>자바에서 <strong>@NotNull String</strong>의 타입은 코틀린에서 <code class="language-plaintext highlighter-rouge">String</code>과 같은 것이다.</p>
+
+<p>코틀린은 여러 널 가능성 애노테이션을 알아본다.</p>
+
+<p>JSR-305 표준이라던지 안드로이드, 젯브레인 도구들이 지원하는 애노테이션 등 코틀린이 이해할 수 있는 애노테이션들을 확인한다.</p>
+
+<p>그러나 만약 이러한 널 가능성 애노테이션이 소스코드에 없는 경우라면 자바 타입은 <strong>코틀린 플랫폼 타입</strong>이 된다.</p>
+
+<h2 id="플랫폼-타입">플랫폼 타입</h2>
+
+<p>플랫폼 타입은 코틀린이 널 관련 정보를 알 수 없는 타입을 말한다.</p>
+
+<p>해당 타입을 널이 될 수 있는 타입으로 처리할 수도 있고 반대도 가능하다.</p>
+
+<p>즉 이는 플랫폼 타입에 대해 수행하는 모든 연산에 대한 책임은 우리에게 있다는 것을 의미한다.</p>
+
+<p>코틀린은 보통 널이 될 수 없는 타입의 값에 대해 널 안전성 검사하는 연산을 수행하면 경고를 표시하지만</p>
+
+<p>플랫폼 타입의 값은 아무 경고도 표시하지않는다.</p>
+
+<p>즉 자바와 마찬가지로 우리가 플랫폼 타입을 제대로 다루지 못할 경우 컴파일러는 <strong>NPE</strong>를 발생시킬 것이다.</p>
+
+<p>그렇다면 어째서 코틀린은 플랫폼 타입을 도입했을까?</p>
+
+<p>모든 자바 타입을 널이 될 수 있는 타입으로 다루면 되는데 말이다.</p>
+
+<p>이는 모든 타입을 널이 될 수 있는 타입으로 다루면 결코 널이 될 수 없는 값에 대해서도 불필요한 널 검사가 들어가기 때문이다.</p>
+
+<p>특히 제네릭을 다룰 때 최악의 상황을 맞이하게 되는데,</p>
+
+<p>예를 들어 자바 <code class="language-plaintext highlighter-rouge">ArrayList&lt;String&gt;</code>을 코틀린에서 <code class="language-plaintext highlighter-rouge">ArrayList&lt;String?&gt;?</code>으로 다루면 배열 원소에 접근할 때 마다 널 검사를 수행하거나 안전한 캐스트를 수행해야한다.</p>
+
+<p>하지만 이런 처리는 이익보다 검사에 드는 비용이 훨씬 많이 들게 된다.</p>
+
+<p>또한 모든 타입의 값에 대해 항상 널 검사를 작성하는 것은 너무 성가신 일이다.</p>
+
+<p>그래서 코틀린 설계자들은 자바의 타입을 가져온 경우 프로그래머에게 그 타입을 제대로 처리할 책임을 부여하는 실용적인 접근 방법을 택했다.</p>
+
+<h2 id="코틀린의-primitive-타입">코틀린의 Primitive 타입</h2>
+
+<p>지금부터는 코틀린에서 사용하는 Int, Boolean, Any 등의 <strong>Primitive</strong> 타입에 대해 살펴보자.</p>
+
+<p>코틀린은 <strong>Primitive</strong>과 <strong>Wrapper</strong> 타입을 구분하지 않는다.</p>
+
+<p>그러면 어떻게 <strong>Primitive</strong> 타입에 대한 래핑이 작동하는지도 알아보자.</p>
+
+<p>또한 <code class="language-plaintext highlighter-rouge">Object</code>,<code class="language-plaintext highlighter-rouge">Void</code> 등의 자바 타입과 코틀린 타입 간의 대응 관계에 대해서도 살펴보자.</p>
+
+<h2 id="primitive-type--int-boolean-">Primitive Type : Int, Boolean …</h2>
+
+<p>알다시피 자바에서는 <strong>Primitive Type</strong>과 <strong>Reference Type</strong>을 구분한다.</p>
+
+<p><strong>Primitive Type</strong>의 경우 값이 직접 들어가지만,</p>
+
+<p><strong>Reference Type</strong>의 경우 메모리 상의 위치가 들어가게 된다.</p>
+
+<p>알다시피 자바 컬렉션에서는 <strong>Primitive Type</strong>을 담을 수 없다.</p>
+
+<p>이를 위해 특별한 래퍼타입으로 <strong>Primitive Type</strong>을 감싸서 사용하는게 자바에서는 일반적이었다.</p>
+
+<p>코틀린은 <strong>Primitive Type</strong>과 <strong>Reference Type</strong>을 구분하지 않는다.</p>
+
+<p><strong>Reference Type</strong>을 구분하지 않기 때문에 편리하다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">i</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">4</span>
+<span class="kd">val</span> <span class="py">list</span><span class="p">:</span><span class="nc">List</span><span class="p">&lt;</span><span class="nc">Int</span><span class="p">&gt;</span> <span class="p">=</span> <span class="nf">listOf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>그러면 여기서 우리는 의문이 생긴다.</p>
+
+<p><strong>Primitive Type</strong>과 <strong>Reference Type</strong>이 같다면 코틀린은 항상 이들을 객체로 표현하는 것일까?</p>
+
+<p>그러면 너무 비효율적이지 않나..?</p>
+
+<p>실제로 항상 객체로 표현하면 비효율적이지만 코틀린은 그렇지 않다.</p>
+
+<p>실행 시점에 숫자 타입은 가능한 한 가장 효율적인 방식으로 표현된다.</p>
+
+<p>대부분의 경우 코틀린의 <strong>Int</strong> 타입은 자바 <strong>int</strong> 타입으로 컴파일된다.</p>
+
+<p>이렇게 컴파일이 안되는 경우는 컬렉션과 같은 제네릭 클래스를 사용하는 경우 뿐이다.</p>
+
+<p>에를 들어 <strong>Int</strong> 타입을 컬렉션의 타입 파라미터로 넘기면 그 컬렉션에는 <strong>Int</strong>의 래퍼 타입에 해당하는 <strong>java.lang.Integer</strong> 객체가 들어간다.</p>
+
+<p>자바의 <strong>Primitive Type</strong>을 코틀린에서 사용할 때도 (플랫폼 타입이 아닌) 널이 될 수 없는 타입으로 취급할 수 있다.</p>
+
+<h2 id="널이-될-수-있는-primitive-type--int-boolean">널이 될 수 있는 Primitive Type : Int?, Boolean?</h2>
+
+<p>코틀린에서 널이 될 수 있는 타입은 자바의 <strong>Primitive Type</strong>으로 표현할 수 없다.</p>
+
+<p>따라서 코틀린에서 널이 될 수 있는 <strong>Primitive Type</strong>을 사용하면 그 타입은 자바의 래퍼 타입으로 컴파일 된다. (흠.. 그러면 성능상 이슈가 있을 수 있으니 가급적이면 널이 될 수 없는 <strong>Primitive Type</strong>을 사용하는게 좋겠네)</p>
+
+<p>또한 앞서 이야기한 대로 제네릭 클래스의 경우 래퍼 타입을 사용한다.</p>
+
+<p>어떤 클래스의 타입 인자로 원시 타입을 넘기면 코틀린은 그 타입에 대한 박스 타입을 사용한다.</p>
+
+<p>이렇게 컴파일 하는 이유는 자바 <strong>JVM</strong>에서 제네릭을 구현하는 방법 때문이다.</p>
+
+<p><strong>JVM</strong>은 제네릭 타입 인자로 <strong>Primitive Type</strong>을 허용하지 않는다.</p>
+
+<p>따라서 자바나 코틀린 모두 제네릭 클래스는 항상 박스 타입을 사용해야한다.</p>
+
+<p>만약 <strong>Primitive Type</strong>으로 이루어진 효율적인 컬렉션을 사용하고 싶다면 서드파티 라이브러리를 사용하거나 배열을 사용해야한다.</p>
+
+<h2 id="숫자-변환">숫자 변환</h2>
+
+<p>코틀린과 자바의 가장 큰 차이 중 하나는 숫자를 변환하는 방식일 것이다.</p>
+
+<p>코틀린은 한 타입의 숫자를 다른 타입의 숫자로 자동 변환하지 않는다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">i</span> <span class="p">=</span> <span class="mi">1</span>
+<span class="kd">val</span> <span class="py">l</span><span class="p">:</span> <span class="nc">Long</span> <span class="p">=</span> <span class="n">i</span> <span class="c1">// 타입 미스매칭 Error!</span>
+</code></pre></div></div>
+
+<p>대신 직접 변환 메소드를 호출해야 한다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">i</span> <span class="p">=</span> <span class="mi">1</span>
+<span class="kd">val</span> <span class="py">l</span><span class="p">:</span><span class="nc">Long</span> <span class="p">=</span> <span class="n">i</span><span class="p">.</span><span class="nf">toLong</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>이는 때때로 불편하다고 느끼게 되는데, 사실 이렇게 숫자 변환을 까다롭게 하는데에는 다 이유가 있다.</p>
+
+<p>코틀린 개발자들은 혼란을 피하기 위해 타입 변환을 <strong>명시</strong>하기로 결정하였다.</p>
+
+<p>특히 박스 타입을 비교하는 경우 문제가 많은데, 두 박스 타입 간의 <strong>equals</strong>() 메소드는 그 안에 들어있는 값이 아니라 박스 타입 객체를 비교한다.</p>
+
+<p>자바에서 예를들면,</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">new</span> <span class="nc">Integer</span><span class="o">(</span><span class="mi">42</span><span class="o">).</span><span class="na">equals</span><span class="o">(</span><span class="k">new</span> <span class="nc">Long</span><span class="o">(</span><span class="mi">42</span><span class="o">))</span> <span class="o">==</span> <span class="kc">false</span> <span class="c1">// True!</span>
+</code></pre></div></div>
+
+<p>박스 내부의 값이 같더라도 박스 타입 객체가 다르기 때문에 <code class="language-plaintext highlighter-rouge">false</code>를 반환한다.</p>
+
+<p>코틀린 역시 이러한 문제를 회피하기 위해 숫자 타입간의 타입 변경 또한 명시적으로 변환하게끔 하였다.</p>
+
+<h2 id="any-any--최상위-타입">Any, Any? : 최상위 타입</h2>
+
+<p>자바에서 모든 클래스의 최상위 계층인 <code class="language-plaintext highlighter-rouge">Object</code>가 있었다면 코틀린에서는 <code class="language-plaintext highlighter-rouge">Any</code>가 그 역할을 대신한다.</p>
+
+<p>그러나 자바에서는 <strong>Reference Type</strong>에서만 <code class="language-plaintext highlighter-rouge">Object</code>가 최상위 클래스지</p>
+
+<p><strong>Primitive Type</strong>의 경우 해당 계층에 포함되지는 않았다.</p>
+
+<p>그러나 코틀린에서는 <code class="language-plaintext highlighter-rouge">Any</code>가 <strong>Primitive Type</strong>을 포함해 모든 타입의 조상 타입이다.</p>
+
+<p>코틀린의 <code class="language-plaintext highlighter-rouge">Any</code>는 자바의 <code class="language-plaintext highlighter-rouge">Object</code>와 대응한다.</p>
+
+<p>그래서 자바 메소드에서 <code class="language-plaintext highlighter-rouge">Object</code>를 인자로 받거나 변환하면 코틀린에서는 <code class="language-plaintext highlighter-rouge">Any</code>로 취급한다.</p>
+
+<p>물론 널이 될 수 있는지 없는지 여부를 알 수 없으므로 플랫폼 타입인 <code class="language-plaintext highlighter-rouge">Any!</code>로 취급하는 것이 더 정확하겠다.</p>
+
+<p>코틀린 함수가 <code class="language-plaintext highlighter-rouge">Any</code>를 사용하면 자바 바이트코드의 <code class="language-plaintext highlighter-rouge">Object</code>로 컴파일된다.</p>
+
+<h2 id="unit-type--코틀린식-void">Unit Type : 코틀린식 void</h2>
+
+<p>자바의 <code class="language-plaintext highlighter-rouge">void</code>와 코틀린의 <code class="language-plaintext highlighter-rouge">Unit</code>은 뭐가 다를까?</p>
+
+<p><code class="language-plaintext highlighter-rouge">Unit</code>은 모든 기능을 갖는 일반적인 타입이며, void와는 달리 <code class="language-plaintext highlighter-rouge">Unit</code>을 타입 인자로 쓸 수 있다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Unit</code> 타입에 속한 값은 <code class="language-plaintext highlighter-rouge">Unit</code> 하나 뿐이다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Unit</code> 타입의 함수는 묵시적으로 <code class="language-plaintext highlighter-rouge">Unit</code> 값을 반환한다.</p>
+
+<p>그러면 코틀린에서는 왜 <code class="language-plaintext highlighter-rouge">Void</code>가 아니라 <code class="language-plaintext highlighter-rouge">Unit</code>이라는 다른 이름을 골랐는지 궁금할 것이다.</p>
+
+<p>이는 함수형 프로그래밍에서 전통적으로 <code class="language-plaintext highlighter-rouge">Unit</code>은 <code class="language-plaintext highlighter-rouge">단 하나의 인스턴스만 갖는 타입</code>을 의미해 왔고</p>
+
+<p>바로 그 유일한 인스턴스의 유무가 자바 <code class="language-plaintext highlighter-rouge">void</code>와 코틀린 <code class="language-plaintext highlighter-rouge">Unit</code>을 구분하는 가장 큰 차이이다.</p>
+
+<h2 id="nothing-type--이-함수는-결코-정상적으로-끝나지-않는다">Nothing Type : 이 함수는 결코 정상적으로 끝나지 않는다.</h2>
+
+<p>코틀린에는 결코 성공적으로 값을 돌려주는 일이 없으므로 <code class="language-plaintext highlighter-rouge">반환 값</code>이라는 개념 자체가 의미 없는 함수들이 일부 존재한다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Nothing</code> 타입은 이럴 때 사용하는데, 아무 값도 포함하지 않으며 주로 함수의 반환 타입이나 반환 타입으로 쓰일 타입 파라미터로만 쓸 수 있다.</p>
+
+<h2 id="컬렉션과-배열">컬렉션과 배열</h2>
+
+<p>코틀린 컬렉션이 자바 라이브러리를 바탕으로 만들어졌고 확장 함수를 통해 기능을 추가한다는 사실을 우리는 이전에 공부해서 알고 있다.</p>
+
+<p>하지만 여전히 코틀린의 컬렉션 지원과 자바와 코틀린 컬렉션 간의 관계에 대해 이야기할만한 내용들이 남았다.</p>
+
+<h2 id="널-가능성과-컬렉션">널 가능성과 컬렉션</h2>
+
+<p>컬렉션에서 널이 될 수 있는 변수를 저장할 수 있는 경우를 생각해보자.</p>
+
+<p><code class="language-plaintext highlighter-rouge">List&lt;Int?&gt;</code>는 컬렉션 내부에 <strong>Int</strong> 값 또는 <code class="language-plaintext highlighter-rouge">null</code> 값이 저장될 수 있음을 의미한다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">List&lt;Int&gt;?</code>는 컬렉션을 가르키는 변수가 <code class="language-plaintext highlighter-rouge">null</code>이 될 수 있음을 의미하며 내부에는 <strong>Int</strong> 값만 저장할 수 있음을 의미한다.</p>
+
+<h2 id="읽기-전용과-변경-가능한-컬렉션">읽기 전용과 변경 가능한 컬렉션</h2>
+
+<p>코틀린 컬렉션과 자바 컬렉션을 나누는 가장 중요한 특성 중 하나는 코틀린에서는 컬렉션 안의 데이터에 접근하는 인터페이스와 컬렉션 안의 데이터를 변경하는 인터페이스를 분리했다는 점이다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">kotlin.collections.Collection</code>은 컬렉션 안의 원소에 대해 이터레이션하고, 컬렉션의 크기를 얻고, 어떤 값이 컬렉션 안에 들어있는지 검사하며 컬렉션에서 데이터를 읽는 여러 다른 연산들을 수행할 수 있다. 하지만 <code class="language-plaintext highlighter-rouge">Collection</code>에는 원소를 추가하거나 제거하는 메소드가 없다.</p>
+
+<p>컬렉션의 데이터를 수정하려면 <code class="language-plaintext highlighter-rouge">kotlin.collections.MutableCollection</code> 인터페이스를 사용해야한다.</p>
+
+<p>여기서 중요한 점은 <strong>읽기 전용 컬렉션</strong>이라고 해서 꼭 <strong>변경 불가능한 컬렉션</strong>일 필요는 없다는 것이다.</p>
+
+<p>물론 코틀린은 이후 표준 라이브러리에 불변 컬렉션을 추가할 것이라고 하였다.</p>
+
+<p>다만 읽기 전용 인터페이스 타입인 변수를 사용할 때 그 인터페이스는 실제로는 어떤 컬렉션 인스턴스를 가라키는 수많은 참조 중 하나일 수 있다는 의미이다.</p>
+
+<p>가령 같은 인스턴스를 가리키는 변경 가능한 인터페이스 타입의 참조가 있을 수도 있다.</p>
+
+<p>이 경우 읽기 전용 컬렉션은 변경의 영향을 받게 된다.</p>
+
+<p>물론 하나의 컬렉션 객체를 가르키는 다른 타입의 참조가 동시에 이 컬렉션 객체의 내용을 변경하려고 하는 경우 <code class="language-plaintext highlighter-rouge">ConcurrentModificationException</code>이나 다른 오류가 발생할 수 있다.</p>
+
+<p>따라서 읽기 전용 컬렉션이 항상 <code class="language-plaintext highlighter-rouge">Thread Safe</code>하지는 않다는 점을 명심해야한다.</p>
+
+<p>다중 스레드 환경에서 데이터를 다루는 경우 그 데이터를 적절히 동기화 하거나 동시 접근을 허용하는 데이터 구조를 활용해야한다.</p>
+
+<p>그러면 코틀린은 어떻게 읽기 전용 컬렉션과 변경 가능 컬렉션을 구분하는 걸까?</p>
+
+<p>앞에서 코틀린의 컬렉션은 자바 컬렉션과 동일하다고 했는데 그러면 이는 모순이 아닐까?</p>
+
+<h2 id="코틀린-컬렉션과-자바">코틀린 컬렉션과 자바</h2>
+
+<p>무슨 일이 벌어지고 있는지 조금 더 자세히 알아보자.</p>
+
+<p>모든 코틀린 컬렉션이 자바 컬렉션 인터페이스의 인스턴스라는 점은 사실이다.</p>
+
+<p>그러나 코틀린은 모든 자바 컬렉션 인터페이스마다 <strong>읽기 전용</strong> 인터페이스와 <strong>변경 가능한</strong> 인터페이스 두 가지를 제공한다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/79042739-0b205280-7c35-11ea-8b1a-efe1559a7781.png" alt="collections-diagram" /></p>
+
+<p>이 컬렉션 구조만 보더라도 코틀린의 철학을 세삼 엿볼 수 있다.</p>
+
+<p>함수형 프로그래밍에서는 기본적으로 <strong>불변성</strong>을 강조하고 있지만, 그 역시도 코틀린은 개발자에게 전적으로 맡기고 자유를 준다.</p>
+
+<p><strong>뭘 선택해서 개발할지는 니가 정해. 우리는 만들어만 놓을게</strong>라느 느낌을 받기도 한다.</p>
+
+<p>자 그러면 여기서 궁금한 점이 생긴다.</p>
+
+<p>자바는 읽기 전용 컬렉션과 변경 가능 컬렉션을 구분하지 않는다.</p>
+
+<p>코틀린에서 읽기 전용 컬렉션으로 선언된 객체라도 자바 코드에서는 그 컬렉션 객체의 내용을 <strong>변경</strong>할 수 있다.</p>
+
+<p>코틀린 컴파일러는 자바 코드가 컬렉션에 대해 어떤 일을 하는지 완전히 분석할 수 없다.</p>
+
+<p>따라서 컬렉션을 변경하는 자바 메소드에 읽기 전용 컬렉션을 넘겨도 코틀린 컴파일러가 이를 막을 수 없다는 이야기이다.</p>
+
+<p>이 마저도 코틀린은 우리에게 모든 것을 열어놓고 <strong>알아서 쓰셈 대신 책임은 니가 지는거고 ㅋㅋ</strong>라는 뉘앙스를 풍긴다.</p>
+
+<p>따라서 컬렉션을 자바 코드에게 넘길 때는 특별히 더 주의를 기울여야 하며 코틀린 쪽 타입이 자바 쪽에서 컬렉션에게 가할 수 있는 변경의 내용을 반영하게 해야한다.</p>
+
+<h2 id="객체의-배열과-primitive-타입의-배열">객체의 배열과 Primitive 타입의 배열</h2>
+
+<p>코틀린의 배열은 다음과 같이 사용 가능하다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">arr</span><span class="p">:</span><span class="nc">Array</span><span class="p">&lt;</span><span class="nc">Int</span><span class="p">&gt;</span> <span class="p">=</span> <span class="nf">arrayOf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>코틀린에서 배열을 만들 수 있는 방법은 다양하다.</p>
+
+<ul>
+  <li>
+    <p>위의 예시처럼 arrayOf 함수에 원소를 넘긴다.</p>
+  </li>
+  <li>
+    <p>arryOfNulls 함수에 정수 값을 넘기면 모든 원소가 null이고 인자로 넘긴 값과 크기가 같은 배열을 만들 수 있다. 물론 원소 타입이 널이 될 수 있는 경우에만 사용 가능</p>
+  </li>
+  <li>
+    <p>Array 생성자는 배열 크기와 람다를 인자로 받아서 람다를 호출해서 각 배열 원소를 초기화해준다.</p>
+  </li>
+</ul>
+
+<p>마지막 Array 생성자는 예시를 보면 더 와닿는다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">letters</span> <span class="p">=</span> <span class="nc">Array</span><span class="p">&lt;</span><span class="nc">String</span><span class="p">&gt;(</span><span class="mi">26</span><span class="p">)</span> <span class="p">{</span> <span class="n">i</span> <span class="p">-&gt;</span> <span class="p">(</span><span class="sc">'a'</span> <span class="p">+</span> <span class="n">i</span><span class="p">).</span><span class="nf">toString</span><span class="p">()}</span>
+</code></pre></div></div>
+
+<p>컬렉션을 배열로 변환하기 위한 함수 또한 존재한다. <code class="language-plaintext highlighter-rouge">toTypedArray</code> 메소드를 사용해보자.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">strings</span> <span class="p">=</span> <span class="nf">listOf</span><span class="p">(</span><span class="s">"a"</span><span class="p">,</span><span class="s">"b"</span><span class="p">,</span><span class="s">"c"</span><span class="p">)</span>
+<span class="nf">println</span><span class="p">(</span><span class="s">"%s/%s/%s"</span><span class="p">.</span><span class="nf">format</span><span class="p">(*</span><span class="n">strings</span><span class="p">.</span><span class="nf">toTypedArray</span><span class="p">()))</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">*</code>이 붙는 이유는 vararg 인자를 넘기기 위해 스프레드 연산자인 <code class="language-plaintext highlighter-rouge">*</code>를 사용한 것이다.</p>
+
+<p>그러면 <strong>Primitive Type</strong>의 배열도 만들어보자.</p>
+
+<p>코틀린은 <strong>Primitive Type</strong>의 배열을 표현하는 별도 클래스를 각 <strong>Primitive Type</strong>마다 하나씩 제공한다.</p>
+
+<p>예를 들어 <strong>Int</strong>의 경우 <strong>IntArray</strong>이다.</p>
+
+<p>이 외에도 <strong>ByteArray</strong>, <strong>CharArray</strong> 등 <strong>Primitive Type</strong>의 배열을 제공한다.</p>
+
+<p>이 모든 타입은 당연히 자바 <strong>Primitive Type</strong> 배열인 int[], byte[], char[] 등으로 컴파일 된다.</p>
+
+<p><strong>Primitive Type</strong> 배열을 만드는 방법은 다음과 같다.</p>
+
+<ul>
+  <li>각 배열 타입의 생성자는 size 인자를 받아서 해당 <strong>Primitive Type</strong>의 디폴트 값(보통은 0)으로 초기화된 size 크기의 배열을 반환한다.</li>
+  <li>팩토리 함수는 여러 값을 가변 인자로 받아서 그런 값이 들어간 배열을 반환한다.</li>
+  <li>크기와 람다를 인자로 받는 생성자를 사용한다.</li>
+</ul>
+
+<p>직접 예시를 보자.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">fiveZeros</span> <span class="p">=</span> <span class="nc">IntArray</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="kd">val</span> <span class="py">fiveZerosToo</span> <span class="p">=</span> <span class="nf">intArrayOf</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="kd">val</span> <span class="py">squares</span> <span class="p">=</span> <span class="nc">IntArray</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="p">{</span><span class="n">i-</span><span class="p">&gt;</span> <span class="p">(</span><span class="n">i</span><span class="p">+</span><span class="mi">1</span><span class="p">)*(</span><span class="n">i</span><span class="p">+</span><span class="mi">1</span><span class="p">)}</span>
+</code></pre></div></div>
+
+<p>코틀린에서는 배열 기본 연산에 더해 컬렉션에 사용할 수 있는 모든 확장 함수를 배열에도 제공해주고 있다.</p>
+
+<p>따라서 컬렉션에서 사용했던 <strong>filter</strong>나 <strong>map</strong>같은 확장 함수를 <strong>Primitive Type</strong>으로 이루어진 배열에서도 똑같이 사용할 수 있다.</p>
+
+<h2 id="listof-메소드에-대한-고찰-feat-kotlin-collection과-java-collection">listOf 메소드에 대한 고찰 (feat. Kotlin Collection과 Java Collection)</h2>
+
+<p><strong>listOf</strong> 메소드를 사용하다 문득 의문이 들었다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/79066775-6f0a5000-7cf5-11ea-9ebc-0c6f69aaceee.png" alt="스크린샷 2020-04-12 오후 7 39 07" /></p>
+
+<p><strong>listOf</strong>는 <code class="language-plaintext highlighter-rouge">List&lt;T&gt;</code> 인터페이스를 반환하고 있다. 그러나 <code class="language-plaintext highlighter-rouge">List&lt;T&gt;</code>는 인터페이스 타입이기 때문에 인스턴스로 만들 수 없다.</p>
+
+<p>그래서 <code class="language-plaintext highlighter-rouge">listOf</code> 함수가 어떤 값을 반환하는지 궁금해져서 찾아보았다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/79066776-6fa2e680-7cf5-11ea-96fd-cc20e6cfc450.png" alt="스크린샷 2020-04-12 오후 7 39 27" /></p>
+
+<p><code class="language-plaintext highlighter-rouge">Collections.kt</code>에 정의된 <code class="language-plaintext highlighter-rouge">listOf</code> 메소드는 <code class="language-plaintext highlighter-rouge">asList</code>() 확장함수를 호출하고 있었다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/79066777-703b7d00-7cf5-11ea-94fd-a7dcaa7693c8.png" alt="스크린샷 2020-04-12 오후 7 39 34" /></p>
+
+<p><code class="language-plaintext highlighter-rouge">asList</code>는 <code class="language-plaintext highlighter-rouge">_ArraysJvm.kt</code>에 정의된 확장함수였고, <strong>ArrayUtilJVM</strong> 객체의 <code class="language-plaintext highlighter-rouge">asList</code>를 호출하고 있었다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/79066778-70d41380-7cf5-11ea-9503-e364f20d8e84.png" alt="스크린샷 2020-04-12 오후 7 39 41" /></p>
+
+<p>놀랍게도 <code class="language-plaintext highlighter-rouge">ArraysUtilJVM</code>은 자바 코드였고, 여기서 자바 <code class="language-plaintext highlighter-rouge">Arrays</code>의 <code class="language-plaintext highlighter-rouge">asList</code>를 호출하고 있었다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/79066780-716caa00-7cf5-11ea-86f7-b1342ad1e02e.png" alt="스크린샷 2020-04-12 오후 7 39 46" /></p>
+
+<p>그리고 알다시피 <code class="language-plaintext highlighter-rouge">Arrays</code>의 <code class="language-plaintext highlighter-rouge">asList</code>는 <code class="language-plaintext highlighter-rouge">ArrayList</code>를 인스턴스로 반환하고 있었다.</p>
+
+<p>여기서 든 한가지 의문은, <strong>어떻게 코틀린은 자바의 ArrayList를 사용하면서 불변 상태를 유지할 수 있는가?</strong>에 대한 부분이었다.</p>
+
+<p>알다시피 <code class="language-plaintext highlighter-rouge">listOf</code>로 생성된 리스트는 <code class="language-plaintext highlighter-rouge">Immutable</code>한 성질을 갖게 된다.</p>
+
+<p>그러나 자바 코드에서는 <code class="language-plaintext highlighter-rouge">Immutable</code>이라는 개념이 컬렉션에 없기 때문에 나는 이 부분이 궁금하였다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/79066722-2eaad200-7cf5-11ea-9266-38a30e2e798d.png" alt="스크린샷 2020-04-12 오후 7 01 49" /></p>
+
+<center>Kotlin의 List에는 add 메소드가 없다.</center>
+
+<p>그런데 생각해보니, 코틀린의 컬렉션은 별도로 구현된 컬렉션이 아니며 자바의 표준 컬렉션을 그대로 사용한다는 것이 생각이 났다.</p>
+
+<p>즉, 코틀린은 자바의 컬렉션을 사용하고 있으며, 대신 <code class="language-plaintext highlighter-rouge">Mutable</code>한 컬렉션을 별도로 두고, 기존의 <code class="language-plaintext highlighter-rouge">Collection</code>은 <code class="language-plaintext highlighter-rouge">Immutable</code>하게 유지하게 함으로써 제한을 둔 것 외에는 자바의 표준 라이브러리를 그대로 사용하고 있다.</p>
+
+<p>아래의 글은 내가 이 내용에 대해서 찾아보다가 찾은 글인데, 아주 잘 정리되어있어서 가져와 보았다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/79066959-b80ed400-7cf6-11ea-9ffe-efb090078184.png" alt="스크린샷 2020-04-12 오후 7 49 24" /></p>
+
+<p>출처 : https://steelkiwi.com/blog/collections-kotlin/</p>
+
+<p>가장 중요한 부분은 <code class="language-plaintext highlighter-rouge">import java.util.*</code>이다.</p>
+
+<p>이를 통해 자바와 코틀린 사이의 <code class="language-plaintext highlighter-rouge">Collection</code> 사용이 자유롭고, 자바의 <code class="language-plaintext highlighter-rouge">Collection</code>이 코틀린에서 사용될 경우 Kotlin의 <code class="language-plaintext highlighter-rouge">Collection</code>의 규약(Immutable or Mutable)을 따르게 되는 것이다.</p>
+
+<p>아래는 직접 그 예시를 작성해보았다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/79066718-26eb2d80-7cf5-11ea-87ec-e2ac77111873.png" alt="스크린샷 2020-04-12 오후 7 38 00" /></p>
+
+<p><strong>listImmutable</strong>의 경우 add 메소드를 사용할 수 없는 반면, <strong>MutableList</strong>는 add 메소드를 사용할 수 있는 것을 확인할 수 있다.</p>
+
+<h2 id="reference">Reference</h2>
+
+<p><strong>Kotlin In Action</strong> (드미트리 제메로프, 스베트라나 이사코바)</p>
+
+    <br />
+    <br />
+  </div>
+  
+
+</article>
+
+<!--<hr class="dingbat" />-->
+<!--
+<div class="share">
+  <h2>Share this post</h2>
+  <div class="share-body">
+    <a href="http://twitter.com/share?text=Kotlin In Action 6장&amp;url=http://localhost:4000/language/2020/04/11/Kotlin-06/"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="icon-twitter">
+      </span>
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/language/2020/04/11/Kotlin-06/"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="icon-facebook">
+      </span>
+    </a>
+  </div>
+</div>
+-->
+<br />
+
+
+
+
+<aside class="related" role="complementary">
+  <h2 class="hr">Related Posts</h2>
+
+  <ul class="related-posts">
+    
+      
+      
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/language/2021/05/27/Effective-Java-44/" data-flip="title">
+    <span>Effective Java 07 람다와 스트림</span>
+  </a>
+  <small><time datetime="2021-05-27T00:00:00+09:00">
+    27 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/language/2021/05/25/Effective-Java-43/" data-flip="title">
+    <span>Effective Java 06 - item 41 -</span>
+  </a>
+  <small><time datetime="2021-05-25T00:00:00+09:00">
+    25 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/language/2021/05/25/Effective-Java-42/" data-flip="title">
+    <span>Effective Java 06 - item 40 -</span>
+  </a>
+  <small><time datetime="2021-05-25T00:00:00+09:00">
+    25 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+      
+    
+  </ul>
+</aside>
+  <aside class="comments" role="complementary">
+  <h2>Comments</h2>
+  <hr/>
+
+  <script src="https://utteranc.es/client.js"
+    repo="minkukjo/minkukjo.github.io"
+    issue-term="title"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</aside>
+
+       <footer>
+  <hr/>
+  
+    <p>© 2022. by minkuk</p>
+
+  
+  <p>
+    <code>Powered by <a href="https://minkukjo.github.io/">minkuk</a></code>
+  </p>
+</footer>
+
+    </main>
+    <div class="right-side">
+  <div class="add-first">
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+    ></script>
+    <!-- 우측 광고 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="9124111205"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+  <br />
+  <br />
+  <div class="add-second">
+    <!-- 우측 광고2 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="5156946039"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+
+  </div>
+  <div id="_yDrawer">
+  <div id="_sidebar" class="sidebar">
+    <div class="sidebar-bg" style="background-color:#4f86aa;background-image:url(/assets/img/bg.jpg)"></div>
+    <header class="sidebar-sticky" role="banner">
+      <br/>
+      <div class="sidebar-about">
+        <h1><a id="_title" href="/">도전하는 개발자</a></h1>
+        
+
+      </div>
+
+      <br/>
+      <br/>
+      <nav class="sidebar-nav heading" role="navigation">
+        <span class="sr-only">Navigation:</span>
+<ul>
+  
+
+  
+
+  
+  
+  
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-1"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/life/">Life</a>
+       <label class="folder" for="list-item-1">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-daily/">Daily</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-review/">Review</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-books/">Books</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-2"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/computer-science/">Computer Science</a>
+       <label class="folder" for="list-item-2">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-algorithm/">Algorithm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-oop/">OOP</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-network/">Network</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-db/">Database</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-ai/">AI</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-security/">Security</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-distribution-system/">Distribution System</a>
+             </li>
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-3"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/programming-language/">Programming Language</a>
+       <label class="folder" for="list-item-3">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-kotlin/">Kotlin</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-go/">Go</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-java/">Java</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-javascript/">JavaScript</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-typescript/">TypeScript</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-4"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/framework/">Framework</a>
+       <label class="folder" for="list-item-4">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring/">Spring</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-data-jpa/">Spring Data JPA</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-security/">Spring Security</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-junit/">JUnit</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-5"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/language/">Language</a>
+       <label class="folder" for="list-item-5">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/language-english/">English</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-6"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/development/">Development</a>
+       <label class="folder" for="list-item-6">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-ddd/">DDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-tdd/">TDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-clean-code/">Clean Code</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-git/">Git</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-7"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/devops/">Devops</a>
+       <label class="folder" for="list-item-7">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-alarm/">Alarm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-ansible/">Ansible</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-cicd/">CI/CD</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-docker/">Docker</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-es/">Elasticsearch</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-k8s/">Kubernetes</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-public-cloud/">Public Cloud</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-kafka/">Kafka</a>
+             </li>
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-8"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/opensource/">Open Source</a>
+       <label class="folder" for="list-item-8">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/opensource-opensource/">Open Source</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-9"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/about/">About</a>
+       
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+</ul>
+
+      </nav>
+    <br/>
+    <br/>
+      <div class="sidebar-box">
+        
+      </div>
+      <p>매일 매일 한계를 뛰어넘기 위한 도전을 즐기는 개발자</p>
+
+      
+      
+        <div class="sidebar-social">
+          <span class="sr-only">Social:</span>
+<ul>
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://github.com/minkukjo">
+    <span class="icon-github" title="GitHub"></span>
+    <span class="sr-only">GitHub</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://www.linkedin.com/in/민국-조-567052166">
+    <span class="icon-linkedin2" title="LinkedIn"></span>
+    <span class="sr-only">LinkedIn</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:harrycode@kakao.com">
+    <span class="icon-mail" title="Email"></span>
+    <span class="sr-only">Email</span>
+  </a>
+</li>
+
+  
+</ul>
+
+        </div>
+      
+    </header>
+  </div>
+</div>
+</div>
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-158654037-1', 'auto');
+  ga('send', 'pageview');
+  loadJSDeferred('https://www.google-analytics.com/analytics.js');
+</script>
+
+
+
+
+
+<!--[if gt IE 8]><!---->
+<script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+  WebFont.load({
+    
+    google: {
+      families: 'Lato'.split('|')
+    },
+    
+
+    custom: {
+      families: ['icomoon'],
+      urls: ['/assets/icomoon/style.css']
+    }
+  });
+</script>
+<!--<![endif]-->
+
+
+  <!--[if gt IE 9]><!---->
+  
+  <script>loadJSDeferred('/assets/js/hydejack.js?v=6.4.0');</script>
+
+  
+  <!--<![endif]-->
+
+
+
+</body>
+
+</html>

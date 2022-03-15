@@ -1,0 +1,1752 @@
+<!DOCTYPE html>
+<html lang="en"><!--
+ __  __                __                                     __
+/\ \/\ \              /\ \             __                    /\ \
+\ \ \_\ \   __  __    \_\ \      __   /\_\      __       ___ \ \ \/'\
+ \ \  _  \ /\ \/\ \   /'_` \   /'__`\ \/\ \   /'__`\    /'___\\ \ , <
+  \ \ \ \ \\ \ \_\ \ /\ \L\ \ /\  __/  \ \ \ /\ \L\.\_ /\ \__/ \ \ \\`\
+   \ \_\ \_\\/`____ \\ \___,_\\ \____\ _\ \ \\ \__/.\_\\ \____\ \ \_\ \_\
+    \/_/\/_/ `/___/> \\/__,_ / \/____//\ \_\ \\/__/\/_/ \/____/  \/_/\/_/
+                /\___/                \ \____/
+                \/__/                  \/___/
+
+Powered by Hydejack v6.4.0 (https://qwtel.com/hydejack/)
+-->
+
+
+
+
+
+
+
+
+
+<head>
+  <!-- =============== -->
+<!-- META            -->
+<!-- =============== -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta
+  name="naver-site-verification"
+  content="22c5b4ef3bfda7fc6100671413989219de7a4ac8"
+/>
+<meta property="og:title" content="Kafka Producer" />
+<meta property="og:type" content="article" />
+
+<!-- =============== -->
+<!-- Google AdSense  -->
+<!-- =============== -->
+<script
+  data-ad-client="ca-pub-8247516864622650"
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+></script>
+
+ 
+<meta
+  property="og:image"
+  content="http://localhost:4000/assets//img/kafka-logo.png"
+/>
+<br />
+
+
+<meta property="og:image:width" content="640" />
+<meta property="og:image:height" content="360" />
+ 
+<title>Kafka Producer &middot; 도전하는 개발자</title>
+ 
+<meta
+  name="description"
+  content="카프카에 메시지 쓰기
+
+"
+/>
+<meta
+  property="og:description"
+  content="카프카에 메시지 쓰기
+
+"
+/>
+
+
+
+<!-- =============== -->
+<!-- LINKS           -->
+<!-- =============== -->
+<link rel="canonical" href="http://localhost:4000/devops/2021/04/28/Kafka-02/" />
+<meta property="og:url" content="http://localhost:4000/devops/2021/04/28/Kafka-02/" />
+
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="도전하는 개발자 Feed"
+  href="http://localhost:4000/feed.xml"
+/>
+
+
+<link rel="prev" href="http://localhost:4000/devops/2021/04/26/Kafka-01/" />
+ 
+<link rel="next" href="http://localhost:4000/devops/2021/04/29/CKA-49/" />
+
+
+<link
+  rel="apple-touch-icon"
+  href="http://localhost:4000/apple-touch-icon.png"
+/>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+<!-- Place favicon.ico in the root directory -->
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+<script>
+  !function(n,e){function t(n,e){n.onload=function(){this.onerror=this.onload=null,e(null,n)},n.onerror=function(){this.onerror=this.onload=null,e(new Error("Failed to load "+this.src),n)}}function o(n,e){n.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||(this.onreadystatechange=null,e(null,n))}}n._loaded=!1,n.loadJSDeferred=function(a,d){function r(){n._loaded=!0;var r=e.createElement("script");r.src=a,d&&(("onload"in r?t:o)(r,d),r.onload||t(r,d));var l=e.getElementsByTagName("script")[0];l.parentNode.insertBefore(r,l)}n._loaded?r():n.addEventListener?n.addEventListener("load",r,!1):n.attachEvent?n.attachEvent("onload",r):n.onload=r}}(window,document);
+
+  !function(e){"use strict";var n=function(n,t,o){function i(e){if(a.body)return e();setTimeout(function(){i(e)})}function r(){l.addEventListener&&l.removeEventListener("load",r),l.media=o||"all"}var d,a=e.document,l=a.createElement("link");if(t)d=t;else{var f=(a.body||a.getElementsByTagName("head")[0]).childNodes;d=f[f.length-1]}var s=a.styleSheets;l.rel="stylesheet",l.href=n,l.media="only x",i(function(){d.parentNode.insertBefore(l,t?d:d.nextSibling)});var u=function(e){for(var n=l.href,t=s.length;t--;)if(s[t].href===n)return e();setTimeout(function(){u(e)})};return l.addEventListener&&l.addEventListener("load",r),l.onloadcssdefined=u,u(r),l};"undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this);
+
+  !function(t){if(t.loadCSS){var e=loadCSS.relpreload={};if(e.support=function(){try{return t.document.createElement("link").relList.supports("preload")}catch(t){return!1}},e.poly=function(){for(var e=t.document.getElementsByTagName("link"),r=0;r<e.length;r++){var n=e[r];"preload"===n.rel&&"style"===n.getAttribute("as")&&(t.loadCSS(n.href,n,n.getAttribute("media")),n.rel=null)}},!e.support()){e.poly();var r=t.setInterval(e.poly,300);t.addEventListener&&t.addEventListener("load",function(){e.poly(),t.clearInterval(r)}),t.attachEvent&&t.attachEvent("onload",function(){t.clearInterval(r)})}}}(this);
+
+  window.disablePushState = false;
+  window.disableDrawer = false;
+</script>
+
+<!--[if lt IE 9]>
+  <script src="https://unpkg.com/html5shiv/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+<!-- =============== -->
+<!-- STYLES          -->
+<!-- =============== -->
+<!--[if gt IE 8]><!---->
+<style>
+  
+  article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}*{box-sizing:border-box}html,body{margin:0;padding:0}html{font-size:16px;line-height:1.75}body{color:#333;background-color:#fff;overflow-y:scroll}a{text-decoration:none}.lead{margin-left:-1rem;margin-right:-1rem}img,.img{display:block;max-width:100%;margin-bottom:1rem;border:none}img.lead,.img.lead{max-width:calc(100% + 2rem);width:calc(100% + 2rem)}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-weight:bold;text-rendering:optimizeLegibility}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{margin:1.6rem 0 1rem;line-height:1.6}h1,.h1{font-size:2rem;line-height:1.25}h2,.h2{font-size:1.5rem}h3,.h3{font-size:1.17em}p{margin-top:0;margin-bottom:1rem}p.lead{font-size:1.25rem;font-weight:300;padding:0 1rem}ul,ol,dl{margin-top:0;margin-bottom:1rem}ul,ol{padding-left:1.25rem}hr{position:relative;margin:1.5rem 0;border:0;border-top:1px solid #eee}.hr{padding-bottom:.5rem;border-bottom:1px solid #eee;margin-bottom:1.5rem}h4,h5,h6,.h4,.h5,.h6{margin-bottom:0.5rem;font-size:1rem}table{margin-bottom:1rem;width:100%;width:calc(100% + 2rem);margin-left:-1rem;border:1px solid #e5e5e5;border-collapse:collapse;border-spacing:0}td,th{padding:.25rem .5rem;border:1px solid #e5e5e5}td:first-child,th:first-child{padding-left:1rem}td:last-child,th:last-child{padding-right:1rem}thead+tbody,tbody+tbody,tfoot{border-top:3px double #e5e5e5}tbody tr:nth-child(odd) td,tbody tr:nth-child(odd) th{background-color:#f9f9f9}footer{margin-bottom:2rem}.page,.post{margin-bottom:3em}.page li+li,.post li+li{margin-top:.25rem}.page>header,.post>header{margin-bottom:2rem}.page-title,.post-title{margin-top:0}.post-date{display:block;margin-top:-0.5rem;margin-bottom:1rem;color:#9a9a9a}.related-posts{padding-left:0;list-style:none}.related-posts>li,.related-posts>li+li{margin-top:1rem}.related-posts>li>small,.related-posts>li+li>small{font-size:75%;color:#9a9a9a}.message{margin-bottom:1rem;padding:1rem;color:#787878;background-color:#f9f9f9;margin-left:-1rem;margin-right:-1rem}body,main{position:relative;overflow-x:hidden}@media screen{body::before{content:'';background:#e5e5e5;position:absolute;left:0;top:0;bottom:0}}@media screen and (min-width: 40em){html{font-size:17px}}@media screen and (min-width: 54em){html{font-size:16px}}@media screen and (min-width: 88em){html{font-size:17px}}@media screen and (min-width: 125em){html{font-size:18px}}.sr-only{display:none}.clearfix,.sidebar-social::after,.clearafter::after{content:"";display:table;clear:both}a,.a{position:relative;padding-bottom:.15rem;border-style:hidden}.img{overflow:hidden;background-color:#f9f9f9}.img>img{margin:0;width:100%;height:100%}.sixteen-nine{position:relative}.sixteen-nine::before{display:block;content:"";width:100%;padding-top:56.25%}.sixteen-nine>*{position:absolute;top:0;left:0;right:0;bottom:0}h1+hr,h2+hr,h3+hr,h4+hr,h5+hr,h6+hr{margin-top:0}.fade-in{animation-duration:500ms;animation-name:fade-in;animation-fill-mode:forwards}@keyframes fade-in{from{transform:translateY(-2rem);opacity:0}50%{transform:translateY(-2rem);opacity:0}to{transform:translateY(0);opacity:1}}.mb6{margin-bottom:10rem}.sidebar{color:rgba(255,255,255,0.75);text-align:left}.sidebar::before{content:"";position:absolute;z-index:2;top:0;left:0;bottom:0;right:0;background:linear-gradient(to bottom, rgba(32,32,32,0) 0%, rgba(32,32,32,0.5) 100%)}.sidebar a{color:#fff;border-bottom-color:rgba(255,255,255,0.2)}.right-side{width:100%;margin-left:auto;margin-right:auto}.right-side .ad-first{text-align:center}@media screen{.right-side{max-width:38rem;min-height:100vh}.right-side .ad-second{display:none}}@media screen and (min-width: 54em){.right-side{margin-left:20rem;margin-right:1rem;padding:4rem 1rem 12rem}.right-side .ad-second{text-align:center;display:block}}@media screen and (min-width: 72em){.right-side{margin-left:22rem;max-width:42rem}}@media screen and (min-width: 88em){.right-side{width:162px;margin-left:0rem;margin-right:0rem;padding:0rem;margin-top:10rem;display:block;float:left}}@media screen and (min-width: 96em){.right-side{width:300px;margin-right:0rem}}#_yDrawer{position:relative}@media screen{#_yDrawer{min-height:640px;min-height:100vh}}@media screen and (min-width: 54em){#_yDrawer{width:18rem;margin-left:0}}.sidebar-bg{position:absolute;height:100%;overflow:hidden;top:0;right:0;bottom:0;left:0;background:#202020 center / cover}.sidebar-box{display:flex;justify-content:center}.sidebar-sticky{position:relative;z-index:3}@media screen{.sidebar-sticky{-ms-overflow-style:none;overflow:-moz-scrollbars-none;height:100%;overflow:auto;position:absolute;padding:3rem 0rem;right:2.5rem;left:2.5rem}}.sidebar-sticky::-webkit-scrollbar{display:none}.sidebar-about>h1{color:#fff;font-size:2rem}.sidebar-nav>ul{list-style:none;padding-left:0;margin-bottom:.5rem}a.sidebar-nav-item{width:100%;font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}a.sidebar-nav-subitem{font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}@media screen{.y-drawer-scrim{z-index:2}.y-drawer-content{width:18rem;left:-18rem;z-index:3}}.sidebar-social{margin-bottom:.5rem}.sidebar-social>ul{list-style:none;padding-left:0;margin:0 -.25rem}.sidebar-social>ul>li{float:left}.sidebar-social>ul>li>a{display:inline-block;text-align:center;font-size:1.6rem;line-height:3rem;width:3.1249rem;height:4rem;padding:.5rem 0}.sidebar-social>ul li+li{margin-top:0}.fixed-top{position:fixed;top:0;left:0;width:100%;z-index:1}.navbar>.content{padding-top:0;padding-bottom:0;min-height:0;height:0}.menu{display:inline-block;padding:1.75rem 1.5rem;border-bottom:none;margin-left:-1.5rem;color:#9a9a9a !important}.menu::after{content:"\2630"}@media screen and (min-width: 54em){.menu{padding:1.25rem 1.5rem;position:absolute;left:-9999px}.menu:focus{position:static}}.animation-main{pointer-events:none}.loading{display:none}@media print{.menu{display:none}}.animation-main{opacity:0;will-change:opacity}.loading{position:absolute;top:0;right:0;padding:5.25rem 4.5rem;transform-origin:top right;transform:scale(0.33)}.content{position:relative;margin-left:auto;margin-right:auto;padding:5rem 1rem 12rem}@media screen{.content{min-height:100vh}}@media screen and (min-width: 54em){.content{padding:4rem 1rem 12rem;margin-left:19rem;margin-right:3rem}}@media screen and (min-width: 72em){.content{max-width:42rem;margin-left:21rem}}@media screen and (min-width: 88em){.content{float:left;width:100%;margin-left:22rem;margin-right:5rem}}@media screen and (min-width: 96em){.content{max-width:44rem}}@media screen and (min-width: 102em){.content{margin-left:25rem;margin-right:8rem}}.me{width:6.5rem;height:6.5rem;align-self:center;margin-right:20px;border-radius:100%;position:relative}@media screen and (min-width: 40em){.me{width:7rem;height:7rem}}@media screen and (min-width: 54em){.me{width:6.5rem;height:6.5rem}}@media screen and (min-width: 72em){.me{width:7rem;height:7rem}}main>footer{width:100%;position:absolute;bottom:0;left:0;right:0;padding:0 1rem;color:#9a9a9a;font-size:smaller;text-align:center}main>footer>p{margin-bottom:0}html{font-family:'Sans-serif'}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-family:'Sans-serif'}
+
+</style>
+
+
+<link
+  rel="preload"
+  href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0"
+  as="style"
+  onload="this.rel='stylesheet'"
+/>
+
+<style id="_pageStyle">
+
+.content a{color:#4f86aa;border-color:rgba(79,134,170,0.2)}.content a:hover{border-color:#4f86aa}:focus{outline-color:#4f86aa}::selection{color:#fff;background:#4f86aa}::-moz-selection{color:#fff;background:#4f86aa}
+
+</style>
+
+
+<noscript>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0" />
+    
+  
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Lato"
+  />
+  <style>
+    html { font-family: 'Lato', 'Sans-serif' }
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .heading { font-family: 'Lato', 'Sans-serif' }
+  </style>
+   
+  <link rel="stylesheet" href="http://localhost:4000/assets/icomoon/style.css" />
+</noscript>
+<!--<![endif]-->
+
+</head>
+
+<body>
+  <!-- =============== -->
+<!-- MENU            -->
+<!-- =============== -->
+<div class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <a id="_menu" class="menu no-hover" href="#_title">
+      <span class="sr-only">Menu</span>
+    </a>
+  </div>
+</div>
+
+<!-- =============== -->
+<!-- CONTENT         -->
+<!-- =============== -->
+<div id="_yPushState">
+  <div class="fade-in">
+    <main
+      id="_main"
+      class="content"
+      role="main"
+      data-color="#4f86aa"
+      data-image="/assets/img/bg.jpg"
+    >
+      
+
+<article id="post-devops/2021/04/28/Kafka-02" class="post" role="article">
+  <header>
+    <h1 class="post-title">
+      
+        Kafka Producer
+        
+    </h1>
+
+    <p class="post-date heading">
+      <time datetime="2021-04-28T00:00:00+09:00">28 Apr 2021</time>
+      
+
+
+
+
+
+
+
+
+
+in <a href="/category/devops/" data-flip="title">Devops</a>
+
+      
+
+
+
+
+
+
+
+
+
+on <a href="/tag/devops-kafka/" data-flip="title">Kafka</a>
+
+    </p>
+
+    
+  <div class="hr" style="padding-bottom:0"></div>
+
+
+  </header>
+  
+
+
+  
+  <div class="markdown-body">
+
+    <!-- 
+    <div class="head-image"><img src="http://localhost:4000/assets//img/kafka-logo.png" /></div>
+    <br /> -->
+    <style>
+      .myAd1190 {
+        width: 48%;
+        height: 280px;
+      }
+
+      .myAd1290 {
+        width: 48%;
+        height: 280px;
+      }
+
+      @media(max-width: 800px) {
+        .myAd1190 {
+          display: none;
+        }
+
+        .myAd1290 {
+          width: 98%;
+        }
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 300px;
+      }
+
+      .row-center {
+        display: flex;
+        justify-content: center;
+        height: 258px;
+      }
+    </style>
+   
+    <!--<br />-->
+    <h2 id="카프카에-메시지-쓰기">카프카에 메시지 쓰기</h2>
+
+<p>카프카는 메시지를 <code class="language-plaintext highlighter-rouge">Produce</code>(발행)하고 <code class="language-plaintext highlighter-rouge">Consume</code>(소비)하는 형태의 오픈소스이다.</p>
+
+<p>메시지를 <code class="language-plaintext highlighter-rouge">Produce</code>하는 쪽을 <code class="language-plaintext highlighter-rouge">Producer</code>라고 부르며, 메시지를 <code class="language-plaintext highlighter-rouge">Consume</code>하는 쪽을 <code class="language-plaintext highlighter-rouge">Consumer</code>라고 부른다.</p>
+
+<p>이번 장에서는 카프카 프로듀서에 대해서 배워볼 것이다.</p>
+
+<p>프로듀서 API는 매우 간단하다.</p>
+
+<p>우선 카프카에 쓰려는 메시지를 갖는 <code class="language-plaintext highlighter-rouge">ProducerRecord</code>를 생성해야한다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">ProducerRecord</code>에는 토픽과 값으로 이루어져있으며 선택적으로 키와 파티션을 지정하는 것도 가능하다.</p>
+
+<p>어쨌든 가장 중요한 것은 <code class="language-plaintext highlighter-rouge">어떤 토픽</code>에 <code class="language-plaintext highlighter-rouge">어떤 값</code>을 저장할 것인가가 프로듀서의 가장 큰 관심사이다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">ProducerRecord</code>가 카프카로 전송하기위해서는 키와 값의 쌍으로 구성되는 메시지 객체들이 네트워크로 전송될 수 있도록 바이트 배열(Byte Array)로 직렬화해줘야한다는 점이다.</p>
+
+<p>이를 위한 직렬화 처리 컴포넌트 <code class="language-plaintext highlighter-rouge">Serializer</code>가 담당한다.</p>
+
+<p>이 후 파티셔너 컴포넌트에 전달된다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">ProducerRecord</code>가 특정 파티션을 지정했다면 해당 파티션으로 가겠지만, 특별히 선택하지 않는다면 카프카가 <code class="language-plaintext highlighter-rouge">ProducerRecord</code>의 키를 기준으로 파티션을 하나 지정해준다.</p>
+
+<p>이후 토픽과 파티션으로 전송될 레코드들을 모은 레코드 배치(Batch)에 추가되며, 별개의 스레드가 그 배치를 카프카 브로커에게 전송해준다.</p>
+
+<p>브로커는 수신된 레코드의 메시지를 처리한 후 응답을 전송해주는데, 메시지가 성공하면 <code class="language-plaintext highlighter-rouge">RecordMetadata</code> 객체를 반환해준다.</p>
+
+<p>만약 메시지 쓰기에 실패하면 에러를 반환하며 프로듀서는 메시지 쓰기를 포기하고 에러를 반환하기 전에 몇 번 더 재전송을 시도할 수 있다.</p>
+
+<h2 id="카프카-프로듀서-구성하기">카프카 프로듀서 구성하기</h2>
+
+<p><code class="language-plaintext highlighter-rouge">ProducerRecord</code>의 메시지를 카프카에 쓰기 위해 프로듀서의 기능을 수행하는 객체를 생성해야한다.</p>
+
+<p>이 객체에 카프카에 관련된 설정을 해볼 수 있는데 다음 세 개의 필수 속성을 갖는다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">bootstrap.servers</code></p>
+
+<p>카프카 클러스터에 최초 연결하기 위해 프로듀서가 사용하는 브로커들의 host:port 목록을 이 속성에 설정한다.</p>
+
+<p>최소 2개정도의 host:port를 포함하는 것이 좋다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">key.serializer</code></p>
+
+<p>프로듀서가 생성하는 레코드 (<code class="language-plaintext highlighter-rouge">ProducerRecord</code>)의 메시지 키를 직렬화하기 위해 사용되는 클래스 이름을 이 속성에 설정해야한다.</p>
+
+<p>기본적으로 카프카 자체에서 <code class="language-plaintext highlighter-rouge">ByteArraySerializer</code>, <code class="language-plaintext highlighter-rouge">StringSerializer</code>, <code class="language-plaintext highlighter-rouge">IntegerSerializer</code>를 포함하고 있다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">value.serializer</code></p>
+
+<p>레코드의 메시지 값을 직렬화하는데 사용되는 클래스를 이 속성에 설정한다.</p>
+
+<p>방법은 <code class="language-plaintext highlighter-rouge">key.serializer</code>와 동일하다.</p>
+
+<h2 id="실제-사용법">실제 사용법</h2>
+
+<div class="language-properties highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">spring</span><span class="p">:</span>
+  <span class="py">kafka</span><span class="p">:</span>
+    <span class="py">producer</span><span class="p">:</span>
+      <span class="py">bootstrap-servers</span><span class="p">:</span> <span class="s">localhost:9092</span>
+      <span class="py">key-serializer</span><span class="p">:</span> <span class="s">org.apache.kafka.common.serialization.StringSerializer</span>
+      <span class="py">value-serializer</span><span class="p">:</span> <span class="s">org.apache.kafka.common.serialization.StringSerializer</span>
+</code></pre></div></div>
+
+<p>책에서는 Java 클래스로 설정값을 관리하는 코드를 보여주었지만, 우리는 일반적으로 Spring Boot에서 개발할 것이므로 application.properties에서 다음과 같이 설정하여 설정값을 관리할 수 있다.</p>
+
+<p>설정이 완료되면 카프카로 메시지 전송을 할 수 있다.</p>
+
+<p>메시지 전송 방법을 선택할 수 있는데, 세 가지 방법이 있다.</p>
+
+<h3 id="file-and-forget전송-후-망각">File-and-forget(전송 후 망각)</h3>
+
+<p>send() 메서드로 메시지를 전송만 하고 성공 또는 실패 여부에 관계없이 후속 조치를 취하지 않는 방법이다.</p>
+
+<p>이 방법은 잘못하면 메시지가 유실될 가능성도 존재한다.</p>
+
+<h3 id="synchronous-send동기식-전송">Synchronous send(동기식 전송)</h3>
+
+<p>send() 메서드로 메시지를 전송하면 자바의 Future 객체가 반환된다.</p>
+
+<p>Future의 get() 메서드를 곧장 호출하면 작업이 완료될 때까지 기다렸다가 브로커로부터 결과가 반환되므로 send()가 성공적으로 수행되었는지 알 수 있다.</p>
+
+<h3 id="asynchronous-send비동기식-전송">Asynchronous send(비동기식 전송)</h3>
+
+<p>send() 메서드의 호출 후 콜백 메서드를 구현한 객체를 매개변수로 전달한다.</p>
+
+<p>이 객체에 구현된 콜백 메서드는 카프카 브로커로부터 응답을 받을 때 자동으로 호출되므로 send()가 성공적으로 수행되었는지 알 수 있다.</p>
+
+<p>콜백 메서드는 카프카 브로커로부터 응답을 받을 때 자동으로 호출되므로 send()가 성공적으로 수행되었는지 알 수 있다.</p>
+
+<h2 id="카프카에-메시지-전송하기">카프카에 메시지 전송하기</h2>
+
+<p>메시지를 전송하기 위한 코드는 다음과 같다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.kafka.core.KafkaTemplate</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="o">;</span>
+
+<span class="nd">@Service</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">KafkaProducer</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">String</span> <span class="no">TOPIC</span> <span class="o">=</span> <span class="s">"exam"</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">KafkaTemplate</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="n">kafkaTemplate</span><span class="o">;</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="kd">public</span> <span class="nf">KafkaProducer</span><span class="o">(</span><span class="nc">KafkaTemplate</span> <span class="n">kafkaTemplate</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">kafkaTemplate</span> <span class="o">=</span> <span class="n">kafkaTemplate</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">sendMessage</span><span class="o">(</span><span class="nc">String</span> <span class="n">message</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"Produce message : %s"</span><span class="o">,</span> <span class="n">message</span><span class="o">));</span>
+        <span class="k">try</span><span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">kafkaTemplate</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="no">TOPIC</span><span class="o">,</span> <span class="n">message</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>이 역시 책의 예제 보다는, 스프링에서 제공하는 <code class="language-plaintext highlighter-rouge">Spring Kafka</code>를 예제로 가져와보았다.</p>
+
+<p>여기서 메시지 전송에 응답을 받지 않았으므로 응답의 성공,실패 여부를 알 수 없다.</p>
+
+<p>어디까지나 예제 코드이므로 실제 애플리케이션에서는 이렇게 처리하지 않는다.</p>
+
+<p>또한 카프카에게 메시지를 전송하기 전에 프로듀서에서 에러가 생기면 예외가 발생할 수 있다.</p>
+
+<p>메시지의 직렬화 실패에는 <code class="language-plaintext highlighter-rouge">SerializationException</code>, 버퍼가 가득차면 <code class="language-plaintext highlighter-rouge">BufferExhaustedException</code>, 시간 초과라면 <code class="language-plaintext highlighter-rouge">TimeoutException</code> 예외가 발생한다.</p>
+
+<h2 id="동기식-메시지-전송-예시">동기식 메시지 전송 예시</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.kafka.core.KafkaTemplate</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="o">;</span>
+
+<span class="nd">@Service</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">KafkaProducer</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">String</span> <span class="no">TOPIC</span> <span class="o">=</span> <span class="s">"exam"</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">KafkaTemplate</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="n">kafkaTemplate</span><span class="o">;</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="kd">public</span> <span class="nf">KafkaProducer</span><span class="o">(</span><span class="nc">KafkaTemplate</span> <span class="n">kafkaTemplate</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">kafkaTemplate</span> <span class="o">=</span> <span class="n">kafkaTemplate</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">sendMessage</span><span class="o">(</span><span class="nc">String</span> <span class="n">message</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"Produce message : %s"</span><span class="o">,</span> <span class="n">message</span><span class="o">));</span>
+        <span class="k">try</span><span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">kafkaTemplate</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="no">TOPIC</span><span class="o">,</span> <span class="n">message</span><span class="o">).</span><span class="na">get</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>여기서는 get 메서드를 사용해 카프카의 응답을 기다린다.</p>
+
+<p>카프카 프로듀서를 사용할 때는 두 가지 유형의 에러가 발생할 수 있다고 한다.</p>
+
+<p>우선 메시지를 다시 전송하면 해결될 수 있는 재시도 가능한 에러 (retriable) 에러가 있다.</p>
+
+<p>이 메시지 전송을 다시 하여 해결할 수 있는 예는, Connection 에러이다. 연결을 다시 시도하면 해결된다.</p>
+
+<p>그리고 <code class="language-plaintext highlighter-rouge">no leader</code>가 있는데, 이는 파티션의 새로운 리더가 선출되면 해결된다.</p>
+
+<p>카프카는 이러한 에러들을 자동으로 재시도하도록 구성할 수 있다.</p>
+
+<p><strong>재시도 횟수가 소진되거나 에러가 해결되지 않으면 애플리케이션 코드가 재시도 관련 예외를 받는다.</strong></p>
+
+<p>그러나 재시도 해도 예외가 해결되지 않을 때가 있는데, 이는 <code class="language-plaintext highlighter-rouge">메시지 크기가 너무 큰 경우</code>이다.</p>
+
+<p>이 경우 카프카 프로듀서는 재시도 없이 그 즉시 애플리케이션에 예외를 발생시킨다.</p>
+
+<h2 id="비동기식으로-메시지-전송하기">비동기식으로 메시지 전송하기</h2>
+
+<p>애플리케이션과 카프카 클러스터간의 네트워크 왕복시간(RTT, roundtrip time)이 최대 10밀리초라면, 100개의 메시지를 전송하는데 약 1초의 시간이 걸린다.</p>
+
+<p>이와 달리 모든 메시지 전송만 하고 기다리지 않는다면 100개의 메시지 전송에는 아무리 느려도 10밀리초 밖에 걸리지 않는다.</p>
+
+<p>실제로 대부분의 경우에 응답을 기다려서 받아야할 이유가 없다.</p>
+
+<p>왜냐하면 프로듀서의 경우 메시지를 쓴 이후 응답에 대한 메타데이터(토픽, 파티션, 오프셋)가 필요없기 떄문이다.</p>
+
+<p>그러나 메시지 전송에 완전히 실패했을 때는 해당 내용을 알아야 한다.</p>
+
+<p>이를 위해 에러를 로그에 쓰는 방식으로 처리해볼 수 있다.</p>
+
+<p>비동기식으로 메시지를 전송하고 받기 위해 프로듀서에 콜백을 추가할 수 있다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.kafka.core.KafkaTemplate</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="o">;</span>
+
+<span class="nd">@Service</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">KafkaProducer</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">String</span> <span class="no">TOPIC</span> <span class="o">=</span> <span class="s">"exam"</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">KafkaTemplate</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="n">kafkaTemplate</span><span class="o">;</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="kd">public</span> <span class="nf">KafkaProducer</span><span class="o">(</span><span class="nc">KafkaTemplate</span> <span class="n">kafkaTemplate</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">kafkaTemplate</span> <span class="o">=</span> <span class="n">kafkaTemplate</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">sendMessage</span><span class="o">(</span><span class="nc">String</span> <span class="n">message</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"Produce message : %s"</span><span class="o">,</span> <span class="n">message</span><span class="o">));</span>
+
+        <span class="nc">ListenableFuture</span><span class="o">&lt;</span><span class="nc">SendResult</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;&gt;</span> <span class="n">future</span><span class="o">;</span>
+        <span class="k">try</span><span class="o">{</span>
+            <span class="n">future</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">kafkaTemplate</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="no">TOPIC</span><span class="o">,</span> <span class="n">message</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+
+        <span class="n">future</span><span class="o">.</span><span class="na">addCallback</span><span class="o">(</span><span class="k">new</span> <span class="nc">ListenableFutureCallback</span><span class="o">&lt;</span><span class="nc">SendResult</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;&gt;()</span> <span class="o">{</span>
+
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onSuccess</span><span class="o">(</span><span class="nc">SendResult</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+                <span class="no">LOGGER</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"Sent message=["</span> <span class="o">+</span> <span class="n">message</span> <span class="o">+</span> <span class="s">"] with offset=["</span> <span class="o">+</span> <span class="n">result</span><span class="o">.</span><span class="na">getRecordMetadata</span><span class="o">().</span><span class="na">offset</span><span class="o">()</span> <span class="o">+</span> <span class="s">"]"</span><span class="o">);</span>
+            <span class="o">}</span>
+
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onFailure</span><span class="o">(</span><span class="nc">Throwable</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+                <span class="no">LOGGER</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"Unable to send message=["</span> <span class="o">+</span> <span class="n">message</span> <span class="o">+</span> <span class="s">"] due to : "</span> <span class="o">+</span> <span class="n">ex</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+            <span class="o">}</span>
+        <span class="o">});</span>
+
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>비동기 전송 방법은 응답으로 오는 future에 콜백 메소드를 등록해둠으로써 가능하다.</p>
+
+<h2 id="직렬처리기">직렬처리기</h2>
+
+<p>카프카로 전송해야하는 객체가 단순한 문자열이나 정수가 아닌 경우라면 <code class="language-plaintext highlighter-rouge">Avro</code>,<code class="language-plaintext highlighter-rouge">Thrift</code>, <code class="language-plaintext highlighter-rouge">Protobuf</code>와 같은 범용 직렬화 라이브러리를 사용해 레코드를 생성하거나 이미 사용중인 객체의 커스텀 직렬처리기를 만들 수 있다.</p>
+
+<p>그러나 저자는 가급적이면 범용 직렬화 라이브러리의 사용을 적극 권장하고 있다.</p>
+
+<h2 id="아파치-avro를-사용해-직렬화해보기">아파치 Avro를 사용해 직렬화해보기</h2>
+
+<p>아파치 <code class="language-plaintext highlighter-rouge">Avro</code>는 언어 중립적인 데이터 직렬화 시스템이다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Avro</code>는 스키마 데이터 구조 표현에 JSON을 지원하는데 직렬화에는 주로 이진 파일을 사용한다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Avro</code>가 카프카와 같은 메시지 시스템에 강점이 있는 이유는, 애플리케이션이 새로운 스키마(데이터 구조)로 변경하더라도 해당 메시지를 읽는 애플리케이션은 일체의 변경 없이 계속해서 메시지를 처리할 수 있어야하기 때문이다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Avro</code>는 이러한 메시지의 변경을 유연하게 처리해준다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Avro</code>는 이러한 스키마를 파일로 관리하는데, 이렇게 <code class="language-plaintext highlighter-rouge">Avro</code> 파일을 사용하는 것 보다 더 좋은 방법에 대해 알아보자.</p>
+
+<h2 id="카프카에서-avro-레코드-사용하기">카프카에서 Avro 레코드 사용하기</h2>
+
+<p>데이터 파일에 스키마 전체를 저장하는 <code class="language-plaintext highlighter-rouge">Avro</code> 파일과는 다르게, 데이터를 갖는 각 레코드에 스키마 전체를 저장하면 어떨까?</p>
+
+<p>각 레코드 크기가 2배 이상이 되므로 이는 꽤 부담이 될 것이다.</p>
+
+<p>그러나 레코드를 읽을 때 <code class="language-plaintext highlighter-rouge">Avro</code>는 스키마 전체를 필요로 하므로, 스키마를 레코드가 아닌 다른 곳에 저장해두어야한다.</p>
+
+<p>이러한 아키텍처 패턴을 스키마 레지스트리 패턴을 사용한다.</p>
+
+<p>카프카에 데이터를 쓰는데 사용하는 모든 스키마를 레지스트리에 저장하는 것이 스키마 레즈스티리이다.</p>
+
+<p>그 후 카프카에 쓰는 레코드에 사용된 스키마의 식별자(id)만 저장하면 된다.</p>
+
+<p>그러면 컨슈머는 해당 식별자를 사용해 스키마 레지스트리의 스키마를 가져온 후 이 스키마에 맞게 데이터를 역직렬화 할 수 있다.</p>
+
+<h2 id="파티션">파티션</h2>
+
+<p><code class="language-plaintext highlighter-rouge">ProducerRecord</code> 객체는 토픽 이름과 키와 값을 포함한다.</p>
+
+<p>키를 명시하지않으면 null이 되는데, 이 경우 카프카의 기본 파티셔너가 사용 가능한 토픽의 파티션들 중 하나를 무작위로 선택되어 해당 레코드가 저장되는 방식이다.</p>
+
+<p>이 파티션을 선정하는데에는 라운드 로빈 알고리즘을 사용하고 있다.</p>
+
+<p>당연히 키가 있으면서 기본 파티셔너가 사용되는 경우라면, 카프카에서 키의 해시 값을 구한 후 (파티셔너 자체의 해싱 알고리즘을 사용하므로 자바 버전 업그레이드와는 관련이 없음) 그 값에 따라 특정 파티션에 메시지를 저장한다.</p>
+
+<p>같은 키와 대응되는 파티션이 변경되지 않게 하려면 충분한 수의 파티션을 갖는 토픽을 생성하고 이후에는 파티션을 추가하지 않는 것이 가장 이상적이라고 할 수 있다.</p>
+
+<h2 id="커스텀-파티셔너">커스텀 파티셔너</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Map</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.apache.kafka.clients.producer.Partitioner</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.kafka.common.Cluster</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.kafka.common.PartitionInfo</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.kafka.common.record.InvalidRecordException</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomPartitioner</span> <span class="kd">implements</span> <span class="nc">Partitioner</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">(</span><span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="o">?&gt;</span> <span class="n">configs</span><span class="o">)</span> <span class="o">{}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">partition</span><span class="o">(</span><span class="nc">String</span> <span class="n">topic</span><span class="o">,</span> <span class="nc">Object</span> <span class="n">key</span><span class="o">,</span> <span class="kt">byte</span><span class="o">[]</span> <span class="n">keyBytes</span><span class="o">,</span> <span class="nc">Object</span> <span class="n">value</span><span class="o">,</span> <span class="kt">byte</span><span class="o">[]</span> <span class="n">valueBytes</span><span class="o">,</span> <span class="nc">Cluster</span> <span class="n">cluster</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">PartitionInfo</span><span class="o">&gt;</span> <span class="n">partitions</span> <span class="o">=</span> <span class="n">cluster</span><span class="o">.</span><span class="na">partitionsForTopic</span><span class="o">(</span><span class="n">topic</span><span class="o">);</span>
+        <span class="kt">int</span> <span class="n">numPartitions</span> <span class="o">=</span> <span class="n">partitions</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">keyBytes</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">InvalidRecordException</span><span class="o">(</span><span class="s">"Message must have a key"</span><span class="o">);</span>
+        <span class="k">else</span> <span class="nf">if</span> <span class="o">(!(</span><span class="n">key</span> <span class="k">instanceof</span> <span class="nc">String</span><span class="o">))</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">InvalidRecordException</span><span class="o">(</span><span class="s">"A key must be instanceof String"</span><span class="o">);</span>
+
+        <span class="k">if</span><span class="o">((</span><span class="nc">String</span><span class="o">)</span> <span class="n">key</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"Harry"</span><span class="o">))</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">numPartitions</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="o">(</span><span class="nc">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="nc">Utils</span><span class="o">.</span><span class="na">mumur2</span><span class="o">(</span><span class="n">keyBytes</span><span class="o">))</span> <span class="o">%</span> <span class="o">(</span><span class="n">numPartitions</span><span class="o">-</span><span class="mi">1</span><span class="o">))</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">close</span><span class="o">()</span> <span class="o">{}</span>
+</code></pre></div></div>
+
+<p>반드시 특정 키의 해시값을 특정 파티션에 매핑하고 싶을 수도 있다.</p>
+
+<p>가령 B2B 서비스에서 특정 기업의 판매량이 매우 높아서 전체 트랜잭션의 10%이상이 해당 고객과의 거래로 발생할만큼 양이 많다면, 해당 서비스에서 발생한 Key는 다른 파티션에 매핑될 확률이 높다.</p>
+
+<p>그 해당 기업의 이름이 <code class="language-plaintext highlighter-rouge">Harry</code>라고 했을 때 이 <code class="language-plaintext highlighter-rouge">Harry</code> 기업의 메시지는 특정 파티션에만 매핑되게 하려면 커스텀 파티셔너를 구현해야한다.</p>
+
+<h2 id="reference">Reference</h2>
+
+<p><img width="458" alt="스크린샷 2021-04-28 오후 7 39 45" src="https://user-images.githubusercontent.com/43809168/116390936-86ad6b80-a859-11eb-91e8-fcfc31a896fe.png" /></p>
+
+<p>카프카 핵심 가이드</p>
+
+    <br />
+    <br />
+  </div>
+  
+
+</article>
+
+<!--<hr class="dingbat" />-->
+<!--
+<div class="share">
+  <h2>Share this post</h2>
+  <div class="share-body">
+    <a href="http://twitter.com/share?text=Kafka Producer&amp;url=http://localhost:4000/devops/2021/04/28/Kafka-02/"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="icon-twitter">
+      </span>
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/devops/2021/04/28/Kafka-02/"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="icon-facebook">
+      </span>
+    </a>
+  </div>
+</div>
+-->
+<br />
+
+
+
+
+<aside class="related" role="complementary">
+  <h2 class="hr">Related Posts</h2>
+
+  <ul class="related-posts">
+    
+      
+      
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/devops/2021/05/16/Kafka-04/" data-flip="title">
+    <span>Kafka 내부 메커니즘</span>
+  </a>
+  <small><time datetime="2021-05-16T00:00:00+09:00">
+    16 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/devops/2021/05/13/CKA-51/" data-flip="title">
+    <span>신입 개발자인 나는 왜 CKA 자격증을 땄을까?</span>
+  </a>
+  <small><time datetime="2021-05-13T00:00:00+09:00">
+    13 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/devops/2021/05/06/Kafka-03/" data-flip="title">
+    <span>Kafka Consumer</span>
+  </a>
+  <small><time datetime="2021-05-06T00:00:00+09:00">
+    06 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+      
+    
+  </ul>
+</aside>
+  <aside class="comments" role="complementary">
+  <h2>Comments</h2>
+  <hr/>
+
+  <script src="https://utteranc.es/client.js"
+    repo="minkukjo/minkukjo.github.io"
+    issue-term="title"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</aside>
+
+       <footer>
+  <hr/>
+  
+    <p>© 2022. by minkuk</p>
+
+  
+  <p>
+    <code>Powered by <a href="https://minkukjo.github.io/">minkuk</a></code>
+  </p>
+</footer>
+
+    </main>
+    <div class="right-side">
+  <div class="add-first">
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+    ></script>
+    <!-- 우측 광고 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="9124111205"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+  <br />
+  <br />
+  <div class="add-second">
+    <!-- 우측 광고2 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="5156946039"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+
+  </div>
+  <div id="_yDrawer">
+  <div id="_sidebar" class="sidebar">
+    <div class="sidebar-bg" style="background-color:#4f86aa;background-image:url(/assets/img/bg.jpg)"></div>
+    <header class="sidebar-sticky" role="banner">
+      <br/>
+      <div class="sidebar-about">
+        <h1><a id="_title" href="/">도전하는 개발자</a></h1>
+        
+
+      </div>
+
+      <br/>
+      <br/>
+      <nav class="sidebar-nav heading" role="navigation">
+        <span class="sr-only">Navigation:</span>
+<ul>
+  
+
+  
+
+  
+  
+  
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-1"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/life/">Life</a>
+       <label class="folder" for="list-item-1">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-daily/">Daily</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-review/">Review</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-books/">Books</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-2"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/computer-science/">Computer Science</a>
+       <label class="folder" for="list-item-2">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-algorithm/">Algorithm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-oop/">OOP</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-network/">Network</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-db/">Database</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-ai/">AI</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-security/">Security</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-distribution-system/">Distribution System</a>
+             </li>
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-3"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/programming-language/">Programming Language</a>
+       <label class="folder" for="list-item-3">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-kotlin/">Kotlin</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-go/">Go</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-java/">Java</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-javascript/">JavaScript</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-typescript/">TypeScript</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-4"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/framework/">Framework</a>
+       <label class="folder" for="list-item-4">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring/">Spring</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-data-jpa/">Spring Data JPA</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-security/">Spring Security</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-junit/">JUnit</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-5"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/language/">Language</a>
+       <label class="folder" for="list-item-5">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/language-english/">English</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-6"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/development/">Development</a>
+       <label class="folder" for="list-item-6">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-ddd/">DDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-tdd/">TDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-clean-code/">Clean Code</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-git/">Git</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-7"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/devops/">Devops</a>
+       <label class="folder" for="list-item-7">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-alarm/">Alarm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-ansible/">Ansible</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-cicd/">CI/CD</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-docker/">Docker</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-es/">Elasticsearch</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-k8s/">Kubernetes</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-public-cloud/">Public Cloud</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-kafka/">Kafka</a>
+             </li>
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-8"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/opensource/">Open Source</a>
+       <label class="folder" for="list-item-8">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/opensource-opensource/">Open Source</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-9"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/about/">About</a>
+       
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+</ul>
+
+      </nav>
+    <br/>
+    <br/>
+      <div class="sidebar-box">
+        
+      </div>
+      <p>매일 매일 한계를 뛰어넘기 위한 도전을 즐기는 개발자</p>
+
+      
+      
+        <div class="sidebar-social">
+          <span class="sr-only">Social:</span>
+<ul>
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://github.com/minkukjo">
+    <span class="icon-github" title="GitHub"></span>
+    <span class="sr-only">GitHub</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://www.linkedin.com/in/민국-조-567052166">
+    <span class="icon-linkedin2" title="LinkedIn"></span>
+    <span class="sr-only">LinkedIn</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:harrycode@kakao.com">
+    <span class="icon-mail" title="Email"></span>
+    <span class="sr-only">Email</span>
+  </a>
+</li>
+
+  
+</ul>
+
+        </div>
+      
+    </header>
+  </div>
+</div>
+</div>
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-158654037-1', 'auto');
+  ga('send', 'pageview');
+  loadJSDeferred('https://www.google-analytics.com/analytics.js');
+</script>
+
+
+
+
+
+<!--[if gt IE 8]><!---->
+<script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+  WebFont.load({
+    
+    google: {
+      families: 'Lato'.split('|')
+    },
+    
+
+    custom: {
+      families: ['icomoon'],
+      urls: ['/assets/icomoon/style.css']
+    }
+  });
+</script>
+<!--<![endif]-->
+
+
+  <!--[if gt IE 9]><!---->
+  
+  <script>loadJSDeferred('/assets/js/hydejack.js?v=6.4.0');</script>
+
+  
+  <!--<![endif]-->
+
+
+
+</body>
+
+</html>

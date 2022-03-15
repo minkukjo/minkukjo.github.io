@@ -1,0 +1,1845 @@
+<!DOCTYPE html>
+<html lang="en"><!--
+ __  __                __                                     __
+/\ \/\ \              /\ \             __                    /\ \
+\ \ \_\ \   __  __    \_\ \      __   /\_\      __       ___ \ \ \/'\
+ \ \  _  \ /\ \/\ \   /'_` \   /'__`\ \/\ \   /'__`\    /'___\\ \ , <
+  \ \ \ \ \\ \ \_\ \ /\ \L\ \ /\  __/  \ \ \ /\ \L\.\_ /\ \__/ \ \ \\`\
+   \ \_\ \_\\/`____ \\ \___,_\\ \____\ _\ \ \\ \__/.\_\\ \____\ \ \_\ \_\
+    \/_/\/_/ `/___/> \\/__,_ / \/____//\ \_\ \\/__/\/_/ \/____/  \/_/\/_/
+                /\___/                \ \____/
+                \/__/                  \/___/
+
+Powered by Hydejack v6.4.0 (https://qwtel.com/hydejack/)
+-->
+
+
+
+
+
+
+
+
+
+<head>
+  <!-- =============== -->
+<!-- META            -->
+<!-- =============== -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta
+  name="naver-site-verification"
+  content="22c5b4ef3bfda7fc6100671413989219de7a4ac8"
+/>
+<meta property="og:title" content="DDD 도메인 주도 설계 3장" />
+<meta property="og:type" content="article" />
+
+<!-- =============== -->
+<!-- Google AdSense  -->
+<!-- =============== -->
+<script
+  data-ad-client="ca-pub-8247516864622650"
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+></script>
+
+ 
+<meta property="og:image" content="http://localhost:4000/assets/img/logo.png" />
+
+
+<meta property="og:image:width" content="640" />
+<meta property="og:image:height" content="360" />
+ 
+<title>DDD 도메인 주도 설계 3장 &middot; 도전하는 개발자</title>
+ 
+<meta
+  name="description"
+  content="DDD - 도메인 주도 설계
+
+"
+/>
+<meta
+  property="og:description"
+  content="DDD - 도메인 주도 설계
+
+"
+/>
+
+
+
+<!-- =============== -->
+<!-- LINKS           -->
+<!-- =============== -->
+<link rel="canonical" href="http://localhost:4000/dev/2020/11/04/DDD-03/" />
+<meta property="og:url" content="http://localhost:4000/dev/2020/11/04/DDD-03/" />
+
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="도전하는 개발자 Feed"
+  href="http://localhost:4000/feed.xml"
+/>
+
+
+<link rel="prev" href="http://localhost:4000/dev/2020/11/02/DDD-02/" />
+ 
+<link rel="next" href="http://localhost:4000/dev/2020/11/11/DDD-09/" />
+
+
+<link
+  rel="apple-touch-icon"
+  href="http://localhost:4000/apple-touch-icon.png"
+/>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+<!-- Place favicon.ico in the root directory -->
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+<script>
+  !function(n,e){function t(n,e){n.onload=function(){this.onerror=this.onload=null,e(null,n)},n.onerror=function(){this.onerror=this.onload=null,e(new Error("Failed to load "+this.src),n)}}function o(n,e){n.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||(this.onreadystatechange=null,e(null,n))}}n._loaded=!1,n.loadJSDeferred=function(a,d){function r(){n._loaded=!0;var r=e.createElement("script");r.src=a,d&&(("onload"in r?t:o)(r,d),r.onload||t(r,d));var l=e.getElementsByTagName("script")[0];l.parentNode.insertBefore(r,l)}n._loaded?r():n.addEventListener?n.addEventListener("load",r,!1):n.attachEvent?n.attachEvent("onload",r):n.onload=r}}(window,document);
+
+  !function(e){"use strict";var n=function(n,t,o){function i(e){if(a.body)return e();setTimeout(function(){i(e)})}function r(){l.addEventListener&&l.removeEventListener("load",r),l.media=o||"all"}var d,a=e.document,l=a.createElement("link");if(t)d=t;else{var f=(a.body||a.getElementsByTagName("head")[0]).childNodes;d=f[f.length-1]}var s=a.styleSheets;l.rel="stylesheet",l.href=n,l.media="only x",i(function(){d.parentNode.insertBefore(l,t?d:d.nextSibling)});var u=function(e){for(var n=l.href,t=s.length;t--;)if(s[t].href===n)return e();setTimeout(function(){u(e)})};return l.addEventListener&&l.addEventListener("load",r),l.onloadcssdefined=u,u(r),l};"undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this);
+
+  !function(t){if(t.loadCSS){var e=loadCSS.relpreload={};if(e.support=function(){try{return t.document.createElement("link").relList.supports("preload")}catch(t){return!1}},e.poly=function(){for(var e=t.document.getElementsByTagName("link"),r=0;r<e.length;r++){var n=e[r];"preload"===n.rel&&"style"===n.getAttribute("as")&&(t.loadCSS(n.href,n,n.getAttribute("media")),n.rel=null)}},!e.support()){e.poly();var r=t.setInterval(e.poly,300);t.addEventListener&&t.addEventListener("load",function(){e.poly(),t.clearInterval(r)}),t.attachEvent&&t.attachEvent("onload",function(){t.clearInterval(r)})}}}(this);
+
+  window.disablePushState = false;
+  window.disableDrawer = false;
+</script>
+
+<!--[if lt IE 9]>
+  <script src="https://unpkg.com/html5shiv/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+<!-- =============== -->
+<!-- STYLES          -->
+<!-- =============== -->
+<!--[if gt IE 8]><!---->
+<style>
+  
+  article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}*{box-sizing:border-box}html,body{margin:0;padding:0}html{font-size:16px;line-height:1.75}body{color:#333;background-color:#fff;overflow-y:scroll}a{text-decoration:none}.lead{margin-left:-1rem;margin-right:-1rem}img,.img{display:block;max-width:100%;margin-bottom:1rem;border:none}img.lead,.img.lead{max-width:calc(100% + 2rem);width:calc(100% + 2rem)}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-weight:bold;text-rendering:optimizeLegibility}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{margin:1.6rem 0 1rem;line-height:1.6}h1,.h1{font-size:2rem;line-height:1.25}h2,.h2{font-size:1.5rem}h3,.h3{font-size:1.17em}p{margin-top:0;margin-bottom:1rem}p.lead{font-size:1.25rem;font-weight:300;padding:0 1rem}ul,ol,dl{margin-top:0;margin-bottom:1rem}ul,ol{padding-left:1.25rem}hr{position:relative;margin:1.5rem 0;border:0;border-top:1px solid #eee}.hr{padding-bottom:.5rem;border-bottom:1px solid #eee;margin-bottom:1.5rem}h4,h5,h6,.h4,.h5,.h6{margin-bottom:0.5rem;font-size:1rem}table{margin-bottom:1rem;width:100%;width:calc(100% + 2rem);margin-left:-1rem;border:1px solid #e5e5e5;border-collapse:collapse;border-spacing:0}td,th{padding:.25rem .5rem;border:1px solid #e5e5e5}td:first-child,th:first-child{padding-left:1rem}td:last-child,th:last-child{padding-right:1rem}thead+tbody,tbody+tbody,tfoot{border-top:3px double #e5e5e5}tbody tr:nth-child(odd) td,tbody tr:nth-child(odd) th{background-color:#f9f9f9}footer{margin-bottom:2rem}.page,.post{margin-bottom:3em}.page li+li,.post li+li{margin-top:.25rem}.page>header,.post>header{margin-bottom:2rem}.page-title,.post-title{margin-top:0}.post-date{display:block;margin-top:-0.5rem;margin-bottom:1rem;color:#9a9a9a}.related-posts{padding-left:0;list-style:none}.related-posts>li,.related-posts>li+li{margin-top:1rem}.related-posts>li>small,.related-posts>li+li>small{font-size:75%;color:#9a9a9a}.message{margin-bottom:1rem;padding:1rem;color:#787878;background-color:#f9f9f9;margin-left:-1rem;margin-right:-1rem}body,main{position:relative;overflow-x:hidden}@media screen{body::before{content:'';background:#e5e5e5;position:absolute;left:0;top:0;bottom:0}}@media screen and (min-width: 40em){html{font-size:17px}}@media screen and (min-width: 54em){html{font-size:16px}}@media screen and (min-width: 88em){html{font-size:17px}}@media screen and (min-width: 125em){html{font-size:18px}}.sr-only{display:none}.clearfix,.sidebar-social::after,.clearafter::after{content:"";display:table;clear:both}a,.a{position:relative;padding-bottom:.15rem;border-style:hidden}.img{overflow:hidden;background-color:#f9f9f9}.img>img{margin:0;width:100%;height:100%}.sixteen-nine{position:relative}.sixteen-nine::before{display:block;content:"";width:100%;padding-top:56.25%}.sixteen-nine>*{position:absolute;top:0;left:0;right:0;bottom:0}h1+hr,h2+hr,h3+hr,h4+hr,h5+hr,h6+hr{margin-top:0}.fade-in{animation-duration:500ms;animation-name:fade-in;animation-fill-mode:forwards}@keyframes fade-in{from{transform:translateY(-2rem);opacity:0}50%{transform:translateY(-2rem);opacity:0}to{transform:translateY(0);opacity:1}}.mb6{margin-bottom:10rem}.sidebar{color:rgba(255,255,255,0.75);text-align:left}.sidebar::before{content:"";position:absolute;z-index:2;top:0;left:0;bottom:0;right:0;background:linear-gradient(to bottom, rgba(32,32,32,0) 0%, rgba(32,32,32,0.5) 100%)}.sidebar a{color:#fff;border-bottom-color:rgba(255,255,255,0.2)}.right-side{width:100%;margin-left:auto;margin-right:auto}.right-side .ad-first{text-align:center}@media screen{.right-side{max-width:38rem;min-height:100vh}.right-side .ad-second{display:none}}@media screen and (min-width: 54em){.right-side{margin-left:20rem;margin-right:1rem;padding:4rem 1rem 12rem}.right-side .ad-second{text-align:center;display:block}}@media screen and (min-width: 72em){.right-side{margin-left:22rem;max-width:42rem}}@media screen and (min-width: 88em){.right-side{width:162px;margin-left:0rem;margin-right:0rem;padding:0rem;margin-top:10rem;display:block;float:left}}@media screen and (min-width: 96em){.right-side{width:300px;margin-right:0rem}}#_yDrawer{position:relative}@media screen{#_yDrawer{min-height:640px;min-height:100vh}}@media screen and (min-width: 54em){#_yDrawer{width:18rem;margin-left:0}}.sidebar-bg{position:absolute;height:100%;overflow:hidden;top:0;right:0;bottom:0;left:0;background:#202020 center / cover}.sidebar-box{display:flex;justify-content:center}.sidebar-sticky{position:relative;z-index:3}@media screen{.sidebar-sticky{-ms-overflow-style:none;overflow:-moz-scrollbars-none;height:100%;overflow:auto;position:absolute;padding:3rem 0rem;right:2.5rem;left:2.5rem}}.sidebar-sticky::-webkit-scrollbar{display:none}.sidebar-about>h1{color:#fff;font-size:2rem}.sidebar-nav>ul{list-style:none;padding-left:0;margin-bottom:.5rem}a.sidebar-nav-item{width:100%;font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}a.sidebar-nav-subitem{font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}@media screen{.y-drawer-scrim{z-index:2}.y-drawer-content{width:18rem;left:-18rem;z-index:3}}.sidebar-social{margin-bottom:.5rem}.sidebar-social>ul{list-style:none;padding-left:0;margin:0 -.25rem}.sidebar-social>ul>li{float:left}.sidebar-social>ul>li>a{display:inline-block;text-align:center;font-size:1.6rem;line-height:3rem;width:3.1249rem;height:4rem;padding:.5rem 0}.sidebar-social>ul li+li{margin-top:0}.fixed-top{position:fixed;top:0;left:0;width:100%;z-index:1}.navbar>.content{padding-top:0;padding-bottom:0;min-height:0;height:0}.menu{display:inline-block;padding:1.75rem 1.5rem;border-bottom:none;margin-left:-1.5rem;color:#9a9a9a !important}.menu::after{content:"\2630"}@media screen and (min-width: 54em){.menu{padding:1.25rem 1.5rem;position:absolute;left:-9999px}.menu:focus{position:static}}.animation-main{pointer-events:none}.loading{display:none}@media print{.menu{display:none}}.animation-main{opacity:0;will-change:opacity}.loading{position:absolute;top:0;right:0;padding:5.25rem 4.5rem;transform-origin:top right;transform:scale(0.33)}.content{position:relative;margin-left:auto;margin-right:auto;padding:5rem 1rem 12rem}@media screen{.content{min-height:100vh}}@media screen and (min-width: 54em){.content{padding:4rem 1rem 12rem;margin-left:19rem;margin-right:3rem}}@media screen and (min-width: 72em){.content{max-width:42rem;margin-left:21rem}}@media screen and (min-width: 88em){.content{float:left;width:100%;margin-left:22rem;margin-right:5rem}}@media screen and (min-width: 96em){.content{max-width:44rem}}@media screen and (min-width: 102em){.content{margin-left:25rem;margin-right:8rem}}.me{width:6.5rem;height:6.5rem;align-self:center;margin-right:20px;border-radius:100%;position:relative}@media screen and (min-width: 40em){.me{width:7rem;height:7rem}}@media screen and (min-width: 54em){.me{width:6.5rem;height:6.5rem}}@media screen and (min-width: 72em){.me{width:7rem;height:7rem}}main>footer{width:100%;position:absolute;bottom:0;left:0;right:0;padding:0 1rem;color:#9a9a9a;font-size:smaller;text-align:center}main>footer>p{margin-bottom:0}html{font-family:'Sans-serif'}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-family:'Sans-serif'}
+
+</style>
+
+
+<link
+  rel="preload"
+  href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0"
+  as="style"
+  onload="this.rel='stylesheet'"
+/>
+
+<style id="_pageStyle">
+
+.content a{color:#4f86aa;border-color:rgba(79,134,170,0.2)}.content a:hover{border-color:#4f86aa}:focus{outline-color:#4f86aa}::selection{color:#fff;background:#4f86aa}::-moz-selection{color:#fff;background:#4f86aa}
+
+</style>
+
+
+<noscript>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0" />
+    
+  
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Lato"
+  />
+  <style>
+    html { font-family: 'Lato', 'Sans-serif' }
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .heading { font-family: 'Lato', 'Sans-serif' }
+  </style>
+   
+  <link rel="stylesheet" href="http://localhost:4000/assets/icomoon/style.css" />
+</noscript>
+<!--<![endif]-->
+
+</head>
+
+<body>
+  <!-- =============== -->
+<!-- MENU            -->
+<!-- =============== -->
+<div class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <a id="_menu" class="menu no-hover" href="#_title">
+      <span class="sr-only">Menu</span>
+    </a>
+  </div>
+</div>
+
+<!-- =============== -->
+<!-- CONTENT         -->
+<!-- =============== -->
+<div id="_yPushState">
+  <div class="fade-in">
+    <main
+      id="_main"
+      class="content"
+      role="main"
+      data-color="#4f86aa"
+      data-image="/assets/img/bg.jpg"
+    >
+      
+
+<article id="post-dev/2020/11/04/DDD-03" class="post" role="article">
+  <header>
+    <h1 class="post-title">
+      
+        DDD 도메인 주도 설계 3장
+        
+    </h1>
+
+    <p class="post-date heading">
+      <time datetime="2020-11-04T00:00:00+09:00">04 Nov 2020</time>
+      
+
+
+
+
+
+
+
+
+
+in <a href="/category/development/" data-flip="title">Development</a>
+
+      
+
+
+
+
+
+
+
+
+
+on <a href="/tag/development-ddd/" data-flip="title">DDD</a>
+
+    </p>
+
+    
+  <div class="hr" style="padding-bottom:0"></div>
+
+
+  </header>
+  
+
+
+  
+  <div class="markdown-body">
+
+    <!--  -->
+    <style>
+      .myAd1190 {
+        width: 48%;
+        height: 280px;
+      }
+
+      .myAd1290 {
+        width: 48%;
+        height: 280px;
+      }
+
+      @media(max-width: 800px) {
+        .myAd1190 {
+          display: none;
+        }
+
+        .myAd1290 {
+          width: 98%;
+        }
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 300px;
+      }
+
+      .row-center {
+        display: flex;
+        justify-content: center;
+        height: 258px;
+      }
+    </style>
+   
+    <!--<br />-->
+    <h2 id="ddd---도메인-주도-설계">DDD - 도메인 주도 설계</h2>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/97804402-04b9fc80-1c93-11eb-8e3f-271400a8633e.jpeg" alt="DDD" /></p>
+
+<p>앞으로 적어갈 글은 최범균님의 저서 <strong>DDD START</strong>!를 읽고 요약 - 정리한 글입니다.</p>
+
+<h2 id="제-3장--애그리거트">제 3장 : 애그리거트</h2>
+
+<p>제 3장 애그리거트</p>
+
+<h2 id="애그리거트">애그리거트</h2>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/98114118-1f38e380-1ee8-11eb-8fe3-fc7a06669574.png" alt="3-1" /></p>
+
+<ul>
+  <li>
+    <p>위 그림은 개별 객체 수준에서 주문 시스템을 표현한 그림이다.</p>
+  </li>
+  <li>
+    <p>확실히 객체 수준에서 모델을 바라보면 이해하기가 어렵다.</p>
+  </li>
+  <li>
+    <p>이번 장에서 배울 애그리거트는 관련 객체를 하나의 <strong>군</strong>으로 만들어준다.</p>
+  </li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/98114121-1fd17a00-1ee8-11eb-9420-73f8ffdf9ca9.png" alt="3-2" /></p>
+
+<ul>
+  <li>
+    <p>위의 그림을 애그리거트로 묶었을 때의 모습</p>
+  </li>
+  <li>
+    <p>확실히 이해하는데 훨씬 쉽고 어려움이 없다.</p>
+  </li>
+  <li>
+    <p>함께 변경되는 빈도가 높은 객체는 한 애그리거트에 속할 가능성이 높다.</p>
+  </li>
+</ul>
+
+<h3 id="애그리거트의-흔한-오해들">애그리거트의 흔한 오해들</h3>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/98114632-e0eff400-1ee8-11eb-95a4-f2f6069c02b5.png" alt="3-3" /></p>
+
+<ul>
+  <li>
+    <p>그렇다고 해서 A가 B를 갖는다는 의미가 A와 B가 하나의 애그리거트에 속함을 의미하지는 않는다.</p>
+
+    <ul>
+      <li>e.q. 상품 판매 글과 리뷰는 함께 존재하지만 둘은 하나의 애그리거틀로 보지 않는다.</li>
+      <li>왜냐하면 상품 판매 글이 바뀐다고 리뷰가 바뀌지는 않으니까!</li>
+    </ul>
+  </li>
+  <li>
+    <p>반드시 도메인 2개 이상일 때 하나의 애그리거트가 되는 것은 아니다.</p>
+  </li>
+  <li>
+    <p>일반적으로 다수의 애그리거트가 한 개의 엔터티 객체를 갖는 경우가 많으며, 두개 이상의 애그리거트는 드물게 존재한다.</p>
+  </li>
+</ul>
+
+<h2 id="애그리거트-루트">애그리거트 루트</h2>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/98114693-f8c77800-1ee8-11eb-87aa-fa84e1050d91.png" alt="3-4" /></p>
+
+<ul>
+  <li>
+    <p>애그리거트는 여러 객체로 구성되기 때문에 반드시 모든 객체들의 상태가 <strong>정상</strong>이어야 한다.</p>
+  </li>
+  <li>
+    <p>애그리거트에 속한 모든 객체가 일관된 상태를 유지하기 위해서는 애그리거트 전체를 관리하는 <strong>루트</strong>가 필요하다.</p>
+  </li>
+</ul>
+
+<h2 id="도메인-규칙과-일관성">도메인 규칙과 일관성</h2>
+
+<ul>
+  <li>
+    <p>애그리거트 루트의 핵심은 애그리거트의 <strong>일관성</strong>이 깨지지 않도록 하는 것이다.</p>
+  </li>
+  <li>
+    <p>이를 위해 모든 변경에 관한 인터페이스는 애그리거트가 제공한다.</p>
+  </li>
+  <li>
+    <p>외부의 객체들은 애그리거트 루트와 협력하여 애그리거트의 상태를 변경할 수 있게 된다.</p>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ShippingInfo</span> <span class="n">si</span> <span class="o">=</span> <span class="n">order</span><span class="o">.</span><span class="na">getShippingInfo</span><span class="o">();</span>
+<span class="n">si</span><span class="o">.</span><span class="na">setAddress</span><span class="o">(</span><span class="n">newAddress</span><span class="o">);</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>만약 위와 같이 애그리거트 루트 외부에서 애그리거트의 모델을 변경하려고 하는 행위는 DB 테이블에서 데이터를 직접 수정하는 것 만큼이나 위험한 작업이 된다.</p>
+  </li>
+  <li>
+    <p>그래서 가급적이면 setter를 사용하지 않는 것이 좋다.</p>
+  </li>
+  <li>
+    <p>그리고 밸류 타입은 가급적 <strong>불변</strong> 상태를 유지하게 한다.</p>
+  </li>
+</ul>
+
+<h2 id="트랜잭션-범위">트랜잭션 범위</h2>
+
+<ul>
+  <li>
+    <p>트랜잭션의 범위는 작으면 작을 수록 좋다.</p>
+  </li>
+  <li>
+    <p>트랜잭션 충돌을 막기 위해 잠그는 대상이 많으면 많을 수록 그만큼 성능은 떨어지게 된다.</p>
+
+    <ul>
+      <li>많이 잠그면 잠글 수록 동시에 처리할 수 있는 트랜잭션 개수가 줄어들기 때문.</li>
+    </ul>
+  </li>
+  <li>
+    <p>마찬가지로 한 트랜잭션에서는 한 개의 애그리거트만 수정해야 함</p>
+  </li>
+  <li>
+    <p>한 트랜잭션에서 두 개 이상의 애그리거트를 수정하면 트랜잭션 충돌이 발생할 가능성이 더 높아진다.</p>
+  </li>
+  <li>
+    <p>만약 한 트랜잭션에서 두 개 이상의 애그리거트를 수정해야한다면 아래와 같이 응용 서비스에서 두 애그리거트를 수정하도록 하자.</p>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ChangeOrderService</span> <span class="o">{</span>
+ <span class="nd">@Transactional</span>
+ <span class="kd">public</span> <span class="kt">void</span> <span class="nf">changeShippingInfo</span><span class="o">(</span><span class="nc">OrderId</span> <span class="n">id</span><span class="o">,</span>
+  <span class="nc">ShippingInfo</span> <span class="n">newShippingInfo</span><span class="o">,</span>
+  <span class="kt">boolean</span> <span class="n">useNewShippingAddrAsMemberAddr</span><span class="o">)</span> <span class="o">{</span>
+
+  <span class="nc">Order</span> <span class="n">order</span> <span class="o">=</span> <span class="n">orderRepository</span><span class="o">.</span><span class="na">findbyId</span><span class="o">(</span><span class="n">id</span><span class="o">);</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">order</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nc">OrderNotFoundException</span><span class="o">();</span>
+  <span class="n">order</span><span class="o">.</span><span class="na">shipTo</span><span class="o">(</span><span class="n">newShippingInfo</span><span class="o">);</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">useNewshippingAddrAsMemberAddr</span><span class="o">)</span> <span class="o">{</span>
+   <span class="n">order</span><span class="o">.</span><span class="na">getOrderer</span><span class="o">()</span>
+    <span class="o">.</span><span class="na">getCustomer</span><span class="o">().</span><span class="na">changeAddress</span><span class="o">(</span><span class="n">newShippingInfo</span><span class="o">.</span><span class="na">getAddress</span><span class="o">());</span>
+  <span class="o">}</span>
+ <span class="o">}</span>
+ <span class="o">...</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>도메인 이벤트를 사용하면 한 트랜잭션에서 한 개의 애그리거트를 수정하면서도 동기나 비동기로 다른 애그리거트의 상태를 변경할 수 있는데 이는 10장에서 등장한다.</p>
+  </li>
+  <li>
+    <p>기본적으로 한 트랜잭션에서는 하나의 애그리거트를 수정하는 것을 권장하지만, 다음의 경우에는 두 개 이상의 애그리거트를 변경하는 것을 고려해볼 수 있다.</p>
+    <ul>
+      <li>팀 표준 : 조직의 표준에 따라 사용자 유스케이스와 관련된 응용 서비스의 기능을 한 트랜잭션으로 실행해야 하는 경우</li>
+      <li>기술 제약 : 한 트랜잭션에서 두 개 이상의 애그리거트를 수정하는 대신 도메인 이벤트와 비동기를 사용하는 방식을 사용하는데, 기술적으로 이벤트 방식을 도입할 수 없는 경우 한 트랜잭션에서 다수의 애그리거트를 수정해서 일관성을 처리해야 한다.</li>
+      <li>UI 구현의 편리 : 운영자의 편리함을 위해 주문 목록 화면에서 여러 주문의 상태를 한 번에 변경하고 싶을 경우</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="리포티저리와-애그리거트">리포티저리와 애그리거트</h2>
+
+<ul>
+  <li>
+    <p>애그리거트는 개념상 완전한 한 개의 도메인을 표현한다.</p>
+  </li>
+  <li>
+    <p>객체의 영속성을 처리하는 리포지터리는 애그리거트 단위로 존재한다.</p>
+  </li>
+  <li>
+    <p>Oder와 OderLine을 물리적으로 각각 별도의 DB 테이블에 저장한다고 해서 각각 별도의 리포지터리를 만들지 않는다.</p>
+  </li>
+  <li>
+    <p>Order가 루트이고 OrderLine인 애그리거트에 속하는 구성요소이므로 Order를 위한 애그리거트만 존재한다.</p>
+  </li>
+  <li>
+    <p>RDBMS든 NoSQL이든, save를 하는 것은 애그리거트를 영속화한다는 뜻이다.</p>
+  </li>
+  <li>
+    <p>여러 객체가 하나의 애그리거트로 묶인다면 이 객체들은 애그리거트가 영속화 될 때 전부 영속화 되어야 한다.</p>
+  </li>
+</ul>
+
+<h2 id="id를-이용한-애그리거트-참조">ID를 이용한 애그리거트 참조</h2>
+
+<ul>
+  <li>
+    <p>한 객체가 다른 객체를 참조하듯이, 애그리거트도 다른 애그리거트를 참조할 수 있다.</p>
+  </li>
+  <li>
+    <p>애그리거트의 관리 주체가 루트이므로 애그리거트에서 다른 애그리거트를 참조한다는 것은 루트를 참조한다는 의미이기도 하다.</p>
+  </li>
+  <li>
+    <p>애그리거트간의 참조는 필드를 통해 간단히 구현할 수 있다.</p>
+  </li>
+  <li>
+    <p>JPA를 사용한다면 <code class="language-plaintext highlighter-rouge">@ManyToOne</code> <code class="language-plaintext highlighter-rouge">@OneToOne</code>과 같은 애노테이션을 이용해 다른 애그리거트를 참조할 수 있다.</p>
+  </li>
+  <li>
+    <p>하지만 필드를 이용한 애그리거트 참조는 다음의 문제를 야기할 수 있다.</p>
+    <ul>
+      <li>편한 탐색 오용</li>
+      <li>성능에 대한 고민</li>
+      <li>확장 어려움</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Order</span> <span class="o">{</span>
+ <span class="kd">private</span> <span class="nc">Orderer</span> <span class="n">orderer</span><span class="o">;</span>
+
+ <span class="kd">public</span> <span class="kt">void</span> <span class="nf">changeShippingInfo</span><span class="o">(</span> <span class="o">...</span> <span class="o">)</span> <span class="o">{</span>
+  <span class="o">...</span>
+  <span class="c1">// Member의 Address를 변경한다.</span>
+  <span class="n">orderer</span><span class="o">.</span><span class="na">getCusotmer</span><span class="o">().</span><span class="na">changeAddress</span><span class="o">(</span><span class="n">newShippingInfo</span><span class="o">.</span><span class="na">getAddress</span><span class="o">());</span>
+ <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>위와 같이 한 애그리거트에 다른 애그리거트를 참조한다는 것은 애그리거트간의 의존도를 높여서 결과적으로 애그리거트의 변경을 여럽게 만든다.</p>
+  </li>
+  <li>
+    <p>두 번째 문제는 애그리거트를 직접 참조하는 것은 성능 문제를 야기한다. JPA의 지연로딩과 즉시로딩을 사용하여 이를 해결할 수 있기는 하다. 상황에 따라 적절한 쿼리의 로딩 전략을 결정해야한다.</p>
+  </li>
+  <li>
+    <p>세 번째 문제는 확장이다. 단일 DBMS를 사용하다가 확장을 하려고 한 도메인은 MongoDB를 한 DB는 마리아 DB를 사용한다면 JPA와 같은 단일 기술을 사용할 수 없게 된다.</p>
+  </li>
+  <li>
+    <p>이 문제를 해결하기 위해 ID를 이용해 다른 애그리거트를 참조하는 방법이 있다.</p>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Order</span> <span class="o">{</span>
+ <span class="kd">private</span> <span class="nc">Orderer</span> <span class="n">orderer</span><span class="o">;</span>
+
+ <span class="kd">public</span> <span class="kt">void</span> <span class="nf">changeShippingInfo</span><span class="o">(</span> <span class="o">...</span> <span class="o">)</span> <span class="o">{</span>
+  <span class="o">...</span>
+  <span class="c1">// Member의 Address를 변경한다.</span>
+  <span class="nc">Customer</span> <span class="n">customer</span> <span class="o">=</span> <span class="n">customerRepository</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="n">order</span><span class="o">.</span><span class="na">getOrderer</span><span class="o">().</span><span class="na">getCustomerid</span><span class="o">());</span>
+  <span class="n">customer</span><span class="o">.</span><span class="na">changeAddress</span><span class="o">(</span><span class="n">newShippingInfo</span><span class="o">.</span><span class="na">getAddress</span><span class="o">());</span>
+ <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>ID를 이용한 참조는 DB 테이블에서 외래키를 사용해 참조하는 것과 유사하게 다른 애그리거트를 참조할 때 ID 참조를 사용한다는 점이다.</p>
+  </li>
+  <li>
+    <p>물론 애그리거트 내에서의 엔티티를 참조할 때는 객체 레퍼런스로 참조한다.</p>
+  </li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/98116705-fdd9f680-1eeb-11eb-8fa6-c53c87a9faa7.png" alt="3-45" /></p>
+
+<ul>
+  <li>ID로 참조하게 되면 리포지터리 마다 다른 저장소를 사용하여 구현하더라도 문제가 없고 확장에 용이해진다.</li>
+</ul>
+
+<h2 id="id를-이용한-참조와-조회-성능">ID를 이용한 참조와 조회 성능</h2>
+
+<ul>
+  <li>
+    <p>주문이 N개 있고, 각 주문 마다 상품이 하나씩 있다고 하면 전체 주문을 조회하는 쿼리 1개와 전체 주문에서 각 상품 정보를 조회하는 쿼리가 N번 날아가는 문제가 발생한다.</p>
+  </li>
+  <li>
+    <p>이를 우리는 흔히 N+1 문제라고 부른다.</p>
+  </li>
+  <li>
+    <p>N+1 조회는 전체 조회 속도가 느려지는 원인이 된다.</p>
+  </li>
+  <li>
+    <p>이 책에서는 JPQL과 세타 조인을 사용해 한 번의 쿼리로 로딩하고 있다.</p>
+  </li>
+</ul>
+
+<h2 id="애그리거트-간-집합-연관">애그리거트 간 집합 연관</h2>
+
+<ul>
+  <li>
+    <p>애그리거트 간 1:N과 M:N 연관에 대해 살펴보자.</p>
+  </li>
+  <li>
+    <p>특정 카테고리에 있는 상품 목록을 보여주는 코드를 살펴보자</p>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Category</span> <span class="o">{</span>
+ <span class="kd">private</span> <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">Product</span><span class="o">&gt;</span> <span class="n">products</span><span class="o">;</span>
+
+ <span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Product</span><span class="o">&gt;</span> <span class="nf">getProducts</span><span class="o">(</span><span class="kt">int</span> <span class="n">page</span><span class="o">,</span> <span class="kt">int</span> <span class="n">size</span><span class="o">)</span> <span class="o">{</span>
+  <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Product</span><span class="o">&gt;</span> <span class="n">sortedProducts</span> <span class="o">=</span> <span class="n">sortById</span><span class="o">(</span><span class="nc">Products</span><span class="o">);</span>
+  <span class="k">return</span> <span class="n">sortedProducts</span><span class="o">.</span><span class="na">subList</span><span class="o">((</span><span class="n">page</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">*</span> <span class="n">size</span><span class="o">,</span> <span class="n">page</span> <span class="o">*</span> <span class="n">size</span><span class="o">);</span>
+ <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>이 코드를 DBMS로 구현하면 Category에 속한 모든 Product를 조회한다.</p>
+  </li>
+  <li>
+    <p>이는 상품 개수가 많아지면 많아질 수록 성능 저하가 심해질 것이다.</p>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ProductListService</span> <span class="o">{</span>
+ <span class="kd">public</span> <span class="nc">Page</span><span class="o">&lt;</span><span class="nc">Product</span><span class="o">&gt;</span> <span class="nf">getProductOfCategory</span><span class="o">(</span><span class="nc">Long</span> <span class="n">categoryId</span><span class="o">,</span> <span class="kt">int</span> <span class="n">page</span><span class="o">,</span> <span class="kt">int</span> <span class="n">size</span><span class="o">)</span> <span class="o">{</span>
+  <span class="nc">Category</span> <span class="n">category</span> <span class="o">=</span> <span class="n">categoryRepository</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="n">categoryId</span><span class="o">);</span>
+  <span class="n">checkCategory</span><span class="o">(</span><span class="n">category</span><span class="o">);</span>
+  <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Product</span><span class="o">&gt;</span> <span class="n">products</span> <span class="o">=</span> <span class="n">productRepository</span><span class="o">.</span><span class="na">findByCategoryId</span><span class="o">(</span><span class="n">category</span><span class="o">.</span><span class="na">getId</span><span class="o">(),</span> <span class="n">page</span><span class="o">,</span> <span class="n">size</span><span class="o">);</span>
+  <span class="kt">int</span> <span class="n">totalCount</span> <span class="o">=</span> <span class="n">productRepository</span><span class="o">.</span><span class="na">countsByCategoryId</span><span class="o">(</span><span class="n">category</span><span class="o">.</span><span class="na">getId</span><span class="o">());</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nf">Page</span><span class="o">(</span><span class="n">page</span><span class="o">,</span> <span class="n">size</span><span class="o">,</span> <span class="n">totalCount</span><span class="o">,</span> <span class="n">products</span><span class="o">);</span>
+ <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>이는 N:1로 연관지어 해결할 수 있다.</li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/98117279-da637b80-1eec-11eb-9f1f-0bbc5e167693.png" alt="3-5" /></p>
+
+<ul>
+  <li>M:N이라면 중간에 조인 테이블을 만들어서 사용한다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Entity</span>
+<span class="nd">@Table</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"product"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Product</span> <span class="o">{</span>
+ <span class="nd">@EmbeddedId</span>
+ <span class="kd">private</span> <span class="nc">ProductId</span> <span class="n">id</span><span class="o">;</span>
+
+ <span class="nd">@ElementCollection</span>
+ <span class="nd">@CollectionTable</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"product_category"</span><span class="o">,</span>
+       <span class="n">joinColumns</span> <span class="o">=</span> <span class="nd">@JoinColumn</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"product_id"</span><span class="o">))</span>
+ <span class="kd">private</span> <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">CategoryId</span><span class="o">&gt;</span> <span class="n">categoryIds</span><span class="o">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>또한 하나의 category Id를 키로 갖고, 컬렉션 리스트를 밸류로 갖는 컬렉션 매핑을 사용할 수도 있다.</li>
+</ul>
+
+<h2 id="애그리거트를-팩토리로-상용하기">애그리거트를 팩토리로 상용하기</h2>
+
+<ul>
+  <li>온라인 쇼핑몰에서 고객이 여러 차례 신고를 해서 특정 상점이 더 이상 물건을 등록하지 못하게 차단한 상태라고 해보자.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">RegisterProductService</span> <span class="o">{</span>
+ <span class="kd">public</span> <span class="nc">ProductId</span> <span class="nf">registerNewProduct</span><span class="o">(</span><span class="nc">NewProductRequest</span> <span class="n">req</span><span class="o">)</span> <span class="o">{</span>
+  <span class="nc">Store</span> <span class="n">account</span> <span class="o">=</span> <span class="n">accountRepository</span><span class="o">.</span><span class="na">findStoreById</span><span class="o">(</span><span class="n">req</span><span class="o">.</span><span class="na">getStoreId</span><span class="o">());</span>
+  <span class="n">checkNull</span><span class="o">(</span><span class="n">account</span><span class="o">);</span>
+  <span class="k">if</span> <span class="o">(!</span><span class="n">account</span><span class="o">.</span><span class="na">isBlocked</span><span class="o">())</span> <span class="o">{</span>
+   <span class="k">throw</span> <span class="k">new</span> <span class="nf">StoreBlockedException</span><span class="o">();</span>
+  <span class="o">}</span>
+  <span class="nc">ProductId</span> <span class="n">id</span> <span class="o">=</span> <span class="n">productRepository</span><span class="o">.</span><span class="na">nextId</span><span class="o">();</span>
+  <span class="nc">Product</span> <span class="n">product</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Product</span><span class="o">(</span><span class="n">id</span><span class="o">,</span> <span class="n">account</span><span class="o">.</span><span class="na">getId</span><span class="o">(),</span> <span class="o">...);</span>
+  <span class="n">productRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">product</span><span class="o">);</span>
+  <span class="k">return</span> <span class="n">id</span><span class="o">;</span>
+ <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>나쁜 코드는 아니지만, 중간에 account를 검증하고 Product를 생성하는 로직이 노출되었다.</p>
+  </li>
+  <li>
+    <p>Product를 생성하는 것은 하나의 도메인 기능인데 이를 응용 서비스에서 구현하고 있다.</p>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Store</span> <span class="kd">extends</span> <span class="nc">Member</span> <span class="o">{</span>
+ <span class="kd">public</span> <span class="nc">Product</span> <span class="nf">createProduct</span><span class="o">(</span><span class="nc">ProductId</span> <span class="n">id</span><span class="o">,</span> <span class="o">...</span> <span class="o">)</span> <span class="o">{</span>
+  <span class="k">if</span> <span class="o">(!</span><span class="n">account</span><span class="o">.</span><span class="na">isBlocked</span><span class="o">())</span> <span class="o">{</span>
+   <span class="k">throw</span> <span class="k">new</span> <span class="nf">StoreBlockedException</span><span class="o">();</span>
+  <span class="o">}</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nf">Product</span><span class="o">(</span><span class="n">id</span><span class="o">,</span> <span class="n">account</span><span class="o">.</span><span class="na">getId</span><span class="o">(),</span> <span class="o">...);</span>
+ <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>Product를 생성하는 기능을 Store 애그리거트에 옮겨보자</p>
+  </li>
+  <li>
+    <p>Store 애그리거트의 createProduct()는 Product 애그리거트를 생성하는 팩토리 역할을 한다.</p>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">RegisterProductService</span> <span class="o">{</span>
+ <span class="kd">public</span> <span class="nc">ProductId</span> <span class="nf">registerNewProduct</span><span class="o">(</span><span class="nc">NewProductRequest</span> <span class="n">req</span><span class="o">)</span> <span class="o">{</span>
+  <span class="nc">Store</span> <span class="n">account</span> <span class="o">=</span> <span class="n">accountRepository</span><span class="o">.</span><span class="na">findStoreById</span><span class="o">(</span><span class="n">req</span><span class="o">.</span><span class="na">getStoreId</span><span class="o">());</span>
+  <span class="n">checkNull</span><span class="o">(</span><span class="n">account</span><span class="o">);</span>
+  <span class="nc">ProductId</span> <span class="n">id</span> <span class="o">=</span> <span class="n">productRepository</span><span class="o">.</span><span class="na">nextId</span><span class="o">();</span>
+  <span class="nc">Product</span> <span class="n">product</span> <span class="o">=</span> <span class="n">account</span><span class="o">.</span><span class="na">createProduct</span><span class="o">(</span><span class="n">id</span><span class="o">,</span> <span class="n">account</span><span class="o">.</span><span class="na">getId</span><span class="o">(),</span> <span class="o">...);</span> <span class="c1">// Store에서 직접 생성</span>
+  <span class="n">productRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">product</span><span class="o">);</span>
+  <span class="k">return</span> <span class="n">id</span><span class="o">;</span>
+ <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>이제 product 생성 가능 여부를 확인하는 로직을 변경하더라도 도메인 영역의 Store만 변경하면 된다.</p>
+  </li>
+  <li>
+    <p>이것이 바로 애그리거트를 팩토리로 사용할 때 얻을 수 있는 이점이다.</p>
+  </li>
+  <li>
+    <p>애그리거트가 갖고 있는 데이터를 이용해 다른 애그리거트를 생성해야 한다면 애그리거트에 팩토리 메서드를 구현하는 것을 고려해보자.</p>
+  </li>
+  <li>
+    <p>Store에 Product를 생성하는 팩토리 메서드를 추가하면 Product를 생성할 때 필요한 데이터의 일부를 직접 제공하면서 동시에 중요한 도메인 로직을 함께 구현할 수 있다.</p>
+  </li>
+</ul>
+
+<h2 id="reference">Reference</h2>
+
+<p>DDD START! - 최범균님 -</p>
+
+<p>그림 및 코드 참조 : <a href="https://incheol-jung.gitbook.io/docs/study/ddd-start/1">https://incheol-jung.gitbook.io/docs/study/ddd-start/1</a></p>
+
+    <br />
+    <br />
+  </div>
+  
+
+</article>
+
+<!--<hr class="dingbat" />-->
+<!--
+<div class="share">
+  <h2>Share this post</h2>
+  <div class="share-body">
+    <a href="http://twitter.com/share?text=DDD 도메인 주도 설계 3장&amp;url=http://localhost:4000/dev/2020/11/04/DDD-03/"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="icon-twitter">
+      </span>
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/dev/2020/11/04/DDD-03/"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="icon-facebook">
+      </span>
+    </a>
+  </div>
+</div>
+-->
+<br />
+
+
+
+
+<aside class="related" role="complementary">
+  <h2 class="hr">Related Posts</h2>
+
+  <ul class="related-posts">
+    
+      
+      
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/dev/2021/08/17/Git/" data-flip="title">
+    <span>Github Access Token 사용하는 법</span>
+  </a>
+  <small><time datetime="2021-08-17T00:00:00+09:00">
+    17 Aug 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/dev/2020/12/03/CleanCode/" data-flip="title">
+    <span>Clean Code 스터디 회고</span>
+  </a>
+  <small><time datetime="2020-12-03T00:00:00+09:00">
+    03 Dec 2020
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/dev/2020/11/24/DDD-11/" data-flip="title">
+    <span>DDD 도메인 주도 설계 11장</span>
+  </a>
+  <small><time datetime="2020-11-24T00:00:00+09:00">
+    24 Nov 2020
+  </time></small>
+</li>
+
+        
+      
+        
+        
+      
+    
+  </ul>
+</aside>
+  <aside class="comments" role="complementary">
+  <h2>Comments</h2>
+  <hr/>
+
+  <script src="https://utteranc.es/client.js"
+    repo="minkukjo/minkukjo.github.io"
+    issue-term="title"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</aside>
+
+       <footer>
+  <hr/>
+  
+    <p>© 2022. by minkuk</p>
+
+  
+  <p>
+    <code>Powered by <a href="https://minkukjo.github.io/">minkuk</a></code>
+  </p>
+</footer>
+
+    </main>
+    <div class="right-side">
+  <div class="add-first">
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+    ></script>
+    <!-- 우측 광고 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="9124111205"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+  <br />
+  <br />
+  <div class="add-second">
+    <!-- 우측 광고2 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="5156946039"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+
+  </div>
+  <div id="_yDrawer">
+  <div id="_sidebar" class="sidebar">
+    <div class="sidebar-bg" style="background-color:#4f86aa;background-image:url(/assets/img/bg.jpg)"></div>
+    <header class="sidebar-sticky" role="banner">
+      <br/>
+      <div class="sidebar-about">
+        <h1><a id="_title" href="/">도전하는 개발자</a></h1>
+        
+
+      </div>
+
+      <br/>
+      <br/>
+      <nav class="sidebar-nav heading" role="navigation">
+        <span class="sr-only">Navigation:</span>
+<ul>
+  
+
+  
+
+  
+  
+  
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-1"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/life/">Life</a>
+       <label class="folder" for="list-item-1">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-daily/">Daily</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-review/">Review</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-books/">Books</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-2"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/computer-science/">Computer Science</a>
+       <label class="folder" for="list-item-2">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-algorithm/">Algorithm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-oop/">OOP</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-network/">Network</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-db/">Database</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-ai/">AI</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-security/">Security</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-distribution-system/">Distribution System</a>
+             </li>
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-3"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/programming-language/">Programming Language</a>
+       <label class="folder" for="list-item-3">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-kotlin/">Kotlin</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-go/">Go</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-java/">Java</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-javascript/">JavaScript</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-typescript/">TypeScript</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-4"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/framework/">Framework</a>
+       <label class="folder" for="list-item-4">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring/">Spring</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-data-jpa/">Spring Data JPA</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-security/">Spring Security</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-junit/">JUnit</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-5"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/language/">Language</a>
+       <label class="folder" for="list-item-5">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/language-english/">English</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-6"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/development/">Development</a>
+       <label class="folder" for="list-item-6">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-ddd/">DDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-tdd/">TDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-clean-code/">Clean Code</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-git/">Git</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-7"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/devops/">Devops</a>
+       <label class="folder" for="list-item-7">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-alarm/">Alarm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-ansible/">Ansible</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-cicd/">CI/CD</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-docker/">Docker</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-es/">Elasticsearch</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-k8s/">Kubernetes</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-public-cloud/">Public Cloud</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-kafka/">Kafka</a>
+             </li>
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-8"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/opensource/">Open Source</a>
+       <label class="folder" for="list-item-8">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/opensource-opensource/">Open Source</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-9"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/about/">About</a>
+       
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+</ul>
+
+      </nav>
+    <br/>
+    <br/>
+      <div class="sidebar-box">
+        
+      </div>
+      <p>매일 매일 한계를 뛰어넘기 위한 도전을 즐기는 개발자</p>
+
+      
+      
+        <div class="sidebar-social">
+          <span class="sr-only">Social:</span>
+<ul>
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://github.com/minkukjo">
+    <span class="icon-github" title="GitHub"></span>
+    <span class="sr-only">GitHub</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://www.linkedin.com/in/민국-조-567052166">
+    <span class="icon-linkedin2" title="LinkedIn"></span>
+    <span class="sr-only">LinkedIn</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:harrycode@kakao.com">
+    <span class="icon-mail" title="Email"></span>
+    <span class="sr-only">Email</span>
+  </a>
+</li>
+
+  
+</ul>
+
+        </div>
+      
+    </header>
+  </div>
+</div>
+</div>
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-158654037-1', 'auto');
+  ga('send', 'pageview');
+  loadJSDeferred('https://www.google-analytics.com/analytics.js');
+</script>
+
+
+
+
+
+<!--[if gt IE 8]><!---->
+<script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+  WebFont.load({
+    
+    google: {
+      families: 'Lato'.split('|')
+    },
+    
+
+    custom: {
+      families: ['icomoon'],
+      urls: ['/assets/icomoon/style.css']
+    }
+  });
+</script>
+<!--<![endif]-->
+
+
+  <!--[if gt IE 9]><!---->
+  
+  <script>loadJSDeferred('/assets/js/hydejack.js?v=6.4.0');</script>
+
+  
+  <!--<![endif]-->
+
+
+
+</body>
+
+</html>

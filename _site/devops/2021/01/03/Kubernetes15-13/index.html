@@ -1,0 +1,1836 @@
+<!DOCTYPE html>
+<html lang="en"><!--
+ __  __                __                                     __
+/\ \/\ \              /\ \             __                    /\ \
+\ \ \_\ \   __  __    \_\ \      __   /\_\      __       ___ \ \ \/'\
+ \ \  _  \ /\ \/\ \   /'_` \   /'__`\ \/\ \   /'__`\    /'___\\ \ , <
+  \ \ \ \ \\ \ \_\ \ /\ \L\ \ /\  __/  \ \ \ /\ \L\.\_ /\ \__/ \ \ \\`\
+   \ \_\ \_\\/`____ \\ \___,_\\ \____\ _\ \ \\ \__/.\_\\ \____\ \ \_\ \_\
+    \/_/\/_/ `/___/> \\/__,_ / \/____//\ \_\ \\/__/\/_/ \/____/  \/_/\/_/
+                /\___/                \ \____/
+                \/__/                  \/___/
+
+Powered by Hydejack v6.4.0 (https://qwtel.com/hydejack/)
+-->
+
+
+
+
+
+
+
+
+
+<head>
+  <!-- =============== -->
+<!-- META            -->
+<!-- =============== -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta
+  name="naver-site-verification"
+  content="22c5b4ef3bfda7fc6100671413989219de7a4ac8"
+/>
+<meta property="og:title" content="K8s 실전 활용을 위한 10단계 Ch.08" />
+<meta property="og:type" content="article" />
+
+<!-- =============== -->
+<!-- Google AdSense  -->
+<!-- =============== -->
+<script
+  data-ad-client="ca-pub-8247516864622650"
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+></script>
+
+ 
+<meta
+  property="og:image"
+  content="http://localhost:4000/assets//img/k8s-logo.png"
+/>
+<br />
+
+
+<meta property="og:image:width" content="640" />
+<meta property="og:image:height" content="360" />
+ 
+<title>K8s 실전 활용을 위한 10단계 Ch.08 &middot; 도전하는 개발자</title>
+ 
+<meta
+  name="description"
+  content="디플로이먼트
+
+"
+/>
+<meta
+  property="og:description"
+  content="디플로이먼트
+
+"
+/>
+
+
+
+<!-- =============== -->
+<!-- LINKS           -->
+<!-- =============== -->
+<link rel="canonical" href="http://localhost:4000/devops/2021/01/03/Kubernetes15-13/" />
+<meta property="og:url" content="http://localhost:4000/devops/2021/01/03/Kubernetes15-13/" />
+
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="도전하는 개발자 Feed"
+  href="http://localhost:4000/feed.xml"
+/>
+
+
+<link rel="prev" href="http://localhost:4000/framework/2021/01/01/Spring-Data-JPA-26/" />
+ 
+<link rel="next" href="http://localhost:4000/framework/2021/01/04/Spring-Data-JPA-27/" />
+
+
+<link
+  rel="apple-touch-icon"
+  href="http://localhost:4000/apple-touch-icon.png"
+/>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+<!-- Place favicon.ico in the root directory -->
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+<script>
+  !function(n,e){function t(n,e){n.onload=function(){this.onerror=this.onload=null,e(null,n)},n.onerror=function(){this.onerror=this.onload=null,e(new Error("Failed to load "+this.src),n)}}function o(n,e){n.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||(this.onreadystatechange=null,e(null,n))}}n._loaded=!1,n.loadJSDeferred=function(a,d){function r(){n._loaded=!0;var r=e.createElement("script");r.src=a,d&&(("onload"in r?t:o)(r,d),r.onload||t(r,d));var l=e.getElementsByTagName("script")[0];l.parentNode.insertBefore(r,l)}n._loaded?r():n.addEventListener?n.addEventListener("load",r,!1):n.attachEvent?n.attachEvent("onload",r):n.onload=r}}(window,document);
+
+  !function(e){"use strict";var n=function(n,t,o){function i(e){if(a.body)return e();setTimeout(function(){i(e)})}function r(){l.addEventListener&&l.removeEventListener("load",r),l.media=o||"all"}var d,a=e.document,l=a.createElement("link");if(t)d=t;else{var f=(a.body||a.getElementsByTagName("head")[0]).childNodes;d=f[f.length-1]}var s=a.styleSheets;l.rel="stylesheet",l.href=n,l.media="only x",i(function(){d.parentNode.insertBefore(l,t?d:d.nextSibling)});var u=function(e){for(var n=l.href,t=s.length;t--;)if(s[t].href===n)return e();setTimeout(function(){u(e)})};return l.addEventListener&&l.addEventListener("load",r),l.onloadcssdefined=u,u(r),l};"undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this);
+
+  !function(t){if(t.loadCSS){var e=loadCSS.relpreload={};if(e.support=function(){try{return t.document.createElement("link").relList.supports("preload")}catch(t){return!1}},e.poly=function(){for(var e=t.document.getElementsByTagName("link"),r=0;r<e.length;r++){var n=e[r];"preload"===n.rel&&"style"===n.getAttribute("as")&&(t.loadCSS(n.href,n,n.getAttribute("media")),n.rel=null)}},!e.support()){e.poly();var r=t.setInterval(e.poly,300);t.addEventListener&&t.addEventListener("load",function(){e.poly(),t.clearInterval(r)}),t.attachEvent&&t.attachEvent("onload",function(){t.clearInterval(r)})}}}(this);
+
+  window.disablePushState = false;
+  window.disableDrawer = false;
+</script>
+
+<!--[if lt IE 9]>
+  <script src="https://unpkg.com/html5shiv/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+<!-- =============== -->
+<!-- STYLES          -->
+<!-- =============== -->
+<!--[if gt IE 8]><!---->
+<style>
+  
+  article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}*{box-sizing:border-box}html,body{margin:0;padding:0}html{font-size:16px;line-height:1.75}body{color:#333;background-color:#fff;overflow-y:scroll}a{text-decoration:none}.lead{margin-left:-1rem;margin-right:-1rem}img,.img{display:block;max-width:100%;margin-bottom:1rem;border:none}img.lead,.img.lead{max-width:calc(100% + 2rem);width:calc(100% + 2rem)}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-weight:bold;text-rendering:optimizeLegibility}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{margin:1.6rem 0 1rem;line-height:1.6}h1,.h1{font-size:2rem;line-height:1.25}h2,.h2{font-size:1.5rem}h3,.h3{font-size:1.17em}p{margin-top:0;margin-bottom:1rem}p.lead{font-size:1.25rem;font-weight:300;padding:0 1rem}ul,ol,dl{margin-top:0;margin-bottom:1rem}ul,ol{padding-left:1.25rem}hr{position:relative;margin:1.5rem 0;border:0;border-top:1px solid #eee}.hr{padding-bottom:.5rem;border-bottom:1px solid #eee;margin-bottom:1.5rem}h4,h5,h6,.h4,.h5,.h6{margin-bottom:0.5rem;font-size:1rem}table{margin-bottom:1rem;width:100%;width:calc(100% + 2rem);margin-left:-1rem;border:1px solid #e5e5e5;border-collapse:collapse;border-spacing:0}td,th{padding:.25rem .5rem;border:1px solid #e5e5e5}td:first-child,th:first-child{padding-left:1rem}td:last-child,th:last-child{padding-right:1rem}thead+tbody,tbody+tbody,tfoot{border-top:3px double #e5e5e5}tbody tr:nth-child(odd) td,tbody tr:nth-child(odd) th{background-color:#f9f9f9}footer{margin-bottom:2rem}.page,.post{margin-bottom:3em}.page li+li,.post li+li{margin-top:.25rem}.page>header,.post>header{margin-bottom:2rem}.page-title,.post-title{margin-top:0}.post-date{display:block;margin-top:-0.5rem;margin-bottom:1rem;color:#9a9a9a}.related-posts{padding-left:0;list-style:none}.related-posts>li,.related-posts>li+li{margin-top:1rem}.related-posts>li>small,.related-posts>li+li>small{font-size:75%;color:#9a9a9a}.message{margin-bottom:1rem;padding:1rem;color:#787878;background-color:#f9f9f9;margin-left:-1rem;margin-right:-1rem}body,main{position:relative;overflow-x:hidden}@media screen{body::before{content:'';background:#e5e5e5;position:absolute;left:0;top:0;bottom:0}}@media screen and (min-width: 40em){html{font-size:17px}}@media screen and (min-width: 54em){html{font-size:16px}}@media screen and (min-width: 88em){html{font-size:17px}}@media screen and (min-width: 125em){html{font-size:18px}}.sr-only{display:none}.clearfix,.sidebar-social::after,.clearafter::after{content:"";display:table;clear:both}a,.a{position:relative;padding-bottom:.15rem;border-style:hidden}.img{overflow:hidden;background-color:#f9f9f9}.img>img{margin:0;width:100%;height:100%}.sixteen-nine{position:relative}.sixteen-nine::before{display:block;content:"";width:100%;padding-top:56.25%}.sixteen-nine>*{position:absolute;top:0;left:0;right:0;bottom:0}h1+hr,h2+hr,h3+hr,h4+hr,h5+hr,h6+hr{margin-top:0}.fade-in{animation-duration:500ms;animation-name:fade-in;animation-fill-mode:forwards}@keyframes fade-in{from{transform:translateY(-2rem);opacity:0}50%{transform:translateY(-2rem);opacity:0}to{transform:translateY(0);opacity:1}}.mb6{margin-bottom:10rem}.sidebar{color:rgba(255,255,255,0.75);text-align:left}.sidebar::before{content:"";position:absolute;z-index:2;top:0;left:0;bottom:0;right:0;background:linear-gradient(to bottom, rgba(32,32,32,0) 0%, rgba(32,32,32,0.5) 100%)}.sidebar a{color:#fff;border-bottom-color:rgba(255,255,255,0.2)}.right-side{width:100%;margin-left:auto;margin-right:auto}.right-side .ad-first{text-align:center}@media screen{.right-side{max-width:38rem;min-height:100vh}.right-side .ad-second{display:none}}@media screen and (min-width: 54em){.right-side{margin-left:20rem;margin-right:1rem;padding:4rem 1rem 12rem}.right-side .ad-second{text-align:center;display:block}}@media screen and (min-width: 72em){.right-side{margin-left:22rem;max-width:42rem}}@media screen and (min-width: 88em){.right-side{width:162px;margin-left:0rem;margin-right:0rem;padding:0rem;margin-top:10rem;display:block;float:left}}@media screen and (min-width: 96em){.right-side{width:300px;margin-right:0rem}}#_yDrawer{position:relative}@media screen{#_yDrawer{min-height:640px;min-height:100vh}}@media screen and (min-width: 54em){#_yDrawer{width:18rem;margin-left:0}}.sidebar-bg{position:absolute;height:100%;overflow:hidden;top:0;right:0;bottom:0;left:0;background:#202020 center / cover}.sidebar-box{display:flex;justify-content:center}.sidebar-sticky{position:relative;z-index:3}@media screen{.sidebar-sticky{-ms-overflow-style:none;overflow:-moz-scrollbars-none;height:100%;overflow:auto;position:absolute;padding:3rem 0rem;right:2.5rem;left:2.5rem}}.sidebar-sticky::-webkit-scrollbar{display:none}.sidebar-about>h1{color:#fff;font-size:2rem}.sidebar-nav>ul{list-style:none;padding-left:0;margin-bottom:.5rem}a.sidebar-nav-item{width:100%;font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}a.sidebar-nav-subitem{font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}@media screen{.y-drawer-scrim{z-index:2}.y-drawer-content{width:18rem;left:-18rem;z-index:3}}.sidebar-social{margin-bottom:.5rem}.sidebar-social>ul{list-style:none;padding-left:0;margin:0 -.25rem}.sidebar-social>ul>li{float:left}.sidebar-social>ul>li>a{display:inline-block;text-align:center;font-size:1.6rem;line-height:3rem;width:3.1249rem;height:4rem;padding:.5rem 0}.sidebar-social>ul li+li{margin-top:0}.fixed-top{position:fixed;top:0;left:0;width:100%;z-index:1}.navbar>.content{padding-top:0;padding-bottom:0;min-height:0;height:0}.menu{display:inline-block;padding:1.75rem 1.5rem;border-bottom:none;margin-left:-1.5rem;color:#9a9a9a !important}.menu::after{content:"\2630"}@media screen and (min-width: 54em){.menu{padding:1.25rem 1.5rem;position:absolute;left:-9999px}.menu:focus{position:static}}.animation-main{pointer-events:none}.loading{display:none}@media print{.menu{display:none}}.animation-main{opacity:0;will-change:opacity}.loading{position:absolute;top:0;right:0;padding:5.25rem 4.5rem;transform-origin:top right;transform:scale(0.33)}.content{position:relative;margin-left:auto;margin-right:auto;padding:5rem 1rem 12rem}@media screen{.content{min-height:100vh}}@media screen and (min-width: 54em){.content{padding:4rem 1rem 12rem;margin-left:19rem;margin-right:3rem}}@media screen and (min-width: 72em){.content{max-width:42rem;margin-left:21rem}}@media screen and (min-width: 88em){.content{float:left;width:100%;margin-left:22rem;margin-right:5rem}}@media screen and (min-width: 96em){.content{max-width:44rem}}@media screen and (min-width: 102em){.content{margin-left:25rem;margin-right:8rem}}.me{width:6.5rem;height:6.5rem;align-self:center;margin-right:20px;border-radius:100%;position:relative}@media screen and (min-width: 40em){.me{width:7rem;height:7rem}}@media screen and (min-width: 54em){.me{width:6.5rem;height:6.5rem}}@media screen and (min-width: 72em){.me{width:7rem;height:7rem}}main>footer{width:100%;position:absolute;bottom:0;left:0;right:0;padding:0 1rem;color:#9a9a9a;font-size:smaller;text-align:center}main>footer>p{margin-bottom:0}html{font-family:'Sans-serif'}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-family:'Sans-serif'}
+
+</style>
+
+
+<link
+  rel="preload"
+  href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0"
+  as="style"
+  onload="this.rel='stylesheet'"
+/>
+
+<style id="_pageStyle">
+
+.content a{color:#4f86aa;border-color:rgba(79,134,170,0.2)}.content a:hover{border-color:#4f86aa}:focus{outline-color:#4f86aa}::selection{color:#fff;background:#4f86aa}::-moz-selection{color:#fff;background:#4f86aa}
+
+</style>
+
+
+<noscript>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0" />
+    
+  
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Lato"
+  />
+  <style>
+    html { font-family: 'Lato', 'Sans-serif' }
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .heading { font-family: 'Lato', 'Sans-serif' }
+  </style>
+   
+  <link rel="stylesheet" href="http://localhost:4000/assets/icomoon/style.css" />
+</noscript>
+<!--<![endif]-->
+
+</head>
+
+<body>
+  <!-- =============== -->
+<!-- MENU            -->
+<!-- =============== -->
+<div class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <a id="_menu" class="menu no-hover" href="#_title">
+      <span class="sr-only">Menu</span>
+    </a>
+  </div>
+</div>
+
+<!-- =============== -->
+<!-- CONTENT         -->
+<!-- =============== -->
+<div id="_yPushState">
+  <div class="fade-in">
+    <main
+      id="_main"
+      class="content"
+      role="main"
+      data-color="#4f86aa"
+      data-image="/assets/img/bg.jpg"
+    >
+      
+
+<article id="post-devops/2021/01/03/Kubernetes15-13" class="post" role="article">
+  <header>
+    <h1 class="post-title">
+      
+        K8s 실전 활용을 위한 10단계 Ch.08
+        
+    </h1>
+
+    <p class="post-date heading">
+      <time datetime="2021-01-03T00:00:00+09:00">03 Jan 2021</time>
+      
+
+
+
+
+
+
+
+
+
+in <a href="/category/devops/" data-flip="title">Devops</a>
+
+      
+
+
+
+
+
+
+
+
+
+on <a href="/tag/devops-k8s/" data-flip="title">Kubernetes</a>
+
+    </p>
+
+    
+  <div class="hr" style="padding-bottom:0"></div>
+
+
+  </header>
+  
+
+
+  
+  <div class="markdown-body">
+
+    <!-- 
+    <div class="head-image"><img src="http://localhost:4000/assets//img/k8s-logo.png" /></div>
+    <br /> -->
+    <style>
+      .myAd1190 {
+        width: 48%;
+        height: 280px;
+      }
+
+      .myAd1290 {
+        width: 48%;
+        height: 280px;
+      }
+
+      @media(max-width: 800px) {
+        .myAd1190 {
+          display: none;
+        }
+
+        .myAd1290 {
+          width: 98%;
+        }
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 300px;
+      }
+
+      .row-center {
+        display: flex;
+        justify-content: center;
+        height: 258px;
+      }
+    </style>
+   
+    <!--<br />-->
+    <h2 id="디플로이먼트">디플로이먼트</h2>
+
+<p>디플로이먼트의 역할에 대해 이해해보자.</p>
+
+<p>1장에서 언급했듯이 디플로이먼트는 백엔드의 워크로드에 적합한 <strong>컨트롤러</strong>이다.</p>
+
+<p>디플로이먼트의 주 역할은 파드의 개수를 관리하는 것이다.</p>
+
+<p>k8s 클러스터에서 파드는 서버의 역할을 담당하며 처리 능력을 높이고 싶다면 <strong>파드의 개수를 늘리면</strong> 된다.</p>
+
+<p>물론 불필요하게 많은 파드를 구동시키면 CPU와 메모리가 낭비될 수 있으므로 적절히 조절해야한다.</p>
+
+<p>이처럼 파드의 개수를 관리하는 것은 시스템의 처리 능력과 서비스를 중단하지 않는 가용성, 그리고 비용 측면에서 매우 중요하다.</p>
+
+<p>디플로이먼트는 요청한 개수만큼 파드를 기동하며 장애 등의 이유로 파드의 개수가 줄어들면 새롭게 파드를 만들어 기동한다.</p>
+
+<p>그리고 애플리케이션의 버전을 업그레이드할 때 새로운 버전의 파드로 조금씩 바꾸는 기능(롤링 업데이트) 기능도 제공한다.</p>
+
+<p>그런데 로드밸런서에 해당하는 기능은 디플로이먼트에 포함되지 않는데, 이는 쿠버네티스의 <strong>서비스</strong>라는 오브젝트가 담당하고 있다.</p>
+
+<p>디플로이먼트는 혼자 동작하지 않고 <strong>레플리카</strong>와 함게 동작한다.</p>
+
+<p>이 관계는 아래의 그림과 같다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/103437408-d5ac1100-4c6a-11eb-910a-823fd93438a2.png" alt="B80Z9" /></p>
+
+<p>레플리카셋은 디플로이먼트의 매니페스트에 적힌 레플리카의 값을 기준으로 파드의 개수를 조절하며 사용자가 직접 조작하는 경우는 거의 없고 주로 상태를 참조한다.</p>
+
+<h2 id="디플로이먼트-생성과-삭제">디플로이먼트 생성과 삭제</h2>
+
+<p>디플로이먼트를 만들고 지워보자.</p>
+
+<p>디플로이먼트를 만드는 명렁어는 <code class="language-plaintext highlighter-rouge">kubectl apply -f {YAML_파일명}</code>이고 지울 때는 <code class="language-plaintext highlighter-rouge">kubectl delete -f {YAML_파일명}</code>이다.</p>
+
+<p>아래는 디플로이먼트 매니페스트이다.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">apps/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Deployment</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">web-deploy</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">replicas</span><span class="pi">:</span> <span class="m">3</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">matchLabels</span><span class="pi">:</span>
+      <span class="na">app</span><span class="pi">:</span> <span class="s">web</span> <span class="c1"># 매치 라벨은 디플로이먼트와 파드를 엮을 라벨 명이다.</span>
+  <span class="na">template</span><span class="pi">:</span>
+    <span class="na">metadata</span><span class="pi">:</span>
+      <span class="na">labels</span><span class="pi">:</span>
+        <span class="na">app</span><span class="pi">:</span> <span class="s">web</span> <span class="c1"># 디플로이먼트에 정의된 라벨을 적어준다.</span>
+    <span class="na">spec</span><span class="pi">:</span> <span class="c1"># spec은 template 안에 적어야한다.</span>
+      <span class="na">containers</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">nginx</span>
+          <span class="na">image</span><span class="pi">:</span> <span class="s1">'</span><span class="s">nginx:latest'</span> <span class="c1"># 도커허브로부터 이미지를 가져온다.</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ✘  ~/TestDatas  kubectl apply -f deployment.yml
+deployment.apps/web-deploy created
+ ✘  ~/TestDatas  kubectl get deploy
+NAME         READY   UP-TO-DATE   AVAILABLE   AGE
+web-deploy   2/3     3            2           10s
+ ~/TestDatas  kubectl get rs
+NAME                    DESIRED   CURRENT   READY   AGE
+web-deploy-86cd4d65b9   3         3         3       83s
+ ~/TestDatas  kubectl get po -o wide
+NAME                          READY   STATUS    RESTARTS   AGE   IP           NODE       NOMINATED NODE   READINESS GATES
+web-deploy-86cd4d65b9-gvg5l   1/1     Running   0          87s   172.17.0.3   minikube   &lt;none&gt;           &lt;none&gt;
+web-deploy-86cd4d65b9-p7hn8   1/1     Running   0          87s   172.17.0.5   minikube   &lt;none&gt;           &lt;none&gt;
+web-deploy-86cd4d65b9-sb956   1/1     Running   0          87s   172.17.0.4   minikube   &lt;none&gt;           &lt;none&gt;
+</code></pre></div></div>
+
+<p>위와 같은 로그를 확인할 수 있다.</p>
+
+<p>미니쿠베의 경우 단일 노드를 사용하므로 3개의 파드가 같은 노드에 배치된다.</p>
+
+<p>만약 노드가 여러개라면 k8s 클러스터는 여러 노드에 파드를 분산 배치시킨다.</p>
+
+<h2 id="스케일-기능">스케일 기능</h2>
+
+<p>스케일 기능은 레플리카의 값을 변경하는 기능을 의미한다.</p>
+
+<p>레플리카에 명시된 파드의 개수를 조절하여 처리 능력을 높이거나 낮추는 기능이다.</p>
+
+<p>여기서는 수동으로 변경하는 방법을 사용하지만 CPU 사용량과 연동해서 동적으로 레플리카의 값을 조절하는 오토스케일 기능도 존재한다.</p>
+
+<p>여기서는 레플리카를 조절하는 두 가지 방법에 대해서 설명할 것이다.</p>
+
+<p>하나는 <strong>매니페스트를 변경한 후 적용하는 방법</strong>과 <strong>kubectl scale</strong> 명령을 사용하여 파드의 개수를 늘리는 방법, 두 가지 방법이 존재한다.</p>
+
+<h3 id="매니페스트-변경-후-적용">매니페스트 변경 후 적용</h3>
+
+<p>이미 배포된 디플로이먼트의 레플리카 값을 변경하여 처리 능력을 올려보자.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">apps/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Deployment</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">web-deploy</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">replicas</span><span class="pi">:</span> <span class="m">10</span> <span class="c1"># 10으로 증가시켜보았다.</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">matchLabels</span><span class="pi">:</span>
+      <span class="na">app</span><span class="pi">:</span> <span class="s">web</span>
+  <span class="na">template</span><span class="pi">:</span>
+    <span class="na">metadata</span><span class="pi">:</span>
+      <span class="na">labels</span><span class="pi">:</span>
+        <span class="na">app</span><span class="pi">:</span> <span class="s">web</span>
+    <span class="na">spec</span><span class="pi">:</span>
+      <span class="na">containers</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">nginx</span>
+          <span class="na">image</span><span class="pi">:</span> <span class="s1">'</span><span class="s">nginx:latest'</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ~/TestDatas  kubectl apply -f deployment.yml
+deployment.apps/web-deploy configured
+
+ ~/TestDatas  kubectl get po
+NAME                          READY   STATUS    RESTARTS   AGE
+web-deploy-86cd4d65b9-49tf4   1/1     Running   0          33s
+web-deploy-86cd4d65b9-7lj77   1/1     Running   0          33s
+web-deploy-86cd4d65b9-bdjd6   1/1     Running   0          33s
+web-deploy-86cd4d65b9-dsjdh   1/1     Running   0          33s
+web-deploy-86cd4d65b9-gqvw6   1/1     Running   0          33s
+web-deploy-86cd4d65b9-gvg5l   1/1     Running   0          5m40s
+web-deploy-86cd4d65b9-p7hn8   1/1     Running   0          5m40s
+web-deploy-86cd4d65b9-r25ts   1/1     Running   0          33s
+web-deploy-86cd4d65b9-sb956   1/1     Running   0          5m40s
+web-deploy-86cd4d65b9-xlxxr   1/1     Running   0          33s
+</code></pre></div></div>
+
+<h3 id="스케일-명령어-사용">스케일 명령어 사용</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ✘  ~/TestDatas  kubectl get deploy
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+mysql   1/1     1            1           14m
+
+ ~/TestDatas  kubectl scale deployment/mysql --replicas=3
+deployment.apps/mysql scaled
+ ~/TestDatas  kubectl get deploy
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+mysql   1/3     3            1           17m
+</code></pre></div></div>
+
+<p>디플로이먼트를 통해 늘릴 수 있는 것은 파드의 개수 뿐이다.</p>
+
+<p>파드의 개수를 늘리는 중에 k8s 클러스터의 자원(CPU, 메모리)이 부족해서 노드를 추가하여 자원이 생길 때 까지 파드 생성이 미뤄진다.</p>
+
+<p>메모리가 부족한 상황에서 까지 가상 메모리를 사용해 메인 메모리를 페이징하면서 까지 파드를 늘려주지는 않는다고 한다.</p>
+
+<p>메인 메모리로 파드를 배치할 수 없으면 파드는 생성되지 않는다.</p>
+
+<p>따라서 파드의 개수를 늘리기 전에 클러스터의 가용 자원을 확인해서 노드 증설을 검토할 필요가 있다.</p>
+
+<h3 id="실제-서비스-환경에서">실제 서비스 환경에서</h3>
+
+<p>이미 배포된 서비스의 경우 CI에서 버저닝이 따지는데 해당 버전의 이미지로 레플리카 수를 조절해볼 수 있을 것 같다.</p>
+
+<p>가령 트래픽이 증가할 수 있는 상황에서는 따로 빌드-배포를 하지 않고 로컬에서 레플리카 수만 조절하는 것도 가능하지 않을까 싶다.</p>
+
+<p>그러면 순간적으로 트래픽이 몰리는 시간대를 대비해서 파드 수를 늘려서 처리력을 높일 수 있을 것 같다.</p>
+
+<h2 id="롤아웃-기능">롤아웃 기능</h2>
+
+<p>롤아웃은 쿠버네티스에서 <strong>컨테이너의 업데이트</strong>를 의미한다.</p>
+
+<p>롤아웃을 할 때는 사용자의 요청을 처리할 수 있도록 정해진 개수만큼 업데이트를 진행할 수 있다.</p>
+
+<p>쿠버네티스 롤아웃 디폴트 전략은 <strong>RollingUpdateStrategy</strong>를 사용한다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~/TestDatas  kubectl describe deployment web-deploy
+Name:                   web-deploy
+Namespace:              default
+CreationTimestamp:      Fri, 01 Jan 2021 22:51:09 +0900
+Labels:                 &lt;none&gt;
+Annotations:            deployment.kubernetes.io/revision: 1
+                        kubectl.kubernetes.io/last-applied-configuration:
+                          {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"name":"web-deploy","namespace":"default"},"spec":{"replicas":10,...
+Selector:               app=web
+Replicas:               10 desired | 10 updated | 10 total | 10 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge // 이 부분 주목
+Pod Template:
+  Labels:  app=web
+  Containers:
+   nginx:
+    Image:        nginx:latest
+    Port:         &lt;none&gt;
+    Host Port:    &lt;none&gt;
+    Environment:  &lt;none&gt;
+    Mounts:       &lt;none&gt;
+  Volumes:        &lt;none&gt;
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Progressing    True    NewReplicaSetAvailable
+  Available      True    MinimumReplicasAvailable
+OldReplicaSets:  &lt;none&gt;
+NewReplicaSet:   web-deploy-86cd4d65b9 (10/10 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  18m   deployment-controller  Scaled up replica set web-deploy-86cd4d65b9 to 3
+  Normal  ScalingReplicaSet  13m   deployment-controller  Scaled up replica set web-deploy-86cd4d65b9 to 10
+</code></pre></div></div>
+
+<p>위 디플로이먼트 상태에서 <code class="language-plaintext highlighter-rouge">RollingUpdateStrategy: 25% max unavailable, 25% max surge</code>를 확인할 수 있다.</p>
+
+<p>최대 25%의 파드를 정지할 수 있고, 최대 25%만큼 초과할 수 있음을 의미한다.</p>
+
+<p>가령 레필라카 값이 10이면, 최소 파드수는 <code class="language-plaintext highlighter-rouge">10-10X0.25=7.5</code>라는 계산식이 나오는데 소수점을 올려 8이 된다.</p>
+
+<p>초과 파드수는 12.5이므로 13이 된다.</p>
+
+<p>정리하면 최소 8개의 파드를 유지하면서 최대 13개의 파드가 되도록 롤아웃이 점진적으로 진행된다.</p>
+
+<p>롤아웃에 의해 종료되는 파드에는 종료 요청 시그널 SIGTERM이 전송된다.</p>
+
+<p>만약 컨테이너에서 애플리케이션이 이 시그널을 받아 종료 처리를 하지 않으면 30초 후에 SIGKILL에 의해 강제 종료 된다.</p>
+
+<p>종료 요청을 받은 컨테이너는 더 이상 클라이언트로부터 새로운 요청을 전달받지 않게 된다.</p>
+
+<p>그리고 종료 시그널을 받은 후 메인 프로세스를 종료시킨다.</p>
+
+<h2 id="롤백-기능">롤백 기능</h2>
+
+<p>이전 버전의 애플리케이션으로 되돌리는 <strong>Rollback</strong> 기능에 대해 알아보자.</p>
+
+<p>k8s에서는 아주 간단한 명령어로 롤백을 수행할 수 있다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">kubectl rollout undo deployment web-deploy</code> 한 줄이면 된다.</p>
+
+<h2 id="파드의-ip-주소가-변경되는-경우와-아닌-경우">파드의 IP 주소가 변경되는 경우와 아닌 경우</h2>
+
+<p>파드의 IP 주소는 특정 이벤트에 의해 변할 수도 있고 변하지 않을 수도 있다.</p>
+
+<p>기본적으로는 가동시에 할당되며 종료 시에 회수되어 다른 파드에 할당된다.</p>
+
+<p>롤아웃이나 롤백, 스케일에 의해 파드가 종료되고 새롭게 만들어지는 경우라면 새로운 IP 주소가 할당된다고 볼 수 있다.</p>
+
+<p>한편 파드가 컨테이너의 프로세스가 이상 종료를 한 경우 재시작하여 RESTARTS 값이 증가한 경우라면 파드의 IP 주소는 바뀌지 않는다.</p>
+
+<h2 id="자동-복구">자동 복구</h2>
+
+<p>파드 내의 컨테이너가 모종의 이유로 죽으면, 기본적으로는 파드가 컨테이너를 재구동 시켜준다.</p>
+
+<p>즉, 파드는 컨테이너 수준의 장애에 대한 복구를 시도한다.</p>
+
+<p>이에 반해 디플로이먼트의 자동 복구 기능은 파드 단위로 복구한다.</p>
+
+<p>디플로이먼트는 노드가 중지되더라도 성급하게 복구를 시도하지 않는다.</p>
+
+<p>노드가 중지하면 디플로이먼트는 5분을 기다리며 거기서 1분이 경과하면 중지된 노드의 파드들의 상태가 <strong>UNKNOWN</strong>으로 바뀐다.</p>
+
+<p>그리고 동시에 다른 노드에 <strong>UNKNOWN</strong> 상태의 파드만큼 새로운 파드를 실행한다.</p>
+
+<p>여기서 중지된 노드가 다시 구동하면 그제서야 <strong>UNKNOWN</strong> 상태의 파드를 제거한다.</p>
+
+<p>이처럼 디플로이먼트의 자동복구 기능은 최대한 신중하게 동작하도록 구성되어있다.</p>
+
+<h2 id="디플로이먼트를-이용한-고가용성-구성">디플로이먼트를 이용한 고가용성 구성</h2>
+
+<p>하나의 파드와 퍼시스턴트 볼륨을 사용하면 고가용성 구성 ( 이하 HA 구성 )을 만들 수 있다.</p>
+
+<p>파드는 어떤 노드에 있더라도 퍼시스턴트 볼륨을 마운트할 수 있다.</p>
+
+<p>지금부터는 2개의 노드로 구성된 k8s 클러스터를 생성하고 파드가 배포된 노드를 중지시킨 이후 파드가 이동하는 것을 확인해볼 것이다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gcloud container clusters create test --num-nodes=2
+</code></pre></div></div>
+
+<p>클러스터 생성 이후 아래의 스크립트로 MySQL 서버와 퍼시스턴트 볼륨을 마운트한 HA 구성을 만들어보자.</p>
+
+<p>클라이언트에서 접근할 수 있도록 서비스 오브젝트도 만들었다.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">PersistentVolumeClaim</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">gvol-1</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">accessModes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">ReadWriteOnce</span>
+  <span class="na">resources</span><span class="pi">:</span>
+    <span class="na">requests</span><span class="pi">:</span>
+      <span class="na">storage</span><span class="pi">:</span> <span class="s">12Gi</span>
+<span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">apps/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Deployment</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="na">app</span><span class="pi">:</span> <span class="s">mysql</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">mysql</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">replicas</span><span class="pi">:</span> <span class="m">1</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">matchLabels</span><span class="pi">:</span>
+      <span class="na">app</span><span class="pi">:</span> <span class="s">mysql</span>
+  <span class="na">template</span><span class="pi">:</span>
+    <span class="na">metadata</span><span class="pi">:</span>
+      <span class="na">labels</span><span class="pi">:</span>
+        <span class="na">app</span><span class="pi">:</span> <span class="s">mysql</span>
+    <span class="na">spec</span><span class="pi">:</span>
+      <span class="na">containers</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">env</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">MYSQL_ROOT_PASSWORD</span>
+              <span class="na">value</span><span class="pi">:</span> <span class="s">qwerty</span>
+          <span class="na">image</span><span class="pi">:</span> <span class="s">mysql:5.7</span>
+          <span class="na">livenessProbe</span><span class="pi">:</span>
+            <span class="na">exec</span><span class="pi">:</span>
+              <span class="na">command</span><span class="pi">:</span>
+                <span class="pi">-</span> <span class="s">mysqladmin</span>
+                <span class="pi">-</span> <span class="s">ping</span>
+            <span class="na">initialDelaySeconds</span><span class="pi">:</span> <span class="m">120</span>
+            <span class="na">timeoutSeconds</span><span class="pi">:</span> <span class="m">10</span>
+          <span class="na">name</span><span class="pi">:</span> <span class="s">mysql</span>
+          <span class="na">ports</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="m">3306</span>
+          <span class="na">volumeMounts</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="na">mountPath</span><span class="pi">:</span> <span class="s">/var/lib/mysql</span>
+              <span class="na">name</span><span class="pi">:</span> <span class="s">pvc</span>
+              <span class="na">subPath</span><span class="pi">:</span> <span class="s">mysql-data</span>
+      <span class="na">volumes</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">pvc</span>
+          <span class="na">persistentVolumeClaim</span><span class="pi">:</span>
+            <span class="na">claimName</span><span class="pi">:</span> <span class="s">gvol-1</span>
+<span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Service</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="na">app</span><span class="pi">:</span> <span class="s">mysql</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">mysql-dpl</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">ports</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">nodePort</span><span class="pi">:</span> <span class="m">30306</span>
+      <span class="na">port</span><span class="pi">:</span> <span class="m">3306</span>
+  <span class="na">selector</span><span class="pi">:</span>
+    <span class="na">app</span><span class="pi">:</span> <span class="s">mysql</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">NodePort</span>
+</code></pre></div></div>
+
+<p>배포 이후 MySQL 파드가 어떤 노드에 배포되었는지를 확인해보자</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ✘  ~/TestDatas  kubectl get node
+NAME                                  STATUS   ROLES    AGE   VERSION
+gke-test-default-pool-a97e525d-6dl1   Ready    &lt;none&gt;   13m   v1.16.15-gke.4901
+gke-test-default-pool-a97e525d-tfdc   Ready    &lt;none&gt;   13m   v1.16.15-gke.4901
+ ~/TestDatas  kubectl get pod -o wide
+NAME                     READY   STATUS    RESTARTS   AGE   IP           NODE                                  NOMINATED NODE   READINESS GATES
+mysql-58665b948b-ndjpd   1/1     Running   0          45s   10.100.1.7   gke-test-default-pool-a97e525d-6dl1   &lt;none&gt;           &lt;none&gt;
+</code></pre></div></div>
+
+<p>이제 이 노드에 더 이상 새로운 파드가 스케줄 되지 않도록 명령하는 <code class="language-plaintext highlighter-rouge">cordon</code> 명령을 사용해보자.</p>
+
+<p>이 명령은 필수는 아니다. 왜냐하면 <code class="language-plaintext highlighter-rouge">drain</code> 명령을 사용하면 <code class="language-plaintext highlighter-rouge">cordon</code>도 같이 실행되기 때문이다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ~/TestDatas  kubectl cordon gke-test-default-pool-a97e525d-6dl1
+node/gke-test-default-pool-a97e525d-6dl1 cordoned
+</code></pre></div></div>
+
+<p>이후 drain 명령을 사용하여 해당 노드에 가동 중인 파드를 다른 노드로 이동시키자.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl drain gke-test-default-pool-a97e525d-6dl1 --ignore-daemonsets
+</code></pre></div></div>
+
+<p>파드 이동이 정상적으로 완료되었는지 확인해보자.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ~/TestDatas  kubectl get pod -o wide
+NAME                     READY   STATUS    RESTARTS   AGE   IP            NODE                                  NOMINATED NODE   READINESS GATES
+mysql-58665b948b-wwgj2   1/1     Running   0          50s   10.100.0.10   gke-test-default-pool-a97e525d-tfdc   &lt;none&gt;           &lt;none&gt;
+</code></pre></div></div>
+
+<p>MySQL 서버가 정상적으로 다른 노드로 이동한 것을 확인할 수 있다.</p>
+
+<p>중지 시킨 노드에 다시 파드가 배치될 수 있게 스케줄 금지를 해제해주자.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ~/TestDatas  kubectl uncordon gke-test-default-pool-a97e525d-6dl1
+node/gke-test-default-pool-a97e525d-6dl1 uncordoned
+</code></pre></div></div>
+
+<p>이처럼 특정 노드의 파드를 전부 클러스터 내의 다른 노드로 옮겨주는 것이 가능하다.</p>
+
+<h2 id="마무리">마무리</h2>
+
+<ul>
+  <li>
+    <p>디플로이먼트는 서버 타입의 워크로드에 적합한 컨트롤러다.</p>
+  </li>
+  <li>
+    <p>디플로이먼트는 스케일, 롤아웃, 롤ㄹ백, 자동 복구라는 네 가지 기능이 있다.</p>
+  </li>
+  <li>
+    <p>스케일을 사용하면 파드의 개수를 늘리거나 줄일 수 있다.</p>
+  </li>
+  <li>
+    <p>롤아웃과 롤백은 서비스를 유지하면서 파드를 교체한다. 이를 위해 애플리케이션의 설계와 구현이 필요하다.</p>
+  </li>
+  <li>
+    <p>자동 복구 기능은 노드 수준에서 장애가 발생했을 때 파드를 복구하는 기능이다.</p>
+  </li>
+  <li>
+    <p>디플로이먼트, 퍼시스턴트 볼륨, 서비스 컨트롤러 이 3개를 조합하면 HA 구성이 가능하다.</p>
+  </li>
+</ul>
+
+<h2 id="reference">Reference</h2>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/101032998-6684c380-35bd-11eb-8ba7-a784fd46b37a.png" alt="k8s" /></p>
+
+<h3 id="15단계로-배우는-도커와-쿠버네티스---타카라-마호-저서">15단계로 배우는 도커와 쿠버네티스 - 타카라 마호 저서</h3>
+
+    <br />
+    <br />
+  </div>
+  
+
+</article>
+
+<!--<hr class="dingbat" />-->
+<!--
+<div class="share">
+  <h2>Share this post</h2>
+  <div class="share-body">
+    <a href="http://twitter.com/share?text=K8s 실전 활용을 위한 10단계 Ch.08&amp;url=http://localhost:4000/devops/2021/01/03/Kubernetes15-13/"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="icon-twitter">
+      </span>
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/devops/2021/01/03/Kubernetes15-13/"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="icon-facebook">
+      </span>
+    </a>
+  </div>
+</div>
+-->
+<br />
+
+
+
+
+<aside class="related" role="complementary">
+  <h2 class="hr">Related Posts</h2>
+
+  <ul class="related-posts">
+    
+      
+      
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/devops/2021/05/16/Kafka-04/" data-flip="title">
+    <span>Kafka 내부 메커니즘</span>
+  </a>
+  <small><time datetime="2021-05-16T00:00:00+09:00">
+    16 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/devops/2021/05/13/CKA-51/" data-flip="title">
+    <span>신입 개발자인 나는 왜 CKA 자격증을 땄을까?</span>
+  </a>
+  <small><time datetime="2021-05-13T00:00:00+09:00">
+    13 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/devops/2021/05/06/Kafka-03/" data-flip="title">
+    <span>Kafka Consumer</span>
+  </a>
+  <small><time datetime="2021-05-06T00:00:00+09:00">
+    06 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+      
+    
+  </ul>
+</aside>
+  <aside class="comments" role="complementary">
+  <h2>Comments</h2>
+  <hr/>
+
+  <script src="https://utteranc.es/client.js"
+    repo="minkukjo/minkukjo.github.io"
+    issue-term="title"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</aside>
+
+       <footer>
+  <hr/>
+  
+    <p>© 2022. by minkuk</p>
+
+  
+  <p>
+    <code>Powered by <a href="https://minkukjo.github.io/">minkuk</a></code>
+  </p>
+</footer>
+
+    </main>
+    <div class="right-side">
+  <div class="add-first">
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+    ></script>
+    <!-- 우측 광고 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="9124111205"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+  <br />
+  <br />
+  <div class="add-second">
+    <!-- 우측 광고2 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="5156946039"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+
+  </div>
+  <div id="_yDrawer">
+  <div id="_sidebar" class="sidebar">
+    <div class="sidebar-bg" style="background-color:#4f86aa;background-image:url(/assets/img/bg.jpg)"></div>
+    <header class="sidebar-sticky" role="banner">
+      <br/>
+      <div class="sidebar-about">
+        <h1><a id="_title" href="/">도전하는 개발자</a></h1>
+        
+
+      </div>
+
+      <br/>
+      <br/>
+      <nav class="sidebar-nav heading" role="navigation">
+        <span class="sr-only">Navigation:</span>
+<ul>
+  
+
+  
+
+  
+  
+  
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-1"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/life/">Life</a>
+       <label class="folder" for="list-item-1">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-daily/">Daily</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-review/">Review</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-books/">Books</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-2"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/computer-science/">Computer Science</a>
+       <label class="folder" for="list-item-2">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-algorithm/">Algorithm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-oop/">OOP</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-network/">Network</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-db/">Database</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-ai/">AI</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-security/">Security</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-distribution-system/">Distribution System</a>
+             </li>
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-3"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/programming-language/">Programming Language</a>
+       <label class="folder" for="list-item-3">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-kotlin/">Kotlin</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-go/">Go</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-java/">Java</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-javascript/">JavaScript</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-typescript/">TypeScript</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-4"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/framework/">Framework</a>
+       <label class="folder" for="list-item-4">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring/">Spring</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-data-jpa/">Spring Data JPA</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-security/">Spring Security</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-junit/">JUnit</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-5"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/language/">Language</a>
+       <label class="folder" for="list-item-5">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/language-english/">English</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-6"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/development/">Development</a>
+       <label class="folder" for="list-item-6">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-ddd/">DDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-tdd/">TDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-clean-code/">Clean Code</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-git/">Git</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-7"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/devops/">Devops</a>
+       <label class="folder" for="list-item-7">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-alarm/">Alarm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-ansible/">Ansible</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-cicd/">CI/CD</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-docker/">Docker</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-es/">Elasticsearch</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-k8s/">Kubernetes</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-public-cloud/">Public Cloud</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-kafka/">Kafka</a>
+             </li>
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-8"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/opensource/">Open Source</a>
+       <label class="folder" for="list-item-8">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/opensource-opensource/">Open Source</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-9"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/about/">About</a>
+       
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+</ul>
+
+      </nav>
+    <br/>
+    <br/>
+      <div class="sidebar-box">
+        
+      </div>
+      <p>매일 매일 한계를 뛰어넘기 위한 도전을 즐기는 개발자</p>
+
+      
+      
+        <div class="sidebar-social">
+          <span class="sr-only">Social:</span>
+<ul>
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://github.com/minkukjo">
+    <span class="icon-github" title="GitHub"></span>
+    <span class="sr-only">GitHub</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://www.linkedin.com/in/민국-조-567052166">
+    <span class="icon-linkedin2" title="LinkedIn"></span>
+    <span class="sr-only">LinkedIn</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:harrycode@kakao.com">
+    <span class="icon-mail" title="Email"></span>
+    <span class="sr-only">Email</span>
+  </a>
+</li>
+
+  
+</ul>
+
+        </div>
+      
+    </header>
+  </div>
+</div>
+</div>
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-158654037-1', 'auto');
+  ga('send', 'pageview');
+  loadJSDeferred('https://www.google-analytics.com/analytics.js');
+</script>
+
+
+
+
+
+<!--[if gt IE 8]><!---->
+<script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+  WebFont.load({
+    
+    google: {
+      families: 'Lato'.split('|')
+    },
+    
+
+    custom: {
+      families: ['icomoon'],
+      urls: ['/assets/icomoon/style.css']
+    }
+  });
+</script>
+<!--<![endif]-->
+
+
+  <!--[if gt IE 9]><!---->
+  
+  <script>loadJSDeferred('/assets/js/hydejack.js?v=6.4.0');</script>
+
+  
+  <!--<![endif]-->
+
+
+
+</body>
+
+</html>

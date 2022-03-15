@@ -1,0 +1,2111 @@
+<!DOCTYPE html>
+<html lang="en"><!--
+ __  __                __                                     __
+/\ \/\ \              /\ \             __                    /\ \
+\ \ \_\ \   __  __    \_\ \      __   /\_\      __       ___ \ \ \/'\
+ \ \  _  \ /\ \/\ \   /'_` \   /'__`\ \/\ \   /'__`\    /'___\\ \ , <
+  \ \ \ \ \\ \ \_\ \ /\ \L\ \ /\  __/  \ \ \ /\ \L\.\_ /\ \__/ \ \ \\`\
+   \ \_\ \_\\/`____ \\ \___,_\\ \____\ _\ \ \\ \__/.\_\\ \____\ \ \_\ \_\
+    \/_/\/_/ `/___/> \\/__,_ / \/____//\ \_\ \\/__/\/_/ \/____/  \/_/\/_/
+                /\___/                \ \____/
+                \/__/                  \/___/
+
+Powered by Hydejack v6.4.0 (https://qwtel.com/hydejack/)
+-->
+
+
+
+
+
+
+
+
+
+<head>
+  <!-- =============== -->
+<!-- META            -->
+<!-- =============== -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta
+  name="naver-site-verification"
+  content="22c5b4ef3bfda7fc6100671413989219de7a4ac8"
+/>
+<meta property="og:title" content="Kotlin In Action 11장" />
+<meta property="og:type" content="article" />
+
+<!-- =============== -->
+<!-- Google AdSense  -->
+<!-- =============== -->
+<script
+  data-ad-client="ca-pub-8247516864622650"
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+></script>
+
+ 
+<meta
+  property="og:image"
+  content="http://localhost:4000/assets//img/kotlin-logo.png"
+/>
+<br />
+
+
+<meta property="og:image:width" content="640" />
+<meta property="og:image:height" content="360" />
+ 
+<title>Kotlin In Action 11장 &middot; 도전하는 개발자</title>
+ 
+<meta
+  name="description"
+  content="DSL 만들기
+
+"
+/>
+<meta
+  property="og:description"
+  content="DSL 만들기
+
+"
+/>
+
+
+
+<!-- =============== -->
+<!-- LINKS           -->
+<!-- =============== -->
+<link rel="canonical" href="http://localhost:4000/language/2020/05/16/Kotlin-12/" />
+<meta property="og:url" content="http://localhost:4000/language/2020/05/16/Kotlin-12/" />
+
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="도전하는 개발자 Feed"
+  href="http://localhost:4000/feed.xml"
+/>
+
+
+<link rel="prev" href="http://localhost:4000/language/2020/05/09/Kotlin-11/" />
+ 
+<link rel="next" href="http://localhost:4000/framework/2020/05/18/Spring-109/" />
+
+
+<link
+  rel="apple-touch-icon"
+  href="http://localhost:4000/apple-touch-icon.png"
+/>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+<!-- Place favicon.ico in the root directory -->
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+<script>
+  !function(n,e){function t(n,e){n.onload=function(){this.onerror=this.onload=null,e(null,n)},n.onerror=function(){this.onerror=this.onload=null,e(new Error("Failed to load "+this.src),n)}}function o(n,e){n.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||(this.onreadystatechange=null,e(null,n))}}n._loaded=!1,n.loadJSDeferred=function(a,d){function r(){n._loaded=!0;var r=e.createElement("script");r.src=a,d&&(("onload"in r?t:o)(r,d),r.onload||t(r,d));var l=e.getElementsByTagName("script")[0];l.parentNode.insertBefore(r,l)}n._loaded?r():n.addEventListener?n.addEventListener("load",r,!1):n.attachEvent?n.attachEvent("onload",r):n.onload=r}}(window,document);
+
+  !function(e){"use strict";var n=function(n,t,o){function i(e){if(a.body)return e();setTimeout(function(){i(e)})}function r(){l.addEventListener&&l.removeEventListener("load",r),l.media=o||"all"}var d,a=e.document,l=a.createElement("link");if(t)d=t;else{var f=(a.body||a.getElementsByTagName("head")[0]).childNodes;d=f[f.length-1]}var s=a.styleSheets;l.rel="stylesheet",l.href=n,l.media="only x",i(function(){d.parentNode.insertBefore(l,t?d:d.nextSibling)});var u=function(e){for(var n=l.href,t=s.length;t--;)if(s[t].href===n)return e();setTimeout(function(){u(e)})};return l.addEventListener&&l.addEventListener("load",r),l.onloadcssdefined=u,u(r),l};"undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this);
+
+  !function(t){if(t.loadCSS){var e=loadCSS.relpreload={};if(e.support=function(){try{return t.document.createElement("link").relList.supports("preload")}catch(t){return!1}},e.poly=function(){for(var e=t.document.getElementsByTagName("link"),r=0;r<e.length;r++){var n=e[r];"preload"===n.rel&&"style"===n.getAttribute("as")&&(t.loadCSS(n.href,n,n.getAttribute("media")),n.rel=null)}},!e.support()){e.poly();var r=t.setInterval(e.poly,300);t.addEventListener&&t.addEventListener("load",function(){e.poly(),t.clearInterval(r)}),t.attachEvent&&t.attachEvent("onload",function(){t.clearInterval(r)})}}}(this);
+
+  window.disablePushState = false;
+  window.disableDrawer = false;
+</script>
+
+<!--[if lt IE 9]>
+  <script src="https://unpkg.com/html5shiv/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+<!-- =============== -->
+<!-- STYLES          -->
+<!-- =============== -->
+<!--[if gt IE 8]><!---->
+<style>
+  
+  article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}*{box-sizing:border-box}html,body{margin:0;padding:0}html{font-size:16px;line-height:1.75}body{color:#333;background-color:#fff;overflow-y:scroll}a{text-decoration:none}.lead{margin-left:-1rem;margin-right:-1rem}img,.img{display:block;max-width:100%;margin-bottom:1rem;border:none}img.lead,.img.lead{max-width:calc(100% + 2rem);width:calc(100% + 2rem)}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-weight:bold;text-rendering:optimizeLegibility}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{margin:1.6rem 0 1rem;line-height:1.6}h1,.h1{font-size:2rem;line-height:1.25}h2,.h2{font-size:1.5rem}h3,.h3{font-size:1.17em}p{margin-top:0;margin-bottom:1rem}p.lead{font-size:1.25rem;font-weight:300;padding:0 1rem}ul,ol,dl{margin-top:0;margin-bottom:1rem}ul,ol{padding-left:1.25rem}hr{position:relative;margin:1.5rem 0;border:0;border-top:1px solid #eee}.hr{padding-bottom:.5rem;border-bottom:1px solid #eee;margin-bottom:1.5rem}h4,h5,h6,.h4,.h5,.h6{margin-bottom:0.5rem;font-size:1rem}table{margin-bottom:1rem;width:100%;width:calc(100% + 2rem);margin-left:-1rem;border:1px solid #e5e5e5;border-collapse:collapse;border-spacing:0}td,th{padding:.25rem .5rem;border:1px solid #e5e5e5}td:first-child,th:first-child{padding-left:1rem}td:last-child,th:last-child{padding-right:1rem}thead+tbody,tbody+tbody,tfoot{border-top:3px double #e5e5e5}tbody tr:nth-child(odd) td,tbody tr:nth-child(odd) th{background-color:#f9f9f9}footer{margin-bottom:2rem}.page,.post{margin-bottom:3em}.page li+li,.post li+li{margin-top:.25rem}.page>header,.post>header{margin-bottom:2rem}.page-title,.post-title{margin-top:0}.post-date{display:block;margin-top:-0.5rem;margin-bottom:1rem;color:#9a9a9a}.related-posts{padding-left:0;list-style:none}.related-posts>li,.related-posts>li+li{margin-top:1rem}.related-posts>li>small,.related-posts>li+li>small{font-size:75%;color:#9a9a9a}.message{margin-bottom:1rem;padding:1rem;color:#787878;background-color:#f9f9f9;margin-left:-1rem;margin-right:-1rem}body,main{position:relative;overflow-x:hidden}@media screen{body::before{content:'';background:#e5e5e5;position:absolute;left:0;top:0;bottom:0}}@media screen and (min-width: 40em){html{font-size:17px}}@media screen and (min-width: 54em){html{font-size:16px}}@media screen and (min-width: 88em){html{font-size:17px}}@media screen and (min-width: 125em){html{font-size:18px}}.sr-only{display:none}.clearfix,.sidebar-social::after,.clearafter::after{content:"";display:table;clear:both}a,.a{position:relative;padding-bottom:.15rem;border-style:hidden}.img{overflow:hidden;background-color:#f9f9f9}.img>img{margin:0;width:100%;height:100%}.sixteen-nine{position:relative}.sixteen-nine::before{display:block;content:"";width:100%;padding-top:56.25%}.sixteen-nine>*{position:absolute;top:0;left:0;right:0;bottom:0}h1+hr,h2+hr,h3+hr,h4+hr,h5+hr,h6+hr{margin-top:0}.fade-in{animation-duration:500ms;animation-name:fade-in;animation-fill-mode:forwards}@keyframes fade-in{from{transform:translateY(-2rem);opacity:0}50%{transform:translateY(-2rem);opacity:0}to{transform:translateY(0);opacity:1}}.mb6{margin-bottom:10rem}.sidebar{color:rgba(255,255,255,0.75);text-align:left}.sidebar::before{content:"";position:absolute;z-index:2;top:0;left:0;bottom:0;right:0;background:linear-gradient(to bottom, rgba(32,32,32,0) 0%, rgba(32,32,32,0.5) 100%)}.sidebar a{color:#fff;border-bottom-color:rgba(255,255,255,0.2)}.right-side{width:100%;margin-left:auto;margin-right:auto}.right-side .ad-first{text-align:center}@media screen{.right-side{max-width:38rem;min-height:100vh}.right-side .ad-second{display:none}}@media screen and (min-width: 54em){.right-side{margin-left:20rem;margin-right:1rem;padding:4rem 1rem 12rem}.right-side .ad-second{text-align:center;display:block}}@media screen and (min-width: 72em){.right-side{margin-left:22rem;max-width:42rem}}@media screen and (min-width: 88em){.right-side{width:162px;margin-left:0rem;margin-right:0rem;padding:0rem;margin-top:10rem;display:block;float:left}}@media screen and (min-width: 96em){.right-side{width:300px;margin-right:0rem}}#_yDrawer{position:relative}@media screen{#_yDrawer{min-height:640px;min-height:100vh}}@media screen and (min-width: 54em){#_yDrawer{width:18rem;margin-left:0}}.sidebar-bg{position:absolute;height:100%;overflow:hidden;top:0;right:0;bottom:0;left:0;background:#202020 center / cover}.sidebar-box{display:flex;justify-content:center}.sidebar-sticky{position:relative;z-index:3}@media screen{.sidebar-sticky{-ms-overflow-style:none;overflow:-moz-scrollbars-none;height:100%;overflow:auto;position:absolute;padding:3rem 0rem;right:2.5rem;left:2.5rem}}.sidebar-sticky::-webkit-scrollbar{display:none}.sidebar-about>h1{color:#fff;font-size:2rem}.sidebar-nav>ul{list-style:none;padding-left:0;margin-bottom:.5rem}a.sidebar-nav-item{width:100%;font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}a.sidebar-nav-subitem{font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}@media screen{.y-drawer-scrim{z-index:2}.y-drawer-content{width:18rem;left:-18rem;z-index:3}}.sidebar-social{margin-bottom:.5rem}.sidebar-social>ul{list-style:none;padding-left:0;margin:0 -.25rem}.sidebar-social>ul>li{float:left}.sidebar-social>ul>li>a{display:inline-block;text-align:center;font-size:1.6rem;line-height:3rem;width:3.1249rem;height:4rem;padding:.5rem 0}.sidebar-social>ul li+li{margin-top:0}.fixed-top{position:fixed;top:0;left:0;width:100%;z-index:1}.navbar>.content{padding-top:0;padding-bottom:0;min-height:0;height:0}.menu{display:inline-block;padding:1.75rem 1.5rem;border-bottom:none;margin-left:-1.5rem;color:#9a9a9a !important}.menu::after{content:"\2630"}@media screen and (min-width: 54em){.menu{padding:1.25rem 1.5rem;position:absolute;left:-9999px}.menu:focus{position:static}}.animation-main{pointer-events:none}.loading{display:none}@media print{.menu{display:none}}.animation-main{opacity:0;will-change:opacity}.loading{position:absolute;top:0;right:0;padding:5.25rem 4.5rem;transform-origin:top right;transform:scale(0.33)}.content{position:relative;margin-left:auto;margin-right:auto;padding:5rem 1rem 12rem}@media screen{.content{min-height:100vh}}@media screen and (min-width: 54em){.content{padding:4rem 1rem 12rem;margin-left:19rem;margin-right:3rem}}@media screen and (min-width: 72em){.content{max-width:42rem;margin-left:21rem}}@media screen and (min-width: 88em){.content{float:left;width:100%;margin-left:22rem;margin-right:5rem}}@media screen and (min-width: 96em){.content{max-width:44rem}}@media screen and (min-width: 102em){.content{margin-left:25rem;margin-right:8rem}}.me{width:6.5rem;height:6.5rem;align-self:center;margin-right:20px;border-radius:100%;position:relative}@media screen and (min-width: 40em){.me{width:7rem;height:7rem}}@media screen and (min-width: 54em){.me{width:6.5rem;height:6.5rem}}@media screen and (min-width: 72em){.me{width:7rem;height:7rem}}main>footer{width:100%;position:absolute;bottom:0;left:0;right:0;padding:0 1rem;color:#9a9a9a;font-size:smaller;text-align:center}main>footer>p{margin-bottom:0}html{font-family:'Sans-serif'}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-family:'Sans-serif'}
+
+</style>
+
+
+<link
+  rel="preload"
+  href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0"
+  as="style"
+  onload="this.rel='stylesheet'"
+/>
+
+<style id="_pageStyle">
+
+.content a{color:#4f86aa;border-color:rgba(79,134,170,0.2)}.content a:hover{border-color:#4f86aa}:focus{outline-color:#4f86aa}::selection{color:#fff;background:#4f86aa}::-moz-selection{color:#fff;background:#4f86aa}
+
+</style>
+
+
+<noscript>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0" />
+    
+  
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Lato"
+  />
+  <style>
+    html { font-family: 'Lato', 'Sans-serif' }
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .heading { font-family: 'Lato', 'Sans-serif' }
+  </style>
+   
+  <link rel="stylesheet" href="http://localhost:4000/assets/icomoon/style.css" />
+</noscript>
+<!--<![endif]-->
+
+</head>
+
+<body>
+  <!-- =============== -->
+<!-- MENU            -->
+<!-- =============== -->
+<div class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <a id="_menu" class="menu no-hover" href="#_title">
+      <span class="sr-only">Menu</span>
+    </a>
+  </div>
+</div>
+
+<!-- =============== -->
+<!-- CONTENT         -->
+<!-- =============== -->
+<div id="_yPushState">
+  <div class="fade-in">
+    <main
+      id="_main"
+      class="content"
+      role="main"
+      data-color="#4f86aa"
+      data-image="/assets/img/bg.jpg"
+    >
+      
+
+<article id="post-language/2020/05/16/Kotlin-12" class="post" role="article">
+  <header>
+    <h1 class="post-title">
+      
+        Kotlin In Action 11장
+        
+    </h1>
+
+    <p class="post-date heading">
+      <time datetime="2020-05-16T00:00:00+09:00">16 May 2020</time>
+      
+
+
+
+
+
+
+
+
+
+in <a href="/category/programming-language/" data-flip="title">Programming Language</a>
+
+      
+
+
+
+
+
+
+
+
+
+on <a href="/tag/programming-language-kotlin/" data-flip="title">Kotlin</a>
+
+    </p>
+
+    
+  <div class="hr" style="padding-bottom:0"></div>
+
+
+  </header>
+  
+
+
+  
+  <div class="markdown-body">
+
+    <!-- 
+    <div class="head-image"><img src="http://localhost:4000/assets//img/kotlin-logo.png" /></div>
+    <br /> -->
+    <style>
+      .myAd1190 {
+        width: 48%;
+        height: 280px;
+      }
+
+      .myAd1290 {
+        width: 48%;
+        height: 280px;
+      }
+
+      @media(max-width: 800px) {
+        .myAd1190 {
+          display: none;
+        }
+
+        .myAd1290 {
+          width: 98%;
+        }
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 300px;
+      }
+
+      .row-center {
+        display: flex;
+        justify-content: center;
+        height: 258px;
+      }
+    </style>
+   
+    <!--<br />-->
+    <h2 id="dsl-만들기">DSL 만들기</h2>
+
+<p>이번 시간에는 영역 특화 언어 (Domain-Specific Language)를 공부해볼 것이다.</p>
+
+<p>코틀린 DSL 설계는 코틀린 언어의 여러 특성을 활용한다.</p>
+
+<p>그 중 두가지 특성을 살펴보고자 한다.</p>
+
+<p>첫 번째는 5장에서 간략하게 살펴본 <strong>수신 객체 지정 람다</strong>이다.</p>
+
+<p><strong>수신 객체 지정 람다</strong>를 사용하면 코드 블록에서 이름(변수)가 가리키는 대상을 정할 수 있었다.</p>
+
+<p>이 방식을 변경해서 DSL 구조를 더욱 쉽게 만들 수 있다.</p>
+
+<p>다른 특성은 <code class="language-plaintext highlighter-rouge">invoke</code>로, 아직 제대로 설명하지 않았다. (10장에서 KFunction을 call,invoke로 호출할 수 있는 것에 관해서 11장에 설명할 것이라고 하고 넘어갔었다.)</p>
+
+<p><code class="language-plaintext highlighter-rouge">invoke</code> convention를 사용하면 DSL 코드 안에서 람다와 프로퍼티 대입을 더 유연하게 조합할 수 있다.</p>
+
+<h2 id="api에서-dsl로">API에서 DSL로</h2>
+
+<p>라이브러리 개발자 뿐만 아니라 모든 개발자는 API를 훌륭하게 만들기 위해 노력해야한다.</p>
+
+<p>왜냐하면 객체지향 프로그래밍에서 객체와 객체는 서로 상호작용 한다.</p>
+
+<p>개발자가 객체지향 프로그래밍에서 지향해야할 목표는 가독성이 높고, 유지보수성이 좋은 코드를 작성하고 객체간의 관계를 잘 설계하는 것이라고 할 수 있다.</p>
+
+<p>코틀린에서는 객체를 위한 API를 깔끔하게 작성하기 위한 여러 코틀린적 특성을 알아보았다.</p>
+
+<p>그러면 여기서 과연 API가 깔끔하다는 것은 어떤 의미일까?</p>
+
+<ul>
+  <li>
+    <p>코드를 읽는 독자가 어떤 일이 벌어질지 명확하게 이해할 수 있어야 한다. 어떤 언어를 사용하건 이름을 잘 붙이고 적절한 개념을 사용하는 것은 매우 중요하다.</p>
+  </li>
+  <li>
+    <p>코드가 간결해야 한다. 불필요한 구문이나 번잡한 준비 코드가 가능한 한 적어야 한다.</p>
+  </li>
+</ul>
+
+<p>그러면 우리가 이전에 코틀린에서 깔끔한 API를 작성하기 위해 지원하는 기능들에 대해서 다시 한번 복습해보자.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>일반 구문</th>
+      <th>간결한 구문</th>
+      <th>사용한 언어 특성</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>StringUtil.capitalize(s)</td>
+      <td>s.capitalize()</td>
+      <td>확장 함수</td>
+    </tr>
+    <tr>
+      <td>1.to(“one”)</td>
+      <td>1 to “one”</td>
+      <td>중위 호출</td>
+    </tr>
+    <tr>
+      <td>set.add(2)</td>
+      <td>set += 2</td>
+      <td>연산자 오버로딩</td>
+    </tr>
+    <tr>
+      <td>map.get(“key”)</td>
+      <td>map[“key”]</td>
+      <td>get 메소드에 대한 관례</td>
+    </tr>
+    <tr>
+      <td>file.use({ f -&gt; f.read() })</td>
+      <td>file.use{ it.read() }</td>
+      <td>람다를 괄호 밖으로 빼내는 관례</td>
+    </tr>
+    <tr>
+      <td>sb.append(“yes”)</td>
+      <td>with(sb){<br />append(“yes”)<br />}</td>
+      <td>수신 객체 지정 람다</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>코틀린 DSL은 간결한 구문을 제공하는 기능과 그런 구문을 확장해 여러 메소드 호출을 조합함으로써 구조를 만들어내는 기능에 의존한다.</p>
+
+<p>그 결과로 DSL은 메소드 호출만을 제공하는 API에 비해 더 표현력이 풍부해지고 사용하기 편해진다.</p>
+
+<p>코틀린 언어와 마찬가지로 코틀린 DSL도 온전히 컴파일 시점에 타입이 정해진다. 따라서 타입 지정 언어의 강점을 코틀린 DSL에서도 누릴 수 있다.</p>
+
+<p>DSL을 사용하면 다음과 같이 하루 전 날을 반환받을 수 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">yesterday</span> <span class="p">=</span> <span class="mi">1</span><span class="p">.</span><span class="n">days</span><span class="p">.</span><span class="n">ago</span>
+</code></pre></div></div>
+
+<p>다음 함수는 HTML 표를 생성한다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">createSimpleTable</span><span class="p">()</span> <span class="p">=</span> <span class="nf">createHTML</span><span class="p">().</span>
+    <span class="nf">table</span> <span class="p">{</span>
+        <span class="nf">tr</span> <span class="p">{</span>
+            <span class="nf">td</span> <span class="p">{</span>
+                <span class="p">+</span><span class="s">"cell"</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<p>우리는 이번 장에서 이런 예제를 어떻게 구현하는지 살펴본다.</p>
+
+<p>하지만 구현을 더 자세히 살펴보기에 앞서 DSL이란 무엇인지에 대해 조금 더 공부해보자.</p>
+
+<h2 id="영역-특화-언어라는-개념">영역 특화 언어라는 개념</h2>
+
+<p>DSL이라는 개념은 오래된 개념이다.</p>
+
+<p>범용 프로그래밍 언어를 기반으로 하여 필요하지 않은 기능을 없앤 <strong>영역 특화 언어</strong>를 <code class="language-plaintext highlighter-rouge">DSL</code>이라고 부른다.</p>
+
+<p>우리에게 가장 익숙한 <code class="language-plaintext highlighter-rouge">DSL</code>은 SQL과 정규식이다.</p>
+
+<p>이 두 언어는 데이터 베이스 조작과 문자열 조작이라는 특정 작업에 가장 적합하다.</p>
+
+<p>그렇다고 해서 우리가 전체 애플리케이션을 정규식이나 SQL을 사용해 작성하는 경우는 없다. (정규식으로만 만들어진 애플리케이션이라니 끔찍하다…)</p>
+
+<p>이러한 DSL은 범용 프로그래밍언어와 달리 <code class="language-plaintext highlighter-rouge">declarative</code>라는 점이 중요하다. 범용 프로그래밍 언어는 주로 <code class="language-plaintext highlighter-rouge">imperative</code>하다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">declarative</code>의 장점은 결과를 기술하기만 하고 그 결과를 달성하기 위한 세부 실행은 언어를 해석하는 엔진에 맡겨버린다.</p>
+
+<p>실행 엔진이 결과를 얻는 과정을 전체적으로 최적화하기 때문에 <code class="language-plaintext highlighter-rouge">declarative</code> 언어가 더 효율적인 경우가 종종 있다.</p>
+
+<p>그러나 이러한 <code class="language-plaintext highlighter-rouge">declarative</code> 언어에도 한 가지 단점이 존재한다.</p>
+
+<p>바로 DSL을 범용 언어로 만든 애플리케이션과 조합하기가 어렵다는 점이다.</p>
+
+<p>DSL은 자체 문법이 있기 때문에 다른 언어의 프로그램 안에 직접 포함시킬 수 없다.</p>
+
+<p>DSL로 작성한 프로그램을 다른 언어에서 호출하기 위해서는 DSL 프로그램을 별도의 파일이나 문자열 리터럴로 저장해야 한다.</p>
+
+<p>하지만 이런 식으로 DSL을 저장하면 호스트 프로그램과 DSL의 상호작용을 컴파일 시점에 제대로 검증하거나 DSL 프로그램을 디버깅하거나 DSL 코드 작성을 돕는 IDE 기능을 제공하기 어려워지는 문제가 있다.</p>
+
+<p>이런 문제를 극복하기 위해 <code class="language-plaintext highlighter-rouge">internal DSL</code>이라는 개념이 점점 유명해지고 있다.</p>
+
+<h2 id="internal-dsl">internal DSL</h2>
+
+<p>독립적인 문법 구조를 가진 external DSL과 반대로 internal DSL은 범용 언어로 작성된 프로그래밍의 일부이며 범용 언어와 동일한 문법을 사용한다.</p>
+
+<p>따라서 internal DSL은 다른 언어가 아니라 DSL의 핵심 장점을 유지하면서 주 언어를 특별한 방법으로 사용하는 것이다.</p>
+
+<p>아래는 internal DSL을 이해하기 좋은 예시가 있다.</p>
+
+<pre><code class="language-SQL">SELECT Country.name, COUNT(Customer.id)
+    FROM Country
+    JOIN Customer
+        ON Country.id = Customer.country_id
+GROUP BY Country.name
+ORDER BY COUNT(Customer.id) DESC
+    LIMIT 1
+</code></pre>
+
+<p>위 SQL은 가장 많은 고객이 살고 있는 나라를 알아내는 질의문이다.</p>
+
+<p>질의 언어아 주 애플리케이션 언어 사이에 상호작용할 수 있는 방법을 제공해야 하기 때문에 SQL로 코드를 작성하는 것이 편하지 않을 수 있다.</p>
+
+<p>코틀린으로 작성된 데이터베이스 프레임워크인 Exposed 프레임워크가 제공하는 DSL을 사용하여 같은 질의를 구현하면 아래와 같다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nc">Country</span> <span class="n">join</span> <span class="nc">Customer</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">slice</span><span class="p">(</span><span class="nc">Country</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="nc">Count</span><span class="p">(</span><span class="nc">Customer</span><span class="p">.</span><span class="n">id</span><span class="p">))</span>
+    <span class="p">.</span><span class="nf">selectAll</span><span class="p">()</span>
+    <span class="p">.</span><span class="nf">groupBy</span><span class="p">(</span><span class="nc">Country</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">orderBy</span><span class="p">(</span><span class="nc">Count</span><span class="p">(</span><span class="nc">Customer</span><span class="p">.</span><span class="n">id</span><span class="p">),</span><span class="n">isAsc</span> <span class="p">=</span> <span class="k">false</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">limit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>위 프로그램을 실행하면 첫 번째 SQL과 동일한 프로그램이 생성되고 실행된다.</p>
+
+<p>하지만 두 번째 코드는 일반 코틀린 코드이며 일반 코틀린 메소드를 사용한다.</p>
+
+<p>또한 두 번째 코드는 SQL 질의가 반환하는 결과 집합을 코틀린 객체로 변환하기 위해 특별히 해줄 것이 없다.</p>
+
+<p>쿼리를 실행한 결과가 네이티브 코틀린 객체이기 때문이다.</p>
+
+<p>두 번째 코드를 <code class="language-plaintext highlighter-rouge">internal DSL</code>이라고 부른다.</p>
+
+<h2 id="dsl의-구조">DSL의 구조</h2>
+
+<p>코틀린 DSL에서는 보통 람다를 중첩시키거나 메소드 호출을 연쇄시키는 방식으로 구조를 만든다.</p>
+
+<p>그런 구조는 위에서 살펴본 SQL 예제에서 역시 확인할 수 있다.</p>
+
+<p>질의를 실행하기 위해 필요한 메소드들을 조합해야하며, 그렇게 메소드를 조합해서 만든 질의는 질의에 필요한 인자를 메소드 호출 하나에 모두 넘기는 것 보다 훨씬 더 가독성이 높다.</p>
+
+<p>JUnit과 KotlinTest의 예제를 살펴보자.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//kotlintest</span>
+<span class="n">str</span> <span class="n">should</span> <span class="nf">startWith</span><span class="p">(</span><span class="s">"kot"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// JUnit</span>
+<span class="nf">assertTrue</span><span class="p">(</span><span class="n">str</span><span class="p">.</span><span class="nf">startsWith</span><span class="p">(</span><span class="s">"kot"</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>일반 JUnit API를 사용해 테스트를 작성하면 더 읽기 복잡하다.</p>
+
+<p>이에 비해 중위 호출을 사용한 코틀린 코드가 훨씬 더 직관적이고 이해하기 쉬운 것을 확인할 수 있다.</p>
+
+<h3 id="개인적인-생각">개인적인 생각</h3>
+
+<p>본 책의 저자이자 코틀린 컴파일러 개발자들은 Kotlin Test가 JUnit에 비해 더욱 직관적이고 훌륭하다고 하였다.</p>
+
+<p>그래서 직접 실제 KotlinTest를 비롯한 코틀린 테스트 프레임워크를 사용한 개발자들의 블로그 글들을 찾아보았다.</p>
+
+<p>우선 KotlinTest는 JUnit 보다 코틀린 문법 (중위 호출)을 지원하면서 더욱 직관적인 것은 맞지만, <code class="language-plaintext highlighter-rouge">@Before</code>이나 <code class="language-plaintext highlighter-rouge">@After</code>같은 JUnit에서 기본적으로 사용하던 기능들의 업데이트가 늦어서 개발자들이 꺼려하는 것으로 보인다.</p>
+
+<p>http://www.douevencode.com/articles/2018-01/kotlin-the-best-testing-framework/</p>
+
+<p>그리고 JUnit에서도 추가적인 라이브러리인 <a href="http://www.douevencode.com/articles/2018-01/kotlin-the-best-testing-framework/">Kluent</a>나 <a href="https://github.com/npryce/hamkrest">Hamkrest</a>를 사용하면 조금 더 가독성 높은 테스트를 작성할 수 있다고 한다.</p>
+
+<p>물론 위 글이 벌써 2년전 글이라 현재는 kotlintest의 입지가 어떻게 되었는지는 모르겠지만 (JUnit5가 등장하기도 했고…)</p>
+
+<p>다음 토이프로젝트에서는 Springboot + Kotlin + Kotlintest로 프로젝트를 한번 진행해보면서 Kotlintest 프레임워크가 어떤지 직접 체험해보고 싶다.</p>
+
+<h2 id="구조화된-api-구축--dsl에서-수신-객체-지정-dsl-사용">구조화된 API 구축 : DSL에서 수신 객체 지정 DSL 사용</h2>
+
+<p>수신 객체 지정 람다는 구조화된 API를 만들 때 도움이 되는 강력한 코틀린 기능이다.</p>
+
+<p>구조가 있다는 것은 일반적인 API와 DSL을 구분하는 아주 중요한 특성이다.</p>
+
+<h2 id="수신-객체-지정-람다와-확장-함수-타입">수신 객체 지정 람다와 확장 함수 타입</h2>
+
+<p>with나 apply같은 scope function에서 수신 객체 지정 람다에 대해 소개했었다.</p>
+
+<p>이제 buildString 함수를 통해 코틀린이 수신 객체 지정 람다를 <strong>어떻게</strong> 구현하는지 살펴보자.</p>
+
+<p>buildString은 한 StringBuilder 객체에 여러 내용을 추가할 수 있다.</p>
+
+<p>람다를 인자로 받는 buildString()을 정의해보자.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">buildString</span><span class="p">(</span>
+    <span class="n">builderAction</span><span class="p">:</span> <span class="p">(</span><span class="nc">StringBuilder</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nc">Unit</span>
+<span class="p">)</span> <span class="p">:</span> <span class="nc">String</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">sb</span> <span class="p">=</span> <span class="nc">StringBuilder</span><span class="p">()</span>
+    <span class="nf">builderAction</span><span class="p">(</span><span class="n">sb</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">sb</span><span class="p">.</span><span class="nf">toString</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">val</span> <span class="py">s</span> <span class="p">=</span> <span class="nf">buildString</span> <span class="p">{</span>
+    <span class="n">it</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="s">"Hello, "</span><span class="p">)</span>
+    <span class="n">it</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="s">"World!"</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nf">println</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="c1">// Hello, World!</span>
+</code></pre></div></div>
+
+<p>이 코드는 이해하기 쉽지만 사용하기 편리하지는 않다.</p>
+
+<p>람다 본문에서 매번 it을 사용해 StringBuilder를 참조해야하기 때문이다.</p>
+
+<p>이번에는 수신 객체 지정 람다를 사용하여 it이라는 이름을 사용하지 않는 람다를 인자로 넘겨보자.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">buildString</span><span class="p">(</span>
+    <span class="n">builderAction</span><span class="p">:</span> <span class="nc">StringBuilder</span><span class="p">.()</span> <span class="p">-&gt;</span> <span class="nc">Unit</span>
+<span class="p">)</span> <span class="p">:</span> <span class="nc">String</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">sb</span> <span class="p">=</span> <span class="nc">StringBuilder</span><span class="p">()</span>
+    <span class="n">sb</span><span class="p">.</span><span class="nf">builderAction</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">sb</span><span class="p">.</span><span class="nf">toString</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">val</span> <span class="py">s</span> <span class="p">=</span> <span class="nf">buildString</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="s">"Hello, "</span><span class="p">)</span>
+    <span class="nf">append</span><span class="p">(</span><span class="s">"World!"</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nf">println</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="c1">// Hello, World!</span>
+</code></pre></div></div>
+
+<p>이전 코드와 현재 코드를 비교해보자.</p>
+
+<p>우선 builderAction의 타입이 달라졌다.</p>
+
+<p>이는 확장 함수 타입을 사용했다.</p>
+
+<p>확장 함수 타입 선언은 람다의 파라미터 목록에 있는 수신 객체 타입을 파라미터 목록을 여는 괄호 앞으로 빼 놓으면서 중간에 마침표를 붙인 형태다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>확장 함수 타입 선언 과정
+
+(StringBuilder) -&gt; StringBuilder() -&gt; StringBuilder.()
+</code></pre></div></div>
+
+<p>확장 함수 타입을 함수의 매개변수 타입으로 지정함으로써 수신 객체 지정 람다를 인자로 받을 수 있게 되었다.</p>
+
+<p>그러면 왜 굳이 확장 함수 타입일까?</p>
+
+<p>확장 함수의 본문에서는 확장 대상 클래스에 정의된 메소드를 마치 그 클래스 내부에서 호출하듯이 사용할 수 있었다.</p>
+
+<p>확장 함수나 수신 객체 지정 람다에서는 모두 함수(람다)를 호출할 때 수신 객체를 지정해야만 하고, 함수(람다) 본문 안에서는 그 수신 객체를 특별한 수식자 없이 사용할 수 있다.</p>
+
+<p>일반 람다를 사용할 때는 StringBuilder 인스턴스를 builderAction(sb)처럼 StringBuilder를 매개변수로 전달해야하지만,</p>
+
+<p>수신 객체 지정 람다를 사용할 때는 sb.builderAction()으로 전달한다.</p>
+
+<p>즉, sb.builderAction()에서 builderAction은 StringBuilder 클래스 안에 정의된 함수가 아니며 StringBuilder 인스턴스인 sb는 확장 함수를 호출할 때와 동일한 구문으로 호출할 수 있는 함수 타입의 인자일 뿐이다.</p>
+
+<p>표준 라이브러리의 buildString 구현은 위의 구현보다 훨씬 짧은데, builderAction을 명시적으로 호출하는 대신 builderAction을 apply 함수에게 인자로 넘긴다.</p>
+
+<p>이렇게 하면 builderString을 단 한줄로 구현할 수 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">buildString</span><span class="p">(</span><span class="n">builderAction</span><span class="p">:</span> <span class="nc">StringBuilder</span><span class="p">.()</span> <span class="p">-&gt;</span> <span class="nc">Unit</span><span class="p">):</span> <span class="nc">String</span> <span class="p">=</span> <span class="nc">StringBuilder</span><span class="p">().</span><span class="nf">apply</span><span class="p">(</span><span class="n">builderAction</span><span class="p">).</span><span class="nf">toString</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>우리는 이전에 with와 apply에 대해서도 살펴보았다.</p>
+
+<p>with와 apply 모두 수신 객체로 확장 함수 타입의 람다를 호출한다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">inline</span> <span class="k">fun</span> <span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;</span> <span class="nc">T</span><span class="p">.</span><span class="nf">apply</span><span class="p">(</span><span class="n">block</span><span class="p">:</span> <span class="nc">T</span><span class="p">.()</span> <span class="p">-&gt;</span> <span class="nc">Unit</span><span class="p">):</span> <span class="nc">T</span> <span class="p">{</span>
+    <span class="nf">block</span><span class="p">()</span>
+    <span class="k">return</span> <span class="k">this</span>
+<span class="p">}</span>
+
+<span class="k">inline</span> <span class="k">fun</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">,</span><span class="nc">R</span><span class="p">&gt;</span> <span class="nf">with</span><span class="p">(</span><span class="n">receiver</span><span class="p">:</span> <span class="nc">T</span><span class="p">,</span> <span class="n">block</span><span class="p">:</span> <span class="nc">T</span><span class="p">.()</span> <span class="p">-&gt;</span> <span class="nc">R</span><span class="p">)</span> <span class="p">:</span> <span class="nc">R</span> <span class="p">{</span>
+    <span class="n">receiver</span><span class="p">.</span><span class="nf">block</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>차이가 있다면 apply의 경우 수신 객체의 메소드처럼 불리며, 수신 객체를 묵시적 인자(this)로 받는다.</p>
+
+<p>이에 비해 with는 수신 객체를 첫 번째 파라미터로 받는다.</p>
+
+<p>또 다른 차이는, apply의 경우 수신 객체를 다시 반환하지만 with의 경우 람다를 호출해 얻은 결과를 반환한다.</p>
+
+<h2 id="invoke-convention을-사용한-더-유연한-블록-중첩">invoke convention을 사용한 더 유연한 블록 중첩</h2>
+
+<p>invoke convention을 사용하면 객체를 함수처럼 호출할 수 있다.</p>
+
+<p>이미 함수 타입의 객체(Function1 등)을 함수처럼 호출하는 경우를 살펴보았다.</p>
+
+<p>마찬가지로 invoke convention을 사용하면 함수처럼 호출할 수 있는 객체를 만드는 클래스를 정의할 수 있다.</p>
+
+<p>하지만 이 기능이 일상적으로 사용하라고 만든 기능은 아니라는 점에 유의하자.</p>
+
+<p>invoke convention을 남용하면 1()과 같이 이해하기 어려운 코드가 생길 수 있다.</p>
+
+<p>그러나 DSL에서는 invoke convention이 아주 유용한 경우가 자주 있다.</p>
+
+<h2 id="invoke-convention--함수처럼-호출할-수-있는-객체">invoke convention : 함수처럼 호출할 수 있는 객체</h2>
+
+<p>우리는 이미 코틀린의 convention에 대하여 학습하였다.</p>
+
+<p>가령 <code class="language-plaintext highlighter-rouge">foo</code>라는 변수가 있고 <code class="language-plaintext highlighter-rouge">foo[bar]</code>라는 식을 사용하면 이는 foo.get(bar)로 변환된다.</p>
+
+<p>이때 get은 Foo라는 클래스 안에 정의된 함수이거나 확장함수여야 한다.</p>
+
+<p>invoke convention 역시 같은 역할을 수행한다.</p>
+
+<p>다만 get과는 다르게 괄호()를 사용한다.</p>
+
+<p>operator 변경자가 붙은 invoke 메소드 정의가 들어있는 클래스의 객체를 함수처럼 호출할 수 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Greeter</span><span class="p">(</span><span class="kd">val</span> <span class="py">greeting</span><span class="p">:</span> <span class="nc">String</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">operator</span> <span class="k">fun</span> <span class="nf">invoke</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nc">String</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nf">println</span><span class="p">(</span><span class="s">"$greeting, $name!"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">val</span> <span class="py">bavarianGreeter</span> <span class="p">=</span> <span class="nc">Greeter</span><span class="p">(</span><span class="s">"Servus"</span><span class="p">)</span>
+<span class="nf">bavarianGreeter</span><span class="p">(</span><span class="s">"Dmitry"</span><span class="p">)</span>
+<span class="c1">// output</span>
+<span class="c1">// Servus, Dmitry!</span>
+</code></pre></div></div>
+
+<p>bavarianGreeter 객체가 마치 함수처럼 호출되는 것을 확인할 수 있다.</p>
+
+<p>이 때 bavarianGreeter(“Dmitry”)는 내부적으로 bavarianGreeter.invoke(“Dmitry”)로 컴파일된다.</p>
+
+<p>즉 이 코드에는 그 어떠한 신비로운 점도 없다.</p>
+
+<p>이러한 invoke convention은 DSL에서 굉장히 유용하게 사용될 수 있다.</p>
+
+<h2 id="invoke-convention과-함수형-타입">invoke convention과 함수형 타입</h2>
+
+<p>invoke convention에 배웠으므로 우리는 일반적인 람다 호출 방식(람다 뒤에 괄호를 붙이는 방식)이 실제로는 invoke convention을 사용하는 것에 지나지 않음을 충분히 알 수 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span> <span class="nf">println</span><span class="p">(</span><span class="s">"Hello"</span><span class="p">)</span> <span class="p">}()</span>
+</code></pre></div></div>
+
+<p>인라인하는 람다를 제외한 모든 람다는 함수형 인터페이스(Function1 등)을 구현하는 클래스로 컴파일된다. 각 함수형 인터페이스 안에는 그 인터페이스 이름이 가리키는 개수만큼 파라미터를 받는 invoke 메소드가 들어있다.</p>
+
+<p>람다를 함수처럼 호출할 수 있다는 사실을 알면 어떤 점이 좋을까?</p>
+
+<p>우선 복잡한 람다를 여러 메소드로 분리하면서도 여전히 분리 전의 람다처럼 외부에서 호출할 수 있는 객체를 만들 수 있다.</p>
+
+<p>그리고 함수 타입 파라미터를 받는 함수에게 그 객체를 전달할 수 있다.</p>
+
+<h2 id="dsl의-invoke-convention--gradle에서-의존관계-정의">DSL의 invoke convention : Gradle에서 의존관계 정의</h2>
+
+<p>모듈 의존 관계를 정의하는 Gradle DSL 예제를 보자.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">dependencies</span> <span class="p">{</span>
+    <span class="nf">compile</span><span class="p">(</span><span class="s">"junit:junit:4.11"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이 코드처럼 중첩된 블록 구조를 허용하는 한편 넓게 펼쳐진 형태의 함수 호출 구조도 함께 제공하는 API를 만들어보자.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dependencies</span><span class="p">.</span><span class="nf">compile</span><span class="p">(</span><span class="s">"junit:junit:4.11"</span><span class="p">)</span> <span class="c1">// 첫 번째</span>
+
+<span class="nf">dependencies</span> <span class="p">{</span> <span class="c1">// 두 번째</span>
+    <span class="nf">compile</span><span class="p">(</span><span class="s">"junit:junit:4.11"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>첫 번째의 경우 dependenices 변수에 대해 compile 메소드를 호출한다.</p>
+
+<p>두 번째의 경우 dependenices 안에 람다를 받는 invoke 메소드를 정의하면 두 번째 방식의 호출을 사용할 수 있다.</p>
+
+<p>invoke를 사용하는 경우 호출 구문을 완전히 풀어쓰면 dependenices.invoke({…})이다.</p>
+
+<p>dependenices 객체는 DependenicyHandler 클래스의 인스턴스이다.</p>
+
+<p>DependenicyHandler 안에는 compile과 invoke 메소드 정의가 들어있다.</p>
+
+<p>invoke 메소드는 수신 객체 지정 람다를 파라미터로 받는데, 이 람다의 수신 객체는 다시 DependenicyHandler이다.</p>
+
+<p>이 람다 안에서 어떤 일이 벌어지는지에 대해서는 이미 잘 알고 있다.</p>
+
+<p>DependenicyHandler가 묵시적 수신 객체이므로 람다 안에서 compile과 같은 DependenicyHandler의 메소드를 직접 호출할 수 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">DependencyHandler</span><span class="p">{</span>
+    <span class="k">fun</span> <span class="nf">compile</span><span class="p">(</span><span class="n">coordinate</span><span class="p">:</span> <span class="nc">String</span><span class="p">){</span>
+        <span class="nf">println</span><span class="p">(</span><span class="s">"Added dependency on $coordinate"</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">operator</span> <span class="k">fun</span> <span class="nf">invoke</span> <span class="p">(</span>
+        <span class="n">body</span><span class="p">:</span> <span class="nc">DependencyHandler</span><span class="p">.()</span> <span class="p">-&gt;</span> <span class="nc">Unit</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">body</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이러한 invoke convention으로 인해 DSL API의 유연성이 커졌다.</p>
+
+<p>다음은 지금까지 설명한 코틀린 언어 특성들이 DSL 안에서 어떤 식으로 쓰이는지 살펴보자.</p>
+
+<h2 id="실전-코틀린-dsl">실전 코틀린 DSL</h2>
+
+<p>이제부터는 실용적인 DSL 예제를 살펴보자.</p>
+
+<p>그 중 테스트 프레임워크, 날짜 리터럴, 데이터베이스 질의만 살펴보도록 하겠다.</p>
+
+<h2 id="중위-호출-연쇄--테스트-프레임워크의-should">중위 호출 연쇄 : 테스트 프레임워크의 should</h2>
+
+<p>우리는 앞서 kotlintest에 대해서 살펴보았다.</p>
+
+<p>이 kotlintest DSL에서 중위 호출을 어떻게 활용하는지 살펴보자.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span> <span class="n">should</span> <span class="nf">startWith</span><span class="p">(</span><span class="s">"kot"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>s에 들어간 값이 kot로 시작하지 않으면 이 단언문은 실패한다.</p>
+
+<p>이 코드는 마치 <strong>The s string should start with this constant</strong>처럼 읽힌다.</p>
+
+<p>이 목적을 달성하기 위해 should 함수 선언 앞에 infix 변경자를 붙여야 한다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">infix</span> <span class="k">fun</span> <span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;</span> <span class="nc">T</span><span class="p">.</span><span class="nf">should</span><span class="p">(</span><span class="n">matcher</span><span class="p">:</span> <span class="nc">Matcher</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;)</span> <span class="p">=</span> <span class="n">matcher</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>should 함수는 Matcher의 인스턴스를 요구한다.</p>
+
+<p>Matcher는 값에 대한 단언문을 표현하는 제네릭 인터페이스이다.</p>
+
+<p>startWith는 Matcher를 구현하며, 어떤 문자열이 주어진 문자열로 시작하는지 검사한다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">interface</span> <span class="nc">Matcher</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;</span> <span class="p">{</span>
+    <span class="k">fun</span> <span class="nf">test</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nc">T</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="err">start</span><span class="nc">With</span><span class="p">(</span><span class="kd">val</span> <span class="py">prefix</span><span class="p">:</span> <span class="nc">String</span><span class="p">)</span> <span class="p">:</span> <span class="nc">Matcher</span><span class="p">&lt;</span><span class="nc">String</span><span class="p">&gt;</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">test</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nc">String</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(!</span><span class="n">value</span><span class="p">.</span><span class="nf">startsWith</span><span class="p">(</span><span class="n">prefix</span><span class="p">))</span>
+            <span class="k">throw</span> <span class="nc">AssertionError</span><span class="p">(</span><span class="s">"String $value does not start with $prefix"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>평범한 프로그램이라면 startWith 클래스의 첫 글자가 대문자여야 하지만 DSL에서는 그런 일반적인 명명 규칙을 벗어나야할 때가 있다.</p>
+
+<p>약간 더 기교를 부리면 더 많은 잡음을 제거할 수도 있다.</p>
+
+<p>코틀린테스트 DSL은 그런 기교도 함께 사용한다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"kotlin"</span> <span class="n">should</span> <span class="n">start</span> <span class="n">with</span> <span class="s">"kot"</span>
+</code></pre></div></div>
+
+<p>위 문장은 전혀 코틀린 문장처럼 보이지 않는다.</p>
+
+<p>이 문장이 어떻게 작동하는지 이해하기위해서는 중위 호출을 일반 메소드 호출로 바꿔봐야한다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"kotlin"</span><span class="p">.</span><span class="nf">should</span><span class="p">(</span><span class="n">start</span><span class="p">).</span><span class="nf">with</span><span class="p">(</span><span class="s">"kot"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>여기서는 should와 with가 연쇄적으로 중위 호출을 한다는 사실을 알 수 있다.</p>
+
+<p>should는 start라는 싱글턴 객체를 파라미터 타입으로 사용하는 특별한 오버로딩이 있다.</p>
+
+<p>이 오버로딩한 should 함수는 중간 래퍼 객체를 돌려주는데, 이 래퍼 객체안에는 중위 호출 가능한 with 메소드가 포함된다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">object</span> <span class="err">start
+
+infix fun </span><span class="nc">String</span><span class="p">.</span><span class="nf">should</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">start</span><span class="p">):</span> <span class="nc">StartWrapper</span> <span class="p">=</span> <span class="nc">StartWrapper</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+
+<span class="kd">class</span> <span class="nc">StartWrapper</span><span class="p">(</span><span class="kd">val</span> <span class="py">value</span><span class="p">:</span> <span class="nc">String</span><span class="p">){</span>
+    <span class="k">infix</span> <span class="k">fun</span> <span class="nf">with</span><span class="p">(</span><span class="n">prefix</span><span class="p">:</span> <span class="nc">String</span><span class="p">)</span> <span class="p">=</span>
+    <span class="k">if</span><span class="p">(!</span><span class="n">value</span><span class="p">.</span><span class="nf">startsWith</span><span class="p">(</span><span class="n">prefix</span><span class="p">))</span>
+        <span class="k">throw</span> <span class="nc">AssertionError</span><span class="p">(</span><span class="s">"String $value does not start with $prefix"</span><span class="p">)</span>
+    <span class="k">else</span>
+        <span class="nc">Unit</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>여기서 start라는 객체를 파라미터 타입으로 사용하는 이유는, 데이터를 넘기기 위함이 아니라 DSL의 문법을 정의하기 위해 사용되었다.</p>
+
+<p>코틀린테스트 라이브러리는 다른 Matcher도 지원하며, 그 Matcher들은 모두 일반 영어 문장처럼 보이는 단언문을 구성한다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"kotlin"</span> <span class="n">should</span> <span class="n">end</span> <span class="n">with</span> <span class="s">"in"</span>
+<span class="s">"kotlin"</span> <span class="n">should</span> <span class="n">have</span> <span class="n">with</span> <span class="s">"otl"</span>
+</code></pre></div></div>
+
+<p>이는 모두 end와 have라는 싱글턴 인스턴스를 취하는 오버로딩 버전이다.</p>
+
+<p>이들은 싱글턴 종류에 따라 각각 EndWrapper, HaveWrapper 인스턴스를 반환한다.</p>
+
+<p>이는 DSL에서도 상대적으로 어려운 방법이다.</p>
+
+<p>그래서 이 기법을 사용한 결과는 꽤나 멋지기 때문에 이런 DSL이 내부에서 어떻게 작동하는지 한 번쯤 분석해볼만 하다.</p>
+
+<h2 id="원시-타입에-대한-확장-함수-정의-날짜-처리">원시 타입에 대한 확장 함수 정의: 날짜 처리</h2>
+
+<p>앞에서 살펴본 예제 중 날짜에 대해서 살펴보자.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">yesterday</span> <span class="p">=</span> <span class="mi">1</span><span class="p">.</span><span class="n">days</span><span class="p">.</span><span class="n">ago</span>
+<span class="kd">val</span> <span class="py">tomorrow</span> <span class="p">=</span> <span class="mi">1</span><span class="p">.</span><span class="n">days</span><span class="p">.</span><span class="n">fromNow</span>
+</code></pre></div></div>
+
+<p>자바 8의 <code class="language-plaintext highlighter-rouge">java.time</code> API와 코틀린을 사용해 이 API를 구현해보자.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">java.time.Period</span>
+<span class="k">import</span> <span class="nn">java.time.LocalDate</span>
+
+<span class="kd">val</span> <span class="py">Int</span><span class="p">.</span><span class="n">days</span><span class="p">:</span> <span class="nc">Period</span>
+    <span class="k">get</span><span class="p">()</span> <span class="p">=</span> <span class="nc">Period</span><span class="p">.</span><span class="nf">ofDays</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+
+<span class="kd">val</span> <span class="py">Period</span><span class="p">.</span><span class="n">ago</span><span class="p">:</span> <span class="nc">LocalDate</span>
+    <span class="k">get</span><span class="p">()</span> <span class="p">=</span> <span class="nc">LocalDate</span><span class="p">.</span><span class="nf">now</span><span class="p">()</span> <span class="p">-</span> <span class="k">this</span>
+
+<span class="kd">val</span> <span class="py">Period</span><span class="p">.</span><span class="n">fromNow</span><span class="p">:</span> <span class="nc">LocalDate</span>
+    <span class="k">get</span><span class="p">()</span> <span class="p">=</span> <span class="nc">LocalDate</span><span class="p">.</span><span class="nf">now</span><span class="p">()</span> <span class="p">+</span> <span class="k">this</span>
+
+<span class="nf">println</span><span class="p">(</span><span class="mi">1</span><span class="p">.</span><span class="n">days</span><span class="p">.</span><span class="n">ago</span><span class="p">)</span>
+<span class="c1">// 2020-05-15</span>
+<span class="nf">println</span><span class="p">(</span><span class="mi">1</span><span class="p">.</span><span class="n">days</span><span class="p">.</span><span class="n">fromNow</span><span class="p">)</span>
+<span class="c1">// 2020-05-17</span>
+</code></pre></div></div>
+
+<p>코틀린에서는 아무 타입이나 확장 함수의 수신 객체 타입이 될 수 있다.</p>
+
+<p>days 프로퍼티는 Period 타입의 값을 반환한다.</p>
+
+<p>Period는 두 날짜 사이의 간격을 나타내는 JDK 8에 추가된 타입이다.</p>
+
+<p>ago를 지원하기 위해서 다른 확장 프로퍼티를 더 정의해야했다.</p>
+
+<p>이번에는 Period 클래스에 대한 확장 프로퍼티가 필요하다. (번역서에 확장 “함수”가 필요하다고 적혀있는데 오타로 보인다. 511페이지 중간쯤)</p>
+
+<p>그 프로퍼티 타입은 LocalDate로 날짜를 표현한다.</p>
+
+<p>ago 프로퍼티에 사용한 <code class="language-plaintext highlighter-rouge">-</code>는 코틀린이 제공하는 확장 함수가 아니다.</p>
+
+<p>LocalDate라는 JDK 클래스에는 코틀린의 - 연산자 convention과 일치하는 인자가 하나뿐인 minus 메소드가 들어있다.</p>
+
+<p>이제 간단한 DSL이 어떻게 작동하는지 이해했다.</p>
+
+<p>다음은 조금 더 복잡한 데이터베이스 질의 DSL을 공부해보자.</p>
+
+<h2 id="멤버-확장-함수--sql을-위한-내부-dsl">멤버 확장 함수 : SQL을 위한 내부 DSL</h2>
+
+<p>DSL 설계에 확장 함수가 중요한 역할을 하는 모습을 살펴보았다.</p>
+
+<p>이번 절에서는 예전에 언급했던 기법을 더 자세히 살펴본다.</p>
+
+<p>그 기법이란 클래스 안에 확장 함수와 확장 프로퍼티를 선언하는 것이다.</p>
+
+<p>이러한 멤버나 함수를 멤버 확장이라고 부른다.</p>
+
+<p>멤버 확장을 사용하는 몇 가지 예제를 살펴보자.</p>
+
+<p>익스포즈드 프레임워크에서 제공한 SQL을 위한 internal DSL에서 가져온 예제이다.</p>
+
+<p>익스포즈드 프레임워크에서 SQL로 테이블을 다루기 위해서는 Table 클래스를 확장한 객체로 대상 테이블을 정의해야 한다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">object</span> <span class="nc">Country</span><span class="p">:</span> <span class="nc">Table</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">id</span> <span class="p">=</span> <span class="nf">integer</span><span class="p">(</span><span class="s">"id"</span><span class="p">).</span><span class="nf">autoIncrement</span><span class="p">().</span><span class="nf">primaryKey</span><span class="p">()</span>
+    <span class="kd">val</span> <span class="py">name</span> <span class="p">=</span> <span class="nf">varchar</span><span class="p">(</span><span class="s">"name"</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이 선언은 데이터베이스 테이블과 대응한다.</p>
+
+<p>이 테이블을 만드려면 SchemaUtils.create(Country) 메소드를 호출한다.</p>
+
+<p>Countr 객체에 속한 프로퍼티들의 타입을 살펴보면 각 칼럼에 맞는 타입 인자가 지정된 Column 타입을 볼 수 있다.</p>
+
+<p>id는 <code class="language-plaintext highlighter-rouge">Column&lt;Int&gt;</code> 타입이고, name은 <code class="language-plaintext highlighter-rouge">Column&lt;String&gt;</code> 타입이다.</p>
+
+<p>익스포즈드 프레임워크의 Table 클래스는 방금 살펴본 두 타입을 포함해 데이터베이스 테이블에 정의할 수 있는 모든 타입을 정의한다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Table</span><span class="p">{</span>
+    <span class="k">fun</span> <span class="nf">integer</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nc">String</span><span class="p">):</span> <span class="nc">Column</span><span class="p">&lt;</span><span class="nc">Int</span><span class="p">&gt;</span>
+    <span class="k">fun</span> <span class="nf">varchar</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nc">String</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span> <span class="nc">Column</span><span class="p">&lt;</span><span class="nc">String</span><span class="p">&gt;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>integer와 varchar 메소드는 각각 순서대로 정수와 문자열을 저장하기 위한 칼럼을 새로 만든다.</p>
+
+<p>이제 각 칼럼의 속성을 지정하기 위해 멤버 확장을 사용해보자.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">id</span> <span class="p">=</span> <span class="nf">integer</span><span class="p">(</span><span class="s">"id"</span><span class="p">).</span><span class="nf">autoIncrement</span><span class="p">().</span><span class="nf">primaryKey</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>autoIncrement나 primaryKey 같은 메소드를 사용해 각 칼럼의 속성을 지정한다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Table</span> <span class="p">{</span>
+    <span class="k">fun</span> <span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;</span> <span class="nf">Column</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;.</span><span class="nf">primaryKey</span><span class="p">():</span> <span class="nc">Column</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;</span>
+    <span class="k">fun</span> <span class="nf">Column</span><span class="p">&lt;</span><span class="nc">Int</span><span class="p">&gt;.</span><span class="nf">autoIncrement</span><span class="p">():</span> <span class="nc">Column</span><span class="p">&lt;</span><span class="nc">Int</span><span class="p">&gt;</span>
+    <span class="o">..</span><span class="p">.</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이 두 함수는 Table 클래스 함수의 멤버이다.</p>
+
+<p>멤버 확장으로 정의하는 이유는 메소드가 적용되는 범위를 제한하기 위함이다.</p>
+
+<p>왜냐하면 테이블 밖에서는 이런 메소드를 찾을 수 없어야 하기 때문이다.</p>
+
+<p>SELECT 질의에 다른 멤버 확장 함수를 살펴보자.</p>
+
+<p>Customer와 Country라는 두 테이블이 있다고 가정하고,</p>
+
+<p>각 Customer의 레코드마다 그 고객이 어떤 나라에서 왔는지 나타내는 Country 레코드에 대한 외래키가 존재한다.</p>
+
+<p>다음 코드는 미국에 사는 모든 고객의 이름을 출력한다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">result</span> <span class="p">=</span> <span class="p">(</span><span class="nc">Country</span> <span class="n">join</span> <span class="nc">Customer</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">select</span><span class="p">{</span> <span class="nc">Country</span><span class="p">.</span><span class="n">name</span> <span class="n">eq</span> <span class="s">"USA"</span> <span class="p">}</span>
+<span class="n">result</span><span class="p">.</span><span class="nf">forEach</span> <span class="p">{</span> <span class="nf">println</span><span class="p">(</span><span class="n">it</span><span class="p">[</span><span class="nc">Customer</span><span class="p">.</span><span class="n">name</span><span class="p">])}</span>
+</code></pre></div></div>
+
+<p>select 메소드는 Table에 대해 호출되거나 두 테이블을 조인한 결과에 대해 호출될 것이다.</p>
+
+<p>select의 인자는 데이터를 선택할 때 사용할 조건을 기술하는 람다이다.</p>
+
+<p>그러면 eq는 어디서 왔을까?</p>
+
+<p>우리는 eq가 “USA”를 인자로 받는 함수인데 중위 표기법으로 식을 적었다는 사실과 eq도 또 다른 멤버 확장임을 추측할 수 있다.</p>
+
+<p>그 추측은 정답이다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nc">Table</span><span class="p">.</span><span class="nf">select</span><span class="p">(</span><span class="k">where</span><span class="p">:</span> <span class="nc">SqlExpressionBuilder</span><span class="p">.()</span> <span class="p">-&gt;</span> <span class="nc">Op</span><span class="p">&lt;</span><span class="nc">Boolean</span><span class="p">&gt;)</span> <span class="p">:</span> <span class="nc">Query</span>
+
+<span class="kd">object</span> <span class="nc">SqlExpressionBuilder</span> <span class="p">{</span>
+    <span class="k">infix</span> <span class="k">fun</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;</span> <span class="nc">Column</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;.</span><span class="nf">eq</span><span class="p">(</span><span class="n">t</span><span class="p">:</span> <span class="nc">T</span><span class="p">)</span> <span class="p">:</span> <span class="nc">Op</span><span class="p">&lt;</span><span class="nc">Boolean</span><span class="p">&gt;</span>
+    <span class="o">..</span><span class="p">.</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>SqlExpressionBuilder는 조건을 표현할 수 있는 여러 방식을 정의한다.</p>
+
+<p>select의 파라미터 타입이 바로 SqlExpressionBuilder를 수신 객체로 하는 수신 객체 지정 람다다.</p>
+
+<p>따라서 select에 전달되는 람다 본문에서는 SqlExpressionBuilder에 정의가 들어있는 모든 확장함수를 사용할 수 있고</p>
+
+<p>eq 역시 그 중 하나이다.</p>
+
+<p>멤버 확장을 사용해서 각 함수를 사용할 수 있는 맥락을 제어할 수 있다.</p>
+
+<h2 id="reference">Reference</h2>
+
+<p><strong>Kotlin In Action</strong> (드미트리 제메로프, 스베트라나 이사코바)</p>
+
+    <br />
+    <br />
+  </div>
+  
+
+</article>
+
+<!--<hr class="dingbat" />-->
+<!--
+<div class="share">
+  <h2>Share this post</h2>
+  <div class="share-body">
+    <a href="http://twitter.com/share?text=Kotlin In Action 11장&amp;url=http://localhost:4000/language/2020/05/16/Kotlin-12/"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="icon-twitter">
+      </span>
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/language/2020/05/16/Kotlin-12/"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="icon-facebook">
+      </span>
+    </a>
+  </div>
+</div>
+-->
+<br />
+
+
+
+
+<aside class="related" role="complementary">
+  <h2 class="hr">Related Posts</h2>
+
+  <ul class="related-posts">
+    
+      
+      
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/language/2021/05/27/Effective-Java-44/" data-flip="title">
+    <span>Effective Java 07 람다와 스트림</span>
+  </a>
+  <small><time datetime="2021-05-27T00:00:00+09:00">
+    27 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/language/2021/05/25/Effective-Java-43/" data-flip="title">
+    <span>Effective Java 06 - item 41 -</span>
+  </a>
+  <small><time datetime="2021-05-25T00:00:00+09:00">
+    25 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/language/2021/05/25/Effective-Java-42/" data-flip="title">
+    <span>Effective Java 06 - item 40 -</span>
+  </a>
+  <small><time datetime="2021-05-25T00:00:00+09:00">
+    25 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+      
+    
+  </ul>
+</aside>
+  <aside class="comments" role="complementary">
+  <h2>Comments</h2>
+  <hr/>
+
+  <script src="https://utteranc.es/client.js"
+    repo="minkukjo/minkukjo.github.io"
+    issue-term="title"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</aside>
+
+       <footer>
+  <hr/>
+  
+    <p>© 2022. by minkuk</p>
+
+  
+  <p>
+    <code>Powered by <a href="https://minkukjo.github.io/">minkuk</a></code>
+  </p>
+</footer>
+
+    </main>
+    <div class="right-side">
+  <div class="add-first">
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+    ></script>
+    <!-- 우측 광고 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="9124111205"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+  <br />
+  <br />
+  <div class="add-second">
+    <!-- 우측 광고2 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="5156946039"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+
+  </div>
+  <div id="_yDrawer">
+  <div id="_sidebar" class="sidebar">
+    <div class="sidebar-bg" style="background-color:#4f86aa;background-image:url(/assets/img/bg.jpg)"></div>
+    <header class="sidebar-sticky" role="banner">
+      <br/>
+      <div class="sidebar-about">
+        <h1><a id="_title" href="/">도전하는 개발자</a></h1>
+        
+
+      </div>
+
+      <br/>
+      <br/>
+      <nav class="sidebar-nav heading" role="navigation">
+        <span class="sr-only">Navigation:</span>
+<ul>
+  
+
+  
+
+  
+  
+  
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-1"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/life/">Life</a>
+       <label class="folder" for="list-item-1">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-daily/">Daily</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-review/">Review</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-books/">Books</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-2"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/computer-science/">Computer Science</a>
+       <label class="folder" for="list-item-2">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-algorithm/">Algorithm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-oop/">OOP</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-network/">Network</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-db/">Database</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-ai/">AI</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-security/">Security</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-distribution-system/">Distribution System</a>
+             </li>
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-3"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/programming-language/">Programming Language</a>
+       <label class="folder" for="list-item-3">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-kotlin/">Kotlin</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-go/">Go</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-java/">Java</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-javascript/">JavaScript</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-typescript/">TypeScript</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-4"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/framework/">Framework</a>
+       <label class="folder" for="list-item-4">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring/">Spring</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-data-jpa/">Spring Data JPA</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-security/">Spring Security</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-junit/">JUnit</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-5"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/language/">Language</a>
+       <label class="folder" for="list-item-5">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/language-english/">English</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-6"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/development/">Development</a>
+       <label class="folder" for="list-item-6">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-ddd/">DDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-tdd/">TDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-clean-code/">Clean Code</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-git/">Git</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-7"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/devops/">Devops</a>
+       <label class="folder" for="list-item-7">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-alarm/">Alarm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-ansible/">Ansible</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-cicd/">CI/CD</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-docker/">Docker</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-es/">Elasticsearch</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-k8s/">Kubernetes</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-public-cloud/">Public Cloud</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-kafka/">Kafka</a>
+             </li>
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-8"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/opensource/">Open Source</a>
+       <label class="folder" for="list-item-8">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/opensource-opensource/">Open Source</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-9"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/about/">About</a>
+       
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+</ul>
+
+      </nav>
+    <br/>
+    <br/>
+      <div class="sidebar-box">
+        
+      </div>
+      <p>매일 매일 한계를 뛰어넘기 위한 도전을 즐기는 개발자</p>
+
+      
+      
+        <div class="sidebar-social">
+          <span class="sr-only">Social:</span>
+<ul>
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://github.com/minkukjo">
+    <span class="icon-github" title="GitHub"></span>
+    <span class="sr-only">GitHub</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://www.linkedin.com/in/민국-조-567052166">
+    <span class="icon-linkedin2" title="LinkedIn"></span>
+    <span class="sr-only">LinkedIn</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:harrycode@kakao.com">
+    <span class="icon-mail" title="Email"></span>
+    <span class="sr-only">Email</span>
+  </a>
+</li>
+
+  
+</ul>
+
+        </div>
+      
+    </header>
+  </div>
+</div>
+</div>
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-158654037-1', 'auto');
+  ga('send', 'pageview');
+  loadJSDeferred('https://www.google-analytics.com/analytics.js');
+</script>
+
+
+
+
+
+<!--[if gt IE 8]><!---->
+<script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+  WebFont.load({
+    
+    google: {
+      families: 'Lato'.split('|')
+    },
+    
+
+    custom: {
+      families: ['icomoon'],
+      urls: ['/assets/icomoon/style.css']
+    }
+  });
+</script>
+<!--<![endif]-->
+
+
+  <!--[if gt IE 9]><!---->
+  
+  <script>loadJSDeferred('/assets/js/hydejack.js?v=6.4.0');</script>
+
+  
+  <!--<![endif]-->
+
+
+
+</body>
+
+</html>

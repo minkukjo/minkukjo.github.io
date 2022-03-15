@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+<html lang="en"><!--
+ __  __                __                                     __
+/\ \/\ \              /\ \             __                    /\ \
+\ \ \_\ \   __  __    \_\ \      __   /\_\      __       ___ \ \ \/'\
+ \ \  _  \ /\ \/\ \   /'_` \   /'__`\ \/\ \   /'__`\    /'___\\ \ , <
+  \ \ \ \ \\ \ \_\ \ /\ \L\ \ /\  __/  \ \ \ /\ \L\.\_ /\ \__/ \ \ \\`\
+   \ \_\ \_\\/`____ \\ \___,_\\ \____\ _\ \ \\ \__/.\_\\ \____\ \ \_\ \_\
+    \/_/\/_/ `/___/> \\/__,_ / \/____//\ \_\ \\/__/\/_/ \/____/  \/_/\/_/
+                /\___/                \ \____/
+                \/__/                  \/___/
+
+Powered by Hydejack v6.4.0 (https://qwtel.com/hydejack/)
+-->
+
+
+
+
+
+
+
+
+
+<head>
+  <!-- =============== -->
+<!-- META            -->
+<!-- =============== -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta
+  name="naver-site-verification"
+  content="22c5b4ef3bfda7fc6100671413989219de7a4ac8"
+/>
+<meta property="og:title" content="쿠버네티스 노드에 어떤 파드도 배포하지 않는 방법" />
+<meta property="og:type" content="article" />
+
+<!-- =============== -->
+<!-- Google AdSense  -->
+<!-- =============== -->
+<script
+  data-ad-client="ca-pub-8247516864622650"
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+></script>
+
+ 
+<meta
+  property="og:image"
+  content="http://localhost:4000/assets//img/k8s-logo.png"
+/>
+<br />
+
+
+<meta property="og:image:width" content="640" />
+<meta property="og:image:height" content="360" />
+ 
+<title>쿠버네티스 노드에 어떤 파드도 배포하지 않는 방법 &middot; 도전하는 개발자</title>
+ 
+<meta
+  name="description"
+  content="How to prevent?
+
+"
+/>
+<meta
+  property="og:description"
+  content="How to prevent?
+
+"
+/>
+
+
+
+<!-- =============== -->
+<!-- LINKS           -->
+<!-- =============== -->
+<link rel="canonical" href="http://localhost:4000/devops/2021/02/17/Kubernetes15-18/" />
+<meta property="og:url" content="http://localhost:4000/devops/2021/02/17/Kubernetes15-18/" />
+
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="도전하는 개발자 Feed"
+  href="http://localhost:4000/feed.xml"
+/>
+
+
+<link rel="prev" href="http://localhost:4000/devops/2021/02/16/CKA-14/" />
+ 
+<link rel="next" href="http://localhost:4000/devops/2021/02/18/CKA-15/" />
+
+
+<link
+  rel="apple-touch-icon"
+  href="http://localhost:4000/apple-touch-icon.png"
+/>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+<!-- Place favicon.ico in the root directory -->
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+<script>
+  !function(n,e){function t(n,e){n.onload=function(){this.onerror=this.onload=null,e(null,n)},n.onerror=function(){this.onerror=this.onload=null,e(new Error("Failed to load "+this.src),n)}}function o(n,e){n.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||(this.onreadystatechange=null,e(null,n))}}n._loaded=!1,n.loadJSDeferred=function(a,d){function r(){n._loaded=!0;var r=e.createElement("script");r.src=a,d&&(("onload"in r?t:o)(r,d),r.onload||t(r,d));var l=e.getElementsByTagName("script")[0];l.parentNode.insertBefore(r,l)}n._loaded?r():n.addEventListener?n.addEventListener("load",r,!1):n.attachEvent?n.attachEvent("onload",r):n.onload=r}}(window,document);
+
+  !function(e){"use strict";var n=function(n,t,o){function i(e){if(a.body)return e();setTimeout(function(){i(e)})}function r(){l.addEventListener&&l.removeEventListener("load",r),l.media=o||"all"}var d,a=e.document,l=a.createElement("link");if(t)d=t;else{var f=(a.body||a.getElementsByTagName("head")[0]).childNodes;d=f[f.length-1]}var s=a.styleSheets;l.rel="stylesheet",l.href=n,l.media="only x",i(function(){d.parentNode.insertBefore(l,t?d:d.nextSibling)});var u=function(e){for(var n=l.href,t=s.length;t--;)if(s[t].href===n)return e();setTimeout(function(){u(e)})};return l.addEventListener&&l.addEventListener("load",r),l.onloadcssdefined=u,u(r),l};"undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this);
+
+  !function(t){if(t.loadCSS){var e=loadCSS.relpreload={};if(e.support=function(){try{return t.document.createElement("link").relList.supports("preload")}catch(t){return!1}},e.poly=function(){for(var e=t.document.getElementsByTagName("link"),r=0;r<e.length;r++){var n=e[r];"preload"===n.rel&&"style"===n.getAttribute("as")&&(t.loadCSS(n.href,n,n.getAttribute("media")),n.rel=null)}},!e.support()){e.poly();var r=t.setInterval(e.poly,300);t.addEventListener&&t.addEventListener("load",function(){e.poly(),t.clearInterval(r)}),t.attachEvent&&t.attachEvent("onload",function(){t.clearInterval(r)})}}}(this);
+
+  window.disablePushState = false;
+  window.disableDrawer = false;
+</script>
+
+<!--[if lt IE 9]>
+  <script src="https://unpkg.com/html5shiv/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+<!-- =============== -->
+<!-- STYLES          -->
+<!-- =============== -->
+<!--[if gt IE 8]><!---->
+<style>
+  
+  article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}*{box-sizing:border-box}html,body{margin:0;padding:0}html{font-size:16px;line-height:1.75}body{color:#333;background-color:#fff;overflow-y:scroll}a{text-decoration:none}.lead{margin-left:-1rem;margin-right:-1rem}img,.img{display:block;max-width:100%;margin-bottom:1rem;border:none}img.lead,.img.lead{max-width:calc(100% + 2rem);width:calc(100% + 2rem)}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-weight:bold;text-rendering:optimizeLegibility}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{margin:1.6rem 0 1rem;line-height:1.6}h1,.h1{font-size:2rem;line-height:1.25}h2,.h2{font-size:1.5rem}h3,.h3{font-size:1.17em}p{margin-top:0;margin-bottom:1rem}p.lead{font-size:1.25rem;font-weight:300;padding:0 1rem}ul,ol,dl{margin-top:0;margin-bottom:1rem}ul,ol{padding-left:1.25rem}hr{position:relative;margin:1.5rem 0;border:0;border-top:1px solid #eee}.hr{padding-bottom:.5rem;border-bottom:1px solid #eee;margin-bottom:1.5rem}h4,h5,h6,.h4,.h5,.h6{margin-bottom:0.5rem;font-size:1rem}table{margin-bottom:1rem;width:100%;width:calc(100% + 2rem);margin-left:-1rem;border:1px solid #e5e5e5;border-collapse:collapse;border-spacing:0}td,th{padding:.25rem .5rem;border:1px solid #e5e5e5}td:first-child,th:first-child{padding-left:1rem}td:last-child,th:last-child{padding-right:1rem}thead+tbody,tbody+tbody,tfoot{border-top:3px double #e5e5e5}tbody tr:nth-child(odd) td,tbody tr:nth-child(odd) th{background-color:#f9f9f9}footer{margin-bottom:2rem}.page,.post{margin-bottom:3em}.page li+li,.post li+li{margin-top:.25rem}.page>header,.post>header{margin-bottom:2rem}.page-title,.post-title{margin-top:0}.post-date{display:block;margin-top:-0.5rem;margin-bottom:1rem;color:#9a9a9a}.related-posts{padding-left:0;list-style:none}.related-posts>li,.related-posts>li+li{margin-top:1rem}.related-posts>li>small,.related-posts>li+li>small{font-size:75%;color:#9a9a9a}.message{margin-bottom:1rem;padding:1rem;color:#787878;background-color:#f9f9f9;margin-left:-1rem;margin-right:-1rem}body,main{position:relative;overflow-x:hidden}@media screen{body::before{content:'';background:#e5e5e5;position:absolute;left:0;top:0;bottom:0}}@media screen and (min-width: 40em){html{font-size:17px}}@media screen and (min-width: 54em){html{font-size:16px}}@media screen and (min-width: 88em){html{font-size:17px}}@media screen and (min-width: 125em){html{font-size:18px}}.sr-only{display:none}.clearfix,.sidebar-social::after,.clearafter::after{content:"";display:table;clear:both}a,.a{position:relative;padding-bottom:.15rem;border-style:hidden}.img{overflow:hidden;background-color:#f9f9f9}.img>img{margin:0;width:100%;height:100%}.sixteen-nine{position:relative}.sixteen-nine::before{display:block;content:"";width:100%;padding-top:56.25%}.sixteen-nine>*{position:absolute;top:0;left:0;right:0;bottom:0}h1+hr,h2+hr,h3+hr,h4+hr,h5+hr,h6+hr{margin-top:0}.fade-in{animation-duration:500ms;animation-name:fade-in;animation-fill-mode:forwards}@keyframes fade-in{from{transform:translateY(-2rem);opacity:0}50%{transform:translateY(-2rem);opacity:0}to{transform:translateY(0);opacity:1}}.mb6{margin-bottom:10rem}.sidebar{color:rgba(255,255,255,0.75);text-align:left}.sidebar::before{content:"";position:absolute;z-index:2;top:0;left:0;bottom:0;right:0;background:linear-gradient(to bottom, rgba(32,32,32,0) 0%, rgba(32,32,32,0.5) 100%)}.sidebar a{color:#fff;border-bottom-color:rgba(255,255,255,0.2)}.right-side{width:100%;margin-left:auto;margin-right:auto}.right-side .ad-first{text-align:center}@media screen{.right-side{max-width:38rem;min-height:100vh}.right-side .ad-second{display:none}}@media screen and (min-width: 54em){.right-side{margin-left:20rem;margin-right:1rem;padding:4rem 1rem 12rem}.right-side .ad-second{text-align:center;display:block}}@media screen and (min-width: 72em){.right-side{margin-left:22rem;max-width:42rem}}@media screen and (min-width: 88em){.right-side{width:162px;margin-left:0rem;margin-right:0rem;padding:0rem;margin-top:10rem;display:block;float:left}}@media screen and (min-width: 96em){.right-side{width:300px;margin-right:0rem}}#_yDrawer{position:relative}@media screen{#_yDrawer{min-height:640px;min-height:100vh}}@media screen and (min-width: 54em){#_yDrawer{width:18rem;margin-left:0}}.sidebar-bg{position:absolute;height:100%;overflow:hidden;top:0;right:0;bottom:0;left:0;background:#202020 center / cover}.sidebar-box{display:flex;justify-content:center}.sidebar-sticky{position:relative;z-index:3}@media screen{.sidebar-sticky{-ms-overflow-style:none;overflow:-moz-scrollbars-none;height:100%;overflow:auto;position:absolute;padding:3rem 0rem;right:2.5rem;left:2.5rem}}.sidebar-sticky::-webkit-scrollbar{display:none}.sidebar-about>h1{color:#fff;font-size:2rem}.sidebar-nav>ul{list-style:none;padding-left:0;margin-bottom:.5rem}a.sidebar-nav-item{width:100%;font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}a.sidebar-nav-subitem{font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}@media screen{.y-drawer-scrim{z-index:2}.y-drawer-content{width:18rem;left:-18rem;z-index:3}}.sidebar-social{margin-bottom:.5rem}.sidebar-social>ul{list-style:none;padding-left:0;margin:0 -.25rem}.sidebar-social>ul>li{float:left}.sidebar-social>ul>li>a{display:inline-block;text-align:center;font-size:1.6rem;line-height:3rem;width:3.1249rem;height:4rem;padding:.5rem 0}.sidebar-social>ul li+li{margin-top:0}.fixed-top{position:fixed;top:0;left:0;width:100%;z-index:1}.navbar>.content{padding-top:0;padding-bottom:0;min-height:0;height:0}.menu{display:inline-block;padding:1.75rem 1.5rem;border-bottom:none;margin-left:-1.5rem;color:#9a9a9a !important}.menu::after{content:"\2630"}@media screen and (min-width: 54em){.menu{padding:1.25rem 1.5rem;position:absolute;left:-9999px}.menu:focus{position:static}}.animation-main{pointer-events:none}.loading{display:none}@media print{.menu{display:none}}.animation-main{opacity:0;will-change:opacity}.loading{position:absolute;top:0;right:0;padding:5.25rem 4.5rem;transform-origin:top right;transform:scale(0.33)}.content{position:relative;margin-left:auto;margin-right:auto;padding:5rem 1rem 12rem}@media screen{.content{min-height:100vh}}@media screen and (min-width: 54em){.content{padding:4rem 1rem 12rem;margin-left:19rem;margin-right:3rem}}@media screen and (min-width: 72em){.content{max-width:42rem;margin-left:21rem}}@media screen and (min-width: 88em){.content{float:left;width:100%;margin-left:22rem;margin-right:5rem}}@media screen and (min-width: 96em){.content{max-width:44rem}}@media screen and (min-width: 102em){.content{margin-left:25rem;margin-right:8rem}}.me{width:6.5rem;height:6.5rem;align-self:center;margin-right:20px;border-radius:100%;position:relative}@media screen and (min-width: 40em){.me{width:7rem;height:7rem}}@media screen and (min-width: 54em){.me{width:6.5rem;height:6.5rem}}@media screen and (min-width: 72em){.me{width:7rem;height:7rem}}main>footer{width:100%;position:absolute;bottom:0;left:0;right:0;padding:0 1rem;color:#9a9a9a;font-size:smaller;text-align:center}main>footer>p{margin-bottom:0}html{font-family:'Sans-serif'}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-family:'Sans-serif'}
+
+</style>
+
+
+<link
+  rel="preload"
+  href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0"
+  as="style"
+  onload="this.rel='stylesheet'"
+/>
+
+<style id="_pageStyle">
+
+.content a{color:#4f86aa;border-color:rgba(79,134,170,0.2)}.content a:hover{border-color:#4f86aa}:focus{outline-color:#4f86aa}::selection{color:#fff;background:#4f86aa}::-moz-selection{color:#fff;background:#4f86aa}
+
+</style>
+
+
+<noscript>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0" />
+    
+  
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Lato"
+  />
+  <style>
+    html { font-family: 'Lato', 'Sans-serif' }
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .heading { font-family: 'Lato', 'Sans-serif' }
+  </style>
+   
+  <link rel="stylesheet" href="http://localhost:4000/assets/icomoon/style.css" />
+</noscript>
+<!--<![endif]-->
+
+</head>
+
+<body>
+  <!-- =============== -->
+<!-- MENU            -->
+<!-- =============== -->
+<div class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <a id="_menu" class="menu no-hover" href="#_title">
+      <span class="sr-only">Menu</span>
+    </a>
+  </div>
+</div>
+
+<!-- =============== -->
+<!-- CONTENT         -->
+<!-- =============== -->
+<div id="_yPushState">
+  <div class="fade-in">
+    <main
+      id="_main"
+      class="content"
+      role="main"
+      data-color="#4f86aa"
+      data-image="/assets/img/bg.jpg"
+    >
+      
+
+<article id="post-devops/2021/02/17/Kubernetes15-18" class="post" role="article">
+  <header>
+    <h1 class="post-title">
+      
+        쿠버네티스 노드에 어떤 파드도 배포하지 않는 방법
+        
+    </h1>
+
+    <p class="post-date heading">
+      <time datetime="2021-02-17T00:00:00+09:00">17 Feb 2021</time>
+      
+
+
+
+
+
+
+
+
+
+in <a href="/category/devops/" data-flip="title">Devops</a>
+
+      
+
+
+
+
+
+
+
+
+
+on <a href="/tag/devops-k8s/" data-flip="title">Kubernetes</a>
+
+    </p>
+
+    
+  <div class="hr" style="padding-bottom:0"></div>
+
+
+  </header>
+  
+
+
+  
+  <div class="markdown-body">
+
+    <!-- 
+    <div class="head-image"><img src="http://localhost:4000/assets//img/k8s-logo.png" /></div>
+    <br /> -->
+    <style>
+      .myAd1190 {
+        width: 48%;
+        height: 280px;
+      }
+
+      .myAd1290 {
+        width: 48%;
+        height: 280px;
+      }
+
+      @media(max-width: 800px) {
+        .myAd1190 {
+          display: none;
+        }
+
+        .myAd1290 {
+          width: 98%;
+        }
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 300px;
+      }
+
+      .row-center {
+        display: flex;
+        justify-content: center;
+        height: 258px;
+      }
+    </style>
+   
+    <!--<br />-->
+    <h2 id="how-to-prevent">How to prevent?</h2>
+
+<p>이번 시간에는 쿠버네티스 노드에 그 어떤 파드도 배포하지 않는 방법에 대해서 알아보겠습니다.</p>
+
+<p>이를 위해서는 <code class="language-plaintext highlighter-rouge">Node-Affinity</code>와 <code class="language-plaintext highlighter-rouge">Taints</code>와 <code class="language-plaintext highlighter-rouge">Toleration</code>에 대해서 알아야합니다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Taints</code>는 <code class="language-plaintext highlighter-rouge">Node-Affinity</code>와 반대되는 옵션입니다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Node-Affinity</code>가 <code class="language-plaintext highlighter-rouge">Pod가 특정 Node</code>에 배포될 수 있게 하는 옵션이라면,</p>
+
+<p><code class="language-plaintext highlighter-rouge">Taints</code>는 <code class="language-plaintext highlighter-rouge">Node가 특정 Pod</code>를 쫓아내는 옵션입니다.</p>
+
+<h2 id="node-affinity">Node-Affinity</h2>
+
+<p><img width="1627" alt="스크린샷 2021-02-17 오전 12 16 20" src="https://user-images.githubusercontent.com/43809168/108082421-6cb31800-70b5-11eb-8ee1-2ba1d82617f2.png" /></p>
+
+<p><img width="1616" alt="스크린샷 2021-02-17 오전 12 16 28" src="https://user-images.githubusercontent.com/43809168/108082429-6f157200-70b5-11eb-8972-318be36e40f4.png" /></p>
+
+<p>Node-Affinity에서 주목할 옵션은 아래입니다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">requiredDuringSchedulingIgnoredDuringExecution</code> 인데요.</p>
+
+<p>막상 보면 길어보이지만 잘라서 보면 이해하기 쉽습니다.</p>
+
+<p>Node-Affinity의 옵션은 크게 가장 앞 부분인 <code class="language-plaintext highlighter-rouge">required</code>와 <code class="language-plaintext highlighter-rouge">preferred</code> 조건으로 나누어집니다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">required</code>는 <code class="language-plaintext highlighter-rouge">반드시</code> 이 파드가 해당 노드에 배포가 되어야한다는 점이고 <code class="language-plaintext highlighter-rouge">preferred</code>는 가급적이면~ 이라는 옵션입니다.</p>
+
+<p>그리고 꼬리에 해당하는 <code class="language-plaintext highlighter-rouge">IgnoredDuringExecution</code>의 경우 런타임에 노드의 Label이 바뀌더라도 무시할 것인지, 즉시 eviction할 것인지에 대한 옵션입니다.</p>
+
+<p>반대 옵션으로는 <code class="language-plaintext highlighter-rouge">RequiredDuringExecution</code>가 있습니다.</p>
+
+<p>이를 종합해보면,</p>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">requiredDuringSchedulingIgnoredDuringExecution</code></p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">preferredDuringSchedulingIgnoredDuringExecution</code></p>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">requiredDuringSchedulingRequiredDuringExecution</code></li>
+  <li><code class="language-plaintext highlighter-rouge">preferredDuringSchedulingRequiredDuringExecution</code></li>
+</ul>
+
+<p>총 네 개의 조합이 가능해집니다.</p>
+
+<h2 id="node의-입장에서">Node의 입장에서</h2>
+
+<p><code class="language-plaintext highlighter-rouge">Node-Affinity</code>는 <strong>특정 파드</strong>가 <strong>특정 노드</strong>로 배포할 것을 설정하는 옵션입니다.</p>
+
+<p>그러나 A Pod가 Node01로의 배포를 반드시 보장해주지만,</p>
+
+<p>Node01에서 B,C 파드가 배포될 것을 보장해주지는 않습니다.</p>
+
+<p><img width="1765" alt="스크린샷 2021-02-17 오전 12 16 33" src="https://user-images.githubusercontent.com/43809168/108082437-70df3580-70b5-11eb-831a-d2a171cbc531.png" /></p>
+
+<h2 id="node-affinity-vs-node-selector">Node-Affinity VS Node-Selector</h2>
+
+<p>우리는 이전에, Node-Selector를 이용해서도 Node-Affinity와 비슷한 기능을 구현할 수 있는 것을 알고 있습니다.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Pod</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">A</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">containers</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">with-node-affinity</span>
+      <span class="na">image</span><span class="pi">:</span> <span class="s">k8s.gcr.io/pause:2.0</span>
+  <span class="na">nodeSelector</span><span class="pi">:</span>
+    <span class="na">nodeName</span><span class="pi">:</span> <span class="s">node01</span>
+</code></pre></div></div>
+
+<p>얼핏 봐서는 이 옵션이 <code class="language-plaintext highlighter-rouge">Node-Affinity</code> 보다 더 명확하고 직관적이라는 생각도 듭니다.</p>
+
+<p>하지만 k8s에서는 이 <code class="language-plaintext highlighter-rouge">Node-Selector</code>보다 <code class="language-plaintext highlighter-rouge">Node-Affinity</code>를 권장하고 있으며, 추후에 <code class="language-plaintext highlighter-rouge">Node-Selector</code>를 Deprecate하고 <code class="language-plaintext highlighter-rouge">Node-Affinity</code>만을 사용할 것이라고 밝혔습니다.</p>
+
+<p>그 이유는 <code class="language-plaintext highlighter-rouge">Node-Affinity</code>에서는 조금 더 다양한 표현식으로 선택이 가능하며, 제약조건의 주체가 노드에 있는 것이 아닌 파드에 부여함으로써 서로 같이 배치될 수 있는 파드와 아닌 파드를 정의하는게 가능해지기 때문인데요.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Node-Selector</code>에서는 <code class="language-plaintext highlighter-rouge">반드시</code> 해당 노드에 배포가 된다는 식의 설정이지만, <code class="language-plaintext highlighter-rouge">Node-Affinity</code>의 경우 <code class="language-plaintext highlighter-rouge">가급적이면 그렇게 해줘</code>라는 옵션도 설정이 가능하므로 조금 더 유연하게 사용할 수 있다는 장점도 있습니다.</p>
+
+<h2 id="taints와-toleration">Taints와 Toleration</h2>
+
+<p>그러면 <code class="language-plaintext highlighter-rouge">Node-Affinity</code>에 반대되는 옵션인 <code class="language-plaintext highlighter-rouge">Taints</code>는 무엇일까요?</p>
+
+<p><code class="language-plaintext highlighter-rouge">Taints</code>의 사전적 의미는 <strong>오염</strong>, <strong>감염</strong>이라는 뜻을 갖고 있는데요.</p>
+
+<p>노드에 <code class="language-plaintext highlighter-rouge">Taints</code>를 하면, <code class="language-plaintext highlighter-rouge">Toleration</code>을 가진 <code class="language-plaintext highlighter-rouge">Pod</code>만 해당 노드에 배포될 수 있게 하는 옵션입니다.</p>
+
+<p><img width="1769" alt="스크린샷 2021-02-17 오전 12 17 43" src="https://user-images.githubusercontent.com/43809168/108082623-a3892e00-70b5-11eb-8a24-42854cc6c8a2.png" /></p>
+
+<p><img width="1762" alt="스크린샷 2021-02-17 오전 12 17 48" src="https://user-images.githubusercontent.com/43809168/108082624-a4ba5b00-70b5-11eb-98a1-ae79f889766f.png" /></p>
+
+<p><img width="1780" alt="스크린샷 2021-02-17 오전 12 17 53" src="https://user-images.githubusercontent.com/43809168/108082627-a5eb8800-70b5-11eb-8aad-c8f96804fd4c.png" /></p>
+
+<p><img width="1761" alt="스크린샷 2021-02-17 오전 12 17 57" src="https://user-images.githubusercontent.com/43809168/108082631-a6841e80-70b5-11eb-93bd-9c359171d51a.png" /></p>
+
+<p><img width="1826" alt="스크린샷 2021-02-17 오전 12 18 04" src="https://user-images.githubusercontent.com/43809168/108082636-a7b54b80-70b5-11eb-9452-94571345164e.png" /></p>
+
+<p>노드에 <code class="language-plaintext highlighter-rouge">Taints</code>를 추가하는 명령어는 다음과 같습니다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">kubectl taints node 노드_이름 key=value:effect</code></p>
+
+<p>여기서 key와 value는 임의로 줄 수 있으나 <code class="language-plaintext highlighter-rouge">effect</code>는 정해진 것을 사용해야합니다.</p>
+
+<p>노드에 추가된 <code class="language-plaintext highlighter-rouge">Taints</code>를 제거하는 명령은 다음과 같습니다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">kubectl taints node 노드_이름 key=value:effect-</code></p>
+
+<p>Taints <code class="language-plaintext highlighter-rouge">effect</code>에는 <code class="language-plaintext highlighter-rouge">NoSchedule</code>, <code class="language-plaintext highlighter-rouge">NoExecute</code>, <code class="language-plaintext highlighter-rouge">PreferNoSchedule</code> 세 가지 <code class="language-plaintext highlighter-rouge">effect</code>가 존재합니다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">NoSchedule</code>은 일치하는 <code class="language-plaintext highlighter-rouge">Toleration</code>이 없으면 해당 노드에 파드를 배치할 수 없음을 의미합니다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">PreferNoSchedule</code>은 toleration이 없으면 포드를 스케쥴링 하지 않으려고 하지만, 이는 필수는 아닙니다. 클러스터 내의 자원이 부족하다면 taint가 있는 노드에도 파드가 스케쥴 될 수 있습니다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">NoExecute</code>의 경우 새롭게 생성된 파드가 toleration이 없으면 배치되지 않게 하고, 기존에 존재하던 파드도 taint에 맞는 toleration이 없다면 즉시 종료시킵니다.</p>
+
+<p>Node01에 다음과 같이 taints를 주고, A Pod에 Toleration을 부여해보겠습니다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">kubectl taints node node01 color=white:NoSchedule</code></p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Pod</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">A</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">containers</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">with-node-affinity</span>
+      <span class="na">image</span><span class="pi">:</span> <span class="s">k8s.gcr.io/pause:2.0</span>
+  <span class="na">tolerations</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">key</span><span class="pi">:</span> <span class="s1">'</span><span class="s">color'</span>
+      <span class="na">operator</span><span class="pi">:</span> <span class="s1">'</span><span class="s">Equal'</span>
+      <span class="na">value</span><span class="pi">:</span> <span class="s1">'</span><span class="s">white'</span>
+      <span class="na">effect</span><span class="pi">:</span> <span class="s1">'</span><span class="s">NoSchedule'</span>
+</code></pre></div></div>
+
+<p>참고로 <code class="language-plaintext highlighter-rouge">operator</code>의 경우 <code class="language-plaintext highlighter-rouge">Equal</code> 외에도 <code class="language-plaintext highlighter-rouge">Exists</code>도 사용가능합니다만, 이 경우 <code class="language-plaintext highlighter-rouge">value</code>를 따로 명시하지않아야 합니다.</p>
+
+<p>만약 다음과 같이 <code class="language-plaintext highlighter-rouge">effect</code>가 <code class="language-plaintext highlighter-rouge">NoExecute</code>인 경우 특정 시간 이후에 노드 내에 있는 Toleration의 파드들을 제거하고 싶다면 다음과 같은 옵션을 줄 수도 있습니다.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Pod</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">A</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">containers</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">with-node-affinity</span>
+      <span class="na">image</span><span class="pi">:</span> <span class="s">k8s.gcr.io/pause:2.0</span>
+  <span class="na">tolerations</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">key</span><span class="pi">:</span> <span class="s1">'</span><span class="s">color'</span>
+      <span class="na">operator</span><span class="pi">:</span> <span class="s1">'</span><span class="s">Equal'</span>
+      <span class="na">value</span><span class="pi">:</span> <span class="s1">'</span><span class="s">white'</span>
+      <span class="na">effect</span><span class="pi">:</span> <span class="s1">'</span><span class="s">NoExecute'</span>
+      <span class="na">tolerationSeconds</span><span class="pi">:</span> <span class="m">3600</span>
+</code></pre></div></div>
+
+<p>이렇게 하면 5분 뒤에 노드 내에 Toleration이 없는 파드들은 모두 제거될 것입니다.</p>
+
+<h2 id="pod의-입장에서">Pod의 입장에서</h2>
+
+<p><img width="1808" alt="스크린샷 2021-02-17 오전 12 18 10" src="https://user-images.githubusercontent.com/43809168/108082639-a84de200-70b5-11eb-9983-a34f366b120f.png" /></p>
+
+<p>그러나 특정 노드의 <code class="language-plaintext highlighter-rouge">Taints</code>의 <code class="language-plaintext highlighter-rouge">Toleration</code>을 가진 파드가 반드시 해당 노드에 배포되는 것은 아닙니다.</p>
+
+<p>해당 파드는 얼마든지 다른 노드로도 배포될 수 있습니다.</p>
+
+<h2 id="node-affinity--taints-and-toleration">Node-Affinity + Taints And Toleration</h2>
+
+<p>그렇다면 앞서 배운 <code class="language-plaintext highlighter-rouge">Node-Affinity</code>와 <code class="language-plaintext highlighter-rouge">Taints And Toleration</code>를 모두 사용해보겠습니다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">kubectl taints node node01 color=white:NoSchedule</code></p>
+
+<p><img width="1766" alt="스크린샷 2021-02-17 오전 12 20 15" src="https://user-images.githubusercontent.com/43809168/108082951-ee0aaa80-70b5-11eb-96fc-55e2dc1ed3cb.png" /></p>
+
+<p>두 기능을 조합하면 특정 파드가 반드시 특정 노드에 배포되는 것을,</p>
+
+<p>특정 노드는 반드시 특정 파드만 배포되게 허락하는 것을 설정할 수 있습니다.</p>
+
+<h2 id="한-줄-요약">한 줄 요약</h2>
+
+<p><code class="language-plaintext highlighter-rouge">Node-Affinity + Taints And Toleration</code>를 사용하면 특정 노드와 특정 파드가 서로 반드시 배치하고 배치되어지는 것을 보장할 수 있다.</p>
+
+    <br />
+    <br />
+  </div>
+  
+
+</article>
+
+<!--<hr class="dingbat" />-->
+<!--
+<div class="share">
+  <h2>Share this post</h2>
+  <div class="share-body">
+    <a href="http://twitter.com/share?text=쿠버네티스 노드에 어떤 파드도 배포하지 않는 방법&amp;url=http://localhost:4000/devops/2021/02/17/Kubernetes15-18/"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="icon-twitter">
+      </span>
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/devops/2021/02/17/Kubernetes15-18/"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="icon-facebook">
+      </span>
+    </a>
+  </div>
+</div>
+-->
+<br />
+
+
+
+
+<aside class="related" role="complementary">
+  <h2 class="hr">Related Posts</h2>
+
+  <ul class="related-posts">
+    
+      
+      
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/devops/2021/05/16/Kafka-04/" data-flip="title">
+    <span>Kafka 내부 메커니즘</span>
+  </a>
+  <small><time datetime="2021-05-16T00:00:00+09:00">
+    16 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/devops/2021/05/13/CKA-51/" data-flip="title">
+    <span>신입 개발자인 나는 왜 CKA 자격증을 땄을까?</span>
+  </a>
+  <small><time datetime="2021-05-13T00:00:00+09:00">
+    13 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/devops/2021/05/06/Kafka-03/" data-flip="title">
+    <span>Kafka Consumer</span>
+  </a>
+  <small><time datetime="2021-05-06T00:00:00+09:00">
+    06 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+      
+    
+  </ul>
+</aside>
+  <aside class="comments" role="complementary">
+  <h2>Comments</h2>
+  <hr/>
+
+  <script src="https://utteranc.es/client.js"
+    repo="minkukjo/minkukjo.github.io"
+    issue-term="title"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</aside>
+
+       <footer>
+  <hr/>
+  
+    <p>© 2022. by minkuk</p>
+
+  
+  <p>
+    <code>Powered by <a href="https://minkukjo.github.io/">minkuk</a></code>
+  </p>
+</footer>
+
+    </main>
+    <div class="right-side">
+  <div class="add-first">
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+    ></script>
+    <!-- 우측 광고 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="9124111205"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+  <br />
+  <br />
+  <div class="add-second">
+    <!-- 우측 광고2 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="5156946039"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+
+  </div>
+  <div id="_yDrawer">
+  <div id="_sidebar" class="sidebar">
+    <div class="sidebar-bg" style="background-color:#4f86aa;background-image:url(/assets/img/bg.jpg)"></div>
+    <header class="sidebar-sticky" role="banner">
+      <br/>
+      <div class="sidebar-about">
+        <h1><a id="_title" href="/">도전하는 개발자</a></h1>
+        
+
+      </div>
+
+      <br/>
+      <br/>
+      <nav class="sidebar-nav heading" role="navigation">
+        <span class="sr-only">Navigation:</span>
+<ul>
+  
+
+  
+
+  
+  
+  
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-1"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/life/">Life</a>
+       <label class="folder" for="list-item-1">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-daily/">Daily</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-review/">Review</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-books/">Books</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-2"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/computer-science/">Computer Science</a>
+       <label class="folder" for="list-item-2">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-algorithm/">Algorithm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-oop/">OOP</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-network/">Network</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-db/">Database</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-ai/">AI</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-security/">Security</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-distribution-system/">Distribution System</a>
+             </li>
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-3"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/programming-language/">Programming Language</a>
+       <label class="folder" for="list-item-3">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-kotlin/">Kotlin</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-go/">Go</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-java/">Java</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-javascript/">JavaScript</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-typescript/">TypeScript</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-4"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/framework/">Framework</a>
+       <label class="folder" for="list-item-4">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring/">Spring</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-data-jpa/">Spring Data JPA</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-security/">Spring Security</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-junit/">JUnit</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-5"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/language/">Language</a>
+       <label class="folder" for="list-item-5">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/language-english/">English</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-6"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/development/">Development</a>
+       <label class="folder" for="list-item-6">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-ddd/">DDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-tdd/">TDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-clean-code/">Clean Code</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-git/">Git</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-7"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/devops/">Devops</a>
+       <label class="folder" for="list-item-7">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-alarm/">Alarm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-ansible/">Ansible</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-cicd/">CI/CD</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-docker/">Docker</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-es/">Elasticsearch</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-k8s/">Kubernetes</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-public-cloud/">Public Cloud</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-kafka/">Kafka</a>
+             </li>
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-8"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/opensource/">Open Source</a>
+       <label class="folder" for="list-item-8">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/opensource-opensource/">Open Source</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-9"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/about/">About</a>
+       
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+</ul>
+
+      </nav>
+    <br/>
+    <br/>
+      <div class="sidebar-box">
+        
+      </div>
+      <p>매일 매일 한계를 뛰어넘기 위한 도전을 즐기는 개발자</p>
+
+      
+      
+        <div class="sidebar-social">
+          <span class="sr-only">Social:</span>
+<ul>
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://github.com/minkukjo">
+    <span class="icon-github" title="GitHub"></span>
+    <span class="sr-only">GitHub</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://www.linkedin.com/in/민국-조-567052166">
+    <span class="icon-linkedin2" title="LinkedIn"></span>
+    <span class="sr-only">LinkedIn</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:harrycode@kakao.com">
+    <span class="icon-mail" title="Email"></span>
+    <span class="sr-only">Email</span>
+  </a>
+</li>
+
+  
+</ul>
+
+        </div>
+      
+    </header>
+  </div>
+</div>
+</div>
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-158654037-1', 'auto');
+  ga('send', 'pageview');
+  loadJSDeferred('https://www.google-analytics.com/analytics.js');
+</script>
+
+
+
+
+
+<!--[if gt IE 8]><!---->
+<script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+  WebFont.load({
+    
+    google: {
+      families: 'Lato'.split('|')
+    },
+    
+
+    custom: {
+      families: ['icomoon'],
+      urls: ['/assets/icomoon/style.css']
+    }
+  });
+</script>
+<!--<![endif]-->
+
+
+  <!--[if gt IE 9]><!---->
+  
+  <script>loadJSDeferred('/assets/js/hydejack.js?v=6.4.0');</script>
+
+  
+  <!--<![endif]-->
+
+
+
+</body>
+
+</html>

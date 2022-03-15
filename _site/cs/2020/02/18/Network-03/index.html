@@ -1,0 +1,1896 @@
+<!DOCTYPE html>
+<html lang="en"><!--
+ __  __                __                                     __
+/\ \/\ \              /\ \             __                    /\ \
+\ \ \_\ \   __  __    \_\ \      __   /\_\      __       ___ \ \ \/'\
+ \ \  _  \ /\ \/\ \   /'_` \   /'__`\ \/\ \   /'__`\    /'___\\ \ , <
+  \ \ \ \ \\ \ \_\ \ /\ \L\ \ /\  __/  \ \ \ /\ \L\.\_ /\ \__/ \ \ \\`\
+   \ \_\ \_\\/`____ \\ \___,_\\ \____\ _\ \ \\ \__/.\_\\ \____\ \ \_\ \_\
+    \/_/\/_/ `/___/> \\/__,_ / \/____//\ \_\ \\/__/\/_/ \/____/  \/_/\/_/
+                /\___/                \ \____/
+                \/__/                  \/___/
+
+Powered by Hydejack v6.4.0 (https://qwtel.com/hydejack/)
+-->
+
+
+
+
+
+
+
+
+
+<head>
+  <!-- =============== -->
+<!-- META            -->
+<!-- =============== -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta
+  name="naver-site-verification"
+  content="22c5b4ef3bfda7fc6100671413989219de7a4ac8"
+/>
+<meta property="og:title" content="HTTP Status Code" />
+<meta property="og:type" content="article" />
+
+<!-- =============== -->
+<!-- Google AdSense  -->
+<!-- =============== -->
+<script
+  data-ad-client="ca-pub-8247516864622650"
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+></script>
+
+ 
+<meta
+  property="og:image"
+  content="http://localhost:4000/assets//img/network-logo.png"
+/>
+<br />
+
+
+<meta property="og:image:width" content="640" />
+<meta property="og:image:height" content="360" />
+ 
+<title>HTTP Status Code &middot; 도전하는 개발자</title>
+ 
+<meta
+  name="description"
+  content="HTTP Status Code
+
+"
+/>
+<meta
+  property="og:description"
+  content="HTTP Status Code
+
+"
+/>
+
+
+
+<!-- =============== -->
+<!-- LINKS           -->
+<!-- =============== -->
+<link rel="canonical" href="http://localhost:4000/cs/2020/02/18/Network-03/" />
+<meta property="og:url" content="http://localhost:4000/cs/2020/02/18/Network-03/" />
+
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="도전하는 개발자 Feed"
+  href="http://localhost:4000/feed.xml"
+/>
+
+
+<link rel="prev" href="http://localhost:4000/cs/2020/02/17/Network-02/" />
+ 
+<link rel="next" href="http://localhost:4000/framework/2020/02/19/Spring/" />
+
+
+<link
+  rel="apple-touch-icon"
+  href="http://localhost:4000/apple-touch-icon.png"
+/>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+<!-- Place favicon.ico in the root directory -->
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+<script>
+  !function(n,e){function t(n,e){n.onload=function(){this.onerror=this.onload=null,e(null,n)},n.onerror=function(){this.onerror=this.onload=null,e(new Error("Failed to load "+this.src),n)}}function o(n,e){n.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||(this.onreadystatechange=null,e(null,n))}}n._loaded=!1,n.loadJSDeferred=function(a,d){function r(){n._loaded=!0;var r=e.createElement("script");r.src=a,d&&(("onload"in r?t:o)(r,d),r.onload||t(r,d));var l=e.getElementsByTagName("script")[0];l.parentNode.insertBefore(r,l)}n._loaded?r():n.addEventListener?n.addEventListener("load",r,!1):n.attachEvent?n.attachEvent("onload",r):n.onload=r}}(window,document);
+
+  !function(e){"use strict";var n=function(n,t,o){function i(e){if(a.body)return e();setTimeout(function(){i(e)})}function r(){l.addEventListener&&l.removeEventListener("load",r),l.media=o||"all"}var d,a=e.document,l=a.createElement("link");if(t)d=t;else{var f=(a.body||a.getElementsByTagName("head")[0]).childNodes;d=f[f.length-1]}var s=a.styleSheets;l.rel="stylesheet",l.href=n,l.media="only x",i(function(){d.parentNode.insertBefore(l,t?d:d.nextSibling)});var u=function(e){for(var n=l.href,t=s.length;t--;)if(s[t].href===n)return e();setTimeout(function(){u(e)})};return l.addEventListener&&l.addEventListener("load",r),l.onloadcssdefined=u,u(r),l};"undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this);
+
+  !function(t){if(t.loadCSS){var e=loadCSS.relpreload={};if(e.support=function(){try{return t.document.createElement("link").relList.supports("preload")}catch(t){return!1}},e.poly=function(){for(var e=t.document.getElementsByTagName("link"),r=0;r<e.length;r++){var n=e[r];"preload"===n.rel&&"style"===n.getAttribute("as")&&(t.loadCSS(n.href,n,n.getAttribute("media")),n.rel=null)}},!e.support()){e.poly();var r=t.setInterval(e.poly,300);t.addEventListener&&t.addEventListener("load",function(){e.poly(),t.clearInterval(r)}),t.attachEvent&&t.attachEvent("onload",function(){t.clearInterval(r)})}}}(this);
+
+  window.disablePushState = false;
+  window.disableDrawer = false;
+</script>
+
+<!--[if lt IE 9]>
+  <script src="https://unpkg.com/html5shiv/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+<!-- =============== -->
+<!-- STYLES          -->
+<!-- =============== -->
+<!--[if gt IE 8]><!---->
+<style>
+  
+  article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}*{box-sizing:border-box}html,body{margin:0;padding:0}html{font-size:16px;line-height:1.75}body{color:#333;background-color:#fff;overflow-y:scroll}a{text-decoration:none}.lead{margin-left:-1rem;margin-right:-1rem}img,.img{display:block;max-width:100%;margin-bottom:1rem;border:none}img.lead,.img.lead{max-width:calc(100% + 2rem);width:calc(100% + 2rem)}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-weight:bold;text-rendering:optimizeLegibility}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{margin:1.6rem 0 1rem;line-height:1.6}h1,.h1{font-size:2rem;line-height:1.25}h2,.h2{font-size:1.5rem}h3,.h3{font-size:1.17em}p{margin-top:0;margin-bottom:1rem}p.lead{font-size:1.25rem;font-weight:300;padding:0 1rem}ul,ol,dl{margin-top:0;margin-bottom:1rem}ul,ol{padding-left:1.25rem}hr{position:relative;margin:1.5rem 0;border:0;border-top:1px solid #eee}.hr{padding-bottom:.5rem;border-bottom:1px solid #eee;margin-bottom:1.5rem}h4,h5,h6,.h4,.h5,.h6{margin-bottom:0.5rem;font-size:1rem}table{margin-bottom:1rem;width:100%;width:calc(100% + 2rem);margin-left:-1rem;border:1px solid #e5e5e5;border-collapse:collapse;border-spacing:0}td,th{padding:.25rem .5rem;border:1px solid #e5e5e5}td:first-child,th:first-child{padding-left:1rem}td:last-child,th:last-child{padding-right:1rem}thead+tbody,tbody+tbody,tfoot{border-top:3px double #e5e5e5}tbody tr:nth-child(odd) td,tbody tr:nth-child(odd) th{background-color:#f9f9f9}footer{margin-bottom:2rem}.page,.post{margin-bottom:3em}.page li+li,.post li+li{margin-top:.25rem}.page>header,.post>header{margin-bottom:2rem}.page-title,.post-title{margin-top:0}.post-date{display:block;margin-top:-0.5rem;margin-bottom:1rem;color:#9a9a9a}.related-posts{padding-left:0;list-style:none}.related-posts>li,.related-posts>li+li{margin-top:1rem}.related-posts>li>small,.related-posts>li+li>small{font-size:75%;color:#9a9a9a}.message{margin-bottom:1rem;padding:1rem;color:#787878;background-color:#f9f9f9;margin-left:-1rem;margin-right:-1rem}body,main{position:relative;overflow-x:hidden}@media screen{body::before{content:'';background:#e5e5e5;position:absolute;left:0;top:0;bottom:0}}@media screen and (min-width: 40em){html{font-size:17px}}@media screen and (min-width: 54em){html{font-size:16px}}@media screen and (min-width: 88em){html{font-size:17px}}@media screen and (min-width: 125em){html{font-size:18px}}.sr-only{display:none}.clearfix,.sidebar-social::after,.clearafter::after{content:"";display:table;clear:both}a,.a{position:relative;padding-bottom:.15rem;border-style:hidden}.img{overflow:hidden;background-color:#f9f9f9}.img>img{margin:0;width:100%;height:100%}.sixteen-nine{position:relative}.sixteen-nine::before{display:block;content:"";width:100%;padding-top:56.25%}.sixteen-nine>*{position:absolute;top:0;left:0;right:0;bottom:0}h1+hr,h2+hr,h3+hr,h4+hr,h5+hr,h6+hr{margin-top:0}.fade-in{animation-duration:500ms;animation-name:fade-in;animation-fill-mode:forwards}@keyframes fade-in{from{transform:translateY(-2rem);opacity:0}50%{transform:translateY(-2rem);opacity:0}to{transform:translateY(0);opacity:1}}.mb6{margin-bottom:10rem}.sidebar{color:rgba(255,255,255,0.75);text-align:left}.sidebar::before{content:"";position:absolute;z-index:2;top:0;left:0;bottom:0;right:0;background:linear-gradient(to bottom, rgba(32,32,32,0) 0%, rgba(32,32,32,0.5) 100%)}.sidebar a{color:#fff;border-bottom-color:rgba(255,255,255,0.2)}.right-side{width:100%;margin-left:auto;margin-right:auto}.right-side .ad-first{text-align:center}@media screen{.right-side{max-width:38rem;min-height:100vh}.right-side .ad-second{display:none}}@media screen and (min-width: 54em){.right-side{margin-left:20rem;margin-right:1rem;padding:4rem 1rem 12rem}.right-side .ad-second{text-align:center;display:block}}@media screen and (min-width: 72em){.right-side{margin-left:22rem;max-width:42rem}}@media screen and (min-width: 88em){.right-side{width:162px;margin-left:0rem;margin-right:0rem;padding:0rem;margin-top:10rem;display:block;float:left}}@media screen and (min-width: 96em){.right-side{width:300px;margin-right:0rem}}#_yDrawer{position:relative}@media screen{#_yDrawer{min-height:640px;min-height:100vh}}@media screen and (min-width: 54em){#_yDrawer{width:18rem;margin-left:0}}.sidebar-bg{position:absolute;height:100%;overflow:hidden;top:0;right:0;bottom:0;left:0;background:#202020 center / cover}.sidebar-box{display:flex;justify-content:center}.sidebar-sticky{position:relative;z-index:3}@media screen{.sidebar-sticky{-ms-overflow-style:none;overflow:-moz-scrollbars-none;height:100%;overflow:auto;position:absolute;padding:3rem 0rem;right:2.5rem;left:2.5rem}}.sidebar-sticky::-webkit-scrollbar{display:none}.sidebar-about>h1{color:#fff;font-size:2rem}.sidebar-nav>ul{list-style:none;padding-left:0;margin-bottom:.5rem}a.sidebar-nav-item{width:100%;font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}a.sidebar-nav-subitem{font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}@media screen{.y-drawer-scrim{z-index:2}.y-drawer-content{width:18rem;left:-18rem;z-index:3}}.sidebar-social{margin-bottom:.5rem}.sidebar-social>ul{list-style:none;padding-left:0;margin:0 -.25rem}.sidebar-social>ul>li{float:left}.sidebar-social>ul>li>a{display:inline-block;text-align:center;font-size:1.6rem;line-height:3rem;width:3.1249rem;height:4rem;padding:.5rem 0}.sidebar-social>ul li+li{margin-top:0}.fixed-top{position:fixed;top:0;left:0;width:100%;z-index:1}.navbar>.content{padding-top:0;padding-bottom:0;min-height:0;height:0}.menu{display:inline-block;padding:1.75rem 1.5rem;border-bottom:none;margin-left:-1.5rem;color:#9a9a9a !important}.menu::after{content:"\2630"}@media screen and (min-width: 54em){.menu{padding:1.25rem 1.5rem;position:absolute;left:-9999px}.menu:focus{position:static}}.animation-main{pointer-events:none}.loading{display:none}@media print{.menu{display:none}}.animation-main{opacity:0;will-change:opacity}.loading{position:absolute;top:0;right:0;padding:5.25rem 4.5rem;transform-origin:top right;transform:scale(0.33)}.content{position:relative;margin-left:auto;margin-right:auto;padding:5rem 1rem 12rem}@media screen{.content{min-height:100vh}}@media screen and (min-width: 54em){.content{padding:4rem 1rem 12rem;margin-left:19rem;margin-right:3rem}}@media screen and (min-width: 72em){.content{max-width:42rem;margin-left:21rem}}@media screen and (min-width: 88em){.content{float:left;width:100%;margin-left:22rem;margin-right:5rem}}@media screen and (min-width: 96em){.content{max-width:44rem}}@media screen and (min-width: 102em){.content{margin-left:25rem;margin-right:8rem}}.me{width:6.5rem;height:6.5rem;align-self:center;margin-right:20px;border-radius:100%;position:relative}@media screen and (min-width: 40em){.me{width:7rem;height:7rem}}@media screen and (min-width: 54em){.me{width:6.5rem;height:6.5rem}}@media screen and (min-width: 72em){.me{width:7rem;height:7rem}}main>footer{width:100%;position:absolute;bottom:0;left:0;right:0;padding:0 1rem;color:#9a9a9a;font-size:smaller;text-align:center}main>footer>p{margin-bottom:0}html{font-family:'Sans-serif'}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-family:'Sans-serif'}
+
+</style>
+
+
+<link
+  rel="preload"
+  href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0"
+  as="style"
+  onload="this.rel='stylesheet'"
+/>
+
+<style id="_pageStyle">
+
+.content a{color:#4f86aa;border-color:rgba(79,134,170,0.2)}.content a:hover{border-color:#4f86aa}:focus{outline-color:#4f86aa}::selection{color:#fff;background:#4f86aa}::-moz-selection{color:#fff;background:#4f86aa}
+
+</style>
+
+
+<noscript>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0" />
+    
+  
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Lato"
+  />
+  <style>
+    html { font-family: 'Lato', 'Sans-serif' }
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .heading { font-family: 'Lato', 'Sans-serif' }
+  </style>
+   
+  <link rel="stylesheet" href="http://localhost:4000/assets/icomoon/style.css" />
+</noscript>
+<!--<![endif]-->
+
+</head>
+
+<body>
+  <!-- =============== -->
+<!-- MENU            -->
+<!-- =============== -->
+<div class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <a id="_menu" class="menu no-hover" href="#_title">
+      <span class="sr-only">Menu</span>
+    </a>
+  </div>
+</div>
+
+<!-- =============== -->
+<!-- CONTENT         -->
+<!-- =============== -->
+<div id="_yPushState">
+  <div class="fade-in">
+    <main
+      id="_main"
+      class="content"
+      role="main"
+      data-color="#4f86aa"
+      data-image="/assets/img/bg.jpg"
+    >
+      
+
+<article id="post-cs/2020/02/18/Network-03" class="post" role="article">
+  <header>
+    <h1 class="post-title">
+      
+        HTTP Status Code
+        
+    </h1>
+
+    <p class="post-date heading">
+      <time datetime="2020-02-18T00:00:00+09:00">18 Feb 2020</time>
+      
+
+
+
+
+
+
+
+
+
+in <a href="/category/computer-science/" data-flip="title">Computer Science</a>
+
+      
+
+
+
+
+
+
+
+
+
+on <a href="/tag/cs-network/" data-flip="title">Network</a>
+
+    </p>
+
+    
+  <div class="hr" style="padding-bottom:0"></div>
+
+
+  </header>
+  
+
+
+  
+  <div class="markdown-body">
+
+    <!-- 
+    <div class="head-image"><img src="http://localhost:4000/assets//img/network-logo.png" /></div>
+    <br /> -->
+    <style>
+      .myAd1190 {
+        width: 48%;
+        height: 280px;
+      }
+
+      .myAd1290 {
+        width: 48%;
+        height: 280px;
+      }
+
+      @media(max-width: 800px) {
+        .myAd1190 {
+          display: none;
+        }
+
+        .myAd1290 {
+          width: 98%;
+        }
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 300px;
+      }
+
+      .row-center {
+        display: flex;
+        justify-content: center;
+        height: 258px;
+      }
+    </style>
+   
+    <!--<br />-->
+    <h2 id="http-status-code">HTTP Status Code</h2>
+
+<p>HTTP 프로토콜은 응답으로 스테이터스 코드를 보낸다.</p>
+
+<p>이 스테이터스 코드를 보고 우리는 처리가 잘 되었는지, 오류가 발생하였는지 등 정보를 알 수 있다.</p>
+
+<p>지금부터 Status Code에 대해서 알아보자.</p>
+
+<h2 id="1xx--처리중">1XX : 처리중</h2>
+
+<h3 id="100-continue">100 Continue</h3>
+
+<ul>
+  <li>바디 : 없음</li>
+  <li>관련 메서드 : 모두</li>
+  <li>요청 헤더 : Expect</li>
+</ul>
+
+<p>Expect 헤더에 100-continue를 넣어서 요청을 송신하면 요청 헤더를 다 보낸 시점에 서버가 100 Continue를 반환한다.</p>
+
+<p>이 요청을 보냄으로써 서버가 해당 요청을 처리가능한지 여부를 알 수 있게 된다.</p>
+
+<p>1기가 짜리 비디오를 POST하는 예를 보자.</p>
+
+<div class="language-http highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">POST /foo/bar/HTTp/1.1
+HOST: example.com
+Expect: 100-continue
+Content-Type: video/mpeg
+Content-Length: 1073741824
+</span></code></pre></div></div>
+
+<p>클라이언트가 헤더를 보내고 대기하며 서버는 이 요청을 처리 가능하다면 100 Continue를 반환한다.</p>
+
+<p>클라이언트는 서버측에서 100 Continue 메세지를 받는다면 다시 POST를 보내는데 이때는 Except 헤더를 포함하지 않는다.</p>
+
+<div class="language-http highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">POST /foo/bar/HTTp/1.1
+HOST: example.com
+Content-Type: video/mpeg
+Content-Length: 1073741824
+</span></code></pre></div></div>
+
+<p>만약 서버가 Expect 헤더에 100-continue를 지정한 요청을 처리할 수 없다고 판단한 경우, 에러를 반환한다.</p>
+
+<p>만약 송신한 데이터가 너무 크다면 413 Request Entity Too Larger를 반환하며 지원하지않는 미디어 타입이라면 415 Unsupported Media Type을 반환한다.</p>
+
+<p>서버가 Except 헤더에 대응하지 않는 경우라면 417 Expectation Failed를 반환한다.</p>
+
+<h3 id="101-switching-protocols">101 Switching Protocols</h3>
+
+<ul>
+  <li>바디 : 없음</li>
+  <li>관련 메서드 : 모두</li>
+  <li>요청 헤더 : Upgrade</li>
+</ul>
+
+<p>이용할 프로토콜을 업그레이드할 때 사용한다.</p>
+
+<p>만약 HTTP 1.1을 사용한다면 HTTP 2.0으로 업그레이드할 수 있다.</p>
+
+<p>현재 HTTP 3이 등장했으므로 3까지 업그레이드 가능하다.</p>
+
+<h2 id="2xx--성공">2XX : 성공</h2>
+
+<h3 id="200-ok">200 OK</h3>
+
+<ul>
+  <li>바디 : GET의 경우 리소스의 표현, 그 밖의 메서드는 처리결과</li>
+  <li>관련 메서드 : 모두</li>
+</ul>
+
+<p>요청이 성공한 경우</p>
+
+<p>가장 자주 볼 수 있는 상태 코드</p>
+
+<h3 id="201-created">201 Created</h3>
+
+<ul>
+  <li>바디 : 신규 작성된 리소스의 표현, 혹은 처리결과의 설명</li>
+  <li>관련 메서드 : POST,PUT</li>
+  <li>요청 헤더 : Location</li>
+</ul>
+
+<p>요청이 성공해서 새로운 리소스를 작성했다는 것을 나타낸다.</p>
+
+<p>요청이 POST인 경우 Location 헤더에는 새로운 리소스의 URI가 절대 URI로 들어간다.</p>
+
+<h3 id="202-accepted">202 Accepted</h3>
+
+<ul>
+  <li>바디 : 처리결과를 얻을 수 있는 리소스의 링크와 예상처리 시간</li>
+  <li>관련 메서드 : 모두</li>
+  <li>요청 헤더 : Location,Retry-After</li>
+</ul>
+
+<p>클라이언트로부터 요청은 받았지만 서버 측에서 처리가 완료되지 않음을 나타내는 상태코드.</p>
+
+<p>일반적으로 POST와 PUT으로 리소스를 작성 또는 갱신했을 때 처리 시간이 많이 걸리는 경우에 반환한다.</p>
+
+<p>Retry-After 헤더는 지정된 시간이 지나면 Location 헤더에 지정된 URI를 가져와 처리결과를 얻는다.</p>
+
+<h3 id="203-non-authoritative-information">203 Non-Authoritative Information</h3>
+
+<ul>
+  <li>바디 : GET의 경우는 리소스의 표현, 그 밖의 메서드는 처리결과</li>
+  <li>관련 메서드 : 모두</li>
+</ul>
+
+<p>응답 헤더가 오리지널 서버로부터 제공된 것이 아님을 나타낸다.</p>
+
+<p>리소스에 대해 프록시가 주석을 헤더에 덧붙인 경우 등에 해당한다.</p>
+
+<p>그 밖의 경우 200 OK와 같다.</p>
+
+<h3 id="204-no-content">204 No Content</h3>
+
+<ul>
+  <li>바디 : 없음</li>
+  <li>관련 메서드 : POST,PUT,DELETE</li>
+</ul>
+
+<p>요청이 성공했지만 클라이언트에게 돌려보낼 콘텐츠가 없다는 것을 나타낸다.</p>
+
+<p>전형적인 예는 DELETE 응답이 여기에 해당한다.</p>
+
+<h3 id="205-reset-content">205 Reset Content</h3>
+
+<ul>
+  <li>바디 : 없음</li>
+  <li>관련 메서드 : 모두</li>
+</ul>
+
+<p>요청이 성공하여 브라우저를 리셋하고 다음 동작으로 옮겨가는 것을 나타낸다.</p>
+
+<h3 id="206-partial-content">206 Partial Content</h3>
+
+<ul>
+  <li>바디 : 지정된 범위의 리소스 표현</li>
+  <li>관련 메서드 : GET</li>
+  <li>요청 헤더 : Range, If-Range</li>
+  <li>응답 헤더 : Content-Range</li>
+</ul>
+
+<p>GET할 때 Range 헤더에 리소스의 범위를 바이트로 지정하면 리소스의 일부만을 얻을 수 있다.</p>
+
+<p>이것을 부분적 GET (Partial GET)이라고 부른다.</p>
+
+<p>이 스테이터스 코드는 부분적 GET이 성공했다는 의미이다.</p>
+
+<h2 id="3xx--리다이렉트">3XX : 리다이렉트</h2>
+
+<h3 id="300-multiple-choices">300 Multiple Choices</h3>
+
+<ul>
+  <li>바디 : 후보 URI의 리스트</li>
+  <li>관련 메서드 : 모두</li>
+</ul>
+
+<p>지정한 URI에 대해 콘텐트 네고시에이션을 수행한 결과 서버측에서 후보를 하나로 만들 수 없을 때 클라이언트에게 복수의 호부에 대한 링크를 반환하기 위해 사용</p>
+
+<h3 id="301-moved-permanently">301 Moved Permanently</h3>
+
+<ul>
+  <li>바디 : 이동할 곳의 URI 링크를 포함한 HTML</li>
+  <li>관련 메서드 : 모두</li>
+  <li>응답 헤더 : Location</li>
+</ul>
+
+<p>지정한 리소스가 새로운 URI로 이동했다는 것을 나타낸다.
+이동할 곳의 URI는 Location 헤더로 나타낸다.</p>
+
+<h3 id="303-see-other">303 See Other</h3>
+
+<ul>
+  <li>바디 : 이동할 곳의 URI 링크를 포함한 HTML</li>
+  <li>관련 메서드 : POST</li>
+  <li>응답 헤더 : Location</li>
+</ul>
+
+<p>요청에 대한 처리결과를 Location 헤더에 표시되는 URI에서 GET으로 취득할 수 있다는 것을 나타낸다.</p>
+
+<p>예를 들어 브라우저 폼을 통해 POST로 처리를 수행하고, 그 응답으로서 결과하면으로 리다리엑트할 때 사용한다.</p>
+
+<h3 id="304-not-modified">304 Not Modified</h3>
+
+<ul>
+  <li>바디 : 없음</li>
+  <li>관련 메서드 : GET</li>
+  <li>요청 헤더 : If-Modified-Since, If-None-Match</li>
+  <li>응답 헤더 : ETag, Last-Modified</li>
+</ul>
+
+<p>조건부 GET일 때, 리소스가 갱신되지 않았다는 것을 보여준다.</p>
+
+<h3 id="305-use-proxy">305 Use Proxy</h3>
+
+<ul>
+  <li>바디 : 프록시가 필요하다는 것을 설명하는 HTML</li>
+  <li>관련 메서드 : 모두</li>
+  <li>응답 헤더 : Location</li>
+</ul>
+
+<p>이 리소스에 액세스 하기 위해서는 지정된 프록시를 통할 필요가 있다는 것을 의미</p>
+
+<p>응답의 Location 헤더에 프록시의 URI가 들어간다.</p>
+
+<h3 id="307-temporary-redirected">307 Temporary Redirected</h3>
+
+<ul>
+  <li>바디 : 이동할 곳의 URI 링크를 포함한 HTML</li>
+  <li>관련 메서드 : 모두</li>
+  <li>응답 헤더 : Location</li>
+</ul>
+
+<p>요청한 URI가 존재하지 않기 때문에 클라이언트는 Location 헤더가 가리키는 새로운 URI로 요청을 재송신할 필요가 있음을 나타낸다.</p>
+
+<h2 id="4xx--클라이언트-에러">4XX : 클라이언트 에러</h2>
+
+<h3 id="400-bad-request">400 Bad Request</h3>
+
+<ul>
+  <li>바디 : 에러의 이유를 설명하는 문서</li>
+  <li>관련 메서드 : 모두</li>
+</ul>
+
+<p>요청의 구문이 잘못되었다는 것을 나타낸다.</p>
+
+<p>클라이언트가 모르는 4XX 계열 스테이터스 코드가 반환되었을 경우 400 Bad Request와 동일하게 다루도록 스펙으로 정해져 있다.</p>
+
+<h3 id="401-unauthorized">401 Unauthorized</h3>
+
+<ul>
+  <li>바디 : 에러의 이유를 설명하는 문서</li>
+  <li>관련 메서드 : 모두</li>
+  <li>요청 헤더 : Authorization</li>
+  <li>응답 헤더 : WWW-Authenticate</li>
+</ul>
+
+<p>적절한 인증정보 없이 리소스에 액세스 하려고 할 때 나타내는 오류</p>
+
+<h3 id="403-forbidden">403 Forbidden</h3>
+
+<ul>
+  <li>바디 : 에러의 이유를 설명하는 문서</li>
+  <li>관련 메서드 : 모두</li>
+</ul>
+
+<p>401 에러가 클라이언트가 적절한 인증정보를 제시하지 않아서 발생한 오류였다면 403 에러는 그 밖의 이유로 리소스를 조작할 수 없음을 나타낸다.</p>
+
+<p>예를들어 특정 IP 어드레스만 접근할 수 없는 경우 등에 사용한다.</p>
+
+<h3 id="404-not-found">404 Not Found</h3>
+
+<ul>
+  <li>바디 : 에러의 이유를 설명하는 문서</li>
+  <li>관련 메서드 : 모두</li>
+</ul>
+
+<p>지정한 리소스를 찾을 수 없다는 것을 나타낸다.</p>
+
+<p>특정 웹사이트에 접속했을 때 가장 많이 만나는 에러이다.</p>
+
+<h3 id="405-method-not-allowed">405 Method Not Allowed</h3>
+
+<ul>
+  <li>바디 : 에러의 이유를 설명하는 문서</li>
+  <li>관련 메서드 : 모두</li>
+  <li>응답 헤더 : Allow</li>
+</ul>
+
+<p>요청한 URI가 지정한 메서드를 지원하지 않는다는 것을 나타낸다.</p>
+
+<p>응답에는 Allow 헤더가 포함되며 이 URI가 지원하는 메서드 목록이 표시된다.</p>
+
+<h3 id="406-not-acceptable">406 Not Acceptable</h3>
+
+<ul>
+  <li>바디 : 후보 URI 리스트</li>
+  <li>관련 메서드 : 모두</li>
+  <li>요청 헤더 : Accept, Accept-Charset, Accept-Language, Accept-Encoding, Accept-Range</li>
+</ul>
+
+<p>클라이언트가 Accept-* 헤더에서 지정한 표현을 반환할 수 없음을 나타낸다.</p>
+
+<h3 id="407-proxy-authentication-required">407 Proxy Authentication Required</h3>
+
+<ul>
+  <li>바디 : 에러의 이유를 설명하는 문서</li>
+  <li>관련 메서드 : 모두</li>
+  <li>요청 헤더 : Proxy-Authorization</li>
+  <li>응답 헤더 : Proxy-Authenticate</li>
+</ul>
+
+<p>프록시 인증이 필요하다는 것을 나타낸다.</p>
+
+<p>응답의 Proxy-Authenticate 헤더에는 인증 방식이 들어간다.</p>
+
+<p>클라이언트는 그 인증방식에 따라 Proxy-Authorization 헤더에 인증정보를 넣어 요청을 재송신한다.</p>
+
+<h3 id="408-request-timeout">408 Request Timeout</h3>
+
+<ul>
+  <li>바디 : 에러의 이유를 설명하는 문서</li>
+  <li>관련 메서드 : 모두</li>
+  <li>응답 헤더 : Connection</li>
+</ul>
+
+<p>클라이언트가 요청을 아무리 기다려도 다 송신하지 못했기 때문에 서버 쪽에서 타임아웃했다는 것을 나타낸다.</p>
+
+<p>클라이언트의 요청이 서버의 대기시간 내에 끝나지 않는 경우 서버는 408 Request Timeout을 반환하고 접속을 끊을 수 있다.</p>
+
+<h3 id="409-conflict">409 Conflict</h3>
+
+<ul>
+  <li>바디 : 에러의 이유를 설명하는 문서</li>
+  <li>관련 메서드 : PUT,POST,DELETE</li>
+  <li>응답 헤더 : Location</li>
+</ul>
+
+<p>요청이 요구한 리소스에 대한 조작이 리소스의 현재 상태와 모순됨을 나타낸다.</p>
+
+<p>예를 들어, 비어 있지 않은 디렉터리를 삭제하려 한다거나 리소스의 이름이 이미 다른 곳에서 사용되고 있는데 변경하려고 하는 경우 등이 해당한다.</p>
+
+<h3 id="410-gone">410 Gone</h3>
+
+<ul>
+  <li>바디 : 에러의 이유를 설명하는 문서</li>
+  <li>관련 메서드 : 모두</li>
+</ul>
+
+<p>이 리소스가 이전에 존재했지만, 현재는 존재하지 않는다는 것을 나타낸다.</p>
+
+<h3 id="411-length-required">411 Length Required</h3>
+
+<ul>
+  <li>바디 : 에러의 이유를 설명하는 문서</li>
+  <li>관련 메서드 : 모두</li>
+  <li>요청 헤더 : Content-Length</li>
+</ul>
+
+<p>클라이언트가 Content-Length 헤더를 송신해야만 한다는 것을 나타낸다.</p>
+
+<h3 id="412-precondition-failed">412 Precondition Failed</h3>
+
+<ul>
+  <li>바디 : 에러의 이유를 설명하는 문서</li>
+  <li>관련 메서드 : PUT,POST</li>
+  <li>요청 헤더 : If-Match, If-None-Match, If-Unmodified-Since</li>
+  <li>응답 헤더 : ETag, Last-Modified</li>
+</ul>
+
+<p>조건부 요청에서 클라이언트가 지정한 사전조건이 서버와 맞지 않는 경우</p>
+
+<h3 id="413-request-entity-too-large">413 Request Entity Too Large</h3>
+
+<ul>
+  <li>바디 : 에러의 이유를 설명하는 문서</li>
+  <li>관련 메서드 : 모두</li>
+  <li>요청 헤더 : Connection</li>
+</ul>
+
+<p>서버가 처리할 수 없을 만큼 요청 메시지가 크다는 것을 의미</p>
+
+<p>서버는 클라이언트와의 접속을 끊음</p>
+
+<h3 id="414-request-uri-too-long">414 Request-URI Too Long</h3>
+
+<ul>
+  <li>바디 : 에러의 이유를 설명하는 문서</li>
+  <li>관련 메서드 : 모두</li>
+</ul>
+
+<p>서버가 처리할 수 없을 만큼 요청한 URI가 너무 길다는 에러</p>
+
+<h3 id="415-unsupported-media-type">415 Unsupported Media Type</h3>
+
+<ul>
+  <li>바디 : 에러의 이유를 설명하는 문서</li>
+  <li>관련 메서드 : PUT,POST</li>
+  <li>요청 헤더 : Content-Type</li>
+</ul>
+
+<p>클라이언트가 지정한 미디어 타입을 서버에서 지원하지 않는 경우 반환하는 에러</p>
+
+<p>예를들어 이미지 등록 웹 API에서 서버가 지원하는 형식은 JPEG,PNG인데 클라이언트가 GIF 이미지를 등록하려 할 경우 이 에러를 볼 수 있다.</p>
+
+<h3 id="416-request-range-not-satisfiable">416 Request Range Not Satisfiable</h3>
+
+<ul>
+  <li>바디 : 에러의 이유를 설명하는 문서</li>
+  <li>관련 메서드 : 모두</li>
+  <li>요청 헤더 : Range</li>
+</ul>
+
+<p>클라이언트가 Range 헤더에서 지정한 범위의 리소스 사이즈와 맞지 않음을 나타낸다.</p>
+
+<h3 id="417-expectation-failed">417 Expectation Failed</h3>
+
+<ul>
+  <li>바디 : 에러의 이유를 설명하는 문서</li>
+  <li>관련 메서드 : 모두</li>
+  <li>요청 헤더 : Expect</li>
+</ul>
+
+<p>클라이언트가 지정한 Expect 헤더를 서버가 이해할 수 없다는 것을 나타낸다.</p>
+
+<p>클라이언트가 요청의 Expect 헤더에 100-continue를 지정했음에도 불구하고 서버가 100-continue를 다룰 수 없는 경우에 사용한다.</p>
+
+<h2 id="5xx--서버에러">5XX : 서버에러</h2>
+
+<h3 id="500-internal-server-error">500 Internal Server Error</h3>
+
+<ul>
+  <li>바디 : 에러의 이유를 설명하는 문서</li>
+  <li>관련 메서드 : 모두</li>
+</ul>
+
+<p>서버측에서 에러가 발생했다는 것을 나타낸다.</p>
+
+<h3 id="501-not-implemented">501 Not Implemented</h3>
+
+<ul>
+  <li>바디 : 에러의 이유를 설명하는 문서</li>
+  <li>관련 메서드 : 모두</li>
+</ul>
+
+<p>요청된 메서드를 이 URI에서 서버가 구현하고 있지 않음을 나타낸다.</p>
+
+<h3 id="502-bad-gateway">502 Bad Gateway</h3>
+
+<ul>
+  <li>바디 : 에러의 이유를 설명하는 문서</li>
+  <li>관련 메서드 : 모두</li>
+</ul>
+
+<p>프록시가 상류 서버에 요청을 보냈지만 처리가 정상적으로 종료하지 않았음을 나타낸다.</p>
+
+<h3 id="503-service-unavailable">503 Service Unavailable</h3>
+
+<ul>
+  <li>바디 : 에러의 이유를 설명하는 문서</li>
+  <li>관련 메서드 : 모두</li>
+  <li>응답 메서드 : Retry-After</li>
+</ul>
+
+<p>서버 점검 등으로 서비스를 제공할 수 없다는 것을 나타낸다.</p>
+
+<p>응답의 Retry-After 헤더에 재개 시기를 통지할 수 있다.</p>
+
+<h3 id="504-gateway-timeout">504 Gateway Timeout</h3>
+
+<ul>
+  <li>바디 : 에러의 이유를 설명하는 문서</li>
+  <li>관련 메서드 : 모두</li>
+</ul>
+
+<p>프록시가 상류 서버에 요청을 보냈지만 접속할 수 없는 경우</p>
+
+<h3 id="505-http-version-not-supported">505 HTTP Version Not Supported</h3>
+
+<ul>
+  <li>바디 : 에러의 이유를 설명하는 문서</li>
+  <li>관련 메서드 : 모두</li>
+</ul>
+
+<p>클라이언트가 송신한 요청의 HTTP 버전을 서버가 지원하지 않음을 나타낸다.</p>
+
+<h2 id="reference">Reference</h2>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/74651864-238d6700-51c8-11ea-9924-3fcedb3b64e8.jpeg" alt="KakaoTalk_Photo_2020-02-17-20-57-22" /></p>
+
+<p>웹을 지탱하는 기술 - 부록</p>
+
+    <br />
+    <br />
+  </div>
+  
+
+</article>
+
+<!--<hr class="dingbat" />-->
+<!--
+<div class="share">
+  <h2>Share this post</h2>
+  <div class="share-body">
+    <a href="http://twitter.com/share?text=HTTP Status Code&amp;url=http://localhost:4000/cs/2020/02/18/Network-03/"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="icon-twitter">
+      </span>
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/cs/2020/02/18/Network-03/"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="icon-facebook">
+      </span>
+    </a>
+  </div>
+</div>
+-->
+<br />
+
+
+
+
+<aside class="related" role="complementary">
+  <h2 class="hr">Related Posts</h2>
+
+  <ul class="related-posts">
+    
+      
+      
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/cs/2021/12/24/test/" data-flip="title">
+    <span>테스트용 게시글</span>
+  </a>
+  <small><time datetime="2021-12-24T00:00:00+09:00">
+    24 Dec 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/cs/2021/10/30/cs-Algorithm/" data-flip="title">
+    <span>백준 1068 트리</span>
+  </a>
+  <small><time datetime="2021-10-30T00:00:00+09:00">
+    30 Oct 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/cs/2020/09/04/Network-08/" data-flip="title">
+    <span>REST API</span>
+  </a>
+  <small><time datetime="2020-09-04T00:00:00+09:00">
+    04 Sep 2020
+  </time></small>
+</li>
+
+        
+      
+        
+        
+      
+    
+  </ul>
+</aside>
+  <aside class="comments" role="complementary">
+  <h2>Comments</h2>
+  <hr/>
+
+  <script src="https://utteranc.es/client.js"
+    repo="minkukjo/minkukjo.github.io"
+    issue-term="title"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</aside>
+
+       <footer>
+  <hr/>
+  
+    <p>© 2022. by minkuk</p>
+
+  
+  <p>
+    <code>Powered by <a href="https://minkukjo.github.io/">minkuk</a></code>
+  </p>
+</footer>
+
+    </main>
+    <div class="right-side">
+  <div class="add-first">
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+    ></script>
+    <!-- 우측 광고 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="9124111205"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+  <br />
+  <br />
+  <div class="add-second">
+    <!-- 우측 광고2 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="5156946039"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+
+  </div>
+  <div id="_yDrawer">
+  <div id="_sidebar" class="sidebar">
+    <div class="sidebar-bg" style="background-color:#4f86aa;background-image:url(/assets/img/bg.jpg)"></div>
+    <header class="sidebar-sticky" role="banner">
+      <br/>
+      <div class="sidebar-about">
+        <h1><a id="_title" href="/">도전하는 개발자</a></h1>
+        
+
+      </div>
+
+      <br/>
+      <br/>
+      <nav class="sidebar-nav heading" role="navigation">
+        <span class="sr-only">Navigation:</span>
+<ul>
+  
+
+  
+
+  
+  
+  
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-1"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/life/">Life</a>
+       <label class="folder" for="list-item-1">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-daily/">Daily</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-review/">Review</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-books/">Books</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-2"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/computer-science/">Computer Science</a>
+       <label class="folder" for="list-item-2">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-algorithm/">Algorithm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-oop/">OOP</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-network/">Network</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-db/">Database</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-ai/">AI</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-security/">Security</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-distribution-system/">Distribution System</a>
+             </li>
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-3"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/programming-language/">Programming Language</a>
+       <label class="folder" for="list-item-3">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-kotlin/">Kotlin</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-go/">Go</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-java/">Java</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-javascript/">JavaScript</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-typescript/">TypeScript</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-4"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/framework/">Framework</a>
+       <label class="folder" for="list-item-4">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring/">Spring</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-data-jpa/">Spring Data JPA</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-security/">Spring Security</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-junit/">JUnit</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-5"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/language/">Language</a>
+       <label class="folder" for="list-item-5">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/language-english/">English</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-6"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/development/">Development</a>
+       <label class="folder" for="list-item-6">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-ddd/">DDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-tdd/">TDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-clean-code/">Clean Code</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-git/">Git</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-7"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/devops/">Devops</a>
+       <label class="folder" for="list-item-7">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-alarm/">Alarm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-ansible/">Ansible</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-cicd/">CI/CD</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-docker/">Docker</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-es/">Elasticsearch</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-k8s/">Kubernetes</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-public-cloud/">Public Cloud</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-kafka/">Kafka</a>
+             </li>
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-8"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/opensource/">Open Source</a>
+       <label class="folder" for="list-item-8">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/opensource-opensource/">Open Source</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-9"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/about/">About</a>
+       
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+</ul>
+
+      </nav>
+    <br/>
+    <br/>
+      <div class="sidebar-box">
+        
+      </div>
+      <p>매일 매일 한계를 뛰어넘기 위한 도전을 즐기는 개발자</p>
+
+      
+      
+        <div class="sidebar-social">
+          <span class="sr-only">Social:</span>
+<ul>
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://github.com/minkukjo">
+    <span class="icon-github" title="GitHub"></span>
+    <span class="sr-only">GitHub</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://www.linkedin.com/in/민국-조-567052166">
+    <span class="icon-linkedin2" title="LinkedIn"></span>
+    <span class="sr-only">LinkedIn</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:harrycode@kakao.com">
+    <span class="icon-mail" title="Email"></span>
+    <span class="sr-only">Email</span>
+  </a>
+</li>
+
+  
+</ul>
+
+        </div>
+      
+    </header>
+  </div>
+</div>
+</div>
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-158654037-1', 'auto');
+  ga('send', 'pageview');
+  loadJSDeferred('https://www.google-analytics.com/analytics.js');
+</script>
+
+
+
+
+
+<!--[if gt IE 8]><!---->
+<script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+  WebFont.load({
+    
+    google: {
+      families: 'Lato'.split('|')
+    },
+    
+
+    custom: {
+      families: ['icomoon'],
+      urls: ['/assets/icomoon/style.css']
+    }
+  });
+</script>
+<!--<![endif]-->
+
+
+  <!--[if gt IE 9]><!---->
+  
+  <script>loadJSDeferred('/assets/js/hydejack.js?v=6.4.0');</script>
+
+  
+  <!--<![endif]-->
+
+
+
+</body>
+
+</html>

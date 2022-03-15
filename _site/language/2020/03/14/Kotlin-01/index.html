@@ -1,0 +1,1704 @@
+<!DOCTYPE html>
+<html lang="en"><!--
+ __  __                __                                     __
+/\ \/\ \              /\ \             __                    /\ \
+\ \ \_\ \   __  __    \_\ \      __   /\_\      __       ___ \ \ \/'\
+ \ \  _  \ /\ \/\ \   /'_` \   /'__`\ \/\ \   /'__`\    /'___\\ \ , <
+  \ \ \ \ \\ \ \_\ \ /\ \L\ \ /\  __/  \ \ \ /\ \L\.\_ /\ \__/ \ \ \\`\
+   \ \_\ \_\\/`____ \\ \___,_\\ \____\ _\ \ \\ \__/.\_\\ \____\ \ \_\ \_\
+    \/_/\/_/ `/___/> \\/__,_ / \/____//\ \_\ \\/__/\/_/ \/____/  \/_/\/_/
+                /\___/                \ \____/
+                \/__/                  \/___/
+
+Powered by Hydejack v6.4.0 (https://qwtel.com/hydejack/)
+-->
+
+
+
+
+
+
+
+
+
+<head>
+  <!-- =============== -->
+<!-- META            -->
+<!-- =============== -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta
+  name="naver-site-verification"
+  content="22c5b4ef3bfda7fc6100671413989219de7a4ac8"
+/>
+<meta property="og:title" content="Kotlin In Action 1장" />
+<meta property="og:type" content="article" />
+
+<!-- =============== -->
+<!-- Google AdSense  -->
+<!-- =============== -->
+<script
+  data-ad-client="ca-pub-8247516864622650"
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+></script>
+
+ 
+<meta
+  property="og:image"
+  content="http://localhost:4000/assets//img/kotlin-logo.png"
+/>
+<br />
+
+
+<meta property="og:image:width" content="640" />
+<meta property="og:image:height" content="360" />
+ 
+<title>Kotlin In Action 1장 &middot; 도전하는 개발자</title>
+ 
+<meta
+  name="description"
+  content="소개
+
+"
+/>
+<meta
+  property="og:description"
+  content="소개
+
+"
+/>
+
+
+
+<!-- =============== -->
+<!-- LINKS           -->
+<!-- =============== -->
+<link rel="canonical" href="http://localhost:4000/language/2020/03/14/Kotlin-01/" />
+<meta property="og:url" content="http://localhost:4000/language/2020/03/14/Kotlin-01/" />
+
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="도전하는 개발자 Feed"
+  href="http://localhost:4000/feed.xml"
+/>
+
+
+<link rel="prev" href="http://localhost:4000/language/2020/03/14/Kotlin-00/" />
+ 
+<link rel="next" href="http://localhost:4000/language/2020/03/14/Kotlin-02/" />
+
+
+<link
+  rel="apple-touch-icon"
+  href="http://localhost:4000/apple-touch-icon.png"
+/>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+<!-- Place favicon.ico in the root directory -->
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+<script>
+  !function(n,e){function t(n,e){n.onload=function(){this.onerror=this.onload=null,e(null,n)},n.onerror=function(){this.onerror=this.onload=null,e(new Error("Failed to load "+this.src),n)}}function o(n,e){n.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||(this.onreadystatechange=null,e(null,n))}}n._loaded=!1,n.loadJSDeferred=function(a,d){function r(){n._loaded=!0;var r=e.createElement("script");r.src=a,d&&(("onload"in r?t:o)(r,d),r.onload||t(r,d));var l=e.getElementsByTagName("script")[0];l.parentNode.insertBefore(r,l)}n._loaded?r():n.addEventListener?n.addEventListener("load",r,!1):n.attachEvent?n.attachEvent("onload",r):n.onload=r}}(window,document);
+
+  !function(e){"use strict";var n=function(n,t,o){function i(e){if(a.body)return e();setTimeout(function(){i(e)})}function r(){l.addEventListener&&l.removeEventListener("load",r),l.media=o||"all"}var d,a=e.document,l=a.createElement("link");if(t)d=t;else{var f=(a.body||a.getElementsByTagName("head")[0]).childNodes;d=f[f.length-1]}var s=a.styleSheets;l.rel="stylesheet",l.href=n,l.media="only x",i(function(){d.parentNode.insertBefore(l,t?d:d.nextSibling)});var u=function(e){for(var n=l.href,t=s.length;t--;)if(s[t].href===n)return e();setTimeout(function(){u(e)})};return l.addEventListener&&l.addEventListener("load",r),l.onloadcssdefined=u,u(r),l};"undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this);
+
+  !function(t){if(t.loadCSS){var e=loadCSS.relpreload={};if(e.support=function(){try{return t.document.createElement("link").relList.supports("preload")}catch(t){return!1}},e.poly=function(){for(var e=t.document.getElementsByTagName("link"),r=0;r<e.length;r++){var n=e[r];"preload"===n.rel&&"style"===n.getAttribute("as")&&(t.loadCSS(n.href,n,n.getAttribute("media")),n.rel=null)}},!e.support()){e.poly();var r=t.setInterval(e.poly,300);t.addEventListener&&t.addEventListener("load",function(){e.poly(),t.clearInterval(r)}),t.attachEvent&&t.attachEvent("onload",function(){t.clearInterval(r)})}}}(this);
+
+  window.disablePushState = false;
+  window.disableDrawer = false;
+</script>
+
+<!--[if lt IE 9]>
+  <script src="https://unpkg.com/html5shiv/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+<!-- =============== -->
+<!-- STYLES          -->
+<!-- =============== -->
+<!--[if gt IE 8]><!---->
+<style>
+  
+  article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}*{box-sizing:border-box}html,body{margin:0;padding:0}html{font-size:16px;line-height:1.75}body{color:#333;background-color:#fff;overflow-y:scroll}a{text-decoration:none}.lead{margin-left:-1rem;margin-right:-1rem}img,.img{display:block;max-width:100%;margin-bottom:1rem;border:none}img.lead,.img.lead{max-width:calc(100% + 2rem);width:calc(100% + 2rem)}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-weight:bold;text-rendering:optimizeLegibility}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{margin:1.6rem 0 1rem;line-height:1.6}h1,.h1{font-size:2rem;line-height:1.25}h2,.h2{font-size:1.5rem}h3,.h3{font-size:1.17em}p{margin-top:0;margin-bottom:1rem}p.lead{font-size:1.25rem;font-weight:300;padding:0 1rem}ul,ol,dl{margin-top:0;margin-bottom:1rem}ul,ol{padding-left:1.25rem}hr{position:relative;margin:1.5rem 0;border:0;border-top:1px solid #eee}.hr{padding-bottom:.5rem;border-bottom:1px solid #eee;margin-bottom:1.5rem}h4,h5,h6,.h4,.h5,.h6{margin-bottom:0.5rem;font-size:1rem}table{margin-bottom:1rem;width:100%;width:calc(100% + 2rem);margin-left:-1rem;border:1px solid #e5e5e5;border-collapse:collapse;border-spacing:0}td,th{padding:.25rem .5rem;border:1px solid #e5e5e5}td:first-child,th:first-child{padding-left:1rem}td:last-child,th:last-child{padding-right:1rem}thead+tbody,tbody+tbody,tfoot{border-top:3px double #e5e5e5}tbody tr:nth-child(odd) td,tbody tr:nth-child(odd) th{background-color:#f9f9f9}footer{margin-bottom:2rem}.page,.post{margin-bottom:3em}.page li+li,.post li+li{margin-top:.25rem}.page>header,.post>header{margin-bottom:2rem}.page-title,.post-title{margin-top:0}.post-date{display:block;margin-top:-0.5rem;margin-bottom:1rem;color:#9a9a9a}.related-posts{padding-left:0;list-style:none}.related-posts>li,.related-posts>li+li{margin-top:1rem}.related-posts>li>small,.related-posts>li+li>small{font-size:75%;color:#9a9a9a}.message{margin-bottom:1rem;padding:1rem;color:#787878;background-color:#f9f9f9;margin-left:-1rem;margin-right:-1rem}body,main{position:relative;overflow-x:hidden}@media screen{body::before{content:'';background:#e5e5e5;position:absolute;left:0;top:0;bottom:0}}@media screen and (min-width: 40em){html{font-size:17px}}@media screen and (min-width: 54em){html{font-size:16px}}@media screen and (min-width: 88em){html{font-size:17px}}@media screen and (min-width: 125em){html{font-size:18px}}.sr-only{display:none}.clearfix,.sidebar-social::after,.clearafter::after{content:"";display:table;clear:both}a,.a{position:relative;padding-bottom:.15rem;border-style:hidden}.img{overflow:hidden;background-color:#f9f9f9}.img>img{margin:0;width:100%;height:100%}.sixteen-nine{position:relative}.sixteen-nine::before{display:block;content:"";width:100%;padding-top:56.25%}.sixteen-nine>*{position:absolute;top:0;left:0;right:0;bottom:0}h1+hr,h2+hr,h3+hr,h4+hr,h5+hr,h6+hr{margin-top:0}.fade-in{animation-duration:500ms;animation-name:fade-in;animation-fill-mode:forwards}@keyframes fade-in{from{transform:translateY(-2rem);opacity:0}50%{transform:translateY(-2rem);opacity:0}to{transform:translateY(0);opacity:1}}.mb6{margin-bottom:10rem}.sidebar{color:rgba(255,255,255,0.75);text-align:left}.sidebar::before{content:"";position:absolute;z-index:2;top:0;left:0;bottom:0;right:0;background:linear-gradient(to bottom, rgba(32,32,32,0) 0%, rgba(32,32,32,0.5) 100%)}.sidebar a{color:#fff;border-bottom-color:rgba(255,255,255,0.2)}.right-side{width:100%;margin-left:auto;margin-right:auto}.right-side .ad-first{text-align:center}@media screen{.right-side{max-width:38rem;min-height:100vh}.right-side .ad-second{display:none}}@media screen and (min-width: 54em){.right-side{margin-left:20rem;margin-right:1rem;padding:4rem 1rem 12rem}.right-side .ad-second{text-align:center;display:block}}@media screen and (min-width: 72em){.right-side{margin-left:22rem;max-width:42rem}}@media screen and (min-width: 88em){.right-side{width:162px;margin-left:0rem;margin-right:0rem;padding:0rem;margin-top:10rem;display:block;float:left}}@media screen and (min-width: 96em){.right-side{width:300px;margin-right:0rem}}#_yDrawer{position:relative}@media screen{#_yDrawer{min-height:640px;min-height:100vh}}@media screen and (min-width: 54em){#_yDrawer{width:18rem;margin-left:0}}.sidebar-bg{position:absolute;height:100%;overflow:hidden;top:0;right:0;bottom:0;left:0;background:#202020 center / cover}.sidebar-box{display:flex;justify-content:center}.sidebar-sticky{position:relative;z-index:3}@media screen{.sidebar-sticky{-ms-overflow-style:none;overflow:-moz-scrollbars-none;height:100%;overflow:auto;position:absolute;padding:3rem 0rem;right:2.5rem;left:2.5rem}}.sidebar-sticky::-webkit-scrollbar{display:none}.sidebar-about>h1{color:#fff;font-size:2rem}.sidebar-nav>ul{list-style:none;padding-left:0;margin-bottom:.5rem}a.sidebar-nav-item{width:100%;font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}a.sidebar-nav-subitem{font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}@media screen{.y-drawer-scrim{z-index:2}.y-drawer-content{width:18rem;left:-18rem;z-index:3}}.sidebar-social{margin-bottom:.5rem}.sidebar-social>ul{list-style:none;padding-left:0;margin:0 -.25rem}.sidebar-social>ul>li{float:left}.sidebar-social>ul>li>a{display:inline-block;text-align:center;font-size:1.6rem;line-height:3rem;width:3.1249rem;height:4rem;padding:.5rem 0}.sidebar-social>ul li+li{margin-top:0}.fixed-top{position:fixed;top:0;left:0;width:100%;z-index:1}.navbar>.content{padding-top:0;padding-bottom:0;min-height:0;height:0}.menu{display:inline-block;padding:1.75rem 1.5rem;border-bottom:none;margin-left:-1.5rem;color:#9a9a9a !important}.menu::after{content:"\2630"}@media screen and (min-width: 54em){.menu{padding:1.25rem 1.5rem;position:absolute;left:-9999px}.menu:focus{position:static}}.animation-main{pointer-events:none}.loading{display:none}@media print{.menu{display:none}}.animation-main{opacity:0;will-change:opacity}.loading{position:absolute;top:0;right:0;padding:5.25rem 4.5rem;transform-origin:top right;transform:scale(0.33)}.content{position:relative;margin-left:auto;margin-right:auto;padding:5rem 1rem 12rem}@media screen{.content{min-height:100vh}}@media screen and (min-width: 54em){.content{padding:4rem 1rem 12rem;margin-left:19rem;margin-right:3rem}}@media screen and (min-width: 72em){.content{max-width:42rem;margin-left:21rem}}@media screen and (min-width: 88em){.content{float:left;width:100%;margin-left:22rem;margin-right:5rem}}@media screen and (min-width: 96em){.content{max-width:44rem}}@media screen and (min-width: 102em){.content{margin-left:25rem;margin-right:8rem}}.me{width:6.5rem;height:6.5rem;align-self:center;margin-right:20px;border-radius:100%;position:relative}@media screen and (min-width: 40em){.me{width:7rem;height:7rem}}@media screen and (min-width: 54em){.me{width:6.5rem;height:6.5rem}}@media screen and (min-width: 72em){.me{width:7rem;height:7rem}}main>footer{width:100%;position:absolute;bottom:0;left:0;right:0;padding:0 1rem;color:#9a9a9a;font-size:smaller;text-align:center}main>footer>p{margin-bottom:0}html{font-family:'Sans-serif'}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-family:'Sans-serif'}
+
+</style>
+
+
+<link
+  rel="preload"
+  href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0"
+  as="style"
+  onload="this.rel='stylesheet'"
+/>
+
+<style id="_pageStyle">
+
+.content a{color:#4f86aa;border-color:rgba(79,134,170,0.2)}.content a:hover{border-color:#4f86aa}:focus{outline-color:#4f86aa}::selection{color:#fff;background:#4f86aa}::-moz-selection{color:#fff;background:#4f86aa}
+
+</style>
+
+
+<noscript>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0" />
+    
+  
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Lato"
+  />
+  <style>
+    html { font-family: 'Lato', 'Sans-serif' }
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .heading { font-family: 'Lato', 'Sans-serif' }
+  </style>
+   
+  <link rel="stylesheet" href="http://localhost:4000/assets/icomoon/style.css" />
+</noscript>
+<!--<![endif]-->
+
+</head>
+
+<body>
+  <!-- =============== -->
+<!-- MENU            -->
+<!-- =============== -->
+<div class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <a id="_menu" class="menu no-hover" href="#_title">
+      <span class="sr-only">Menu</span>
+    </a>
+  </div>
+</div>
+
+<!-- =============== -->
+<!-- CONTENT         -->
+<!-- =============== -->
+<div id="_yPushState">
+  <div class="fade-in">
+    <main
+      id="_main"
+      class="content"
+      role="main"
+      data-color="#4f86aa"
+      data-image="/assets/img/bg.jpg"
+    >
+      
+
+<article id="post-language/2020/03/14/Kotlin-01" class="post" role="article">
+  <header>
+    <h1 class="post-title">
+      
+        Kotlin In Action 1장
+        
+    </h1>
+
+    <p class="post-date heading">
+      <time datetime="2020-03-14T00:00:00+09:00">14 Mar 2020</time>
+      
+
+
+
+
+
+
+
+
+
+in <a href="/category/programming-language/" data-flip="title">Programming Language</a>
+
+      
+
+
+
+
+
+
+
+
+
+on <a href="/tag/programming-language-kotlin/" data-flip="title">Kotlin</a>
+
+    </p>
+
+    
+  <div class="hr" style="padding-bottom:0"></div>
+
+
+  </header>
+  
+
+
+  
+  <div class="markdown-body">
+
+    <!-- 
+    <div class="head-image"><img src="http://localhost:4000/assets//img/kotlin-logo.png" /></div>
+    <br /> -->
+    <style>
+      .myAd1190 {
+        width: 48%;
+        height: 280px;
+      }
+
+      .myAd1290 {
+        width: 48%;
+        height: 280px;
+      }
+
+      @media(max-width: 800px) {
+        .myAd1190 {
+          display: none;
+        }
+
+        .myAd1290 {
+          width: 98%;
+        }
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 300px;
+      }
+
+      .row-center {
+        display: flex;
+        justify-content: center;
+        height: 258px;
+      }
+    </style>
+   
+    <!--<br />-->
+    <h2 id="소개">소개</h2>
+
+<p><strong>이 책의 대상?</strong> 자바를 어느 정도 알고 있는 개발자, 서버나 안드로이드 개발자 또는 JVM에서 실행될 프로젝트를 구축하는 모든 개발자</p>
+
+<p>Kotlin의 주목적은 <strong>자바를 대체할 수 있고, 더 간결하고 더 생산적이며 안전한 대체 언어를 제공하는 것</strong></p>
+
+<h2 id="코틀린의-핵심-특징">코틀린의 핵심 특징</h2>
+
+<h3 id="정적-타입-지정-언어와-동적-타입-지정-언어">정적 타입 지정 언어와 동적 타입 지정 언어</h3>
+
+<p>자바와 마찬가지로 코틀린 또한 <strong>정적 타입 지정 언어</strong>이다.</p>
+
+<p><strong>정적 타입 지정 언어</strong>란 모든 프로그램 구성 요소의 타입을 컴파일 시점에 알 수 있고, 프로그램 안에서 객체의 필드나 메소드를 사용할 때마다 컴파일러가 타입을 검증해준다는 것을 의미한다.</p>
+
+<p>이는 <strong>동적 타입 지정 언어</strong>와 상반되는 의미를 갖는데, JVM에서는 그루비나 JRuby가 대표적인 동적 타입 지정 언어이다.</p>
+
+<p><strong>동적 타입 지정 언어</strong>란 타입과 관계없이 모든 값을 변수에 넣을 수 있고, 메소드나 필드 접근에 대한 검증이 실행 시점(RunTime)에 일어나며 그에 따라 코드가 더 짧아지고 데이터 구조를 더 유연하게 생성하고 사용할 수 있다.</p>
+
+<h3 id="타입-추론">타입 추론</h3>
+
+<p><code class="language-plaintext highlighter-rouge">var x = 1</code></p>
+
+<p>코틀린에서는 변수를 정의하면서 정수 값으로 초기화를 하는데, 이때 코틀린은 변수의 타입이 <code class="language-plaintext highlighter-rouge">Int</code>임을 자동으로 알아낸다.</p>
+
+<p>컴파일러가 문맥을 고려해 변수 타입을 지정하는 기능을 <code class="language-plaintext highlighter-rouge">Type Inference(타입 추론)</code>이라고 부른다.</p>
+
+<h3 id="코틀린은-왜-정적-타입-지정-언어로-만들었을까">코틀린은 왜 정적 타입 지정 언어로 만들었을까?</h3>
+
+<p>정적 타입 지정 언어의 장점은 아래와 같다.</p>
+
+<h3 id="성능">성능</h3>
+
+<p>실행 시점에 어떤 메소드를 호출할지 알아내는 과정이 필요 없으므로 메소드 호출이 더 빠르다.</p>
+
+<h3 id="신뢰성">신뢰성</h3>
+
+<p>컴파일러가 프로그램의 정확성을 검증하기 때문에 실행 시 프로그램이 오류로 중단될 가능성이 적어진다.</p>
+
+<h3 id="유지-보수성">유지 보수성</h3>
+
+<p>코드에서 다루는 객체가 어떤 타입에 속하는지 알 수 있기 때문에 처음 보는 코드를 다룰 때 더 쉽다.</p>
+
+<h3 id="도구-지원">도구 지원</h3>
+
+<p>정적 타입 지정을 활용하면 더 안전하게 리팩토링 할 수 있고, 도구는 더 정확한 코드 완성 기능을 제공할 수 있으며, IDE의 다른 지원 기능도 더 잘 만들 수 있다.
+즉 도구의 지원을 받기가 수월하다.</p>
+
+<h3 id="코틀린에서만-제공하는-특별한-타입">코틀린에서만 제공하는 특별한 타입</h3>
+
+<p>코틀린은 널이 될 수 있는 타입 즉, <strong>Nullable Type</strong>을 지원한다.</p>
+
+<p>널이 될 수 있는 타입을 지원함에 따라 컴파일 시점에 NPE(Null Pointer Exception)이 발생할 수 있는 지 여부를 검사할 수 있어 좀 더 프로그래밍의 신뢰성을 높일 수 있다.</p>
+
+<p>자바 개발자라면 NPE로 고통받아본 경험이 많을 것이다. 코틀린에서는 NPE에 대한 처리를 조금 더 똑똑하게 할 수 있게 <strong>Nullable Type</strong>을 지원하고 있다.</p>
+
+<h3 id="함수형-프로그래밍에-대한-지원">함수형 프로그래밍에 대한 지원</h3>
+
+<p>Kotlin은 <strong>객체 지향 프로그래밍</strong>(OOP)과 <strong>함수 지향 프로그래밍</strong>을 모두 지원하는 <strong>멀티 패러다임 프로그래밍 언어</strong>이다.</p>
+
+<p>Kotlin에서는 어떻게 함수형 프로그래밍을 지원하는지 지금부터 알아보자.</p>
+
+<h2 id="함수형-프로그래밍과-객체지향-프로그래밍">함수형 프로그래밍과 객체지향 프로그래밍</h2>
+
+<p>함수형 프로그래밍의 개념은 아래와 같다.</p>
+
+<ul>
+  <li>
+    <p>일급 시민 함수</p>
+  </li>
+  <li>
+    <p>불변성</p>
+  </li>
+  <li>
+    <p>부수 효과(Side Effect) 없음</p>
+  </li>
+</ul>
+
+<p>함수형 스타일로 프로그램을 작성하는 것에는 어떠한 이득이 있을까?</p>
+
+<p><strong>첫 번째</strong>는 <code class="language-plaintext highlighter-rouge">간결성</code>이다.</p>
+
+<p>함수형 코드는 명령형 코드에 비해 더 간결하며 우아하다.</p>
+
+<p>순수 함수를 값처럼 활용할 수 있으면 더 강력한 추상화가 가능하며 코드의 중복을 막을 수 있다.</p>
+
+<p><strong>두 번째</strong>는 다중 스레드를 사용해도 안전하다는 것이다.</p>
+
+<p>다중 스레드 환경에서는 적절한 동기화를 하지 않으면 여러 쓰레드가 하나의 데이터에 접근해 많은 문제가 발생한다.</p>
+
+<p>그러나 불변 데이터 구조를 사용하고 순수 함수를 사용한다면 다중 스레드 환경이라도 같은 데이터를 여러 쓰레드가 변경할 수 없다.</p>
+
+<p>즉, 복잡한 동기화 과정이 불필요해지는 것이다.</p>
+
+<p><strong>마지막</strong>은 테스트하기가 쉽다는 것이다.</p>
+
+<p>Side Effect가 존재하는 함수는 그 함수를 실행할 때 전체 환경을 구성하는 준비 코드가 필요하지만 순수 함수는 그런 준비 코드 없이 독립적으로 테스트할 수 있다.</p>
+
+<h3 id="하지만-자유로운-kotlin">하지만 자유로운 Kotlin</h3>
+
+<p>그렇다고 해서 코틀린이 함수형 프로그래밍을 <code class="language-plaintext highlighter-rouge">강제</code>하지는 않는다.</p>
+
+<p>명령형 방식이 더 적합한 경우라면 부수 효과를 활용하는 함수를 사용하는 것을 코틀린은 허락한다.</p>
+
+<p>그래서 코틀린은 자유롭게 객체지향과 함수형 접근 방법을 함께 조합하여 문제에 가장 적합한 도구를 사용하도록 개발자에게 자유를 주었다.</p>
+
+<h2 id="코틀린의-철학">코틀린의 철학</h2>
+
+<p>주로 코틀린은 자바와의 상호운용성에 초점을 맞춘 <strong>실용적</strong>이고 <strong>간결</strong>하며 <strong>안전한</strong> 언어라고 설명한다.</p>
+
+<p>각각에 대해서 조금 더 자세히 살펴보자.</p>
+
+<h3 id="실용성">실용성</h3>
+
+<p>코틀린은 연구를 위한 언어가 아니다.</p>
+
+<p>최신 프로그래밍 언어 설계를 앞서 채택하거나 전산학계에서 연구 중인 혁신적인 아이디어를 코틀린을 통해 탐구하려고 하지 않는다.</p>
+
+<p>또한 코틀린은 어느 특정 프로그래밍 스타일이나 패러다임을 사용하는 것을 강제로 요구하지 않는다.</p>
+
+<p>코틀린을 처음 배우는 사람이라면 자바에서 사용해 온 익숙한 프로그래밍 스타일이나 기법을 사용할 수 있다.</p>
+
+<p>추후에 코틀린의 강력한 특성을 발견하면 그 코드를 자신의 코드에 적용하는 방법을 배워서 간결하게 적용할 수 있다.</p>
+
+<p>실용성 만큼이나 코틀린의 강력한 점은 <strong>도구</strong>를 강조한다는 점이다.</p>
+
+<p>좋은 언어만큼이나 편리한 개발 환경도 생산성 향상에 필수적이다.</p>
+
+<p>코틀린은 <strong>Jetbrain</strong>에서 개발된 언어이며 <strong>Jetbrain</strong>은 IDE를 개발하는 회사이다.</p>
+
+<p>때문에 <strong>Jetbrain</strong> 사의 <strong>JVM IDE인 Intellij</strong>는 코틀린을 100% 활용할 수 있는 다양한 도구들을 제공해준다.</p>
+
+<h3 id="간결성">간결성</h3>
+
+<p>개발자는 코드를 새로 작성하는 시간보다 기존 코드를 읽는 시간이 더 길다는 사실은 자명한 사실이다.</p>
+
+<p>때문에 코틀린은 <strong>더 간단</strong>하고 <strong>간결</strong>한 코드를 지향하고 있다.</p>
+
+<p>그래서 코틀린에서는 개발자가 작성하는 것이 의미 없다고 판단되는 <strong>Getter,Setter, 생성자</strong>등을 묵시적으로 지원하면서 개발자가 일일이 이러한 코드를 작성하지 않게 하였다.</p>
+
+<p>또한 코틀린에서는 <strong>컬렉션 프레임워크</strong>를 다룰 때 더 간결하게 작성하기 위해 <strong>람다</strong>를 지원하면서 쉽고 간결하게 처리할 수 있게 하였다.</p>
+
+<p>반면 코틀린의 설계 목표에 <code class="language-plaintext highlighter-rouge">가능한한 소스코드를 짧게 만들겠다</code>는 <strong>내용은 들어있지 않다.</strong></p>
+
+<p>예를 들어 연산자 오버로딩을 지원하지만 언어가 제공하지 않는 연산자를 프로그래머가 정의하는 것은 허용하지 않는다.</p>
+
+<p>왜냐하면 메소드의 이름을 암호문 처럼 보이는 기호만으로 이루어진 연산자 식별자로 하는 것보다 단어로 이루어진 이름이 훨씬 읽거나 검색하기 쉽기 때문이다.</p>
+
+<p>코드가 간결하면 작성하는데 시간이 덜 걸리는 것은 물론이고 읽는 시간 또한 덜 걸린다.</p>
+
+<p>이것이 코틀린이 간결성을 추구한 이유이다.</p>
+
+<h3 id="안전성">안전성</h3>
+
+<p>코틀린에서 안전성을 보장하기 위해 NPE를 없애려고 노력했다.</p>
+
+<p>코틀린의 타입 시스템은 null이 될 수 없는 값을 추적하며, 실행 시점에 NPE가 발생할 수 있는 연산을 사용하는 코드를 금지한다.</p>
+
+<p>이는 매우 간단하게 가능한데 아래의 예제를 보자.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">s</span><span class="p">:</span> <span class="nc">String</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span> <span class="c1">// Nullable</span>
+<span class="kd">val</span> <span class="py">s</span><span class="p">:</span> <span class="nc">String</span> <span class="p">=</span> <span class="s">""</span> <span class="c1">// Non-Nullable</span>
+</code></pre></div></div>
+
+<p>코틀린에서는 기본타입으로 선언하면 <strong>Non-Nullable</strong>한 데이터 타입이 만들어지기 때문에 예기치 못한 NPE의 발생을 컴파일 타임에 미리 알 수 있다는 장점이 있다.</p>
+
+<p>또 다른 예외로는 <code class="language-plaintext highlighter-rouge">ClassCastException</code>이 있다.</p>
+
+<p>어떤 객체를 다른 타입으로 캐스팅하기 전에 타입을 미리 검사하지 않으면 <code class="language-plaintext highlighter-rouge">ClassCastException</code>이 발생할 수 있다.</p>
+
+<p>코틀린에서는 타입 검사와 캐스트가 한 연산자에 의해 이루어진다.</p>
+
+<p>코틀린은 이러한 기능등을 제공하며 더욱 안정성있는 프로그래밍이 가능해지게 되었다.</p>
+
+<h3 id="상호-운용성">상호 운용성</h3>
+
+<p>자바 개발자들이 가장 관심있어 하는 질문은 <strong>자바의 기존 라이브러리를 그대로 사용할 수 있는가</strong>? 일 것이다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/76679385-6a357c00-6623-11ea-95a8-c9c9005d48cc.jpg" alt="jj1FG" /></p>
+
+<p>답은 <strong>물론</strong>이다.</p>
+
+<p>코틀린의 강력한 특징 중 하나는 기존 자바 코드나 라이브러리와 100% 호환된다는 특징을 갖고 있다.</p>
+
+<p>자바에서 코틀린 코드를 사용하거나 코틀린에서 자바 코드를 사용할 때 그 어떤 노력도 필요없다. 그냥 쓰면 된다.</p>
+
+<p>마찬가지로 자바의 API를 코틀린에서 사용할 때도 별다른 노력없이 사용 가능하다.</p>
+
+<h2 id="그러면-코틀린은-도대체-어떻게-컴파일-되길래-이게-가능한-걸까">그러면 코틀린은 도대체 어떻게 컴파일 되길래 이게 가능한 걸까?</h2>
+
+<p>자바와 마찬가지로 코틀린 또한 컴파일 언어이다.</p>
+
+<p>따라서 코틀린 코드를 실행하기 전에 코드를 컴파일 해야한다.</p>
+
+<p>코틀린 컴파일러는 자바 컴파일러와 마찬가지로 코틀린 소스코드를 분석하여 byte code(.class)를 만들어낸다.</p>
+
+<p>코틀린 컴파일러의 이름은 자바와 마찬가지로 kotlinc이며 커맨드라인에서 kotlinc를 사용해 코드를 컴파일하는 것이 가능하다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kotlinc &lt;소스파일 또는 디렉터리&gt; -include-runtime -d &lt;jar 이름&gt;
+java -jar &lt;jar 이름&gt;
+</code></pre></div></div>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/76679435-c7313200-6623-11ea-9f9e-b4520701f42f.png" alt="main-qimg-79bc2220bd7fb1d08849b2b9663f8bc8" /></p>
+
+<p>코틀린 컴파일러로 컴파일한 코드는 코틀린 런타임 라이브러리에 의존한다.</p>
+
+<p>런타임 라이브러리에는 코틀린 자체 표준 라이브러리 클래스와 코틀린에서 자바 API의 기능을 확장한 내용이 들어있다.</p>
+
+<p>코틀린으로 컴파일한 애플리케이션을 배포할 때는 런타임 라이브러리도 함께 배포해야한다.</p>
+
+<p>실제 프로젝트를 컴파일하기 위해 Maven,Gradle,Ant 등의 빌드 시스템을 사용한다.</p>
+
+<h2 id="kotlin-runtime-library란-무엇일까">Kotlin Runtime Library란 무엇일까?</h2>
+
+<p>스터디를 진행하면서 <strong>Kotlin Runtime Library</strong>는 어디에 존재하는 것인가에 대한 이야기가 나왔다.</p>
+
+<p>이름이 <strong>Runtime Library</strong>이니 JRE에 포함되어있는건가? 라고 생각했지만, Java JDK를 다운받았지 Kotlin JDK를 다운받은 적은 없었기에 스터디원들 모두 혼란스러웠다.</p>
+
+<p>집에 돌아와서 직접 <strong>jar</strong>의 내부를 까보았다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>깨알 꿀팁
+
+jar를 zip으로 확장자를 바꾼 후 열어보면 jar의 내부를 볼 수 있다.
+</code></pre></div></div>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/76701159-ed2d0400-6701-11ea-9801-00a9bce5382c.png" alt="스크린샷 2020-03-15 오후 9 06 25" /></p>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/76701172-1057b380-6702-11ea-9d3e-a889d80923d5.png" alt="스크린샷 2020-03-15 오후 9 15 07" /></p>
+
+<p>보다시피 <strong>kotlin-standardlibrary</strong>들이 추가되어있는 것을 확인할 수 있었다.</p>
+
+<p><strong>Java</strong>의 경우 표준 클래스 라이브러리들이 JRE에 포함되어 있다.</p>
+
+<p><strong>Kotlin</strong> 또한 <strong>Java</strong>의 표준 라이브러리와 별개로 자체 표준 라이브러리가 존재하며 이를 <strong>Kotlin</strong>에서는 <strong>Runtime Library</strong>라고 부른다.</p>
+
+<p>그래서 jar 파일로 만들 때 아래와 같은 명령어를 수행하면 <strong>RuntimeLibrary</strong>를 <strong>jar</strong>에 포함시키지 않을 수 있다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kotlinc-jvm hello.kt -d hello.jar
+</code></pre></div></div>
+
+<p>반대로 <code class="language-plaintext highlighter-rouge">-include-runtime</code> 옵션을 주면 <strong>RuntimeLibrary</strong>를 포함할 수 있는데, <strong>jar</strong>를 배포할 때는 일반적으로 <strong>jar</strong>에 <strong>RuntimeLibrary</strong>를 포함시키는 것이 일반적이기 때문에 아래의 명령어를 사용한다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kotlinc-jvm hello.kt -include-runtime -d hello.jar
+</code></pre></div></div>
+
+<p>결국 우리가 혼란스러웠던 이유는 <strong>Kotlin</strong>에서 <strong>Runtime</strong>이라는 표현을 사용했기 때문인데 이는 <strong>JRE</strong>와 같은 <strong>Runtime</strong>이라기 보다는 일종의 <strong>class library</strong>에 더 가깝다고 생각된다.</p>
+
+<p>보통 <strong>.jar</strong> 파일을 생성할 때 주로 <strong>gradle</strong>을 사용하다보니 <strong>Kotlin</strong>이 어떻게 컴파일되고 <strong>jar</strong>로 패키징되는지까지는 자세하게 몰랐었는데 스터디원들과 이야기 하다보니 의문이 생겨서 찾아보게 되었고 덕분에 좋은 공부가 되었다. (스터디 좋구먼~)</p>
+
+<p><a href="https://stackoverflow.com/questions/30565036/why-kotlin-needs-to-bundle-its-runtime-after-compiled">Kotlin에서 jar 파일을 만들 때 runtime을 jar에 포함시키는 이유</a></p>
+
+<h2 id="kotlin에서-lombok을-사용할-수-없는-문제">Kotlin에서 Lombok을 사용할 수 없는 문제</h2>
+
+<p>JVM에서는 코틀린이 먼저 컴파일 된 후 자바가 컴파일 된다.</p>
+
+<p>코틀린이 자바의 롬복으로 생성된 클래스에 접근하려 하나 getter setter가 만들어지지 않아서 접근하지 못한다.</p>
+
+<p>롬복은 컴파일 시간에 동작하는 애노테이션이기 때문이다.</p>
+
+<p>강제로 컴파일러가 자바 먼저 컴파일하게 바꿀 수는 있지만 그러면 자바에서 코틀린 코드를 사용할 수 없다.</p>
+
+<p>출처 : https://sehajyang.github.io/etc/2019/03/07/kotlin-and-lombok.html/</p>
+
+<h2 id="1장-요약">1장 요약</h2>
+
+<ul>
+  <li>
+    <p>코틀린은 타입 추론을 지원하며 정적 타입 지정 언어이다. 따라서 소스코드의 정확성과 성능을 보장하며 소스코드를 간결하게 유지할 수 있다.</p>
+  </li>
+  <li>
+    <p>코틀린은 객체지향과 함수형 프로그래밍을 모두 지원한다. 코틀린에서는 일급 시민 함수를 사용해 수준 높은 추상화가 가능하고, 불변 값 지원을 통해 다중 쓰레드 애플리케이션 개발과 테스트를 더 쉽게 할 수 있다.</p>
+  </li>
+  <li>
+    <p>코틀린은 실용적이며 안전하고 간결하며 상호운용성이 좋다. 이는 코틀린을 설계하며 일반적인 작업에 대해 이미 잘 알려진 해법을 채택하고, NPE와 같이 흔히 발생하는 오류를 방지하며, 읽기 쉽고 간결한 코드를 지원하면서 자바와 아무 제약 없이 통합될 수 있는 언어를 맞추는데 초점을 맞췄다는 뜻이다.</p>
+  </li>
+</ul>
+
+<h2 id="reference">Reference</h2>
+
+<p><strong>Kotlin In Action</strong> (드미트리 제메로프, 스베트라나 이사코바)</p>
+
+    <br />
+    <br />
+  </div>
+  
+
+</article>
+
+<!--<hr class="dingbat" />-->
+<!--
+<div class="share">
+  <h2>Share this post</h2>
+  <div class="share-body">
+    <a href="http://twitter.com/share?text=Kotlin In Action 1장&amp;url=http://localhost:4000/language/2020/03/14/Kotlin-01/"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="icon-twitter">
+      </span>
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/language/2020/03/14/Kotlin-01/"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="icon-facebook">
+      </span>
+    </a>
+  </div>
+</div>
+-->
+<br />
+
+
+
+
+<aside class="related" role="complementary">
+  <h2 class="hr">Related Posts</h2>
+
+  <ul class="related-posts">
+    
+      
+      
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/language/2021/05/27/Effective-Java-44/" data-flip="title">
+    <span>Effective Java 07 람다와 스트림</span>
+  </a>
+  <small><time datetime="2021-05-27T00:00:00+09:00">
+    27 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/language/2021/05/25/Effective-Java-43/" data-flip="title">
+    <span>Effective Java 06 - item 41 -</span>
+  </a>
+  <small><time datetime="2021-05-25T00:00:00+09:00">
+    25 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/language/2021/05/25/Effective-Java-42/" data-flip="title">
+    <span>Effective Java 06 - item 40 -</span>
+  </a>
+  <small><time datetime="2021-05-25T00:00:00+09:00">
+    25 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+      
+    
+  </ul>
+</aside>
+  <aside class="comments" role="complementary">
+  <h2>Comments</h2>
+  <hr/>
+
+  <script src="https://utteranc.es/client.js"
+    repo="minkukjo/minkukjo.github.io"
+    issue-term="title"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</aside>
+
+       <footer>
+  <hr/>
+  
+    <p>© 2022. by minkuk</p>
+
+  
+  <p>
+    <code>Powered by <a href="https://minkukjo.github.io/">minkuk</a></code>
+  </p>
+</footer>
+
+    </main>
+    <div class="right-side">
+  <div class="add-first">
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+    ></script>
+    <!-- 우측 광고 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="9124111205"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+  <br />
+  <br />
+  <div class="add-second">
+    <!-- 우측 광고2 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="5156946039"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+
+  </div>
+  <div id="_yDrawer">
+  <div id="_sidebar" class="sidebar">
+    <div class="sidebar-bg" style="background-color:#4f86aa;background-image:url(/assets/img/bg.jpg)"></div>
+    <header class="sidebar-sticky" role="banner">
+      <br/>
+      <div class="sidebar-about">
+        <h1><a id="_title" href="/">도전하는 개발자</a></h1>
+        
+
+      </div>
+
+      <br/>
+      <br/>
+      <nav class="sidebar-nav heading" role="navigation">
+        <span class="sr-only">Navigation:</span>
+<ul>
+  
+
+  
+
+  
+  
+  
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-1"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/life/">Life</a>
+       <label class="folder" for="list-item-1">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-daily/">Daily</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-review/">Review</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-books/">Books</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-2"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/computer-science/">Computer Science</a>
+       <label class="folder" for="list-item-2">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-algorithm/">Algorithm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-oop/">OOP</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-network/">Network</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-db/">Database</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-ai/">AI</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-security/">Security</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-distribution-system/">Distribution System</a>
+             </li>
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-3"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/programming-language/">Programming Language</a>
+       <label class="folder" for="list-item-3">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-kotlin/">Kotlin</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-go/">Go</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-java/">Java</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-javascript/">JavaScript</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-typescript/">TypeScript</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-4"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/framework/">Framework</a>
+       <label class="folder" for="list-item-4">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring/">Spring</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-data-jpa/">Spring Data JPA</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-security/">Spring Security</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-junit/">JUnit</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-5"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/language/">Language</a>
+       <label class="folder" for="list-item-5">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/language-english/">English</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-6"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/development/">Development</a>
+       <label class="folder" for="list-item-6">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-ddd/">DDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-tdd/">TDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-clean-code/">Clean Code</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-git/">Git</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-7"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/devops/">Devops</a>
+       <label class="folder" for="list-item-7">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-alarm/">Alarm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-ansible/">Ansible</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-cicd/">CI/CD</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-docker/">Docker</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-es/">Elasticsearch</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-k8s/">Kubernetes</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-public-cloud/">Public Cloud</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-kafka/">Kafka</a>
+             </li>
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-8"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/opensource/">Open Source</a>
+       <label class="folder" for="list-item-8">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/opensource-opensource/">Open Source</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-9"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/about/">About</a>
+       
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+</ul>
+
+      </nav>
+    <br/>
+    <br/>
+      <div class="sidebar-box">
+        
+      </div>
+      <p>매일 매일 한계를 뛰어넘기 위한 도전을 즐기는 개발자</p>
+
+      
+      
+        <div class="sidebar-social">
+          <span class="sr-only">Social:</span>
+<ul>
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://github.com/minkukjo">
+    <span class="icon-github" title="GitHub"></span>
+    <span class="sr-only">GitHub</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://www.linkedin.com/in/민국-조-567052166">
+    <span class="icon-linkedin2" title="LinkedIn"></span>
+    <span class="sr-only">LinkedIn</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:harrycode@kakao.com">
+    <span class="icon-mail" title="Email"></span>
+    <span class="sr-only">Email</span>
+  </a>
+</li>
+
+  
+</ul>
+
+        </div>
+      
+    </header>
+  </div>
+</div>
+</div>
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-158654037-1', 'auto');
+  ga('send', 'pageview');
+  loadJSDeferred('https://www.google-analytics.com/analytics.js');
+</script>
+
+
+
+
+
+<!--[if gt IE 8]><!---->
+<script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+  WebFont.load({
+    
+    google: {
+      families: 'Lato'.split('|')
+    },
+    
+
+    custom: {
+      families: ['icomoon'],
+      urls: ['/assets/icomoon/style.css']
+    }
+  });
+</script>
+<!--<![endif]-->
+
+
+  <!--[if gt IE 9]><!---->
+  
+  <script>loadJSDeferred('/assets/js/hydejack.js?v=6.4.0');</script>
+
+  
+  <!--<![endif]-->
+
+
+
+</body>
+
+</html>

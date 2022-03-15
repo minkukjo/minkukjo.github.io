@@ -1,0 +1,1917 @@
+<!DOCTYPE html>
+<html lang="en"><!--
+ __  __                __                                     __
+/\ \/\ \              /\ \             __                    /\ \
+\ \ \_\ \   __  __    \_\ \      __   /\_\      __       ___ \ \ \/'\
+ \ \  _  \ /\ \/\ \   /'_` \   /'__`\ \/\ \   /'__`\    /'___\\ \ , <
+  \ \ \ \ \\ \ \_\ \ /\ \L\ \ /\  __/  \ \ \ /\ \L\.\_ /\ \__/ \ \ \\`\
+   \ \_\ \_\\/`____ \\ \___,_\\ \____\ _\ \ \\ \__/.\_\\ \____\ \ \_\ \_\
+    \/_/\/_/ `/___/> \\/__,_ / \/____//\ \_\ \\/__/\/_/ \/____/  \/_/\/_/
+                /\___/                \ \____/
+                \/__/                  \/___/
+
+Powered by Hydejack v6.4.0 (https://qwtel.com/hydejack/)
+-->
+
+
+
+
+
+
+
+
+
+<head>
+  <!-- =============== -->
+<!-- META            -->
+<!-- =============== -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta
+  name="naver-site-verification"
+  content="22c5b4ef3bfda7fc6100671413989219de7a4ac8"
+/>
+<meta property="og:title" content="Kotlin In Action 7장" />
+<meta property="og:type" content="article" />
+
+<!-- =============== -->
+<!-- Google AdSense  -->
+<!-- =============== -->
+<script
+  data-ad-client="ca-pub-8247516864622650"
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+></script>
+
+ 
+<meta
+  property="og:image"
+  content="http://localhost:4000/assets//img/kotlin-logo.png"
+/>
+<br />
+
+
+<meta property="og:image:width" content="640" />
+<meta property="og:image:height" content="360" />
+ 
+<title>Kotlin In Action 7장 &middot; 도전하는 개발자</title>
+ 
+<meta
+  name="description"
+  content="연산자 오버로딩과 기타 관례
+
+"
+/>
+<meta
+  property="og:description"
+  content="연산자 오버로딩과 기타 관례
+
+"
+/>
+
+
+
+<!-- =============== -->
+<!-- LINKS           -->
+<!-- =============== -->
+<link rel="canonical" href="http://localhost:4000/language/2020/04/18/Kotlin-07/" />
+<meta property="og:url" content="http://localhost:4000/language/2020/04/18/Kotlin-07/" />
+
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="도전하는 개발자 Feed"
+  href="http://localhost:4000/feed.xml"
+/>
+
+
+<link rel="prev" href="http://localhost:4000/devops/2020/04/18/Infra-16/" />
+ 
+<link rel="next" href="http://localhost:4000/devops/2020/04/19/Infra-17/" />
+
+
+<link
+  rel="apple-touch-icon"
+  href="http://localhost:4000/apple-touch-icon.png"
+/>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+<!-- Place favicon.ico in the root directory -->
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+<script>
+  !function(n,e){function t(n,e){n.onload=function(){this.onerror=this.onload=null,e(null,n)},n.onerror=function(){this.onerror=this.onload=null,e(new Error("Failed to load "+this.src),n)}}function o(n,e){n.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||(this.onreadystatechange=null,e(null,n))}}n._loaded=!1,n.loadJSDeferred=function(a,d){function r(){n._loaded=!0;var r=e.createElement("script");r.src=a,d&&(("onload"in r?t:o)(r,d),r.onload||t(r,d));var l=e.getElementsByTagName("script")[0];l.parentNode.insertBefore(r,l)}n._loaded?r():n.addEventListener?n.addEventListener("load",r,!1):n.attachEvent?n.attachEvent("onload",r):n.onload=r}}(window,document);
+
+  !function(e){"use strict";var n=function(n,t,o){function i(e){if(a.body)return e();setTimeout(function(){i(e)})}function r(){l.addEventListener&&l.removeEventListener("load",r),l.media=o||"all"}var d,a=e.document,l=a.createElement("link");if(t)d=t;else{var f=(a.body||a.getElementsByTagName("head")[0]).childNodes;d=f[f.length-1]}var s=a.styleSheets;l.rel="stylesheet",l.href=n,l.media="only x",i(function(){d.parentNode.insertBefore(l,t?d:d.nextSibling)});var u=function(e){for(var n=l.href,t=s.length;t--;)if(s[t].href===n)return e();setTimeout(function(){u(e)})};return l.addEventListener&&l.addEventListener("load",r),l.onloadcssdefined=u,u(r),l};"undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this);
+
+  !function(t){if(t.loadCSS){var e=loadCSS.relpreload={};if(e.support=function(){try{return t.document.createElement("link").relList.supports("preload")}catch(t){return!1}},e.poly=function(){for(var e=t.document.getElementsByTagName("link"),r=0;r<e.length;r++){var n=e[r];"preload"===n.rel&&"style"===n.getAttribute("as")&&(t.loadCSS(n.href,n,n.getAttribute("media")),n.rel=null)}},!e.support()){e.poly();var r=t.setInterval(e.poly,300);t.addEventListener&&t.addEventListener("load",function(){e.poly(),t.clearInterval(r)}),t.attachEvent&&t.attachEvent("onload",function(){t.clearInterval(r)})}}}(this);
+
+  window.disablePushState = false;
+  window.disableDrawer = false;
+</script>
+
+<!--[if lt IE 9]>
+  <script src="https://unpkg.com/html5shiv/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+<!-- =============== -->
+<!-- STYLES          -->
+<!-- =============== -->
+<!--[if gt IE 8]><!---->
+<style>
+  
+  article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}*{box-sizing:border-box}html,body{margin:0;padding:0}html{font-size:16px;line-height:1.75}body{color:#333;background-color:#fff;overflow-y:scroll}a{text-decoration:none}.lead{margin-left:-1rem;margin-right:-1rem}img,.img{display:block;max-width:100%;margin-bottom:1rem;border:none}img.lead,.img.lead{max-width:calc(100% + 2rem);width:calc(100% + 2rem)}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-weight:bold;text-rendering:optimizeLegibility}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{margin:1.6rem 0 1rem;line-height:1.6}h1,.h1{font-size:2rem;line-height:1.25}h2,.h2{font-size:1.5rem}h3,.h3{font-size:1.17em}p{margin-top:0;margin-bottom:1rem}p.lead{font-size:1.25rem;font-weight:300;padding:0 1rem}ul,ol,dl{margin-top:0;margin-bottom:1rem}ul,ol{padding-left:1.25rem}hr{position:relative;margin:1.5rem 0;border:0;border-top:1px solid #eee}.hr{padding-bottom:.5rem;border-bottom:1px solid #eee;margin-bottom:1.5rem}h4,h5,h6,.h4,.h5,.h6{margin-bottom:0.5rem;font-size:1rem}table{margin-bottom:1rem;width:100%;width:calc(100% + 2rem);margin-left:-1rem;border:1px solid #e5e5e5;border-collapse:collapse;border-spacing:0}td,th{padding:.25rem .5rem;border:1px solid #e5e5e5}td:first-child,th:first-child{padding-left:1rem}td:last-child,th:last-child{padding-right:1rem}thead+tbody,tbody+tbody,tfoot{border-top:3px double #e5e5e5}tbody tr:nth-child(odd) td,tbody tr:nth-child(odd) th{background-color:#f9f9f9}footer{margin-bottom:2rem}.page,.post{margin-bottom:3em}.page li+li,.post li+li{margin-top:.25rem}.page>header,.post>header{margin-bottom:2rem}.page-title,.post-title{margin-top:0}.post-date{display:block;margin-top:-0.5rem;margin-bottom:1rem;color:#9a9a9a}.related-posts{padding-left:0;list-style:none}.related-posts>li,.related-posts>li+li{margin-top:1rem}.related-posts>li>small,.related-posts>li+li>small{font-size:75%;color:#9a9a9a}.message{margin-bottom:1rem;padding:1rem;color:#787878;background-color:#f9f9f9;margin-left:-1rem;margin-right:-1rem}body,main{position:relative;overflow-x:hidden}@media screen{body::before{content:'';background:#e5e5e5;position:absolute;left:0;top:0;bottom:0}}@media screen and (min-width: 40em){html{font-size:17px}}@media screen and (min-width: 54em){html{font-size:16px}}@media screen and (min-width: 88em){html{font-size:17px}}@media screen and (min-width: 125em){html{font-size:18px}}.sr-only{display:none}.clearfix,.sidebar-social::after,.clearafter::after{content:"";display:table;clear:both}a,.a{position:relative;padding-bottom:.15rem;border-style:hidden}.img{overflow:hidden;background-color:#f9f9f9}.img>img{margin:0;width:100%;height:100%}.sixteen-nine{position:relative}.sixteen-nine::before{display:block;content:"";width:100%;padding-top:56.25%}.sixteen-nine>*{position:absolute;top:0;left:0;right:0;bottom:0}h1+hr,h2+hr,h3+hr,h4+hr,h5+hr,h6+hr{margin-top:0}.fade-in{animation-duration:500ms;animation-name:fade-in;animation-fill-mode:forwards}@keyframes fade-in{from{transform:translateY(-2rem);opacity:0}50%{transform:translateY(-2rem);opacity:0}to{transform:translateY(0);opacity:1}}.mb6{margin-bottom:10rem}.sidebar{color:rgba(255,255,255,0.75);text-align:left}.sidebar::before{content:"";position:absolute;z-index:2;top:0;left:0;bottom:0;right:0;background:linear-gradient(to bottom, rgba(32,32,32,0) 0%, rgba(32,32,32,0.5) 100%)}.sidebar a{color:#fff;border-bottom-color:rgba(255,255,255,0.2)}.right-side{width:100%;margin-left:auto;margin-right:auto}.right-side .ad-first{text-align:center}@media screen{.right-side{max-width:38rem;min-height:100vh}.right-side .ad-second{display:none}}@media screen and (min-width: 54em){.right-side{margin-left:20rem;margin-right:1rem;padding:4rem 1rem 12rem}.right-side .ad-second{text-align:center;display:block}}@media screen and (min-width: 72em){.right-side{margin-left:22rem;max-width:42rem}}@media screen and (min-width: 88em){.right-side{width:162px;margin-left:0rem;margin-right:0rem;padding:0rem;margin-top:10rem;display:block;float:left}}@media screen and (min-width: 96em){.right-side{width:300px;margin-right:0rem}}#_yDrawer{position:relative}@media screen{#_yDrawer{min-height:640px;min-height:100vh}}@media screen and (min-width: 54em){#_yDrawer{width:18rem;margin-left:0}}.sidebar-bg{position:absolute;height:100%;overflow:hidden;top:0;right:0;bottom:0;left:0;background:#202020 center / cover}.sidebar-box{display:flex;justify-content:center}.sidebar-sticky{position:relative;z-index:3}@media screen{.sidebar-sticky{-ms-overflow-style:none;overflow:-moz-scrollbars-none;height:100%;overflow:auto;position:absolute;padding:3rem 0rem;right:2.5rem;left:2.5rem}}.sidebar-sticky::-webkit-scrollbar{display:none}.sidebar-about>h1{color:#fff;font-size:2rem}.sidebar-nav>ul{list-style:none;padding-left:0;margin-bottom:.5rem}a.sidebar-nav-item{width:100%;font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}a.sidebar-nav-subitem{font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}@media screen{.y-drawer-scrim{z-index:2}.y-drawer-content{width:18rem;left:-18rem;z-index:3}}.sidebar-social{margin-bottom:.5rem}.sidebar-social>ul{list-style:none;padding-left:0;margin:0 -.25rem}.sidebar-social>ul>li{float:left}.sidebar-social>ul>li>a{display:inline-block;text-align:center;font-size:1.6rem;line-height:3rem;width:3.1249rem;height:4rem;padding:.5rem 0}.sidebar-social>ul li+li{margin-top:0}.fixed-top{position:fixed;top:0;left:0;width:100%;z-index:1}.navbar>.content{padding-top:0;padding-bottom:0;min-height:0;height:0}.menu{display:inline-block;padding:1.75rem 1.5rem;border-bottom:none;margin-left:-1.5rem;color:#9a9a9a !important}.menu::after{content:"\2630"}@media screen and (min-width: 54em){.menu{padding:1.25rem 1.5rem;position:absolute;left:-9999px}.menu:focus{position:static}}.animation-main{pointer-events:none}.loading{display:none}@media print{.menu{display:none}}.animation-main{opacity:0;will-change:opacity}.loading{position:absolute;top:0;right:0;padding:5.25rem 4.5rem;transform-origin:top right;transform:scale(0.33)}.content{position:relative;margin-left:auto;margin-right:auto;padding:5rem 1rem 12rem}@media screen{.content{min-height:100vh}}@media screen and (min-width: 54em){.content{padding:4rem 1rem 12rem;margin-left:19rem;margin-right:3rem}}@media screen and (min-width: 72em){.content{max-width:42rem;margin-left:21rem}}@media screen and (min-width: 88em){.content{float:left;width:100%;margin-left:22rem;margin-right:5rem}}@media screen and (min-width: 96em){.content{max-width:44rem}}@media screen and (min-width: 102em){.content{margin-left:25rem;margin-right:8rem}}.me{width:6.5rem;height:6.5rem;align-self:center;margin-right:20px;border-radius:100%;position:relative}@media screen and (min-width: 40em){.me{width:7rem;height:7rem}}@media screen and (min-width: 54em){.me{width:6.5rem;height:6.5rem}}@media screen and (min-width: 72em){.me{width:7rem;height:7rem}}main>footer{width:100%;position:absolute;bottom:0;left:0;right:0;padding:0 1rem;color:#9a9a9a;font-size:smaller;text-align:center}main>footer>p{margin-bottom:0}html{font-family:'Sans-serif'}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-family:'Sans-serif'}
+
+</style>
+
+
+<link
+  rel="preload"
+  href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0"
+  as="style"
+  onload="this.rel='stylesheet'"
+/>
+
+<style id="_pageStyle">
+
+.content a{color:#4f86aa;border-color:rgba(79,134,170,0.2)}.content a:hover{border-color:#4f86aa}:focus{outline-color:#4f86aa}::selection{color:#fff;background:#4f86aa}::-moz-selection{color:#fff;background:#4f86aa}
+
+</style>
+
+
+<noscript>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0" />
+    
+  
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Lato"
+  />
+  <style>
+    html { font-family: 'Lato', 'Sans-serif' }
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .heading { font-family: 'Lato', 'Sans-serif' }
+  </style>
+   
+  <link rel="stylesheet" href="http://localhost:4000/assets/icomoon/style.css" />
+</noscript>
+<!--<![endif]-->
+
+</head>
+
+<body>
+  <!-- =============== -->
+<!-- MENU            -->
+<!-- =============== -->
+<div class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <a id="_menu" class="menu no-hover" href="#_title">
+      <span class="sr-only">Menu</span>
+    </a>
+  </div>
+</div>
+
+<!-- =============== -->
+<!-- CONTENT         -->
+<!-- =============== -->
+<div id="_yPushState">
+  <div class="fade-in">
+    <main
+      id="_main"
+      class="content"
+      role="main"
+      data-color="#4f86aa"
+      data-image="/assets/img/bg.jpg"
+    >
+      
+
+<article id="post-language/2020/04/18/Kotlin-07" class="post" role="article">
+  <header>
+    <h1 class="post-title">
+      
+        Kotlin In Action 7장
+        
+    </h1>
+
+    <p class="post-date heading">
+      <time datetime="2020-04-18T00:00:00+09:00">18 Apr 2020</time>
+      
+
+
+
+
+
+
+
+
+
+in <a href="/category/programming-language/" data-flip="title">Programming Language</a>
+
+      
+
+
+
+
+
+
+
+
+
+on <a href="/tag/programming-language-kotlin/" data-flip="title">Kotlin</a>
+
+    </p>
+
+    
+  <div class="hr" style="padding-bottom:0"></div>
+
+
+  </header>
+  
+
+
+  
+  <div class="markdown-body">
+
+    <!-- 
+    <div class="head-image"><img src="http://localhost:4000/assets//img/kotlin-logo.png" /></div>
+    <br /> -->
+    <style>
+      .myAd1190 {
+        width: 48%;
+        height: 280px;
+      }
+
+      .myAd1290 {
+        width: 48%;
+        height: 280px;
+      }
+
+      @media(max-width: 800px) {
+        .myAd1190 {
+          display: none;
+        }
+
+        .myAd1290 {
+          width: 98%;
+        }
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 300px;
+      }
+
+      .row-center {
+        display: flex;
+        justify-content: center;
+        height: 258px;
+      }
+    </style>
+   
+    <!--<br />-->
+    <h2 id="연산자-오버로딩과-기타-관례">연산자 오버로딩과 기타 관례</h2>
+
+<p>코틀린에서는 기존 자바 클래스를 코틀린 언어에 적용하기 위함이다.</p>
+
+<p>기존 자바 클래스가 구현하는 인터페이스가 이미 고정돼 있고 코틀린 쪽에서 자바 클래스가 새로운 인터페이스를 구현하게 만들 수는 없다.</p>
+
+<p>반면 확장 함수를 사용하면 기존 자바 클래스에 대해 <strong>관례</strong>에 따라 이름을 붙임으로써 기존 자바 코드를 수정하지않고 새로운 기능을 쉽게 구현할 수 있다.</p>
+
+<h2 id="산술-연산자-오버로딩">산술 연산자 오버로딩</h2>
+
+<p>앞서 서술한 코틀린의 <strong>관례</strong>를 사용하는 방법을 알아보자.</p>
+
+<p>가장 단순한 관례는 <strong>산술 연산자</strong>다.</p>
+
+<p>자바는 Primitive 타입에 대해서만 산술 연산자를 사용할 수 있고, 추가로 String에 대해 <code class="language-plaintext highlighter-rouge">+</code> 연산자를 사용할 수 있다.</p>
+
+<p>그러나 BigInteger같은 클래스에서도 add 메소드가 아닌 + 연산을 사용하는 편이 더욱 직관적이다.</p>
+
+<p>컬렉션도 마찬가지로 += 연산자를 사용할 수 있으면 더 좋을 것이다.</p>
+
+<p>코틀린에서는 이러한 기능이 가능하다.</p>
+
+<h2 id="이항-산술-연산-오버로딩">이항 산술 연산 오버로딩</h2>
+
+<p><strong>Point</strong> 클래스를 하나 만들자.</p>
+
+<p>이 클래스는 두 점의 X 좌표와 Y 좌표를 각각 더한다. 다음 코드는 + 연산자 구현을 보여준다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">data class</span> <span class="nc">Point</span><span class="p">(</span><span class="kd">val</span> <span class="py">x</span><span class="p">:</span><span class="nc">Int</span><span class="p">,</span> <span class="kd">val</span> <span class="py">y</span><span class="p">:</span><span class="nc">Int</span><span class="p">){</span>
+    <span class="k">operator</span> <span class="k">fun</span> <span class="nf">plus</span><span class="p">(</span><span class="n">other</span><span class="p">:</span> <span class="nc">Point</span><span class="p">):</span> <span class="nc">Point</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nc">Point</span><span class="p">(</span><span class="n">x</span> <span class="p">+</span> <span class="n">other</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">+</span> <span class="n">other</span><span class="p">.</span><span class="n">y</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">p1</span> <span class="p">=</span> <span class="nc">Point</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+<span class="kd">val</span> <span class="py">p2</span> <span class="p">=</span> <span class="nc">Point</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+<span class="nf">println</span><span class="p">(</span><span class="n">p1</span> <span class="p">+</span> <span class="n">p2</span><span class="p">)</span>
+<span class="c1">// 결과 : Point(x=40, y=40)</span>
+</code></pre></div></div>
+
+<p>plus 함수 앞에는 반드시 <strong>operator</strong> 키워드를 명시해야한다.</p>
+
+<p>기본적으로 연산자 오버로딩을 사용할 때는 <strong>operator</strong> 키워드를 명시함으로써 이 함수가 어떤 <strong>관례</strong>를 따르고 있음을 명시한다.</p>
+
+<p>확장함수로 만드는 것도 가능하다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">operator</span> <span class="k">fun</span> <span class="nc">Point</span><span class="p">.</span><span class="nf">plus</span><span class="p">(</span><span class="n">other</span><span class="p">:</span><span class="nc">Point</span><span class="p">):</span><span class="nc">Point</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nc">Point</span><span class="p">(</span><span class="n">x</span> <span class="p">+</span> <span class="n">other</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="p">+</span> <span class="n">other</span><span class="p">.</span><span class="n">y</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>오버로딩이 가능한 이항 산술 연산자는 다음과 같다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>식</th>
+      <th>함수 이름</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>a*b</td>
+      <td>times</td>
+    </tr>
+    <tr>
+      <td>a/b</td>
+      <td>div</td>
+    </tr>
+    <tr>
+      <td>a%b</td>
+      <td>mod(1.1부터 rem)</td>
+    </tr>
+    <tr>
+      <td>a+b</td>
+      <td>plus</td>
+    </tr>
+    <tr>
+      <td>a-b</td>
+      <td>minus</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>직접 정의한 함수를 통해 구현하더라도 당연히 연산자 우선순위는 우리가 알고 있는 그것과 동일하게 적용된다.</p>
+
+<h2 id="복합-대입-연산자-오버로딩">복합 대입 연산자 오버로딩</h2>
+
+<p>plus와 같은 연산자를 오버로딩하면 코틀린은 + 연산뿐 아니라 그와 관련있는 복합 대입 연산자인 +=도 자동으로 지원한다.</p>
+
+<p>만약 += 연산이 객체에 대한 참조를 다른 참조로 바꾸기보다 원래 객체의 내부 상태를 변경하고 싶은 경우가 있을 수 있다.</p>
+
+<p>변경 가능한 컬렉션에 원소를 추가하는 경우가 이 경우일텐데, 이 경우 반환 타입이 Unit인 PlusAssign 함수를 정의하면 코틀린은 += 연산자에 그 함수를 사용한다.</p>
+
+<p>만약 해당 컬렉션이 읽기 전용 컬렉션이라면 +=과 -=는 변경을 적용한 복사본을 반환한다.</p>
+
+<h2 id="단항-연산자-오버로딩">단항 연산자 오버로딩</h2>
+
+<p>단항 연산자를 오버로딩하는 절차도 이항 연산자와 마찬가지이다.</p>
+
+<p>+a, -a와 같은 단항 연산자 또한 사용 가능하다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>식</th>
+      <th>함수 이름</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>+a</td>
+      <td>unaryPlus</td>
+    </tr>
+    <tr>
+      <td>-a</td>
+      <td>unaryMinus</td>
+    </tr>
+    <tr>
+      <td>!a</td>
+      <td>not</td>
+    </tr>
+    <tr>
+      <td>++a,a++</td>
+      <td>inc</td>
+    </tr>
+    <tr>
+      <td>–a,a–</td>
+      <td>dec</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="비교-연산자-오버로딩">비교 연산자 오버로딩</h2>
+
+<p>코틀린에서는 Primitive 타입 뿐만 아니라 모든 객체에 대한 비교 연산을 수행할 수 있다.</p>
+
+<p>eqauls나 compareTo를 호출해야하는 자바와 달리 코틀린에서는 == 비교 연산자를 직접 사용할 수 있어 훨씬 코드를 이해하기 쉽다.</p>
+
+<h2 id="동등성-연산자--eqauls">동등성 연산자 : eqauls</h2>
+
+<p>우리는 이전에 == 연산자 호출이 eqauls 메소드 호출로 컴파일한다는 사실을 배웠다.</p>
+
+<p>식별자 비교 연산자 <code class="language-plaintext highlighter-rouge">===</code>를 사용해 두 객체간의 참조가 같은지를 비교할 수 있다.</p>
+
+<p>단, <code class="language-plaintext highlighter-rouge">===</code>는 오버로딩할 수 없다.</p>
+
+<h2 id="순서-연산자--compareto">순서 연산자 : compareTo</h2>
+
+<p>자바에서는 정렬이나 최대,최소값을 비교할 때 <strong>Comparable</strong> 인터페이스를 구현해야했다.</p>
+
+<p>코틀린도 <strong>Comparable</strong> 인터페이스를 지원한다.</p>
+
+<p>또한 인터페이스 안에 있는 compareTo 메소드를 호출하는 관례를 지원한다.</p>
+
+<p>따라서 비교 연산자 &lt;,&gt;,&lt;=, &gt;=는 compareTo 호출로 컴파일된다.</p>
+
+<p>compareTo가 반환하는 값은 <code class="language-plaintext highlighter-rouge">Int</code>다.</p>
+
+<h2 id="컬렉션과-범위에-대해-쓸-수-있는-관례">컬렉션과 범위에 대해 쓸 수 있는 관례</h2>
+
+<p>컬렉션을 다룰 때 가장 많이 쓰이는 연산은 인덱스를 사용해 원소를 읽거나 쓰는 연산과</p>
+
+<p>어떤 값이 컬렉션에 속해있는지 검사하는 연산이다.</p>
+
+<p>인덱스를 가져올때는 <code class="language-plaintext highlighter-rouge">a[b]</code>와 같이 사용하며(이를 인덱스 연산자라고 부른다.) in 연산자는 원소가 컬렉션이나 범위에 속하는지 검사하거나 컬렉션에 있는 원소를 순회할 때 사용한다.</p>
+
+<h2 id="인덱스로-원소에-접근--get과-set">인덱스로 원소에 접근 : get과 set</h2>
+
+<p>코틀린의 map 컬렉션에서 인덱스 연산자를 사용해 맵에 키/값 쌍을 넣거나 변경할 수 있단느 사실을 우리는 이미 알고 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">map</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="p">=</span> <span class="n">newValue</span>
+</code></pre></div></div>
+
+<p>자 이제 위의 코드가 어떻게 동작하는지 살펴보자.</p>
+
+<p>코틀린에서는 인덱스 연산자도 관례를 따른다.</p>
+
+<p>인덱스 연산자를 사용해 원소를 읽는 연산은 <code class="language-plaintext highlighter-rouge">get</code> 연산자 메소드로 변환되고, 원소를 쓰는 연산은 <code class="language-plaintext highlighter-rouge">set</code> 연산자 메소드로 변환된다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">operator</span> <span class="k">fun</span> <span class="nc">Point</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">index</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span> <span class="nc">Int</span><span class="p">{</span>
+    <span class="k">return</span> <span class="k">when</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="p">{</span>
+        <span class="mi">0</span> <span class="p">-&gt;</span> <span class="n">x</span>
+        <span class="mi">1</span> <span class="p">-&gt;</span> <span class="n">y</span>
+        <span class="k">else</span> <span class="p">-&gt;</span>
+            <span class="k">throw</span> <span class="nc">IndexOutOfBoundsException</span><span class="p">(</span><span class="s">"Invalid coordinate $index"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>당연히 타입은 Int가 아닌 타입도 사용할 수 있다.</p>
+
+<p>또한 만약 2차원 행렬을 표현하는 클래스에는 <code class="language-plaintext highlighter-rouge">operator fun get(rowIndex:Int, colIndex:int)</code>를 정의하면 <code class="language-plaintext highlighter-rouge">matrix[row,col]</code>로 해당 메소드를 호출하는 것이 가능하다.</p>
+
+<p>이번엔 인덱스에 해당하는 컬렉션 원소를 쓰고 싶은 경우를 살펴보자.</p>
+
+<p>이때는 <code class="language-plaintext highlighter-rouge">set</code>이라는 이름의 함수를 정의하면 된다.</p>
+
+<p>기존 Point가 불변 클래스이므로 변경가능한 새로운 클래스인 <code class="language-plaintext highlighter-rouge">MutablePoint</code>를 정의해서 사용하자.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">data class</span> <span class="nc">MutablePoint</span><span class="p">(</span><span class="kd">var</span> <span class="py">x</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="kd">var</span> <span class="py">y</span><span class="p">:</span><span class="nc">Int</span><span class="p">)</span>
+
+<span class="k">operator</span> <span class="k">fun</span> <span class="nc">MutablePoint</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="n">index</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">when</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="p">{</span>
+        <span class="mi">0</span> <span class="p">-&gt;</span> <span class="n">x</span> <span class="p">=</span> <span class="n">value</span>
+        <span class="mi">1</span> <span class="p">-&gt;</span> <span class="n">y</span> <span class="p">=</span> <span class="n">value</span>
+        <span class="k">else</span> <span class="p">-&gt;</span>
+            <span class="k">throw</span> <span class="nc">IndexOutOfBoundsException</span><span class="p">(</span><span class="s">"Invalid coordinate $index"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="in-관례">in 관례</h2>
+
+<p><code class="language-plaintext highlighter-rouge">in</code>은 객체가 컬렉션에 들어있는지 검사한다.</p>
+
+<p>이 경우 in 연산자와 대응하는 함수는 <code class="language-plaintext highlighter-rouge">contains</code>다.</p>
+
+<p>어떤 점이 사각형 영역에 포함되는지 판단할 때 in 연산자를 사용해 구현해보자.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">data class</span> <span class="nc">Rectangle</span><span class="p">(</span><span class="kd">val</span> <span class="py">upperLeft</span><span class="p">:</span> <span class="nc">Point</span><span class="p">,</span> <span class="kd">val</span> <span class="py">lowerRight</span><span class="p">:</span> <span class="nc">Point</span><span class="p">)</span>
+
+<span class="k">operator</span> <span class="k">fun</span> <span class="nc">Rectangle</span><span class="p">.</span><span class="nf">contains</span><span class="p">(</span><span class="n">p</span><span class="p">:</span> <span class="nc">Point</span><span class="p">):</span> <span class="nc">Boolean</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">p</span><span class="p">.</span><span class="n">x</span> <span class="k">in</span> <span class="n">upperLeft</span><span class="p">.</span><span class="n">x</span> <span class="n">until</span> <span class="n">lowerRight</span><span class="p">.</span><span class="n">x</span> <span class="p">&amp;&amp;</span>
+        <span class="n">p</span><span class="p">.</span><span class="n">y</span> <span class="k">in</span> <span class="n">upperLeft</span><span class="p">.</span><span class="n">y</span> <span class="n">until</span> <span class="n">lowerRight</span><span class="p">.</span><span class="n">y</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>until을 통해 열린 범위를 만들고 그 범위 안에 해당 좌표가 포함되는지를 검사한다.</p>
+
+<h2 id="rangeto-관례">rangeTo 관례</h2>
+
+<p>범위를 만들기 위해서는 ..를 사용해야한다.</p>
+
+<p>1..10은 1부터 10까지 모두 포함된 수의 범위를 말한다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">..</code> 연산자는 <strong>rangeTo</strong> 함수를 간략하게 표현하는 방법이다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">operator</span> <span class="k">fun</span> <span class="p">&lt;</span><span class="nc">T</span><span class="p">:</span> <span class="nc">Comparable</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;&gt;</span> <span class="nc">T</span><span class="p">.</span><span class="nf">rangeTo</span><span class="p">(</span><span class="n">that</span><span class="p">:</span> <span class="nc">T</span><span class="p">):</span> <span class="nc">ClosedRange</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;</span>
+</code></pre></div></div>
+
+<p>이 함수는 범위를 반환하며, 어떤 원소가 그 범위 안에 들어있는지를 in을 통해 검사할 수 있다.</p>
+
+<h2 id="for-루프를-위한-iterator-관례">for 루프를 위한 iterator 관례</h2>
+
+<p>for 루프는 범위 검사와 마찬가지로 in 연산자를 사용한다.</p>
+
+<p>하지만 이 경우 in의 의미는 조금 다르다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">for(x in list) { ... }</code> 의 경우 <code class="language-plaintext highlighter-rouge">list.iterator()</code>를 호출해서 이터레이터를 얻은 다음, 자바와 마찬가지로 그 이터레이터에 대해 <strong>hasNext</strong>와 <strong>next</strong> 호출을 반복하는 식으로 변환된다.</p>
+
+<p>코틀린에서는 이 또한 관례이므로 iterator 메소드를 확장 함수로 정의할 수 있다.</p>
+
+<p>이러한 성질로 인해 일반 자바 문자열에 대한 for 루프가 가능하다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">operator</span> <span class="k">fun</span> <span class="nc">CharSequence</span><span class="p">.</span><span class="nf">iterator</span><span class="p">():</span> <span class="nc">CharIterator</span>
+</code></pre></div></div>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="p">(</span><span class="n">c</span> <span class="k">in</span> <span class="s">"abc"</span><span class="p">)</span> <span class="p">{}</span>
+</code></pre></div></div>
+
+<h2 id="구조-분해-선언과-component-함수">구조 분해 선언과 component 함수</h2>
+
+<p>구조 분해 선언, <strong>destructuring declaration</strong>을 살펴보자.</p>
+
+<p>구조 분해를 사용하며 복합적인 값을 분해해서 여러 변수를 한꺼번에 초기화할 수 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">p</span> <span class="p">=</span> <span class="nc">Point</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+<span class="kd">val</span> <span class="p">(</span><span class="py">x</span><span class="p">,</span><span class="py">y</span><span class="p">)</span> <span class="p">=</span> <span class="n">p</span>
+</code></pre></div></div>
+
+<p>구조 분해 선언은 일반 변수 선언과 비슷해 보인다.</p>
+
+<p>다만 =의 좌변에 여러 변수를 괄호로 묶었다는 점이 다르다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">val (x,y) = p</code>는 다음과 같이 컴파일된다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">a</span> <span class="p">=</span> <span class="n">p</span><span class="p">.</span><span class="nf">component1</span><span class="p">()</span>
+<span class="kd">val</span> <span class="py">b</span> <span class="p">=</span> <span class="n">p</span><span class="p">.</span><span class="nf">component2</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>data 클래스의 주 생성자에 들어있는 프로퍼티에 대해서는 컴파일러가 자동으로 <code class="language-plaintext highlighter-rouge">componentN</code> 함수를 만들어준다.</p>
+
+<p>결국 data 클래스이기 때문에 구조분해 선언을 사용할 수 있었다는 것을 알 수 있다.</p>
+
+<p>만약 data 클래스가 아닌 일반 클래스에서 이 함수는 다음과 같이 구현할 수 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Point</span><span class="p">(</span><span class="kd">val</span> <span class="py">x</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="kd">val</span> <span class="py">y</span><span class="p">:</span> <span class="nc">Int</span><span class="p">){</span>
+    <span class="k">operator</span> <span class="k">fun</span> <span class="nf">component1</span><span class="p">()</span> <span class="p">=</span> <span class="n">x</span>
+    <span class="k">operator</span> <span class="k">fun</span> <span class="nf">component2</span><span class="p">()</span> <span class="p">=</span> <span class="n">y</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>참고로 컬렉션이나 배열에서도 <code class="language-plaintext highlighter-rouge">componentN</code> 함수가 존재한다.</p>
+
+<h2 id="구조-분해-선언과-루프">구조 분해 선언과 루프</h2>
+
+<p>구조 분해 선언은 다음과 같이 사용할 수 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="p">((</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="k">in</span> <span class="n">map</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">println</span><span class="p">(</span><span class="s">"$key -&gt; $value"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>여기서는 두 가지 관례를 사용한다.</p>
+
+<p>하나는 객체를 이터레이션하는 관례이고, 하나는 구조 분해 선언이다.</p>
+
+<p>코틀린 표준 라이브러리에는 맵에 대한 확장 함수로 iterator가 들어있다.</p>
+
+<p>그 iterator는 맵 원소에 대한 이터레이터를 반환한다. 즉, 자바와는 달리 코틀린에서는 맵을 직접 이터레이션할 수 있다.</p>
+
+<h2 id="프로퍼티-접근자-로직-재활용--위임-프로퍼티">프로퍼티 접근자 로직 재활용 : 위임 프로퍼티</h2>
+
+<p><strong>위임 프로퍼티</strong> (delegated property)는 코틀린이 제공하는 관례에 의존하는 특성 중 독특하면서 강력한 기능을 갖고 있다.</p>
+
+<p>위임 프로퍼티를 사용하면 값을 뒷받침하는 필드에 단순히 저장하는 것보다 더 복잡한 방식으로 작동하는 프로퍼티를 쉽게 구현할 수 있다.</p>
+
+<p>예를 들어 프로퍼티는 위임을 사용해 자신의 값을 필드가 아니라 데이터베이스 테이블이나 브라우저 세션, 맵 등에 저장할 수 있다.</p>
+
+<h2 id="위임-프로퍼티-소개">위임 프로퍼티 소개</h2>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="py">p</span><span class="p">:</span> <span class="nc">Type</span> <span class="k">by</span> <span class="nc">Delegate</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>위임 프로퍼티의 일반적인 문법은 위와 같다.</p>
+
+<p>p 프로퍼티는 접근자 로직을 다른 객체에게 위임한다.</p>
+
+<p>여기서는 <strong>Delegate</strong> 클래스의 인스턴스를 위임 객체로 사용한다.</p>
+
+<p>by 뒤에 있는 식을 계산해서 위임에 쓰일 객체를 얻는다.</p>
+
+<p>다음과 같이 컴파일러는 숨겨진 도우미 프로퍼티를 만들고 그 프로퍼티를 위임 객체의 인스턴스로 초기화한다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+    <span class="k">private</span> <span class="kd">val</span> <span class="py">delegate</span> <span class="p">=</span> <span class="nc">Delegate</span><span class="p">()</span>
+    <span class="kd">var</span> <span class="py">p</span><span class="p">:</span> <span class="nc">Type</span>
+    <span class="k">set</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nc">Type</span><span class="p">)</span> <span class="p">=</span> <span class="n">delegate</span><span class="p">.</span><span class="nf">setValue</span><span class="p">(</span><span class="o">..</span><span class="p">.,</span> <span class="n">value</span><span class="p">)</span>
+    <span class="k">get</span><span class="p">()</span> <span class="p">=</span> <span class="n">delegate</span><span class="p">.</span><span class="nf">getValue</span><span class="p">(</span><span class="o">..</span><span class="p">.)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>프로퍼티 위임 관례를 따르는 Delegate 클래스는 getVaule와 setValue 메소드를 제공해야한다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Delegate</span> <span class="p">{</span>
+    <span class="k">operator</span> <span class="k">fun</span> <span class="nf">getValue</span><span class="p">(</span><span class="o">..</span><span class="p">.)</span> <span class="p">{</span> <span class="o">..</span><span class="p">.</span> <span class="p">}</span>
+    <span class="k">operator</span> <span class="k">fun</span> <span class="nf">setValue</span><span class="p">(</span><span class="o">..</span><span class="p">.,</span> <span class="n">value</span><span class="p">:</span> <span class="nc">Type</span><span class="p">)</span> <span class="p">{</span> <span class="o">..</span><span class="p">.</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="py">p</span><span class="p">:</span> <span class="nc">Type</span> <span class="k">by</span> <span class="nc">Delegate</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="위임-프로퍼티-사용--by-lazy를-사용한-프로퍼티-초기화-지연">위임 프로퍼티 사용 : by lazy()를 사용한 프로퍼티 초기화 지연</h2>
+
+<p>lazy initialization은 객체의 일부분을 초기화하지 않고 남겨뒀다가 실제 그 부분의 값이 필요한 경우 초기화 할 때 흔히 쓰이는 패턴이다.</p>
+
+<p>예를 들어보자.</p>
+
+<p>person 클래스가 자신이 작성한 이메일의 목록을 제공한다고 가정하자.</p>
+
+<p>이메일은 데이터베이스에 들어있고 불러오려면 시간이 오래 걸린다.</p>
+
+<p>그래서 이메일 프로퍼티의 값을 최초로 사용할 때 단 한 번만 이메일을 데이터베이스로 가져오고 싶다.</p>
+
+<p>이제 데이터베이스에서 이메일을 가져오는 loadEmials라는 함수가 있다고 하자.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Email</span> <span class="p">{</span> <span class="o">..</span><span class="p">.</span> <span class="p">}</span>
+<span class="k">fun</span> <span class="nf">loadEmails</span><span class="p">(</span><span class="n">person</span><span class="p">:</span> <span class="nc">Person</span><span class="p">):</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Email</span><span class="p">&gt;</span> <span class="p">{</span>
+    <span class="nf">println</span><span class="p">(</span><span class="s">"${person.name}의 이메일을 가져옴)
+</span>    <span class="k">return</span> <span class="nf">listOf</span><span class="p">(</span><span class="o">..</span><span class="p">.)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>다음은 이메일을 불러오기 전에는 null을 저장하고 불러온 다음에는 이메일 리스트를 저장하는 _emails 프로퍼티를 추가해서 지연 초기화를 구현한 클래스를 보여준다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Person</span><span class="p">(</span><span class="kd">val</span> <span class="py">name</span><span class="p">:</span> <span class="nc">String</span><span class="p">){</span>
+    <span class="k">private</span> <span class="kd">var</span> <span class="py">_emails</span><span class="p">:</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Email</span><span class="p">&gt;?</span> <span class="p">=</span> <span class="k">null</span>
+    <span class="kd">val</span> <span class="py">emails</span><span class="p">:</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Email</span><span class="p">&gt;</span>
+        <span class="k">get</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">_emails</span> <span class="p">==</span> <span class="k">null</span><span class="p">){</span>
+                <span class="n">_emails</span> <span class="p">=</span> <span class="nf">loadEmails</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+            <span class="p">}</span>
+            <span class="k">return</span> <span class="n">_emails</span><span class="o">!!</span>
+        <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>하지만 이 코드는 어딘가 지저분하고 복잡해보인다.</p>
+
+<p>이 때 위임 프로퍼티를 사용하면 훨씬 더 깔끔한 코드를 얻을 수 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="err">person(val name: </span><span class="nc">String</span><span class="p">){</span>
+    <span class="kd">val</span> <span class="py">emails</span> <span class="k">by</span> <span class="nf">lazy</span> <span class="p">{</span> <span class="nf">loadEmails</span><span class="p">(</span><span class="k">this</span><span class="p">)</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>lazy 함수는 코틀린 관례에 맞는 시그니처 getValue 메소드가 들어있는 객체를 반환한다.</p>
+
+<p>lazy 함수는 기본적으로 스레드 안전하다.</p>
+
+<p>lazy를 by와 함께 사용함으로써 위임 프로퍼티를 만들 수 있었다.</p>
+
+<h2 id="위임-프로퍼티-컴파일-규칙">위임 프로퍼티 컴파일 규칙</h2>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">C</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="py">prop</span><span class="p">:</span> <span class="nc">Type</span> <span class="k">by</span> <span class="nc">MyDelegate</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">val</span> <span class="py">c</span> <span class="p">=</span> <span class="nc">C</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>위의 코드를 컴파일하면 컴파일러는 다음과 같은 코드를 생성한다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">C</span> <span class="p">{</span>
+    <span class="k">private</span> <span class="kd">val</span> <span class="p">&lt;</span><span class="err">delegate</span><span class="p">&gt;</span> <span class="err">=</span> <span class="py">MyDelegate</span><span class="p">()</span>
+    <span class="kd">var</span> <span class="py">prop</span><span class="p">:</span> <span class="nc">Type</span>
+        <span class="k">get</span><span class="p">()</span> <span class="p">=</span> <span class="p">&lt;</span><span class="n">delegate</span><span class="p">&gt;.</span><span class="nf">getValue</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="p">&lt;</span><span class="n">property</span><span class="p">&gt;)</span>
+        <span class="k">set</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nc">Type</span><span class="p">)</span> <span class="p">=</span> <span class="p">&lt;</span><span class="n">delegate</span><span class="p">&gt;.</span><span class="nf">setValue</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="p">&lt;</span><span class="n">property</span><span class="p">&gt;,</span> <span class="n">value</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>다시 말해 컴파일러는 모든 프로퍼티 접근자 안에 getValue와 setValue 호출 코드를 생성해준다.</p>
+
+<h2 id="프로퍼티-값을-맵에-저장">프로퍼티 값을 맵에 저장</h2>
+
+<p>자신의 프로퍼티를 동적으로 정의할 수 있는 객체를 만들 때 위임 프로퍼티를 사용할 수 있다.</p>
+
+<p>그런 객체를 확장 가능한 객체라고 부르기도 한다.</p>
+
+<p>아래는 클래스 내부에 맵을 정의하고 해당 맵에 값을 꺼내오는 예제 코드이다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Person</span> <span class="p">{</span>
+    <span class="k">private</span> <span class="kd">val</span> <span class="py">_attributes</span> <span class="p">=</span> <span class="n">hashMapOf</span><span class="p">&lt;</span><span class="nc">String</span><span class="p">,</span><span class="nc">String</span><span class="p">&gt;()</span>
+    <span class="k">fun</span> <span class="nf">setAttribute</span><span class="p">(</span><span class="n">attrName</span><span class="p">:</span> <span class="nc">String</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nc">String</span><span class="p">){</span>
+        <span class="n">_attributes</span><span class="p">[</span><span class="n">attrName</span><span class="p">]</span> <span class="p">=</span> <span class="n">value</span>
+    <span class="p">}</span>
+
+    <span class="kd">val</span> <span class="py">name</span><span class="p">:</span> <span class="nc">String</span>
+    <span class="k">get</span><span class="p">()</span> <span class="p">=</span> <span class="n">_attributes</span><span class="p">[</span><span class="s">"name"</span><span class="p">]</span><span class="o">!!</span> <span class="c1">// 수동으로 꺼낸다.</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이 경우 위임 프로퍼티를 사용하면 아주 쉽게 사용할 수 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Person</span> <span class="p">{</span>
+   <span class="k">private</span> <span class="kd">val</span> <span class="py">_attributes</span> <span class="p">=</span> <span class="n">hashMapOf</span><span class="p">&lt;</span><span class="nc">String</span><span class="p">,</span><span class="nc">String</span><span class="p">&gt;()</span>
+    <span class="k">fun</span> <span class="nf">setAttribute</span><span class="p">(</span><span class="n">attrName</span><span class="p">:</span> <span class="nc">String</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nc">String</span><span class="p">){</span>
+        <span class="n">_attributes</span><span class="p">[</span><span class="n">attrName</span><span class="p">]</span> <span class="p">=</span> <span class="n">value</span>
+    <span class="p">}</span>
+
+    <span class="kd">val</span> <span class="py">name</span><span class="p">:</span> <span class="nc">String</span> <span class="k">by</span> <span class="n">_attributes</span> <span class="c1">// 위임 프로퍼티로 맵을 사용</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이 코드가 작동하는 이유는 표준 라이브러리가 Map과 MutableMap 인터페이스에 대해 getValue와 setValue 확장 함수를 제공하기 때문이다.</p>
+
+<h2 id="프레임워크에서-위임-프로퍼티-활용">프레임워크에서 위임 프로퍼티 활용</h2>
+
+<p>객체 프로퍼티를 저장하거나 변경하는 방법을 바꿀 수 있으면 프레임워크를 개발할 때 유용하다.</p>
+
+<p>데이터베이스에 User라는 테이블이 있고 그 테이블에는 name이라는 문자열 타입의 컬럼과 age라는 정수 타입의 열이 있다고 하자.</p>
+
+<p>User와 Users라는 클래스를 코틀린에서 정의한다. 그리고 데이터베이스에 들어있는 모든 사용자 Entity를 User 클래스를 통해 가져오고 저장할 수 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">object</span> <span class="nc">Users</span><span class="p">:</span> <span class="nc">IdTable</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">name</span> <span class="p">=</span> <span class="nf">varchar</span><span class="p">(</span><span class="s">"name"</span><span class="p">,</span><span class="n">length</span><span class="p">=</span><span class="mi">50</span><span class="p">).</span><span class="nf">index</span><span class="p">()</span>
+    <span class="kd">val</span> <span class="py">age</span> <span class="p">=</span> <span class="nf">integer</span><span class="p">(</span><span class="s">"age"</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="nc">EntityID</span><span class="p">)</span> <span class="p">:</span> <span class="nc">Entity</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="py">name</span><span class="p">:</span> <span class="nc">String</span> <span class="k">by</span> <span class="nc">Users</span><span class="p">.</span><span class="n">name</span>
+    <span class="kd">var</span> <span class="py">age</span><span class="p">:</span> <span class="nc">Int</span> <span class="k">by</span> <span class="nc">Users</span><span class="p">.</span><span class="n">age</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Users 객체는 데이터베이스 테이블을 표현한다.</p>
+
+<p>데이터베이스 전체에 단 하나만 존재해야는 테이블을 표현해야하므로 Users를 싱글턴으로 선언했다.</p>
+
+<p>객체의 프로퍼티는 테이블 컬럼을 표현한다.</p>
+
+<p>User의 상위 클래스인 Entity 클래스는 데이터베이스 컬럼을 엔터티의 속성 값으로 연결해주는 매핑이 있다.</p>
+
+<h2 id="reference">Reference</h2>
+
+<p><strong>Kotlin In Action</strong> (드미트리 제메로프, 스베트라나 이사코바)</p>
+
+    <br />
+    <br />
+  </div>
+  
+
+</article>
+
+<!--<hr class="dingbat" />-->
+<!--
+<div class="share">
+  <h2>Share this post</h2>
+  <div class="share-body">
+    <a href="http://twitter.com/share?text=Kotlin In Action 7장&amp;url=http://localhost:4000/language/2020/04/18/Kotlin-07/"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="icon-twitter">
+      </span>
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/language/2020/04/18/Kotlin-07/"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="icon-facebook">
+      </span>
+    </a>
+  </div>
+</div>
+-->
+<br />
+
+
+
+
+<aside class="related" role="complementary">
+  <h2 class="hr">Related Posts</h2>
+
+  <ul class="related-posts">
+    
+      
+      
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/language/2021/05/27/Effective-Java-44/" data-flip="title">
+    <span>Effective Java 07 람다와 스트림</span>
+  </a>
+  <small><time datetime="2021-05-27T00:00:00+09:00">
+    27 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/language/2021/05/25/Effective-Java-43/" data-flip="title">
+    <span>Effective Java 06 - item 41 -</span>
+  </a>
+  <small><time datetime="2021-05-25T00:00:00+09:00">
+    25 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/language/2021/05/25/Effective-Java-42/" data-flip="title">
+    <span>Effective Java 06 - item 40 -</span>
+  </a>
+  <small><time datetime="2021-05-25T00:00:00+09:00">
+    25 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+      
+    
+  </ul>
+</aside>
+  <aside class="comments" role="complementary">
+  <h2>Comments</h2>
+  <hr/>
+
+  <script src="https://utteranc.es/client.js"
+    repo="minkukjo/minkukjo.github.io"
+    issue-term="title"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</aside>
+
+       <footer>
+  <hr/>
+  
+    <p>© 2022. by minkuk</p>
+
+  
+  <p>
+    <code>Powered by <a href="https://minkukjo.github.io/">minkuk</a></code>
+  </p>
+</footer>
+
+    </main>
+    <div class="right-side">
+  <div class="add-first">
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+    ></script>
+    <!-- 우측 광고 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="9124111205"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+  <br />
+  <br />
+  <div class="add-second">
+    <!-- 우측 광고2 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="5156946039"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+
+  </div>
+  <div id="_yDrawer">
+  <div id="_sidebar" class="sidebar">
+    <div class="sidebar-bg" style="background-color:#4f86aa;background-image:url(/assets/img/bg.jpg)"></div>
+    <header class="sidebar-sticky" role="banner">
+      <br/>
+      <div class="sidebar-about">
+        <h1><a id="_title" href="/">도전하는 개발자</a></h1>
+        
+
+      </div>
+
+      <br/>
+      <br/>
+      <nav class="sidebar-nav heading" role="navigation">
+        <span class="sr-only">Navigation:</span>
+<ul>
+  
+
+  
+
+  
+  
+  
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-1"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/life/">Life</a>
+       <label class="folder" for="list-item-1">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-daily/">Daily</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-review/">Review</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-books/">Books</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-2"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/computer-science/">Computer Science</a>
+       <label class="folder" for="list-item-2">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-algorithm/">Algorithm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-oop/">OOP</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-network/">Network</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-db/">Database</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-ai/">AI</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-security/">Security</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-distribution-system/">Distribution System</a>
+             </li>
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-3"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/programming-language/">Programming Language</a>
+       <label class="folder" for="list-item-3">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-kotlin/">Kotlin</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-go/">Go</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-java/">Java</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-javascript/">JavaScript</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-typescript/">TypeScript</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-4"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/framework/">Framework</a>
+       <label class="folder" for="list-item-4">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring/">Spring</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-data-jpa/">Spring Data JPA</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-security/">Spring Security</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-junit/">JUnit</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-5"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/language/">Language</a>
+       <label class="folder" for="list-item-5">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/language-english/">English</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-6"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/development/">Development</a>
+       <label class="folder" for="list-item-6">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-ddd/">DDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-tdd/">TDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-clean-code/">Clean Code</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-git/">Git</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-7"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/devops/">Devops</a>
+       <label class="folder" for="list-item-7">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-alarm/">Alarm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-ansible/">Ansible</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-cicd/">CI/CD</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-docker/">Docker</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-es/">Elasticsearch</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-k8s/">Kubernetes</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-public-cloud/">Public Cloud</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-kafka/">Kafka</a>
+             </li>
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-8"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/opensource/">Open Source</a>
+       <label class="folder" for="list-item-8">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/opensource-opensource/">Open Source</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-9"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/about/">About</a>
+       
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+</ul>
+
+      </nav>
+    <br/>
+    <br/>
+      <div class="sidebar-box">
+        
+      </div>
+      <p>매일 매일 한계를 뛰어넘기 위한 도전을 즐기는 개발자</p>
+
+      
+      
+        <div class="sidebar-social">
+          <span class="sr-only">Social:</span>
+<ul>
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://github.com/minkukjo">
+    <span class="icon-github" title="GitHub"></span>
+    <span class="sr-only">GitHub</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://www.linkedin.com/in/민국-조-567052166">
+    <span class="icon-linkedin2" title="LinkedIn"></span>
+    <span class="sr-only">LinkedIn</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:harrycode@kakao.com">
+    <span class="icon-mail" title="Email"></span>
+    <span class="sr-only">Email</span>
+  </a>
+</li>
+
+  
+</ul>
+
+        </div>
+      
+    </header>
+  </div>
+</div>
+</div>
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-158654037-1', 'auto');
+  ga('send', 'pageview');
+  loadJSDeferred('https://www.google-analytics.com/analytics.js');
+</script>
+
+
+
+
+
+<!--[if gt IE 8]><!---->
+<script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+  WebFont.load({
+    
+    google: {
+      families: 'Lato'.split('|')
+    },
+    
+
+    custom: {
+      families: ['icomoon'],
+      urls: ['/assets/icomoon/style.css']
+    }
+  });
+</script>
+<!--<![endif]-->
+
+
+  <!--[if gt IE 9]><!---->
+  
+  <script>loadJSDeferred('/assets/js/hydejack.js?v=6.4.0');</script>
+
+  
+  <!--<![endif]-->
+
+
+
+</body>
+
+</html>

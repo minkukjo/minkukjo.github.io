@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+<html lang="en"><!--
+ __  __                __                                     __
+/\ \/\ \              /\ \             __                    /\ \
+\ \ \_\ \   __  __    \_\ \      __   /\_\      __       ___ \ \ \/'\
+ \ \  _  \ /\ \/\ \   /'_` \   /'__`\ \/\ \   /'__`\    /'___\\ \ , <
+  \ \ \ \ \\ \ \_\ \ /\ \L\ \ /\  __/  \ \ \ /\ \L\.\_ /\ \__/ \ \ \\`\
+   \ \_\ \_\\/`____ \\ \___,_\\ \____\ _\ \ \\ \__/.\_\\ \____\ \ \_\ \_\
+    \/_/\/_/ `/___/> \\/__,_ / \/____//\ \_\ \\/__/\/_/ \/____/  \/_/\/_/
+                /\___/                \ \____/
+                \/__/                  \/___/
+
+Powered by Hydejack v6.4.0 (https://qwtel.com/hydejack/)
+-->
+
+
+
+
+
+
+
+
+
+<head>
+  <!-- =============== -->
+<!-- META            -->
+<!-- =============== -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta
+  name="naver-site-verification"
+  content="22c5b4ef3bfda7fc6100671413989219de7a4ac8"
+/>
+<meta property="og:title" content="JUnit 5 + Kotlin 테스트 클래스에서 생성자 주입 이슈" />
+<meta property="og:type" content="article" />
+
+<!-- =============== -->
+<!-- Google AdSense  -->
+<!-- =============== -->
+<script
+  data-ad-client="ca-pub-8247516864622650"
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+></script>
+
+ 
+<meta
+  property="og:image"
+  content="http://localhost:4000/assets//img/junit5-banner.png"
+/>
+<br />
+
+
+<meta property="og:image:width" content="640" />
+<meta property="og:image:height" content="360" />
+ 
+<title>JUnit 5 + Kotlin 테스트 클래스에서 생성자 주입 이슈 &middot; 도전하는 개발자</title>
+ 
+<meta
+  name="description"
+  content="서론
+
+"
+/>
+<meta
+  property="og:description"
+  content="서론
+
+"
+/>
+
+
+
+<!-- =============== -->
+<!-- LINKS           -->
+<!-- =============== -->
+<link rel="canonical" href="http://localhost:4000/framework/2020/06/28/JUnit-23/" />
+<meta property="og:url" content="http://localhost:4000/framework/2020/06/28/JUnit-23/" />
+
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="도전하는 개발자 Feed"
+  href="http://localhost:4000/feed.xml"
+/>
+
+
+<link rel="prev" href="http://localhost:4000/framework/2020/06/27/Spring-127/" />
+ 
+<link rel="next" href="http://localhost:4000/language/2020/07/03/Kotlin-14/" />
+
+
+<link
+  rel="apple-touch-icon"
+  href="http://localhost:4000/apple-touch-icon.png"
+/>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+<!-- Place favicon.ico in the root directory -->
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+<script>
+  !function(n,e){function t(n,e){n.onload=function(){this.onerror=this.onload=null,e(null,n)},n.onerror=function(){this.onerror=this.onload=null,e(new Error("Failed to load "+this.src),n)}}function o(n,e){n.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||(this.onreadystatechange=null,e(null,n))}}n._loaded=!1,n.loadJSDeferred=function(a,d){function r(){n._loaded=!0;var r=e.createElement("script");r.src=a,d&&(("onload"in r?t:o)(r,d),r.onload||t(r,d));var l=e.getElementsByTagName("script")[0];l.parentNode.insertBefore(r,l)}n._loaded?r():n.addEventListener?n.addEventListener("load",r,!1):n.attachEvent?n.attachEvent("onload",r):n.onload=r}}(window,document);
+
+  !function(e){"use strict";var n=function(n,t,o){function i(e){if(a.body)return e();setTimeout(function(){i(e)})}function r(){l.addEventListener&&l.removeEventListener("load",r),l.media=o||"all"}var d,a=e.document,l=a.createElement("link");if(t)d=t;else{var f=(a.body||a.getElementsByTagName("head")[0]).childNodes;d=f[f.length-1]}var s=a.styleSheets;l.rel="stylesheet",l.href=n,l.media="only x",i(function(){d.parentNode.insertBefore(l,t?d:d.nextSibling)});var u=function(e){for(var n=l.href,t=s.length;t--;)if(s[t].href===n)return e();setTimeout(function(){u(e)})};return l.addEventListener&&l.addEventListener("load",r),l.onloadcssdefined=u,u(r),l};"undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this);
+
+  !function(t){if(t.loadCSS){var e=loadCSS.relpreload={};if(e.support=function(){try{return t.document.createElement("link").relList.supports("preload")}catch(t){return!1}},e.poly=function(){for(var e=t.document.getElementsByTagName("link"),r=0;r<e.length;r++){var n=e[r];"preload"===n.rel&&"style"===n.getAttribute("as")&&(t.loadCSS(n.href,n,n.getAttribute("media")),n.rel=null)}},!e.support()){e.poly();var r=t.setInterval(e.poly,300);t.addEventListener&&t.addEventListener("load",function(){e.poly(),t.clearInterval(r)}),t.attachEvent&&t.attachEvent("onload",function(){t.clearInterval(r)})}}}(this);
+
+  window.disablePushState = false;
+  window.disableDrawer = false;
+</script>
+
+<!--[if lt IE 9]>
+  <script src="https://unpkg.com/html5shiv/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+<!-- =============== -->
+<!-- STYLES          -->
+<!-- =============== -->
+<!--[if gt IE 8]><!---->
+<style>
+  
+  article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}*{box-sizing:border-box}html,body{margin:0;padding:0}html{font-size:16px;line-height:1.75}body{color:#333;background-color:#fff;overflow-y:scroll}a{text-decoration:none}.lead{margin-left:-1rem;margin-right:-1rem}img,.img{display:block;max-width:100%;margin-bottom:1rem;border:none}img.lead,.img.lead{max-width:calc(100% + 2rem);width:calc(100% + 2rem)}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-weight:bold;text-rendering:optimizeLegibility}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{margin:1.6rem 0 1rem;line-height:1.6}h1,.h1{font-size:2rem;line-height:1.25}h2,.h2{font-size:1.5rem}h3,.h3{font-size:1.17em}p{margin-top:0;margin-bottom:1rem}p.lead{font-size:1.25rem;font-weight:300;padding:0 1rem}ul,ol,dl{margin-top:0;margin-bottom:1rem}ul,ol{padding-left:1.25rem}hr{position:relative;margin:1.5rem 0;border:0;border-top:1px solid #eee}.hr{padding-bottom:.5rem;border-bottom:1px solid #eee;margin-bottom:1.5rem}h4,h5,h6,.h4,.h5,.h6{margin-bottom:0.5rem;font-size:1rem}table{margin-bottom:1rem;width:100%;width:calc(100% + 2rem);margin-left:-1rem;border:1px solid #e5e5e5;border-collapse:collapse;border-spacing:0}td,th{padding:.25rem .5rem;border:1px solid #e5e5e5}td:first-child,th:first-child{padding-left:1rem}td:last-child,th:last-child{padding-right:1rem}thead+tbody,tbody+tbody,tfoot{border-top:3px double #e5e5e5}tbody tr:nth-child(odd) td,tbody tr:nth-child(odd) th{background-color:#f9f9f9}footer{margin-bottom:2rem}.page,.post{margin-bottom:3em}.page li+li,.post li+li{margin-top:.25rem}.page>header,.post>header{margin-bottom:2rem}.page-title,.post-title{margin-top:0}.post-date{display:block;margin-top:-0.5rem;margin-bottom:1rem;color:#9a9a9a}.related-posts{padding-left:0;list-style:none}.related-posts>li,.related-posts>li+li{margin-top:1rem}.related-posts>li>small,.related-posts>li+li>small{font-size:75%;color:#9a9a9a}.message{margin-bottom:1rem;padding:1rem;color:#787878;background-color:#f9f9f9;margin-left:-1rem;margin-right:-1rem}body,main{position:relative;overflow-x:hidden}@media screen{body::before{content:'';background:#e5e5e5;position:absolute;left:0;top:0;bottom:0}}@media screen and (min-width: 40em){html{font-size:17px}}@media screen and (min-width: 54em){html{font-size:16px}}@media screen and (min-width: 88em){html{font-size:17px}}@media screen and (min-width: 125em){html{font-size:18px}}.sr-only{display:none}.clearfix,.sidebar-social::after,.clearafter::after{content:"";display:table;clear:both}a,.a{position:relative;padding-bottom:.15rem;border-style:hidden}.img{overflow:hidden;background-color:#f9f9f9}.img>img{margin:0;width:100%;height:100%}.sixteen-nine{position:relative}.sixteen-nine::before{display:block;content:"";width:100%;padding-top:56.25%}.sixteen-nine>*{position:absolute;top:0;left:0;right:0;bottom:0}h1+hr,h2+hr,h3+hr,h4+hr,h5+hr,h6+hr{margin-top:0}.fade-in{animation-duration:500ms;animation-name:fade-in;animation-fill-mode:forwards}@keyframes fade-in{from{transform:translateY(-2rem);opacity:0}50%{transform:translateY(-2rem);opacity:0}to{transform:translateY(0);opacity:1}}.mb6{margin-bottom:10rem}.sidebar{color:rgba(255,255,255,0.75);text-align:left}.sidebar::before{content:"";position:absolute;z-index:2;top:0;left:0;bottom:0;right:0;background:linear-gradient(to bottom, rgba(32,32,32,0) 0%, rgba(32,32,32,0.5) 100%)}.sidebar a{color:#fff;border-bottom-color:rgba(255,255,255,0.2)}.right-side{width:100%;margin-left:auto;margin-right:auto}.right-side .ad-first{text-align:center}@media screen{.right-side{max-width:38rem;min-height:100vh}.right-side .ad-second{display:none}}@media screen and (min-width: 54em){.right-side{margin-left:20rem;margin-right:1rem;padding:4rem 1rem 12rem}.right-side .ad-second{text-align:center;display:block}}@media screen and (min-width: 72em){.right-side{margin-left:22rem;max-width:42rem}}@media screen and (min-width: 88em){.right-side{width:162px;margin-left:0rem;margin-right:0rem;padding:0rem;margin-top:10rem;display:block;float:left}}@media screen and (min-width: 96em){.right-side{width:300px;margin-right:0rem}}#_yDrawer{position:relative}@media screen{#_yDrawer{min-height:640px;min-height:100vh}}@media screen and (min-width: 54em){#_yDrawer{width:18rem;margin-left:0}}.sidebar-bg{position:absolute;height:100%;overflow:hidden;top:0;right:0;bottom:0;left:0;background:#202020 center / cover}.sidebar-box{display:flex;justify-content:center}.sidebar-sticky{position:relative;z-index:3}@media screen{.sidebar-sticky{-ms-overflow-style:none;overflow:-moz-scrollbars-none;height:100%;overflow:auto;position:absolute;padding:3rem 0rem;right:2.5rem;left:2.5rem}}.sidebar-sticky::-webkit-scrollbar{display:none}.sidebar-about>h1{color:#fff;font-size:2rem}.sidebar-nav>ul{list-style:none;padding-left:0;margin-bottom:.5rem}a.sidebar-nav-item{width:100%;font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}a.sidebar-nav-subitem{font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}@media screen{.y-drawer-scrim{z-index:2}.y-drawer-content{width:18rem;left:-18rem;z-index:3}}.sidebar-social{margin-bottom:.5rem}.sidebar-social>ul{list-style:none;padding-left:0;margin:0 -.25rem}.sidebar-social>ul>li{float:left}.sidebar-social>ul>li>a{display:inline-block;text-align:center;font-size:1.6rem;line-height:3rem;width:3.1249rem;height:4rem;padding:.5rem 0}.sidebar-social>ul li+li{margin-top:0}.fixed-top{position:fixed;top:0;left:0;width:100%;z-index:1}.navbar>.content{padding-top:0;padding-bottom:0;min-height:0;height:0}.menu{display:inline-block;padding:1.75rem 1.5rem;border-bottom:none;margin-left:-1.5rem;color:#9a9a9a !important}.menu::after{content:"\2630"}@media screen and (min-width: 54em){.menu{padding:1.25rem 1.5rem;position:absolute;left:-9999px}.menu:focus{position:static}}.animation-main{pointer-events:none}.loading{display:none}@media print{.menu{display:none}}.animation-main{opacity:0;will-change:opacity}.loading{position:absolute;top:0;right:0;padding:5.25rem 4.5rem;transform-origin:top right;transform:scale(0.33)}.content{position:relative;margin-left:auto;margin-right:auto;padding:5rem 1rem 12rem}@media screen{.content{min-height:100vh}}@media screen and (min-width: 54em){.content{padding:4rem 1rem 12rem;margin-left:19rem;margin-right:3rem}}@media screen and (min-width: 72em){.content{max-width:42rem;margin-left:21rem}}@media screen and (min-width: 88em){.content{float:left;width:100%;margin-left:22rem;margin-right:5rem}}@media screen and (min-width: 96em){.content{max-width:44rem}}@media screen and (min-width: 102em){.content{margin-left:25rem;margin-right:8rem}}.me{width:6.5rem;height:6.5rem;align-self:center;margin-right:20px;border-radius:100%;position:relative}@media screen and (min-width: 40em){.me{width:7rem;height:7rem}}@media screen and (min-width: 54em){.me{width:6.5rem;height:6.5rem}}@media screen and (min-width: 72em){.me{width:7rem;height:7rem}}main>footer{width:100%;position:absolute;bottom:0;left:0;right:0;padding:0 1rem;color:#9a9a9a;font-size:smaller;text-align:center}main>footer>p{margin-bottom:0}html{font-family:'Sans-serif'}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-family:'Sans-serif'}
+
+</style>
+
+
+<link
+  rel="preload"
+  href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0"
+  as="style"
+  onload="this.rel='stylesheet'"
+/>
+
+<style id="_pageStyle">
+
+.content a{color:#4f86aa;border-color:rgba(79,134,170,0.2)}.content a:hover{border-color:#4f86aa}:focus{outline-color:#4f86aa}::selection{color:#fff;background:#4f86aa}::-moz-selection{color:#fff;background:#4f86aa}
+
+</style>
+
+
+<noscript>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0" />
+    
+  
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Lato"
+  />
+  <style>
+    html { font-family: 'Lato', 'Sans-serif' }
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .heading { font-family: 'Lato', 'Sans-serif' }
+  </style>
+   
+  <link rel="stylesheet" href="http://localhost:4000/assets/icomoon/style.css" />
+</noscript>
+<!--<![endif]-->
+
+</head>
+
+<body>
+  <!-- =============== -->
+<!-- MENU            -->
+<!-- =============== -->
+<div class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <a id="_menu" class="menu no-hover" href="#_title">
+      <span class="sr-only">Menu</span>
+    </a>
+  </div>
+</div>
+
+<!-- =============== -->
+<!-- CONTENT         -->
+<!-- =============== -->
+<div id="_yPushState">
+  <div class="fade-in">
+    <main
+      id="_main"
+      class="content"
+      role="main"
+      data-color="#4f86aa"
+      data-image="/assets/img/bg.jpg"
+    >
+      
+
+<article id="post-framework/2020/06/28/JUnit-23" class="post" role="article">
+  <header>
+    <h1 class="post-title">
+      
+        JUnit 5 + Kotlin 테스트 클래스에서 생성자 주입 이슈
+        
+    </h1>
+
+    <p class="post-date heading">
+      <time datetime="2020-06-28T00:00:00+09:00">28 Jun 2020</time>
+      
+
+
+
+
+
+
+
+
+
+in <a href="/category/framework/" data-flip="title">Framework</a>
+
+      
+
+
+
+
+
+
+
+
+
+on <a href="/tag/framework-junit/" data-flip="title">JUnit</a>
+
+    </p>
+
+    
+  <div class="hr" style="padding-bottom:0"></div>
+
+
+  </header>
+  
+
+
+  
+  <div class="markdown-body">
+
+    <!-- 
+    <div class="head-image"><img src="http://localhost:4000/assets//img/junit5-banner.png" /></div>
+    <br /> -->
+    <style>
+      .myAd1190 {
+        width: 48%;
+        height: 280px;
+      }
+
+      .myAd1290 {
+        width: 48%;
+        height: 280px;
+      }
+
+      @media(max-width: 800px) {
+        .myAd1190 {
+          display: none;
+        }
+
+        .myAd1290 {
+          width: 98%;
+        }
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 300px;
+      }
+
+      .row-center {
+        display: flex;
+        justify-content: center;
+        height: 258px;
+      }
+    </style>
+   
+    <!--<br />-->
+    <h2 id="서론">서론</h2>
+
+<p>제가 현재 근무하고 있는 카카오 엔터프라이즈 AI 서비스 플랫폼실 서버개발팀은 테스트 코드의 중요성을 강조하는 팀입니다.</p>
+
+<p>보다 퀄리티 높은 코드와 보다 편리한 문서 작업을 위해 (Spring RestDocs) 테스트 코드를 잘 작성하는 것은 개발자의 기본이자 미덕이지요.</p>
+
+<p>그러나 저같은 0년차 주니어 개발자 입장에서 스프링은 여전히 어렵고 JUnit이라는 테스트 프레임워크는 낯선데다가, Kotlin이라는 언어는 더 생소하기까지 합니다.</p>
+
+<p>그래서 테스트 코드를 작성하는 일이 쉽지 않았으며 지금도 여전히 테스트 코드와 씨름을 하면서 TDD라는 꿈을 향해 달려가고 있습니다.</p>
+
+<h2 id="문제-상황">문제 상황</h2>
+
+<p>테스트 코드에서 생성자를 이용하여 빈 객체를 주입받으려고 했으나 오류가 발생한 것이 문제의 발단입니다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@SpringBootTest</span>
+<span class="nd">@AutoConfigureMockMvc</span>
+<span class="kd">class</span> <span class="nc">PostControllerTest</span> <span class="p">(</span>
+        <span class="kd">val</span> <span class="py">mockMvc</span><span class="p">:</span> <span class="nc">MockMvc</span><span class="p">,</span>
+        <span class="kd">val</span> <span class="py">postRepository</span><span class="p">:</span> <span class="nc">PostRepository</span>
+<span class="p">){</span>
+
+
+    <span class="nd">@Test</span>
+    <span class="k">fun</span> <span class="nf">getPost</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">val</span> <span class="py">post</span> <span class="p">=</span> <span class="nc">Post</span><span class="p">()</span>
+        <span class="n">post</span><span class="p">.</span><span class="n">title</span> <span class="p">=</span> <span class="s">"jpa"</span>
+        <span class="n">postRepository</span><span class="p">.</span><span class="nf">save</span><span class="p">(</span><span class="n">post</span><span class="p">)</span>
+
+        <span class="n">mockMvc</span><span class="p">.</span><span class="nf">perform</span><span class="p">(</span>
+                <span class="k">get</span><span class="p">(</span><span class="s">"/posts/${post.id}"</span><span class="p">)</span>
+                        <span class="p">.</span><span class="nf">contentType</span><span class="p">(</span><span class="nc">MediaType</span><span class="p">.</span><span class="nc">APPLICATION_JSON</span><span class="p">))</span>
+                <span class="p">.</span><span class="nf">andDo</span><span class="p">(</span><span class="nf">print</span><span class="p">())</span>
+                <span class="p">.</span><span class="nf">andExpect</span><span class="p">(</span><span class="nf">status</span><span class="p">().</span><span class="n">isOk</span><span class="p">)</span>
+                <span class="p">.</span><span class="nf">andExpect</span><span class="p">(</span><span class="nf">content</span><span class="p">().</span><span class="nf">string</span><span class="p">(</span><span class="s">"jpa"</span><span class="p">))</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>분명 코틀린 생성자 주입을 메인 코드에서 썼을 때는 잘 됐었는데 왜 테스트코드에서는 실패하는 것인지 의아했습니다.</p>
+
+<p>설상 가상으로 Intellij의 빈(콩) 아이콘도 나오지 않았습니다.</p>
+
+<p><img width="451" alt="스크린샷 2020-06-28 오전 2 03 12" src="https://user-images.githubusercontent.com/43809168/85927817-86fc7380-b8e3-11ea-9824-17a62c42fca6.png" /></p>
+
+<p><br /></p>
+<center>어딨니 콩아..</center>
+<p><br /></p>
+
+<p>이 때 느낌적인 느낌으로 뭔가 빈 주입이 안되고 있음을 느끼긴 했지만 왜 그런가 계속 고민하고 있었습니다.</p>
+
+<p>그 때 같은 팀 개발자 PJ가 비슷한 상황을 이전에 겪어보셨다고 하셔서 다음과 같이 코드를 수정해주셨습니다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@SpringBootTest</span>
+<span class="nd">@AutoConfigureMockMvc</span>
+<span class="kd">class</span> <span class="nc">PostControllerTest</span> <span class="nd">@Autowired</span> <span class="k">constructor</span><span class="p">(</span>
+        <span class="kd">val</span> <span class="py">mockMvc</span><span class="p">:</span> <span class="nc">MockMvc</span><span class="p">,</span>
+        <span class="kd">val</span> <span class="py">postRepository</span><span class="p">:</span> <span class="nc">PostRepository</span>
+<span class="p">){</span>
+
+
+    <span class="nd">@Test</span>
+    <span class="k">fun</span> <span class="nf">getPost</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">val</span> <span class="py">post</span> <span class="p">=</span> <span class="nc">Post</span><span class="p">()</span>
+        <span class="n">post</span><span class="p">.</span><span class="n">title</span> <span class="p">=</span> <span class="s">"jpa"</span>
+        <span class="n">postRepository</span><span class="p">.</span><span class="nf">save</span><span class="p">(</span><span class="n">post</span><span class="p">)</span>
+
+        <span class="n">mockMvc</span><span class="p">.</span><span class="nf">perform</span><span class="p">(</span>
+                <span class="k">get</span><span class="p">(</span><span class="s">"/posts/${post.id}"</span><span class="p">)</span>
+                        <span class="p">.</span><span class="nf">contentType</span><span class="p">(</span><span class="nc">MediaType</span><span class="p">.</span><span class="nc">APPLICATION_JSON</span><span class="p">))</span>
+                <span class="p">.</span><span class="nf">andDo</span><span class="p">(</span><span class="nf">print</span><span class="p">())</span>
+                <span class="p">.</span><span class="nf">andExpect</span><span class="p">(</span><span class="nf">status</span><span class="p">().</span><span class="n">isOk</span><span class="p">)</span>
+                <span class="p">.</span><span class="nf">andExpect</span><span class="p">(</span><span class="nf">content</span><span class="p">().</span><span class="nf">string</span><span class="p">(</span><span class="s">"jpa"</span><span class="p">))</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">@Autowired constructor</code>를 추가하자 이제 IDE에서 콩모양도 잘 보이기 시작했습니다.</p>
+
+<p><img width="503" alt="스크린샷 2020-06-28 오전 1 09 08" src="https://user-images.githubusercontent.com/43809168/85926685-0e45e900-b8dc-11ea-815c-7122b48b1bc1.png" /></p>
+
+<p>환호도 잠시 저는 깊은 생각에 빠졌습니다.</p>
+
+<p>왜 <code class="language-plaintext highlighter-rouge">@Autowired constructor</code>을 붙여야지만 빈 주입이 되는가..?</p>
+
+<p>그렇습니다.</p>
+
+<p>여러분도 잘 아시는 개발자의 딜레마가 시작된 것이지요.</p>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/85926725-477e5900-b8dc-11ea-9d60-808263b1a8f3.jpeg" alt="112" />
+<br />
+<img src="https://user-images.githubusercontent.com/43809168/85926727-4816ef80-b8dc-11ea-985e-a2f27b5010c2.jpg" alt="5555" /></p>
+
+<center>어 되네? 어 안되네? </center>
+<p><br /></p>
+
+<p>다행히 학부생 시절부터 이런 짤들을 너무 많이 봐왔었기 때문에 저같은 개발자가 한 두명이 아닐 것이라는 것이 조금이나마 위안이 되었습니다.</p>
+
+<p>그래서 차분하게 집에와서 문제를 파헤치기 시작했고 그 나름의 답을 찾아서 지금부터 공유를 드리고자 합니다. (잘못된 부분이 있으면 피드백 부탁드립니다.)</p>
+
+<p>그럼 지금부터 논리적으로 이 문제가 왜 발생했으며 왜 해결됐는지를 하나씩 살펴보도록 하겠습니다.</p>
+
+<h2 id="에러로그를-읽어보자">에러로그를 읽어보자</h2>
+
+<p>PJ가 저의 코드를 봐주시면서 하셨던 말씀은</p>
+
+<p><strong>이럴 땐 에러 로그를 잘 봐야해요 해리, 여기에 답이 있어요.</strong></p>
+
+<p>라는 말씀이 기억납니다.</p>
+
+<p>당시에는 빈 주입 외에도 다른 복잡하게 얽힌 다른 에러들이 있어 지금보다 훨씬 에러 로그가 길었습니다. (그래서 약간 멘붕하기도 했습니다.)</p>
+
+<p>지금 여러분들에게 공유하는 에러는 당시 발생한 여러 에러들 중 오늘 주제에 대한 에러<strong>만</strong> 재현해서 보여드리고자 합니다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>org.junit.jupiter.api.extension.ParameterResolutionException: No ParameterResolver registered for parameter [org.springframework.test.web.servlet.MockMvc mockMvc] in constructor [public me.harry.jpa.PostControllerTest(org.springframework.test.web.servlet.MockMvc,me.harry.jpa.PostRepository)].
+</code></pre></div></div>
+
+<p>대략 Jupiter가 해당 파라미터에 대해 등록된 ParameterResolver가 없다는 예외를 내뱉고 있었습니다.</p>
+
+<p>우선 Jupiter란게 정확히 무엇이며 왜 저런 예외를 발생시키는지에 대해서 알아야했습니다.</p>
+
+<p>저는 문제를 해결하기에 앞서 간략히 JUnit 5의 구조에 대해서도 공부를 해야할 필요성을 느꼈습니다.</p>
+
+<p>JUnit 5는 어떻게 구성되어있는지 Jupiter의 역할은 정확히 무엇인지에 대해 알아야 이 문제의 해결에 실마리를 잡을 수 있을 것 같았습니다.</p>
+
+<p>그래서 다음 부분은 JUnit 5의 구조에 대한 설명을 하려고 합니다. (이미 알고 계신분들은 스킵하시면 됩니다. 여러분의 시간은 소중하니까요.)</p>
+
+<h2 id="junit-5-architecture">JUnit 5 Architecture</h2>
+
+<p>JUnit 5의 Architecture 크게 세 부분으로 나뉘어 집니다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Jupiter</code>, <code class="language-plaintext highlighter-rouge">Vintage</code>, <code class="language-plaintext highlighter-rouge">JUnit Platform</code></p>
+
+<p><img width="994" alt="스크린샷 2020-06-28 오전 1 22 36" src="https://user-images.githubusercontent.com/43809168/85926964-dd66b380-b8dd-11ea-8567-28b8919b9af8.png" /></p>
+
+<p><br /></p>
+
+<p>각각 하나씩 자세히 알아보자면,</p>
+
+<p><strong>JUnit Platform</strong>은 테스트를 실행할 수 있는 엔진을 포함하고 여러 Tool(콘솔, 이클립스, Intellij등의 IDE)에 일관성 있는 API를 제공해주는 역할을 담당합니다.</p>
+
+<p><strong>Jupiter</strong>와 <strong>Vintage</strong> 모두 <strong>JUnit Platform</strong>을 구현하는 구현체입니다.</p>
+
+<p>차이점이 있다면 <strong>Jupiter</strong>는 <code class="language-plaintext highlighter-rouge">JUnit 5</code>의 구현체이며 Vintage는 이름만 들어도 느껴지지만 하위 버전(JUnit 4, JUnit 3)들에 대한 지원을 위해 구현된 구현체 입니다.</p>
+
+<p>그래서 우리는 일반적으로 <code class="language-plaintext highlighter-rouge">JUnit 5</code>로 테스트 코드를 작성한다고 하면 <strong>Jupiter</strong>를 사용한다고 생각하면 되겠습니다.</p>
+
+<p>여담이지만 JUnit팀이 이러한 <strong>JUnit Platform</strong>을 기반으로 구현체를 만드는 방식을 사용한 이유가 있습니다.</p>
+
+<p>Jupiter나 Vintage처럼 다른 써드파티 구현체들이 <strong>JUnit Platform</strong>의 스펙을 준수해서 API를 구현하게 해서</p>
+
+<p>오픈소스 기반으로 개발자 생태계에 JUnit이 기여하고 똑똑한 개발자들이 <strong>JUnit Platform</strong>을 기반으로 한 창의적인 테스트 프레임워크를 개발하기를 바랬기 때문입니다.</p>
+
+<p>그에 따른 여러 JUnit 기반 오픈소스 테스트 프레임워크들도 속속 등장하고 있습니다. (Spec, Specsy 등등)</p>
+
+<p>이는 결국 JUnit이라는 테스트 프레임워크 생태계를 구축하고 넓히려는데 그 목적이 있다고 볼 수 있겠습니다. (이미 자바 테스트 프레임워크 점유율 90% 이상인데…)</p>
+
+<h2 id="그렇다면-jupiter는-왜-parameterresolver를-못찾는가">그렇다면 Jupiter는 왜 ParameterResolver를 못찾는가?</h2>
+
+<p>생성자 매개변수의 경우 메인 코드라면 Spring IoC 컨테이너가 이를 해결합니다.</p>
+
+<p>스프링 프레임워크의 Application Context는 등록할 빈들을 찾아서 저장했다가 적절한 시점에 빈을 생성자에 주입하는 방식인 것은 다들 알고 계실 것입니다.</p>
+
+<p>그렇기 때문에 Kotlin의 생성자는 <code class="language-plaintext highlighter-rouge">@Autowired</code> 애노테이션 없이도 스프링 컨테이너가 알아서 잘 생성자 주입을 해왔던 것이지요.</p>
+
+<p>그러나 테스트 코드의 경우 조금 다릅니다.</p>
+
+<p>테스트 프레임워크에서의 생성자 매개변수 관리는 스프링 컨테이너가 아닌 <code class="language-plaintext highlighter-rouge">Jupiter</code>가 담당합니다.</p>
+
+<p>그래서 <code class="language-plaintext highlighter-rouge">@Autowired</code>를 명시적으로 선언해주어야 <code class="language-plaintext highlighter-rouge">Jupiter</code>가 Spring Container에게 빈 주입을 요청할 수 있게 되는 것이지요.</p>
+
+<p>테스트 프레임워크에서 프레임워크의 주체는 <code class="language-plaintext highlighter-rouge">Jupiter</code>이기 때문에 아무리 생성자 주입이라 한들 <code class="language-plaintext highlighter-rouge">@Autowired</code> 애노테이션이 명시되지 않은 객체는 의존성 주입을 받을 수 없게 되는 것이지요.</p>
+
+<p>최종적으로 <code class="language-plaintext highlighter-rouge">Jupiter</code>는 자기 딴에는 열심히 생성자 매개변수를 처리할 ParamterResolver를 뒤져보지만 그런게 있을리 없고, 결국 예외를 뱉게 되는 것이죠.</p>
+
+<p><img width="1597" alt="스크린샷 2020-06-28 오전 1 48 52" src="https://user-images.githubusercontent.com/43809168/85927552-c924b580-b8e1-11ea-8aa7-4f1d21ebcbea.png" />
+<img width="1065" alt="스크린샷 2020-06-28 오전 1 48 57" src="https://user-images.githubusercontent.com/43809168/85927546-c32ed480-b8e1-11ea-96f7-d1241ab2f384.png" />
+<img width="1704" alt="스크린샷 2020-06-28 오전 1 50 13" src="https://user-images.githubusercontent.com/43809168/85927543-c033e400-b8e1-11ea-86f1-813cf2bd2fd1.png" />
+<img width="1100" alt="스크린샷 2020-06-28 오전 1 50 16" src="https://user-images.githubusercontent.com/43809168/85927555-d2158700-b8e1-11ea-8af6-3a2353b8b84f.png" /></p>
+
+<h2 id="마치며">마치며</h2>
+
+<p>프레임워크의 사전적 의미는 뼈대라는 뜻이 있지만, 소프트웨어에서 프레임워크와 라이브러리의 차이를 이야기할 때 <strong>누가 코드를 컨트롤 하고 있느냐</strong>로 프레임워크인지, 라이브러리인지가 결정됩니다.</p>
+
+<p>즉 제가 이 문제에서 헤맸던 이유도 테스트 프레임워크에서 코드를 컨트롤 하는 주체가 누구인지를 몰랐기 때문에 발생했던 문제였던 것이라고 생각합니다.</p>
+
+<p>어쨌든 이번 기회로 많은 것들을 배울 수 있었는데 혼자 알게된 것 보다는 나눠서 더 많은 사람들에게 도움이 됐으면 하는 바램으로 이 글을 작성해보았습니다.</p>
+
+<p>비록 부족한 글이지만 누군가에게는 도움이 되셨기를 바라며 글을 마치겠습니다.</p>
+
+<p>끝으로 문제 해결에 도움을 주신 PJ에게 진심으로 다시 한번 감사드립니다.</p>
+
+<h2 id="reference">Reference</h2>
+
+<p>더 자바, 애플리케이션을 테스트하는 다양한 방법 - 백기선님</p>
+
+<p>https://blog.codefx.org/design/architecture/junit-5-architecture-jupiter/#JUnit-5</p>
+
+<p><a href="https://stackoverflow.com/questions/62609314/what-is-difference-between-using-and-not-using-autowired-constructor-in-springb/62609684#62609684">모르면 물어봐야지</a></p>
+
+    <br />
+    <br />
+  </div>
+  
+
+</article>
+
+<!--<hr class="dingbat" />-->
+<!--
+<div class="share">
+  <h2>Share this post</h2>
+  <div class="share-body">
+    <a href="http://twitter.com/share?text=JUnit 5 + Kotlin 테스트 클래스에서 생성자 주입 이슈&amp;url=http://localhost:4000/framework/2020/06/28/JUnit-23/"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="icon-twitter">
+      </span>
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/framework/2020/06/28/JUnit-23/"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="icon-facebook">
+      </span>
+    </a>
+  </div>
+</div>
+-->
+<br />
+
+
+
+
+<aside class="related" role="complementary">
+  <h2 class="hr">Related Posts</h2>
+
+  <ul class="related-posts">
+    
+      
+      
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/framework/2022/03/16/JPA-31/" data-flip="title">
+    <span>시간 관련 트러블 슈팅</span>
+  </a>
+  <small><time datetime="2022-03-16T00:00:00+09:00">
+    16 Mar 2022
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/framework/2021/05/23/Spring/" data-flip="title">
+    <span>Spring의 @Transactional과 AOP 그리고 CGLib와 Dynamic Proxy(JDK Proxy)</span>
+  </a>
+  <small><time datetime="2021-05-23T00:00:00+09:00">
+    23 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/framework/2021/05/22/Spring/" data-flip="title">
+    <span>Springboot 테스트 코드 한글 깨짐 현상 (feat. JUnit 5)</span>
+  </a>
+  <small><time datetime="2021-05-22T00:00:00+09:00">
+    22 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+      
+    
+  </ul>
+</aside>
+  <aside class="comments" role="complementary">
+  <h2>Comments</h2>
+  <hr/>
+
+  <script src="https://utteranc.es/client.js"
+    repo="minkukjo/minkukjo.github.io"
+    issue-term="title"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</aside>
+
+       <footer>
+  <hr/>
+  
+    <p>© 2022. by minkuk</p>
+
+  
+  <p>
+    <code>Powered by <a href="https://minkukjo.github.io/">minkuk</a></code>
+  </p>
+</footer>
+
+    </main>
+    <div class="right-side">
+  <div class="add-first">
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+    ></script>
+    <!-- 우측 광고 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="9124111205"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+  <br />
+  <br />
+  <div class="add-second">
+    <!-- 우측 광고2 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="5156946039"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+
+  </div>
+  <div id="_yDrawer">
+  <div id="_sidebar" class="sidebar">
+    <div class="sidebar-bg" style="background-color:#4f86aa;background-image:url(/assets/img/bg.jpg)"></div>
+    <header class="sidebar-sticky" role="banner">
+      <br/>
+      <div class="sidebar-about">
+        <h1><a id="_title" href="/">도전하는 개발자</a></h1>
+        
+
+      </div>
+
+      <br/>
+      <br/>
+      <nav class="sidebar-nav heading" role="navigation">
+        <span class="sr-only">Navigation:</span>
+<ul>
+  
+
+  
+
+  
+  
+  
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-1"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/life/">Life</a>
+       <label class="folder" for="list-item-1">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-daily/">Daily</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-review/">Review</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-books/">Books</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-2"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/computer-science/">Computer Science</a>
+       <label class="folder" for="list-item-2">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-algorithm/">Algorithm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-oop/">OOP</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-network/">Network</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-db/">Database</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-ai/">AI</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-security/">Security</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-distribution-system/">Distribution System</a>
+             </li>
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-3"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/programming-language/">Programming Language</a>
+       <label class="folder" for="list-item-3">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-kotlin/">Kotlin</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-go/">Go</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-java/">Java</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-javascript/">JavaScript</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-typescript/">TypeScript</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-4"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/framework/">Framework</a>
+       <label class="folder" for="list-item-4">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring/">Spring</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-data-jpa/">Spring Data JPA</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-security/">Spring Security</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-junit/">JUnit</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-5"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/language/">Language</a>
+       <label class="folder" for="list-item-5">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/language-english/">English</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-6"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/development/">Development</a>
+       <label class="folder" for="list-item-6">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-ddd/">DDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-tdd/">TDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-clean-code/">Clean Code</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-git/">Git</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-7"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/devops/">Devops</a>
+       <label class="folder" for="list-item-7">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-alarm/">Alarm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-ansible/">Ansible</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-cicd/">CI/CD</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-docker/">Docker</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-es/">Elasticsearch</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-k8s/">Kubernetes</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-public-cloud/">Public Cloud</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-kafka/">Kafka</a>
+             </li>
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-8"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/opensource/">Open Source</a>
+       <label class="folder" for="list-item-8">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/opensource-opensource/">Open Source</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-9"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/about/">About</a>
+       
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+</ul>
+
+      </nav>
+    <br/>
+    <br/>
+      <div class="sidebar-box">
+        
+      </div>
+      <p>매일 매일 한계를 뛰어넘기 위한 도전을 즐기는 개발자</p>
+
+      
+      
+        <div class="sidebar-social">
+          <span class="sr-only">Social:</span>
+<ul>
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://github.com/minkukjo">
+    <span class="icon-github" title="GitHub"></span>
+    <span class="sr-only">GitHub</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://www.linkedin.com/in/민국-조-567052166">
+    <span class="icon-linkedin2" title="LinkedIn"></span>
+    <span class="sr-only">LinkedIn</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:harrycode@kakao.com">
+    <span class="icon-mail" title="Email"></span>
+    <span class="sr-only">Email</span>
+  </a>
+</li>
+
+  
+</ul>
+
+        </div>
+      
+    </header>
+  </div>
+</div>
+</div>
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-158654037-1', 'auto');
+  ga('send', 'pageview');
+  loadJSDeferred('https://www.google-analytics.com/analytics.js');
+</script>
+
+
+
+
+
+<!--[if gt IE 8]><!---->
+<script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+  WebFont.load({
+    
+    google: {
+      families: 'Lato'.split('|')
+    },
+    
+
+    custom: {
+      families: ['icomoon'],
+      urls: ['/assets/icomoon/style.css']
+    }
+  });
+</script>
+<!--<![endif]-->
+
+
+  <!--[if gt IE 9]><!---->
+  
+  <script>loadJSDeferred('/assets/js/hydejack.js?v=6.4.0');</script>
+
+  
+  <!--<![endif]-->
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,1939 @@
+<!DOCTYPE html>
+<html lang="en"><!--
+ __  __                __                                     __
+/\ \/\ \              /\ \             __                    /\ \
+\ \ \_\ \   __  __    \_\ \      __   /\_\      __       ___ \ \ \/'\
+ \ \  _  \ /\ \/\ \   /'_` \   /'__`\ \/\ \   /'__`\    /'___\\ \ , <
+  \ \ \ \ \\ \ \_\ \ /\ \L\ \ /\  __/  \ \ \ /\ \L\.\_ /\ \__/ \ \ \\`\
+   \ \_\ \_\\/`____ \\ \___,_\\ \____\ _\ \ \\ \__/.\_\\ \____\ \ \_\ \_\
+    \/_/\/_/ `/___/> \\/__,_ / \/____//\ \_\ \\/__/\/_/ \/____/  \/_/\/_/
+                /\___/                \ \____/
+                \/__/                  \/___/
+
+Powered by Hydejack v6.4.0 (https://qwtel.com/hydejack/)
+-->
+
+
+
+
+
+
+
+
+
+<head>
+  <!-- =============== -->
+<!-- META            -->
+<!-- =============== -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta
+  name="naver-site-verification"
+  content="22c5b4ef3bfda7fc6100671413989219de7a4ac8"
+/>
+<meta property="og:title" content="DDD 도메인 주도 설계 2장" />
+<meta property="og:type" content="article" />
+
+<!-- =============== -->
+<!-- Google AdSense  -->
+<!-- =============== -->
+<script
+  data-ad-client="ca-pub-8247516864622650"
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+></script>
+
+ 
+<meta property="og:image" content="http://localhost:4000/assets/img/logo.png" />
+
+
+<meta property="og:image:width" content="640" />
+<meta property="og:image:height" content="360" />
+ 
+<title>DDD 도메인 주도 설계 2장 &middot; 도전하는 개발자</title>
+ 
+<meta
+  name="description"
+  content="DDD - 도메인 주도 설계
+
+"
+/>
+<meta
+  property="og:description"
+  content="DDD - 도메인 주도 설계
+
+"
+/>
+
+
+
+<!-- =============== -->
+<!-- LINKS           -->
+<!-- =============== -->
+<link rel="canonical" href="http://localhost:4000/dev/2020/11/02/DDD-02/" />
+<meta property="og:url" content="http://localhost:4000/dev/2020/11/02/DDD-02/" />
+
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="도전하는 개발자 Feed"
+  href="http://localhost:4000/feed.xml"
+/>
+
+
+<link rel="prev" href="http://localhost:4000/dev/2020/11/01/DDD-01/" />
+ 
+<link rel="next" href="http://localhost:4000/dev/2020/11/04/DDD-03/" />
+
+
+<link
+  rel="apple-touch-icon"
+  href="http://localhost:4000/apple-touch-icon.png"
+/>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+<!-- Place favicon.ico in the root directory -->
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+<script>
+  !function(n,e){function t(n,e){n.onload=function(){this.onerror=this.onload=null,e(null,n)},n.onerror=function(){this.onerror=this.onload=null,e(new Error("Failed to load "+this.src),n)}}function o(n,e){n.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||(this.onreadystatechange=null,e(null,n))}}n._loaded=!1,n.loadJSDeferred=function(a,d){function r(){n._loaded=!0;var r=e.createElement("script");r.src=a,d&&(("onload"in r?t:o)(r,d),r.onload||t(r,d));var l=e.getElementsByTagName("script")[0];l.parentNode.insertBefore(r,l)}n._loaded?r():n.addEventListener?n.addEventListener("load",r,!1):n.attachEvent?n.attachEvent("onload",r):n.onload=r}}(window,document);
+
+  !function(e){"use strict";var n=function(n,t,o){function i(e){if(a.body)return e();setTimeout(function(){i(e)})}function r(){l.addEventListener&&l.removeEventListener("load",r),l.media=o||"all"}var d,a=e.document,l=a.createElement("link");if(t)d=t;else{var f=(a.body||a.getElementsByTagName("head")[0]).childNodes;d=f[f.length-1]}var s=a.styleSheets;l.rel="stylesheet",l.href=n,l.media="only x",i(function(){d.parentNode.insertBefore(l,t?d:d.nextSibling)});var u=function(e){for(var n=l.href,t=s.length;t--;)if(s[t].href===n)return e();setTimeout(function(){u(e)})};return l.addEventListener&&l.addEventListener("load",r),l.onloadcssdefined=u,u(r),l};"undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this);
+
+  !function(t){if(t.loadCSS){var e=loadCSS.relpreload={};if(e.support=function(){try{return t.document.createElement("link").relList.supports("preload")}catch(t){return!1}},e.poly=function(){for(var e=t.document.getElementsByTagName("link"),r=0;r<e.length;r++){var n=e[r];"preload"===n.rel&&"style"===n.getAttribute("as")&&(t.loadCSS(n.href,n,n.getAttribute("media")),n.rel=null)}},!e.support()){e.poly();var r=t.setInterval(e.poly,300);t.addEventListener&&t.addEventListener("load",function(){e.poly(),t.clearInterval(r)}),t.attachEvent&&t.attachEvent("onload",function(){t.clearInterval(r)})}}}(this);
+
+  window.disablePushState = false;
+  window.disableDrawer = false;
+</script>
+
+<!--[if lt IE 9]>
+  <script src="https://unpkg.com/html5shiv/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+<!-- =============== -->
+<!-- STYLES          -->
+<!-- =============== -->
+<!--[if gt IE 8]><!---->
+<style>
+  
+  article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}*{box-sizing:border-box}html,body{margin:0;padding:0}html{font-size:16px;line-height:1.75}body{color:#333;background-color:#fff;overflow-y:scroll}a{text-decoration:none}.lead{margin-left:-1rem;margin-right:-1rem}img,.img{display:block;max-width:100%;margin-bottom:1rem;border:none}img.lead,.img.lead{max-width:calc(100% + 2rem);width:calc(100% + 2rem)}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-weight:bold;text-rendering:optimizeLegibility}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{margin:1.6rem 0 1rem;line-height:1.6}h1,.h1{font-size:2rem;line-height:1.25}h2,.h2{font-size:1.5rem}h3,.h3{font-size:1.17em}p{margin-top:0;margin-bottom:1rem}p.lead{font-size:1.25rem;font-weight:300;padding:0 1rem}ul,ol,dl{margin-top:0;margin-bottom:1rem}ul,ol{padding-left:1.25rem}hr{position:relative;margin:1.5rem 0;border:0;border-top:1px solid #eee}.hr{padding-bottom:.5rem;border-bottom:1px solid #eee;margin-bottom:1.5rem}h4,h5,h6,.h4,.h5,.h6{margin-bottom:0.5rem;font-size:1rem}table{margin-bottom:1rem;width:100%;width:calc(100% + 2rem);margin-left:-1rem;border:1px solid #e5e5e5;border-collapse:collapse;border-spacing:0}td,th{padding:.25rem .5rem;border:1px solid #e5e5e5}td:first-child,th:first-child{padding-left:1rem}td:last-child,th:last-child{padding-right:1rem}thead+tbody,tbody+tbody,tfoot{border-top:3px double #e5e5e5}tbody tr:nth-child(odd) td,tbody tr:nth-child(odd) th{background-color:#f9f9f9}footer{margin-bottom:2rem}.page,.post{margin-bottom:3em}.page li+li,.post li+li{margin-top:.25rem}.page>header,.post>header{margin-bottom:2rem}.page-title,.post-title{margin-top:0}.post-date{display:block;margin-top:-0.5rem;margin-bottom:1rem;color:#9a9a9a}.related-posts{padding-left:0;list-style:none}.related-posts>li,.related-posts>li+li{margin-top:1rem}.related-posts>li>small,.related-posts>li+li>small{font-size:75%;color:#9a9a9a}.message{margin-bottom:1rem;padding:1rem;color:#787878;background-color:#f9f9f9;margin-left:-1rem;margin-right:-1rem}body,main{position:relative;overflow-x:hidden}@media screen{body::before{content:'';background:#e5e5e5;position:absolute;left:0;top:0;bottom:0}}@media screen and (min-width: 40em){html{font-size:17px}}@media screen and (min-width: 54em){html{font-size:16px}}@media screen and (min-width: 88em){html{font-size:17px}}@media screen and (min-width: 125em){html{font-size:18px}}.sr-only{display:none}.clearfix,.sidebar-social::after,.clearafter::after{content:"";display:table;clear:both}a,.a{position:relative;padding-bottom:.15rem;border-style:hidden}.img{overflow:hidden;background-color:#f9f9f9}.img>img{margin:0;width:100%;height:100%}.sixteen-nine{position:relative}.sixteen-nine::before{display:block;content:"";width:100%;padding-top:56.25%}.sixteen-nine>*{position:absolute;top:0;left:0;right:0;bottom:0}h1+hr,h2+hr,h3+hr,h4+hr,h5+hr,h6+hr{margin-top:0}.fade-in{animation-duration:500ms;animation-name:fade-in;animation-fill-mode:forwards}@keyframes fade-in{from{transform:translateY(-2rem);opacity:0}50%{transform:translateY(-2rem);opacity:0}to{transform:translateY(0);opacity:1}}.mb6{margin-bottom:10rem}.sidebar{color:rgba(255,255,255,0.75);text-align:left}.sidebar::before{content:"";position:absolute;z-index:2;top:0;left:0;bottom:0;right:0;background:linear-gradient(to bottom, rgba(32,32,32,0) 0%, rgba(32,32,32,0.5) 100%)}.sidebar a{color:#fff;border-bottom-color:rgba(255,255,255,0.2)}.right-side{width:100%;margin-left:auto;margin-right:auto}.right-side .ad-first{text-align:center}@media screen{.right-side{max-width:38rem;min-height:100vh}.right-side .ad-second{display:none}}@media screen and (min-width: 54em){.right-side{margin-left:20rem;margin-right:1rem;padding:4rem 1rem 12rem}.right-side .ad-second{text-align:center;display:block}}@media screen and (min-width: 72em){.right-side{margin-left:22rem;max-width:42rem}}@media screen and (min-width: 88em){.right-side{width:162px;margin-left:0rem;margin-right:0rem;padding:0rem;margin-top:10rem;display:block;float:left}}@media screen and (min-width: 96em){.right-side{width:300px;margin-right:0rem}}#_yDrawer{position:relative}@media screen{#_yDrawer{min-height:640px;min-height:100vh}}@media screen and (min-width: 54em){#_yDrawer{width:18rem;margin-left:0}}.sidebar-bg{position:absolute;height:100%;overflow:hidden;top:0;right:0;bottom:0;left:0;background:#202020 center / cover}.sidebar-box{display:flex;justify-content:center}.sidebar-sticky{position:relative;z-index:3}@media screen{.sidebar-sticky{-ms-overflow-style:none;overflow:-moz-scrollbars-none;height:100%;overflow:auto;position:absolute;padding:3rem 0rem;right:2.5rem;left:2.5rem}}.sidebar-sticky::-webkit-scrollbar{display:none}.sidebar-about>h1{color:#fff;font-size:2rem}.sidebar-nav>ul{list-style:none;padding-left:0;margin-bottom:.5rem}a.sidebar-nav-item{width:100%;font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}a.sidebar-nav-subitem{font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}@media screen{.y-drawer-scrim{z-index:2}.y-drawer-content{width:18rem;left:-18rem;z-index:3}}.sidebar-social{margin-bottom:.5rem}.sidebar-social>ul{list-style:none;padding-left:0;margin:0 -.25rem}.sidebar-social>ul>li{float:left}.sidebar-social>ul>li>a{display:inline-block;text-align:center;font-size:1.6rem;line-height:3rem;width:3.1249rem;height:4rem;padding:.5rem 0}.sidebar-social>ul li+li{margin-top:0}.fixed-top{position:fixed;top:0;left:0;width:100%;z-index:1}.navbar>.content{padding-top:0;padding-bottom:0;min-height:0;height:0}.menu{display:inline-block;padding:1.75rem 1.5rem;border-bottom:none;margin-left:-1.5rem;color:#9a9a9a !important}.menu::after{content:"\2630"}@media screen and (min-width: 54em){.menu{padding:1.25rem 1.5rem;position:absolute;left:-9999px}.menu:focus{position:static}}.animation-main{pointer-events:none}.loading{display:none}@media print{.menu{display:none}}.animation-main{opacity:0;will-change:opacity}.loading{position:absolute;top:0;right:0;padding:5.25rem 4.5rem;transform-origin:top right;transform:scale(0.33)}.content{position:relative;margin-left:auto;margin-right:auto;padding:5rem 1rem 12rem}@media screen{.content{min-height:100vh}}@media screen and (min-width: 54em){.content{padding:4rem 1rem 12rem;margin-left:19rem;margin-right:3rem}}@media screen and (min-width: 72em){.content{max-width:42rem;margin-left:21rem}}@media screen and (min-width: 88em){.content{float:left;width:100%;margin-left:22rem;margin-right:5rem}}@media screen and (min-width: 96em){.content{max-width:44rem}}@media screen and (min-width: 102em){.content{margin-left:25rem;margin-right:8rem}}.me{width:6.5rem;height:6.5rem;align-self:center;margin-right:20px;border-radius:100%;position:relative}@media screen and (min-width: 40em){.me{width:7rem;height:7rem}}@media screen and (min-width: 54em){.me{width:6.5rem;height:6.5rem}}@media screen and (min-width: 72em){.me{width:7rem;height:7rem}}main>footer{width:100%;position:absolute;bottom:0;left:0;right:0;padding:0 1rem;color:#9a9a9a;font-size:smaller;text-align:center}main>footer>p{margin-bottom:0}html{font-family:'Sans-serif'}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-family:'Sans-serif'}
+
+</style>
+
+
+<link
+  rel="preload"
+  href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0"
+  as="style"
+  onload="this.rel='stylesheet'"
+/>
+
+<style id="_pageStyle">
+
+.content a{color:#4f86aa;border-color:rgba(79,134,170,0.2)}.content a:hover{border-color:#4f86aa}:focus{outline-color:#4f86aa}::selection{color:#fff;background:#4f86aa}::-moz-selection{color:#fff;background:#4f86aa}
+
+</style>
+
+
+<noscript>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0" />
+    
+  
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Lato"
+  />
+  <style>
+    html { font-family: 'Lato', 'Sans-serif' }
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .heading { font-family: 'Lato', 'Sans-serif' }
+  </style>
+   
+  <link rel="stylesheet" href="http://localhost:4000/assets/icomoon/style.css" />
+</noscript>
+<!--<![endif]-->
+
+</head>
+
+<body>
+  <!-- =============== -->
+<!-- MENU            -->
+<!-- =============== -->
+<div class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <a id="_menu" class="menu no-hover" href="#_title">
+      <span class="sr-only">Menu</span>
+    </a>
+  </div>
+</div>
+
+<!-- =============== -->
+<!-- CONTENT         -->
+<!-- =============== -->
+<div id="_yPushState">
+  <div class="fade-in">
+    <main
+      id="_main"
+      class="content"
+      role="main"
+      data-color="#4f86aa"
+      data-image="/assets/img/bg.jpg"
+    >
+      
+
+<article id="post-dev/2020/11/02/DDD-02" class="post" role="article">
+  <header>
+    <h1 class="post-title">
+      
+        DDD 도메인 주도 설계 2장
+        
+    </h1>
+
+    <p class="post-date heading">
+      <time datetime="2020-11-02T00:00:00+09:00">02 Nov 2020</time>
+      
+
+
+
+
+
+
+
+
+
+in <a href="/category/development/" data-flip="title">Development</a>
+
+      
+
+
+
+
+
+
+
+
+
+on <a href="/tag/development-ddd/" data-flip="title">DDD</a>
+
+    </p>
+
+    
+  <div class="hr" style="padding-bottom:0"></div>
+
+
+  </header>
+  
+
+
+  
+  <div class="markdown-body">
+
+    <!--  -->
+    <style>
+      .myAd1190 {
+        width: 48%;
+        height: 280px;
+      }
+
+      .myAd1290 {
+        width: 48%;
+        height: 280px;
+      }
+
+      @media(max-width: 800px) {
+        .myAd1190 {
+          display: none;
+        }
+
+        .myAd1290 {
+          width: 98%;
+        }
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 300px;
+      }
+
+      .row-center {
+        display: flex;
+        justify-content: center;
+        height: 258px;
+      }
+    </style>
+   
+    <!--<br />-->
+    <h2 id="ddd---도메인-주도-설계">DDD - 도메인 주도 설계</h2>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/97804402-04b9fc80-1c93-11eb-8e3f-271400a8633e.jpeg" alt="DDD" /></p>
+
+<p>앞으로 적어갈 글은 최범균님의 저서 <strong>DDD START</strong>!를 읽고 요약 - 정리한 글입니다.</p>
+
+<h2 id="제-2장--아키텍처-개요">제 2장 : 아키텍처 개요</h2>
+
+<p>제 2장 아키텍처 개요</p>
+
+<h2 id="네-개의-영역">네 개의 영역</h2>
+
+<p><img width="402" alt="스크린샷 2020-11-01 오후 11 59 16" src="https://user-images.githubusercontent.com/43809168/97806284-44d2ac80-1c9e-11eb-8a92-1bb47c280a9a.png" /></p>
+
+<ul>
+  <li>
+    <p>아키텍처를 설계 할 때 출현하는 전형적인 영역은 <strong>표현</strong>, <strong>응용</strong>, <strong>도메인</strong>, <strong>인프라스트럭처의</strong> 네 영역이다.</p>
+  </li>
+  <li>
+    <p>응용 레이어는 도메인 모델에 로직 수행을 위임한다.</p>
+  </li>
+  <li>
+    <p>웹 애플리케이션에서 표현 영역은 HTTP 요청을 응용 영역이 필요로 하는 형식으로 변환해서 응용 영역에 전달하고 응용 영역의 응답을 HTTP 응답으로 변환해서 정송한다.</p>
+  </li>
+  <li>
+    <p>응용 서비스는 로직을 직접 수행하기 보다는 도메인 모델에 로직 수행을 위임한다.</p>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CancelOrderService</span> <span class="o">{</span>
+  <span class="nd">@Transactional</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">cancelOrder</span><span class="o">(</span><span class="nc">String</span> <span class="n">oderId</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Order</span> <span class="n">order</span> <span class="o">=</span> <span class="n">findOrderById</span><span class="o">(</span><span class="n">orderId</span><span class="o">);</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">order</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nc">OrderNotFoundException</span><span class="o">(</span><span class="n">orderId</span><span class="o">);</span>
+    <span class="n">order</span><span class="o">.</span><span class="na">cancel</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>위 코드에서 주문 취소 로직을 도메인 모델에 위임하고 있다.</li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/97806143-7ac36100-1c9d-11eb-8a0e-319477728eba.png" alt="2-1" /></p>
+
+<ul>
+  <li>
+    <p>도메인 영역은 도메인 모델을 구현한다.</p>
+  </li>
+  <li>
+    <p>도메인 모델은 도메인의 핵심 로직을 구현한다.</p>
+  </li>
+  <li>
+    <p>주문 도메인의 경우 <strong>배송지 변경</strong>, <strong>결제 완료</strong>, <strong>주문 총액 계산</strong>과 같은 핵심 로직을 도메인 모델에서 구현한다.</p>
+  </li>
+</ul>
+
+<p><img width="240" alt="스크린샷 2020-11-02 오전 12 03 43" src="https://user-images.githubusercontent.com/43809168/97806410-e22de080-1c9e-11eb-93ab-db9de5fb61a1.png" /></p>
+
+<ul>
+  <li>
+    <p>인프라 스트럭처 영역은 RDBMS 연동, 메시징 큐에 메시지 전송 및 수신, 몽고 DB or HBase를 사용해 데이터베이스 연동을 처리한다.</p>
+  </li>
+  <li>
+    <p>이 영역은 SMTP를 사용하여 메일 발송 기능을 구현하거나 HTTP 클라이언트를 사용해 REST API를 처리하는 것 또한 처리한다.</p>
+  </li>
+</ul>
+
+<h2 id="계층-구조-아키텍처">계층 구조 아키텍처</h2>
+
+<p><img width="201" alt="스크린샷 2020-11-02 오전 12 04 45" src="https://user-images.githubusercontent.com/43809168/97806446-07baea00-1c9f-11eb-8eed-c922c6ea2bc0.png" /></p>
+
+<ul>
+  <li>
+    <p>네 영역을 구성할 때 많이 사용하는 아키텍처가 위와 같은 계층 구조이다.</p>
+  </li>
+  <li>
+    <p>표현 영역과 응용 영역은 도메인 영역을 사용하며, 도메인 영역은 인프라 스트럭쳐 영역을 사용하므로 계층 구조라 할 수 있다.</p>
+  </li>
+  <li>
+    <p>상위 계층에서 하위 계층을 의존할 뿐 하위 계층은 상위 계층에 의존하지 않는다.</p>
+  </li>
+  <li>
+    <p>하지만 구현의 편리함을 위해 계층 구조를 유연하게 적용할 수 있다.</p>
+  </li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/97806495-320ca780-1c9f-11eb-8ab4-6659b7683d7a.png" alt="2-2" /></p>
+
+<ul>
+  <li>
+    <p>위와 같이 응용 계층은 바로 아래 계층인 도메인 계층에 의존해야하지만, 외부 시스템과의 연동을 위해 더 아래 계층인 인프라스트럭처 게층에 의존하기도 한다.</p>
+  </li>
+  <li>
+    <p>응용 영역과 도메인 영역이 DB나 외부 시스템 연동을 위해 인프라 스트럭처의 기능을 사용하는 것은 얼핏 그럴싸해보인다.</p>
+  </li>
+  <li>
+    <p>그러나 표현, 응용, 도메인 계층이 상세한 구현 기술을 다루는 인프라스트럭처 계층에 종속되게 된다.</p>
+  </li>
+  <li>
+    <p>이것이 어떤 문제를 일으킬 수 있을까?</p>
+  </li>
+  <li>
+    <p>도메인의 가격 계산 규칙을 정할 때 할인 금액 계산 로직이 복잡해지면 객체 지향으로 로직을 구현하는 것 보단 룰 엔진을 사용하는 것이 더 낫다.</p>
+  </li>
+  <li>
+    <p>다음은 Drools라는 룰 엔진을 사용해서 로직을 수행할 수 있는 인프라 스트럭처 코드이다. (Drools는 무시해도 된다.)</p>
+  </li>
+  <li>
+    <p>핵심은 evalute() 메서드에 값을 주면 별도 파일로 작성한 규칙을 이용해서 연산을 수행하는 코드라는 것 정도만 이해하고 넘어가자.</p>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DroolsRuleEngine</span> <span class="o">{</span>
+ <span class="kd">private</span> <span class="nc">KieContainer</span> <span class="n">kContainer</span><span class="o">;</span>
+
+ <span class="kd">public</span> <span class="kt">void</span> <span class="nf">evalute</span><span class="o">(</span><span class="nc">String</span> <span class="n">sessionName</span><span class="o">,</span> <span class="nc">List</span><span class="o">&lt;?&gt;</span> <span class="n">facts</span><span class="o">)</span> <span class="o">{</span>
+  <span class="o">...</span>
+ <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CalculateDiscountService</span> <span class="o">{</span>
+ <span class="kd">private</span> <span class="nc">DroolsRuleEngine</span> <span class="n">ruleEngine</span><span class="o">;</span>
+
+ <span class="kd">public</span> <span class="nc">Money</span> <span class="nf">calculateDiscount</span><span class="o">(</span><span class="nc">OrderLine</span> <span class="n">orderLines</span><span class="o">,</span> <span class="nc">String</span> <span class="n">customerId</span><span class="o">)</span> <span class="o">{</span>
+  <span class="nc">Customer</span> <span class="n">customer</span> <span class="o">=</span> <span class="n">findCusotmer</span><span class="o">(</span><span class="n">customerId</span><span class="o">);</span>
+  <span class="nc">MutableMoney</span> <span class="n">money</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MutableMoney</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+  <span class="n">facts</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">orderLines</span><span class="o">);</span>
+  <span class="n">ruleEngine</span><span class="o">.</span><span class="na">evalute</span><span class="o">(</span><span class="s">"discountCalculation"</span><span class="o">,</span> <span class="n">facts</span><span class="o">);</span>
+  <span class="k">return</span> <span class="n">money</span><span class="o">.</span><span class="na">toImmutableMoney</span><span class="o">();</span>
+ <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>응용 영역은 가격 계산을 위해 인프라스트럭처 영역의 DroolsRuleEngine을 사용했다.</p>
+  </li>
+  <li>
+    <p>여기서 두 가지 문제가 발생한다.</p>
+
+    <ul>
+      <li>
+        <ol>
+          <li>CalculateDiscountService만 테스트 하기가 어렵다. CalculateDiscountService는 RuleEngine에 의존하므로 RuleEngine에 관련된 클래스와 관련 설정 파일을 모두 만들어야 비로소 작동할 것이다.</li>
+        </ol>
+      </li>
+      <li>
+        <ol>
+          <li>구현 방식을 변경하기 어렵다. calculateDiscount 메소드의 “discountCalculation” 문자열은 Drools의 세션 이름이다. Drools의 세션 이름을 변경하면 CalculateDiscountService의 코드도 같이 변경되어야한다.</li>
+        </ol>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>인프라스터럭처 계층에 의존하면 <strong>테스트의 어려움</strong>과 <strong>기능 확장의 어려움</strong>이 생긴다.</p>
+  </li>
+  <li>
+    <p>이를 해결하기 위해서 DIP를 적용해야한다.</p>
+  </li>
+</ul>
+
+<h2 id="dip">DIP</h2>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/97806714-62a11100-1ca0-11eb-8080-2778f2f49206.png" alt="2-3" /></p>
+
+<ul>
+  <li>
+    <p>CalculateDiscountService는 고수준 모듈이며 이를 실행하기 위해서는 하위 기능이 필요하다.</p>
+  </li>
+  <li>
+    <p>고수준 모듈이 제대로 동작하려면 저수준 모듈을 사용해야한다.</p>
+  </li>
+  <li>
+    <p>그런데 고수준 모듈이 저수준 모듈에 의존하면 앞서 언급한 두 가지 문제(구현 변경과 테스트 어려움)이 발생한다.</p>
+  </li>
+  <li>
+    <p>DIP는 저수준 모듈이 고수준 모듈에 의존하도록 바꾼다. (객체지향 5요소 중 5번째 그것으로 보인다.)</p>
+  </li>
+  <li>
+    <p>CalculateDiscountService가의 입장에서 룰 적용을 Drools로 했는지, 자바로 했는지 중요하지 않다.</p>
+  </li>
+  <li>
+    <p>단지 <strong>고객 정보와 구매 정보에 룰을 적용해서 할인 금액을 구한다</strong>는 것이 중요할 뿐이다.</p>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 이를 추상화한 인터페이스</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">RuleDiscounter</span> <span class="o">{</span>
+ <span class="kd">public</span> <span class="nc">Money</span> <span class="nf">applyRules</span><span class="o">(</span><span class="nc">Customer</span> <span class="n">customer</span><span class="o">,</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">OrderLine</span><span class="o">&gt;</span> <span class="n">orderLines</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>CalculateDiscountService가 RuleDiscounter를 이용하도록 바꿔보자.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CalculateDiscountService</span> <span class="o">{</span>
+ <span class="kd">private</span> <span class="nc">CustomerRepository</span> <span class="n">customerRepository</span><span class="o">;</span>
+ <span class="kd">private</span> <span class="nc">RuleDiscounter</span> <span class="n">ruleDiscounter</span><span class="o">;</span>
+
+ <span class="kd">public</span> <span class="nc">Money</span> <span class="nf">calculateDiscount</span><span class="o">(</span><span class="nc">OrderLine</span> <span class="n">orderLines</span><span class="o">,</span> <span class="nc">String</span> <span class="n">customerId</span><span class="o">)</span> <span class="o">{</span>
+  <span class="nc">Customer</span> <span class="n">customer</span> <span class="o">=</span> <span class="n">customerRepository</span><span class="o">.</span><span class="na">findCusotmer</span><span class="o">(</span><span class="n">customerId</span><span class="o">);</span>
+  <span class="k">return</span> <span class="n">ruleDiscounter</span><span class="o">.</span><span class="na">applyRules</span><span class="o">(</span><span class="n">customer</span><span class="o">,</span> <span class="n">orderLines</span><span class="o">);</span>
+ <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>CalculateDiscountService는 더이상 Drools에 의존하는 코드를 포함하지 않는다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DroolsRuleDiscounter</span> <span class="kd">implements</span> <span class="nc">RuleDiscounter</span><span class="o">{</span>
+ <span class="kd">private</span> <span class="nc">KieContainer</span> <span class="n">kContainer</span><span class="o">;</span>
+
+ <span class="nd">@Override</span>
+ <span class="kd">public</span> <span class="kt">void</span> <span class="nf">applyRules</span><span class="o">(</span><span class="nc">Customer</span> <span class="n">customer</span><span class="o">,</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">OrderLine</span><span class="o">&gt;</span> <span class="n">orderLines</span><span class="o">)</span> <span class="o">{</span>
+  <span class="o">...</span>
+ <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>DroolsRuleDiscounter를 RuleDiscounter의 구현체로 변경한다.</li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/97806898-4baeee80-1ca1-11eb-888f-c9893f61936e.png" alt="2-4" /></p>
+
+<ul>
+  <li>CalculateDiscountService는 RuleDiscounter 인터페이스에 의존하며 DroolsRuleDiscounter는 고수준의 하위 기능인 RuleDiscounter를 구현한 것이므로 저수준 모듈에 속한다.</li>
+</ul>
+
+<p><img width="332" alt="스크린샷 2020-11-02 오전 12 22 27" src="https://user-images.githubusercontent.com/43809168/97806961-7f8a1400-1ca1-11eb-9f92-41f3a8acfd16.png" /></p>
+
+<ul>
+  <li>이제는 저수준 모듈이 고수준 모듈에 의존하면서 위에서 언급한 문제를 해결하였다.</li>
+</ul>
+
+<h2 id="dip-주의사항">DIP 주의사항</h2>
+
+<ul>
+  <li>
+    <p>DIP는 단순히 인터페이스와 구현 클래스를 분리하는 정도로 받아들일 수 있는데 이는 잘못된 생각이다.</p>
+  </li>
+  <li>
+    <p>DIP의 핵심은 <strong>고수준 모듈이 저수준 모듈에 의존하지 않기</strong>위함이다.</p>
+  </li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/97807015-d09a0800-1ca1-11eb-880d-227e9e712fe7.png" alt="2-5" /></p>
+
+<ul>
+  <li>
+    <p>이 구조는 잘못된 구조이다.</p>
+  </li>
+  <li>
+    <p>도메인 영역은 구현 기술을 다루는 인프라스트럭처 영역에 여전히 의존하고 있다.</p>
+  </li>
+  <li>
+    <p>즉 여전히, 고수준 모듈이 저수준 모듈에 의존하고 있다는 것이다.</p>
+  </li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/97807034-e4456e80-1ca1-11eb-9226-08df8e2b5901.png" alt="2-6" /></p>
+
+<ul>
+  <li>이를 염두해서 항상 저수준 모듈이 고수준 모듈에 의존하게 설계하도록 하자.</li>
+</ul>
+
+<h2 id="dip와-아키텍처">DIP와 아키텍처</h2>
+
+<p><img width="271" alt="스크린샷 2020-11-02 오전 12 27 37" src="https://user-images.githubusercontent.com/43809168/97807091-36868f80-1ca2-11eb-9a28-c7c8e2730ca8.png" /></p>
+
+<ul>
+  <li>
+    <p>인프라스터럭처 영역은 구현 기술을 다루는 저수준 모듈이며, 응용 영역과 도메인 영역은 고수준 모듈이다.</p>
+  </li>
+  <li>
+    <p>아키텍처에 DIP를 적용하면 아래와 같이 인프라스트럭처 영역이 응용 영역과 도메인 영역에 의존하는 구조가 된다.</p>
+  </li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/97807115-5c139900-1ca2-11eb-8fae-aa76b600dbec.png" alt="2-7" /></p>
+
+<ul>
+  <li>DIP를 적용하면 응용 영역과 도메인 영역에 영향을 최소화하면서 구현체를 변경하거나 추가할 수 있다.</li>
+</ul>
+
+<h2 id="도메인-영역의-주요-구성요소">도메인 영역의 주요 구성요소</h2>
+
+<h3 id="엔티티">엔티티</h3>
+
+<ul>
+  <li>
+    <p>고유의 식별자를 갖는 객체로 자신의 라이프 사이클을 갖는다.</p>
+  </li>
+  <li>
+    <p>주문, 회원, 상품 등과 같이 도메인의 고유한 개념을 표현한다.</p>
+  </li>
+  <li>
+    <p>도메인 모델의 데이터를 포함하며 해당 데이터와 관련된 기능을 함께 제공한다.</p>
+  </li>
+</ul>
+
+<h3 id="밸류">밸류</h3>
+
+<ul>
+  <li>고유의 식별자를 갖지 않는 객체로 주로 개념적으로 하나인 도메인 객체의 속성을 표현할 때 주로 사용된다.</li>
+</ul>
+
+<h3 id="애그리거트">애그리거트</h3>
+
+<ul>
+  <li>애그리거트는 관련된 엔티티와 밸류 객체를 개념적으로 하나로 묶은 것이다. 예를 들어, 주문과 관련된 Order 엔터티, OrderLine 밸류, Orderer 밸류 객체를 <strong>주문</strong> 애그리게이터로 묶을 수 있다.</li>
+</ul>
+
+<h3 id="리포지토리">리포지토리</h3>
+
+<ul>
+  <li>도메인 모델의 영속성을 처리한다. DBMS 테이블에서 엔티티 객체를 로딩하거나 저장하는 기능을 제공한다.</li>
+</ul>
+
+<h3 id="도메인-서비스">도메인 서비스</h3>
+
+<ul>
+  <li>
+    <p>특정 엔티티에 속하지 않은 도메인 로직을 제공한다.</p>
+  </li>
+  <li>
+    <p>“할인 금액 계산”은 상품, 쿠폰, 회원 등급, 구매 금액 등 다양한 조건을 이용해서 구현하게 되는데, 이렇게 도메인 로직이 여러 엔티티와 밸류를 필요로 할 경우 도메인 서비스에서 로직을 구현한다.</p>
+  </li>
+</ul>
+
+<h2 id="엔티티와-밸류">엔티티와 밸류</h2>
+
+<ul>
+  <li>
+    <p>도메인 모델의 엔티티와 DB 모델의 엔티티는 <strong>같은 것이 아니다</strong>.</p>
+  </li>
+  <li>
+    <p>두 모델의 가장 큰 차이점은 도메인 모델의 엔티티는 데이터와 함께 도메인 기능을 함께 제공한다.</p>
+  </li>
+  <li>
+    <p>예를 들어, 주문을 표현하는 엔티티는 주문과 관련된 데이터뿐만 아니라 배송지 주소 변경을 위한 기능을 함께 제공한다.</p>
+  </li>
+  <li>
+    <p>밸류는 가급적이면 불변으로 구현하는 것을 권장하는데, 이는 엔티티의 밸류 타입 데이터를 변경할 때는 객체 자체를 완전히 교체해주어야 하기 때문이다.</p>
+  </li>
+</ul>
+
+<h2 id="애그리거트-1">애그리거트</h2>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/97807408-e3add780-1ca3-11eb-92b1-f4da8d746e24.png" alt="2-8" /></p>
+
+<ul>
+  <li>
+    <p>도메인이 커질수록 개발할 도메인 모델도 커지면서 많은 엔티티와 밸류가 출현한다.</p>
+  </li>
+  <li>
+    <p>엔티티와 밸류 개수가 많아지면 많아질수록 모델은 점점 더 복잡해진다.</p>
+  </li>
+  <li>
+    <p>도메인 모델이 복잡해지면 개발자가 전체 구조가 아닌 한 개 엔티티와 밸류에만 집중하게 되는 현상이 발생한다.</p>
+  </li>
+  <li>
+    <p>상위 수준의 모델을 관리하기 보다 개별 요소에만 초점을 맞추다보면 큰 수준에서 모델을 이해하지 못해 큰 틀에서 모델을 관리할 수 없는 상황에 빠질 수 있다.</p>
+  </li>
+  <li>
+    <p>도메인 모델에서 전체 구조를 이해하는데 도움이 되는 것이 바로 이 애그리거트다!</p>
+  </li>
+  <li>
+    <p>애그리거트는 관련 객체를 하나로 묶은 군집이요, 군집에 속한 객체들을 관리하는 루트 엔티티를 갖는다.</p>
+  </li>
+  <li>
+    <p>루트 엔티티는 애그리거트에 속해 있는 엔티티와 밸류 객체를 이용해서 애그리거트가 구현해야할 기능을 제공한다.</p>
+  </li>
+  <li>
+    <p>애그리거트를 사용하는 코드는 애그리거트 루트가 제공하는 기능을 실행하고 에그리거트 루트를 통해 간접적으로 애그리거트 내의 다른 엔티티나 밸류 객체에 접근하게 된다.</p>
+  </li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class Order {
+ ...
+ public void changeShippingInfo(ShippingInfo shippinginfo) {
+  checkShippingInfoChangeable(); // 배송지 변경 가능 여부 확인
+ }
+
+ private Boolean checkShippingInfoChangeable() {
+  ...
+ }
+}
+</code></pre></div></div>
+
+<p><img width="360" alt="스크린샷 2020-11-02 오전 12 42 51" src="https://user-images.githubusercontent.com/43809168/97807469-57e87b00-1ca4-11eb-98ee-769ef8209cfe.png" /></p>
+
+<ul>
+  <li>
+    <p>주문 애그리거트 루트는 Order이다.</p>
+  </li>
+  <li>
+    <p>Order는 애그리거트 루트이자 애그리거트의 상태를 관리한다.</p>
+  </li>
+  <li>
+    <p>애그리거트에 관한 자세한 내용은 3에서 살펴보도록 하겠다.</p>
+  </li>
+</ul>
+
+<h2 id="리포지터리">리포지터리</h2>
+
+<ul>
+  <li>
+    <p>도메인 객체를 지속적으로 사용하기 위해서는 RDBMS, NoSQL, 로컬 파일과 같은 물리적인 저장소에 도메인 객체를 보관해야한다.</p>
+  </li>
+  <li>
+    <p>이를 위한 도메인 리포지터리이다.</p>
+  </li>
+  <li>
+    <p>리포지터리는 애그리게이터 단위로 도메인 객체를 저장하고 조회하는 기능을 정의한다.</p>
+  </li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/97807519-a8f86f00-1ca4-11eb-90b2-ac0c131d53af.png" alt="2-9" /></p>
+
+<ul>
+  <li>
+    <p>도메인 모델 관점에서 OrderRepository는 도메인 객체를 영속화하는 데 필요한 기능을 추상화한 것이므로 고수준 모듈에 속한다.</p>
+  </li>
+  <li>
+    <p>기반 기술을 사용해서 OrderRepository를 구현한 클래스는 저수준 모듈로 인프라스트럭처 영역에 속한다.</p>
+  </li>
+  <li>
+    <p>리포지터리 인터페이스는 도메인 모델 영역에 속하며, 실제 구현 클래스는 인프라스트럭처영역에 속한다.</p>
+  </li>
+  <li>
+    <p>응용 서비스와 리포지터리는 밀접한 연관이 있다.</p>
+    <ul>
+      <li>응용 서비스는 필요한 도메인 객체를 구하거나 저장할 때 리포지터리를 사용한다.</li>
+      <li>응용 서비스는 트랜잭션을 관리하는데, 트랜잭션 처리는 리포지터리 구현 기술에 영향을 받는다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="요청-처리-흐름">요청 처리 흐름</h2>
+
+<p><img width="426" alt="스크린샷 2020-11-02 오전 1 09 47" src="https://user-images.githubusercontent.com/43809168/97808100-1d80dd00-1ca8-11eb-8d8b-8c530d0a8fb4.png" /></p>
+
+<ul>
+  <li>
+    <p>스프링 MVC를 사용해서 웹 애플리케이션을 구현한다면 컨트롤러는 사용자의 요청을 받는 <strong>표현 영역</strong>이 된다.</p>
+  </li>
+  <li>
+    <p>표현 영역은 사용자가 전송한 데이터 형식이 올바른지 검사하고 문제가 없다면 데이터를 이용해서 응용 서비스에 기능 실행을 위임한다.</p>
+  </li>
+  <li>
+    <p>또한 표현 영역은 사용자가 전송한 데이터를 <strong>응용 서비스가 요구하는 형식으로 변환해서 전달</strong>한다.</p>
+  </li>
+  <li>
+    <p>응용 서비스는 도메인 모델을 이용해서 기능을 구현한다.</p>
+  </li>
+</ul>
+
+<h2 id="인프라스트럭처-개요">인프라스트럭처 개요</h2>
+
+<ul>
+  <li>
+    <p>인프라스트럭처는 표현 영역, 응용 영역, 도메인 영역을 지원한다.</p>
+  </li>
+  <li>
+    <p>도메인 객체의 영속성 처리, 트랜잭션, SMTP 클라이언트, REST 클라이언트 등 다른 영역에서 필요로 하는 프레임워크, 구현 기술, 보조 기능을 지원한다.</p>
+  </li>
+  <li>
+    <p>DIP에서 언급했듯이 도메인 영역과 응용 영역이 인프라스트럭처의 기능을 직접 사용하기 보다는, 이 두 영역에 정의한 인터페이스를 인프라스트럭처 영역에서 구현하는 것이 시스템을 더 유연하고 테스트하기 쉽게 만들어준다.</p>
+  </li>
+</ul>
+
+<h2 id="모듈-구성">모듈 구성</h2>
+
+<p><img width="301" alt="스크린샷 2020-11-02 오전 1 15 18" src="https://user-images.githubusercontent.com/43809168/97808194-e232de00-1ca8-11eb-926b-e032c22b1b47.png" /></p>
+
+<ul>
+  <li>
+    <p>아키텍처의 각 영역은 패키지에 위치한다.</p>
+  </li>
+  <li>
+    <p>패키지 구성 규칙에 한 개의 정답만 존재하는 것은 아니지만 아래와 같이 영역별로 모듈이 위치할 때 패키지를 구성할 수 있을 것이다.</p>
+  </li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/97808171-b57ec680-1ca8-11eb-9e81-91d11e2d64ac.png" alt="2-10" /></p>
+
+<ul>
+  <li>도메인이 크다면 하위 도메인으로 나누고 각 하위 도메인마다 별도 패키지를 구성하게 할 수 있다.</li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/97808218-00004300-1ca9-11eb-98c0-a9c49efbcde2.png" alt="2-11" /></p>
+
+<ul>
+  <li>
+    <p>Domain 모듈은 도메인에 속한 애그리거트를 기준으로 다시 패키지를 구성한다.</p>
+  </li>
+  <li>
+    <p>위 예시는 카탈로그 하위 도메인을 위한 도메인은 상품 애그리거트와 카테고리 애그리거트로 구성된다고 할 경우, domain을 두 개의 하위 패키지로 구성해볼 수 있다.</p>
+  </li>
+  <li>
+    <p>모듈 구조를 얼마나 세분화 할지에 대해서는 정해진 규칙은 없다.</p>
+  </li>
+  <li>
+    <p>한 패키지에 너무 많은 타입이 몰려서 코드를 찾을 때 불편한 정도만 아니면 된다.</p>
+  </li>
+  <li>
+    <p>저자는 한 패키지에 가능하면 10개 미만으로 타입 개수를 유지하려고 노력한다고 한다. 이 개수가 넘어가면 모듈을 분리하는 시도를 해보자.</p>
+  </li>
+</ul>
+
+<h2 id="reference">Reference</h2>
+
+<p>DDD START! - 최범균님 -</p>
+
+<p>그림 및 코드 참조 : <a href="https://incheol-jung.gitbook.io/docs/study/ddd-start/1">https://incheol-jung.gitbook.io/docs/study/ddd-start/1</a></p>
+
+    <br />
+    <br />
+  </div>
+  
+
+</article>
+
+<!--<hr class="dingbat" />-->
+<!--
+<div class="share">
+  <h2>Share this post</h2>
+  <div class="share-body">
+    <a href="http://twitter.com/share?text=DDD 도메인 주도 설계 2장&amp;url=http://localhost:4000/dev/2020/11/02/DDD-02/"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="icon-twitter">
+      </span>
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/dev/2020/11/02/DDD-02/"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="icon-facebook">
+      </span>
+    </a>
+  </div>
+</div>
+-->
+<br />
+
+
+
+
+<aside class="related" role="complementary">
+  <h2 class="hr">Related Posts</h2>
+
+  <ul class="related-posts">
+    
+      
+      
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/dev/2021/08/17/Git/" data-flip="title">
+    <span>Github Access Token 사용하는 법</span>
+  </a>
+  <small><time datetime="2021-08-17T00:00:00+09:00">
+    17 Aug 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/dev/2020/12/03/CleanCode/" data-flip="title">
+    <span>Clean Code 스터디 회고</span>
+  </a>
+  <small><time datetime="2020-12-03T00:00:00+09:00">
+    03 Dec 2020
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/dev/2020/11/24/DDD-11/" data-flip="title">
+    <span>DDD 도메인 주도 설계 11장</span>
+  </a>
+  <small><time datetime="2020-11-24T00:00:00+09:00">
+    24 Nov 2020
+  </time></small>
+</li>
+
+        
+      
+        
+        
+      
+    
+  </ul>
+</aside>
+  <aside class="comments" role="complementary">
+  <h2>Comments</h2>
+  <hr/>
+
+  <script src="https://utteranc.es/client.js"
+    repo="minkukjo/minkukjo.github.io"
+    issue-term="title"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</aside>
+
+       <footer>
+  <hr/>
+  
+    <p>© 2022. by minkuk</p>
+
+  
+  <p>
+    <code>Powered by <a href="https://minkukjo.github.io/">minkuk</a></code>
+  </p>
+</footer>
+
+    </main>
+    <div class="right-side">
+  <div class="add-first">
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+    ></script>
+    <!-- 우측 광고 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="9124111205"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+  <br />
+  <br />
+  <div class="add-second">
+    <!-- 우측 광고2 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="5156946039"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+
+  </div>
+  <div id="_yDrawer">
+  <div id="_sidebar" class="sidebar">
+    <div class="sidebar-bg" style="background-color:#4f86aa;background-image:url(/assets/img/bg.jpg)"></div>
+    <header class="sidebar-sticky" role="banner">
+      <br/>
+      <div class="sidebar-about">
+        <h1><a id="_title" href="/">도전하는 개발자</a></h1>
+        
+
+      </div>
+
+      <br/>
+      <br/>
+      <nav class="sidebar-nav heading" role="navigation">
+        <span class="sr-only">Navigation:</span>
+<ul>
+  
+
+  
+
+  
+  
+  
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-1"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/life/">Life</a>
+       <label class="folder" for="list-item-1">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-daily/">Daily</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-review/">Review</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-books/">Books</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-2"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/computer-science/">Computer Science</a>
+       <label class="folder" for="list-item-2">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-algorithm/">Algorithm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-oop/">OOP</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-network/">Network</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-db/">Database</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-ai/">AI</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-security/">Security</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-distribution-system/">Distribution System</a>
+             </li>
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-3"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/programming-language/">Programming Language</a>
+       <label class="folder" for="list-item-3">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-kotlin/">Kotlin</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-go/">Go</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-java/">Java</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-javascript/">JavaScript</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-typescript/">TypeScript</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-4"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/framework/">Framework</a>
+       <label class="folder" for="list-item-4">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring/">Spring</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-data-jpa/">Spring Data JPA</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-security/">Spring Security</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-junit/">JUnit</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-5"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/language/">Language</a>
+       <label class="folder" for="list-item-5">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/language-english/">English</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-6"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/development/">Development</a>
+       <label class="folder" for="list-item-6">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-ddd/">DDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-tdd/">TDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-clean-code/">Clean Code</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-git/">Git</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-7"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/devops/">Devops</a>
+       <label class="folder" for="list-item-7">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-alarm/">Alarm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-ansible/">Ansible</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-cicd/">CI/CD</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-docker/">Docker</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-es/">Elasticsearch</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-k8s/">Kubernetes</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-public-cloud/">Public Cloud</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-kafka/">Kafka</a>
+             </li>
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-8"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/opensource/">Open Source</a>
+       <label class="folder" for="list-item-8">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/opensource-opensource/">Open Source</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-9"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/about/">About</a>
+       
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+</ul>
+
+      </nav>
+    <br/>
+    <br/>
+      <div class="sidebar-box">
+        
+      </div>
+      <p>매일 매일 한계를 뛰어넘기 위한 도전을 즐기는 개발자</p>
+
+      
+      
+        <div class="sidebar-social">
+          <span class="sr-only">Social:</span>
+<ul>
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://github.com/minkukjo">
+    <span class="icon-github" title="GitHub"></span>
+    <span class="sr-only">GitHub</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://www.linkedin.com/in/민국-조-567052166">
+    <span class="icon-linkedin2" title="LinkedIn"></span>
+    <span class="sr-only">LinkedIn</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:harrycode@kakao.com">
+    <span class="icon-mail" title="Email"></span>
+    <span class="sr-only">Email</span>
+  </a>
+</li>
+
+  
+</ul>
+
+        </div>
+      
+    </header>
+  </div>
+</div>
+</div>
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-158654037-1', 'auto');
+  ga('send', 'pageview');
+  loadJSDeferred('https://www.google-analytics.com/analytics.js');
+</script>
+
+
+
+
+
+<!--[if gt IE 8]><!---->
+<script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+  WebFont.load({
+    
+    google: {
+      families: 'Lato'.split('|')
+    },
+    
+
+    custom: {
+      families: ['icomoon'],
+      urls: ['/assets/icomoon/style.css']
+    }
+  });
+</script>
+<!--<![endif]-->
+
+
+  <!--[if gt IE 9]><!---->
+  
+  <script>loadJSDeferred('/assets/js/hydejack.js?v=6.4.0');</script>
+
+  
+  <!--<![endif]-->
+
+
+
+</body>
+
+</html>

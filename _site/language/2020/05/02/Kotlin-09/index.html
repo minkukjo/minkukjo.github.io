@@ -1,0 +1,2189 @@
+<!DOCTYPE html>
+<html lang="en"><!--
+ __  __                __                                     __
+/\ \/\ \              /\ \             __                    /\ \
+\ \ \_\ \   __  __    \_\ \      __   /\_\      __       ___ \ \ \/'\
+ \ \  _  \ /\ \/\ \   /'_` \   /'__`\ \/\ \   /'__`\    /'___\\ \ , <
+  \ \ \ \ \\ \ \_\ \ /\ \L\ \ /\  __/  \ \ \ /\ \L\.\_ /\ \__/ \ \ \\`\
+   \ \_\ \_\\/`____ \\ \___,_\\ \____\ _\ \ \\ \__/.\_\\ \____\ \ \_\ \_\
+    \/_/\/_/ `/___/> \\/__,_ / \/____//\ \_\ \\/__/\/_/ \/____/  \/_/\/_/
+                /\___/                \ \____/
+                \/__/                  \/___/
+
+Powered by Hydejack v6.4.0 (https://qwtel.com/hydejack/)
+-->
+
+
+
+
+
+
+
+
+
+<head>
+  <!-- =============== -->
+<!-- META            -->
+<!-- =============== -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta
+  name="naver-site-verification"
+  content="22c5b4ef3bfda7fc6100671413989219de7a4ac8"
+/>
+<meta property="og:title" content="Kotlin In Action 9장" />
+<meta property="og:type" content="article" />
+
+<!-- =============== -->
+<!-- Google AdSense  -->
+<!-- =============== -->
+<script
+  data-ad-client="ca-pub-8247516864622650"
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+></script>
+
+ 
+<meta
+  property="og:image"
+  content="http://localhost:4000/assets//img/kotlin-logo.png"
+/>
+<br />
+
+
+<meta property="og:image:width" content="640" />
+<meta property="og:image:height" content="360" />
+ 
+<title>Kotlin In Action 9장 &middot; 도전하는 개발자</title>
+ 
+<meta
+  name="description"
+  content="제네릭스
+
+"
+/>
+<meta
+  property="og:description"
+  content="제네릭스
+
+"
+/>
+
+
+
+<!-- =============== -->
+<!-- LINKS           -->
+<!-- =============== -->
+<link rel="canonical" href="http://localhost:4000/language/2020/05/02/Kotlin-09/" />
+<meta property="og:url" content="http://localhost:4000/language/2020/05/02/Kotlin-09/" />
+
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="도전하는 개발자 Feed"
+  href="http://localhost:4000/feed.xml"
+/>
+
+
+<link rel="prev" href="http://localhost:4000/framework/2020/04/28/Spring-108/" />
+ 
+<link rel="next" href="http://localhost:4000/cs/2020/05/06/AI-01/" />
+
+
+<link
+  rel="apple-touch-icon"
+  href="http://localhost:4000/apple-touch-icon.png"
+/>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+<!-- Place favicon.ico in the root directory -->
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+<script>
+  !function(n,e){function t(n,e){n.onload=function(){this.onerror=this.onload=null,e(null,n)},n.onerror=function(){this.onerror=this.onload=null,e(new Error("Failed to load "+this.src),n)}}function o(n,e){n.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||(this.onreadystatechange=null,e(null,n))}}n._loaded=!1,n.loadJSDeferred=function(a,d){function r(){n._loaded=!0;var r=e.createElement("script");r.src=a,d&&(("onload"in r?t:o)(r,d),r.onload||t(r,d));var l=e.getElementsByTagName("script")[0];l.parentNode.insertBefore(r,l)}n._loaded?r():n.addEventListener?n.addEventListener("load",r,!1):n.attachEvent?n.attachEvent("onload",r):n.onload=r}}(window,document);
+
+  !function(e){"use strict";var n=function(n,t,o){function i(e){if(a.body)return e();setTimeout(function(){i(e)})}function r(){l.addEventListener&&l.removeEventListener("load",r),l.media=o||"all"}var d,a=e.document,l=a.createElement("link");if(t)d=t;else{var f=(a.body||a.getElementsByTagName("head")[0]).childNodes;d=f[f.length-1]}var s=a.styleSheets;l.rel="stylesheet",l.href=n,l.media="only x",i(function(){d.parentNode.insertBefore(l,t?d:d.nextSibling)});var u=function(e){for(var n=l.href,t=s.length;t--;)if(s[t].href===n)return e();setTimeout(function(){u(e)})};return l.addEventListener&&l.addEventListener("load",r),l.onloadcssdefined=u,u(r),l};"undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this);
+
+  !function(t){if(t.loadCSS){var e=loadCSS.relpreload={};if(e.support=function(){try{return t.document.createElement("link").relList.supports("preload")}catch(t){return!1}},e.poly=function(){for(var e=t.document.getElementsByTagName("link"),r=0;r<e.length;r++){var n=e[r];"preload"===n.rel&&"style"===n.getAttribute("as")&&(t.loadCSS(n.href,n,n.getAttribute("media")),n.rel=null)}},!e.support()){e.poly();var r=t.setInterval(e.poly,300);t.addEventListener&&t.addEventListener("load",function(){e.poly(),t.clearInterval(r)}),t.attachEvent&&t.attachEvent("onload",function(){t.clearInterval(r)})}}}(this);
+
+  window.disablePushState = false;
+  window.disableDrawer = false;
+</script>
+
+<!--[if lt IE 9]>
+  <script src="https://unpkg.com/html5shiv/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+<!-- =============== -->
+<!-- STYLES          -->
+<!-- =============== -->
+<!--[if gt IE 8]><!---->
+<style>
+  
+  article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}*{box-sizing:border-box}html,body{margin:0;padding:0}html{font-size:16px;line-height:1.75}body{color:#333;background-color:#fff;overflow-y:scroll}a{text-decoration:none}.lead{margin-left:-1rem;margin-right:-1rem}img,.img{display:block;max-width:100%;margin-bottom:1rem;border:none}img.lead,.img.lead{max-width:calc(100% + 2rem);width:calc(100% + 2rem)}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-weight:bold;text-rendering:optimizeLegibility}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{margin:1.6rem 0 1rem;line-height:1.6}h1,.h1{font-size:2rem;line-height:1.25}h2,.h2{font-size:1.5rem}h3,.h3{font-size:1.17em}p{margin-top:0;margin-bottom:1rem}p.lead{font-size:1.25rem;font-weight:300;padding:0 1rem}ul,ol,dl{margin-top:0;margin-bottom:1rem}ul,ol{padding-left:1.25rem}hr{position:relative;margin:1.5rem 0;border:0;border-top:1px solid #eee}.hr{padding-bottom:.5rem;border-bottom:1px solid #eee;margin-bottom:1.5rem}h4,h5,h6,.h4,.h5,.h6{margin-bottom:0.5rem;font-size:1rem}table{margin-bottom:1rem;width:100%;width:calc(100% + 2rem);margin-left:-1rem;border:1px solid #e5e5e5;border-collapse:collapse;border-spacing:0}td,th{padding:.25rem .5rem;border:1px solid #e5e5e5}td:first-child,th:first-child{padding-left:1rem}td:last-child,th:last-child{padding-right:1rem}thead+tbody,tbody+tbody,tfoot{border-top:3px double #e5e5e5}tbody tr:nth-child(odd) td,tbody tr:nth-child(odd) th{background-color:#f9f9f9}footer{margin-bottom:2rem}.page,.post{margin-bottom:3em}.page li+li,.post li+li{margin-top:.25rem}.page>header,.post>header{margin-bottom:2rem}.page-title,.post-title{margin-top:0}.post-date{display:block;margin-top:-0.5rem;margin-bottom:1rem;color:#9a9a9a}.related-posts{padding-left:0;list-style:none}.related-posts>li,.related-posts>li+li{margin-top:1rem}.related-posts>li>small,.related-posts>li+li>small{font-size:75%;color:#9a9a9a}.message{margin-bottom:1rem;padding:1rem;color:#787878;background-color:#f9f9f9;margin-left:-1rem;margin-right:-1rem}body,main{position:relative;overflow-x:hidden}@media screen{body::before{content:'';background:#e5e5e5;position:absolute;left:0;top:0;bottom:0}}@media screen and (min-width: 40em){html{font-size:17px}}@media screen and (min-width: 54em){html{font-size:16px}}@media screen and (min-width: 88em){html{font-size:17px}}@media screen and (min-width: 125em){html{font-size:18px}}.sr-only{display:none}.clearfix,.sidebar-social::after,.clearafter::after{content:"";display:table;clear:both}a,.a{position:relative;padding-bottom:.15rem;border-style:hidden}.img{overflow:hidden;background-color:#f9f9f9}.img>img{margin:0;width:100%;height:100%}.sixteen-nine{position:relative}.sixteen-nine::before{display:block;content:"";width:100%;padding-top:56.25%}.sixteen-nine>*{position:absolute;top:0;left:0;right:0;bottom:0}h1+hr,h2+hr,h3+hr,h4+hr,h5+hr,h6+hr{margin-top:0}.fade-in{animation-duration:500ms;animation-name:fade-in;animation-fill-mode:forwards}@keyframes fade-in{from{transform:translateY(-2rem);opacity:0}50%{transform:translateY(-2rem);opacity:0}to{transform:translateY(0);opacity:1}}.mb6{margin-bottom:10rem}.sidebar{color:rgba(255,255,255,0.75);text-align:left}.sidebar::before{content:"";position:absolute;z-index:2;top:0;left:0;bottom:0;right:0;background:linear-gradient(to bottom, rgba(32,32,32,0) 0%, rgba(32,32,32,0.5) 100%)}.sidebar a{color:#fff;border-bottom-color:rgba(255,255,255,0.2)}.right-side{width:100%;margin-left:auto;margin-right:auto}.right-side .ad-first{text-align:center}@media screen{.right-side{max-width:38rem;min-height:100vh}.right-side .ad-second{display:none}}@media screen and (min-width: 54em){.right-side{margin-left:20rem;margin-right:1rem;padding:4rem 1rem 12rem}.right-side .ad-second{text-align:center;display:block}}@media screen and (min-width: 72em){.right-side{margin-left:22rem;max-width:42rem}}@media screen and (min-width: 88em){.right-side{width:162px;margin-left:0rem;margin-right:0rem;padding:0rem;margin-top:10rem;display:block;float:left}}@media screen and (min-width: 96em){.right-side{width:300px;margin-right:0rem}}#_yDrawer{position:relative}@media screen{#_yDrawer{min-height:640px;min-height:100vh}}@media screen and (min-width: 54em){#_yDrawer{width:18rem;margin-left:0}}.sidebar-bg{position:absolute;height:100%;overflow:hidden;top:0;right:0;bottom:0;left:0;background:#202020 center / cover}.sidebar-box{display:flex;justify-content:center}.sidebar-sticky{position:relative;z-index:3}@media screen{.sidebar-sticky{-ms-overflow-style:none;overflow:-moz-scrollbars-none;height:100%;overflow:auto;position:absolute;padding:3rem 0rem;right:2.5rem;left:2.5rem}}.sidebar-sticky::-webkit-scrollbar{display:none}.sidebar-about>h1{color:#fff;font-size:2rem}.sidebar-nav>ul{list-style:none;padding-left:0;margin-bottom:.5rem}a.sidebar-nav-item{width:100%;font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}a.sidebar-nav-subitem{font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}@media screen{.y-drawer-scrim{z-index:2}.y-drawer-content{width:18rem;left:-18rem;z-index:3}}.sidebar-social{margin-bottom:.5rem}.sidebar-social>ul{list-style:none;padding-left:0;margin:0 -.25rem}.sidebar-social>ul>li{float:left}.sidebar-social>ul>li>a{display:inline-block;text-align:center;font-size:1.6rem;line-height:3rem;width:3.1249rem;height:4rem;padding:.5rem 0}.sidebar-social>ul li+li{margin-top:0}.fixed-top{position:fixed;top:0;left:0;width:100%;z-index:1}.navbar>.content{padding-top:0;padding-bottom:0;min-height:0;height:0}.menu{display:inline-block;padding:1.75rem 1.5rem;border-bottom:none;margin-left:-1.5rem;color:#9a9a9a !important}.menu::after{content:"\2630"}@media screen and (min-width: 54em){.menu{padding:1.25rem 1.5rem;position:absolute;left:-9999px}.menu:focus{position:static}}.animation-main{pointer-events:none}.loading{display:none}@media print{.menu{display:none}}.animation-main{opacity:0;will-change:opacity}.loading{position:absolute;top:0;right:0;padding:5.25rem 4.5rem;transform-origin:top right;transform:scale(0.33)}.content{position:relative;margin-left:auto;margin-right:auto;padding:5rem 1rem 12rem}@media screen{.content{min-height:100vh}}@media screen and (min-width: 54em){.content{padding:4rem 1rem 12rem;margin-left:19rem;margin-right:3rem}}@media screen and (min-width: 72em){.content{max-width:42rem;margin-left:21rem}}@media screen and (min-width: 88em){.content{float:left;width:100%;margin-left:22rem;margin-right:5rem}}@media screen and (min-width: 96em){.content{max-width:44rem}}@media screen and (min-width: 102em){.content{margin-left:25rem;margin-right:8rem}}.me{width:6.5rem;height:6.5rem;align-self:center;margin-right:20px;border-radius:100%;position:relative}@media screen and (min-width: 40em){.me{width:7rem;height:7rem}}@media screen and (min-width: 54em){.me{width:6.5rem;height:6.5rem}}@media screen and (min-width: 72em){.me{width:7rem;height:7rem}}main>footer{width:100%;position:absolute;bottom:0;left:0;right:0;padding:0 1rem;color:#9a9a9a;font-size:smaller;text-align:center}main>footer>p{margin-bottom:0}html{font-family:'Sans-serif'}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-family:'Sans-serif'}
+
+</style>
+
+
+<link
+  rel="preload"
+  href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0"
+  as="style"
+  onload="this.rel='stylesheet'"
+/>
+
+<style id="_pageStyle">
+
+.content a{color:#4f86aa;border-color:rgba(79,134,170,0.2)}.content a:hover{border-color:#4f86aa}:focus{outline-color:#4f86aa}::selection{color:#fff;background:#4f86aa}::-moz-selection{color:#fff;background:#4f86aa}
+
+</style>
+
+
+<noscript>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0" />
+    
+  
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Lato"
+  />
+  <style>
+    html { font-family: 'Lato', 'Sans-serif' }
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .heading { font-family: 'Lato', 'Sans-serif' }
+  </style>
+   
+  <link rel="stylesheet" href="http://localhost:4000/assets/icomoon/style.css" />
+</noscript>
+<!--<![endif]-->
+
+</head>
+
+<body>
+  <!-- =============== -->
+<!-- MENU            -->
+<!-- =============== -->
+<div class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <a id="_menu" class="menu no-hover" href="#_title">
+      <span class="sr-only">Menu</span>
+    </a>
+  </div>
+</div>
+
+<!-- =============== -->
+<!-- CONTENT         -->
+<!-- =============== -->
+<div id="_yPushState">
+  <div class="fade-in">
+    <main
+      id="_main"
+      class="content"
+      role="main"
+      data-color="#4f86aa"
+      data-image="/assets/img/bg.jpg"
+    >
+      
+
+<article id="post-language/2020/05/02/Kotlin-09" class="post" role="article">
+  <header>
+    <h1 class="post-title">
+      
+        Kotlin In Action 9장
+        
+    </h1>
+
+    <p class="post-date heading">
+      <time datetime="2020-05-02T00:00:00+09:00">02 May 2020</time>
+      
+
+
+
+
+
+
+
+
+
+in <a href="/category/programming-language/" data-flip="title">Programming Language</a>
+
+      
+
+
+
+
+
+
+
+
+
+on <a href="/tag/programming-language-kotlin/" data-flip="title">Kotlin</a>
+
+    </p>
+
+    
+  <div class="hr" style="padding-bottom:0"></div>
+
+
+  </header>
+  
+
+
+  
+  <div class="markdown-body">
+
+    <!-- 
+    <div class="head-image"><img src="http://localhost:4000/assets//img/kotlin-logo.png" /></div>
+    <br /> -->
+    <style>
+      .myAd1190 {
+        width: 48%;
+        height: 280px;
+      }
+
+      .myAd1290 {
+        width: 48%;
+        height: 280px;
+      }
+
+      @media(max-width: 800px) {
+        .myAd1190 {
+          display: none;
+        }
+
+        .myAd1290 {
+          width: 98%;
+        }
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 300px;
+      }
+
+      .row-center {
+        display: flex;
+        justify-content: center;
+        height: 258px;
+      }
+    </style>
+   
+    <!--<br />-->
+    <h2 id="제네릭스">제네릭스</h2>
+
+<p>이번 시간에는 제네릭스를 공부해볼 것이다.</p>
+
+<p>자바의 제네릭스와 코틀린의 제네릭스는 어떤 점이 달라졌는지, <code class="language-plaintext highlighter-rouge">reified type parameter</code>와 <code class="language-plaintext highlighter-rouge">declaration-site variance</code>등의 새로운 개념에 대해서도 학습할 것이다.</p>
+
+<h2 id="제네릭-타입-파라미터">제네릭 타입 파라미터</h2>
+
+<p>제네릭스를 사용하면 타입 파라미터를 받는 타입을 정의할 수 있다.</p>
+
+<p>제네릭 타입의 인스턴스를 만들기 위해서는 타입 파라미터를 구체적인 타입 인자로 치환해야한다.</p>
+
+<p>일반적으로 사용은 자바와 거의 일치하나 차이점이 하나 있다.</p>
+
+<p><strong>코틀린은 반드시 제네릭 타입의 타입 인자를 정의해야한다</strong>는 규약이 있다.</p>
+
+<p>왜 이런 규약이 있을까?</p>
+
+<p>자바의 경우 최초에는 제네릭이라는 개념이 없었다.</p>
+
+<p>이후 업데이트를 통해 1.5에서 처음 제네릭이 나왔고, 이로 인해 자바에서는 컬렉션을 선언할 때 원소 타입을 지정하지 않아도 컬렉션을 생성할 수 있었다.</p>
+
+<p>그러나 코틀린은 처음부터 제네릭을 도입했기 때문에 반드시 제네릭 타입의 인자를 정의해주어야(프로그래머가 정의하든, 타입 추론에 의해 정의되든) 사용할 수 있다.</p>
+
+<p>또한 주의해야할 점은 제네릭은 <strong>확장 프로퍼티</strong>에서만 사용가능하다는 점이다.</p>
+
+<p>일반 프로퍼티는 타입 파라미터를 갖는 것이 불가능하다. 클래스 프로퍼티에 여러 타입의 값을 저장하는 것은 말이 안되므로, 제네릭한 일반 프로퍼티는 말이 안된다는 것을 알 수 있다.</p>
+
+<p>일반 프로퍼티를 제네릭하게 정의하면 컴파일러가 다음과 같은 오류를 뱉는다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ERROR: type parameter of a property must be used in its receiver type
+</code></pre></div></div>
+
+<h2 id="제네릭-클래스-선언">제네릭 클래스 선언</h2>
+
+<p>자바와 마찬가지로 꺽쇠 기호(&lt;&gt;)를 사용하여 클래스나 인터페이스를 제네릭하게 만들 수 있다.</p>
+
+<p>일반적으로 자바에서의 제네릭과 코틀린의 제네릭은 큰 차이가 없다.</p>
+
+<p>그러나 지금부터는 자바와 비슷하거나 다른 점들에 대해서 설명하도록 하겠다.</p>
+
+<h2 id="타입-파라미터-제약">타입 파라미터 제약</h2>
+
+<p><code class="language-plaintext highlighter-rouge">type paramter constraint</code>는 클래스나 함수에 사용할 수 있는 타입 인자를 제한하는 기능이다.</p>
+
+<p>가령 모든 원소의 합을 구하려고 했을 때 <code class="language-plaintext highlighter-rouge">List&lt;Int&gt;</code>와 <code class="language-plaintext highlighter-rouge">List&lt;Double&gt;</code>은 사용하는데 문제가 없지만, <code class="language-plaintext highlighter-rouge">List&lt;String&gt;</code>의 경우 문제가 될 수 있다.</p>
+
+<p>이 경우 타입 파라미터로 <strong>숫자</strong> 타입 만을 허용하게 하여 조건을 지정해줄 수 있는 기능이 필요할 수도 있다.</p>
+
+<p>어떤 타입을 제네릭 타입의 타입 파라미터에 대한 상한(upper bound)를 지정하면 그 제네릭 타입을 인스턴화할 때 사용하는 타입 인자는 반드시 그 상한 타입이거나 그 상한 타입의 하위 타입이어야 한다.</p>
+
+<p>제약을 가하려면 타입 파라미터 이름 뒤에 콜론을 표시하고 그 뒤에 상한 타입을 적으면 된다.</p>
+
+<p>자바에서는 아래와 같이 사용했다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="no">T</span> <span class="kd">extends</span> <span class="nc">Number</span><span class="o">&gt;</span> <span class="no">T</span> <span class="nf">sum</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>코틀린은 아래와 같이 표현한다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="p">&lt;</span><span class="nc">T</span><span class="p">:</span> <span class="nc">Number</span><span class="p">&gt;</span> <span class="nf">List</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;.</span><span class="nf">sum</span><span class="p">():</span> <span class="nc">T</span>
+</code></pre></div></div>
+
+<p>타입 파라미터 T에 대한 상한을 정하고 나면 T 타입의 값을 그 상한 타입의 값으로 취급할 수 있다.</p>
+
+<h2 id="number-class">Number Class</h2>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/80861291-a17dec00-8ca8-11ea-9daa-2ee99e55773b.png" alt="스크린샷 2020-05-02 오후 7 10 06" /></p>
+
+<p>자바의 Number</p>
+
+<p><img src="https://user-images.githubusercontent.com/43809168/80861289-9d51ce80-8ca8-11ea-9c9a-90b6d1bb034a.png" alt="스크린샷 2020-05-02 오후 7 10 09" /></p>
+
+<p>코틀린 Number</p>
+
+<p>차이는 toChar이 추가된 것 외에는 자바와 동일</p>
+
+<h2 id="타입-파라미터-제약이-둘-이상인-경우">타입 파라미터 제약이 둘 이상인 경우</h2>
+
+<p>드물지만 타입 파라미터에 의해 둘 이상의 제약을 가해야 하는 경우도 있다.</p>
+
+<p>다음 코드는 맨 끝에 마침표(.)가 있는지 검사하는 제네릭 함수이다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;</span> <span class="nf">ensureTrailingPeriod</span> <span class="p">(</span><span class="n">seq</span><span class="p">:</span> <span class="nc">T</span><span class="p">)</span>
+    <span class="k">where</span> <span class="nc">T</span><span class="p">:</span> <span class="nc">CharSequence</span><span class="p">,</span> <span class="nc">T</span><span class="p">:</span> <span class="nc">Appendable</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(!</span><span class="n">seq</span><span class="p">.</span><span class="nf">endsWith</span><span class="p">(</span><span class="sc">'.'</span><span class="p">)){</span>
+        <span class="n">seq</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sc">'.'</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">helloWorld</span> <span class="p">=</span> <span class="nc">StringBuilder</span><span class="p">(</span><span class="s">"Hello World"</span><span class="p">)</span>
+    <span class="nf">ensureTrailingPeriod</span><span class="p">(</span><span class="n">helloWorld</span><span class="p">)</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">helloWorld</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// output
+Hello World.
+</code></pre></div></div>
+
+<p>이 예제는 타입 인자가 CharSequence와 Appendable 인터페이스를 반드시 구현해야한다는 사실을 표현한다.</p>
+
+<p>여기서 한가지 <code class="language-plaintext highlighter-rouge">where</code>이라는 낯선 키워드를 봐서 당황했을 것이다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">where</code>은 제네릭에서 사용하는 키워드인데, 둘 이상의 상한(upper bound) 조건이 필요한 경우 where 키워드를 사용해서 명시하는 것이 가능하다.</p>
+
+<p>타입 파라미터 제약을 자주 쓰는 다른 예시는 널이 될 수 없는 타입으로 파라미터를 한정하고 싶은 경우에 사용할 수 있다.</p>
+
+<h2 id="타입-파라미터를-널이-될-수-없는-타입으로-한정">타입 파라미터를 널이 될 수 없는 타입으로 한정</h2>
+
+<p>아무런 타입 상한을 정하지 않은 타입 파라미터는 결과적으로 <strong>Any</strong>?를 상한으로 정한 파라미터와 같다.</p>
+
+<p>다음을 보자.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Processor</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;</span> <span class="p">{</span>
+    <span class="k">fun</span> <span class="nf">process</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nc">T</span><span class="p">){</span>
+        <span class="n">value</span><span class="o">?.</span><span class="nf">hashCode</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>여기서 <code class="language-plaintext highlighter-rouge">value</code>는 널이 될 수 있는 타입이므로 안전한 호출을 사용했다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">nullableStringProcessor</span> <span class="p">=</span> <span class="nc">Processor</span><span class="p">&lt;</span><span class="nc">String</span><span class="p">?&gt;()</span>
+<span class="n">nullableStringProcessor</span><span class="p">.</span><span class="nf">process</span><span class="p">(</span><span class="k">null</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>만약 여기에 널 가능성을 제외한 아무런 제약이 필요 없다면 간단히 <strong>Any</strong>를 상한으로 사용하면 된다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Processor</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">:</span><span class="nc">Any</span><span class="p">&gt;</span> <span class="p">{</span>
+    <span class="k">fun</span> <span class="nf">process</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nc">T</span><span class="p">){</span>
+        <span class="n">value</span><span class="p">.</span><span class="nf">hashCode</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이제부터 자바 개발자에게 낯익은 다른 주제를 살펴보자.</p>
+
+<p>그 주제는 실행 시점에 제네릭스가 어떻게 동작하는가에 대해서 이다.</p>
+
+<h2 id="실행-시-제네릭스의-동작--type-erasure-parameter-와-reify-type-parameter">실행 시 제네릭스의 동작 : type erasure parameter 와 reify type parameter</h2>
+
+<p>JVM의 제네릭스는 보통 타입 소거를 사용해 구현된다.</p>
+
+<p>이는 실행 시점에 제네릭 클래스의 인스턴스에 타입 인자 정보가 들어있지 않다는 것을 의미한다.</p>
+
+<p>이번 절에서는 코틀린 타입 소거가 실용적인 면에서 어떤 영향을 끼치는지, 함수를 inline으로 선언함으로써 이런 제약을 어떻게 우회하는지 보도록 하겠다.</p>
+
+<h2 id="실행-시점의-제네릭--타입-검사와-캐스트">실행 시점의 제네릭 : 타입 검사와 캐스트</h2>
+
+<p>자바와 마찬가지로 코틀린 제네릭 타입의 인자 정보는 런타임에 지워진다.</p>
+
+<p>이는 제네릭 클래스 인스턴스가 그 인스턴스를 생성할 때 쓰인 타입 인자에 대한 정보를 유지하지 않는다는 뜻이기도 하다.</p>
+
+<p>가령 다음과 같은 두 리스트를 상상해보라.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">list1</span><span class="p">:</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">String</span><span class="p">&gt;</span> <span class="p">=</span> <span class="nf">listOf</span><span class="p">(</span><span class="s">"a"</span><span class="p">,</span><span class="s">"b"</span><span class="p">)</span>
+<span class="kd">val</span> <span class="py">list2</span><span class="p">:</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Int</span><span class="p">&gt;</span> <span class="p">=</span> <span class="nf">listOf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>컴파일러는 두 리스트를 서로 다른 타입으로 인식하지만 실행 시점에 그 둘은 완전히 같은 타입 객체이다.</p>
+
+<p>그럼에도 불구하고 보통은 문자열과 정수로 들어있다고 가정할 수 있는데, 이는 컴파일러가 타입 인자를 알고 올바른 타입의 값만 각 리스트에 넣도록 보장해주기 때문이다.</p>
+
+<p>그러면 다음은 타입 소거로 인한 한계를 살펴보자.</p>
+
+<p>타입 인자를 따로 저장하지 않으므로 실행 시점에는 타입 인자를 검사할 수 없다.</p>
+
+<p>타입 소거로 인한 장점은 저장해야하는 타입의 정보의 크기가 줄어들어 전반적인 메모리 사용량이 줄어든다는 것이 제네릭 타입 소거의 장점이라고 하겠다.</p>
+
+<p>어쨌든, 코틀린에서는 타입 인자를 명시하지않고 제네릭 타입을 사용할 수 없다.</p>
+
+<p>그러면 특정 값이 집합이나 맵이 아니라 리스트라는 사실을 어떻게 확인할 수 있을까?</p>
+
+<p>바로 스타 프로젝션 <strong>Star Projection</strong>을 사용하면 된다.</p>
+
+<p>이 스타 프로젝션에 대해서는 뒤에서 좀 더 자세히 다루도록 하겠다.</p>
+
+<p>현재는 인자를 알 수 없는 제네릭 타입을 표현할 때 (자바의 <code class="language-plaintext highlighter-rouge">List&lt;?&gt;</code>과 유사) 스타 프로젝션을 사용한다는 것만 알아두자.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="p">(</span><span class="n">value</span> <span class="k">is</span> <span class="nc">List</span><span class="p">&lt;</span><span class="err">*</span><span class="p">&gt;)</span> <span class="p">{</span> <span class="o">..</span><span class="p">.</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<p>위 예제에서 value가 List임은 알 수 있으나 그 원소의 타입까지는 알 수 없다.</p>
+
+<p>as나 as? 캐스팅에도 제네릭 타입을 사용할 수 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">printSum</span><span class="p">(</span><span class="n">c</span><span class="p">:</span> <span class="nc">Collection</span><span class="p">&lt;</span><span class="err">*</span><span class="p">&gt;)</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">intList</span> <span class="p">=</span> <span class="n">c</span> <span class="k">as</span><span class="p">?</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Int</span><span class="p">&gt;</span>
+        <span class="o">?:</span> <span class="nc">IllegalArgumentException</span><span class="p">(</span><span class="s">"List is expected"</span><span class="p">)</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">intList</span><span class="p">.</span><span class="nf">sum</span><span class="p">())</span>
+<span class="p">}</span>
+
+<span class="nf">printSum</span><span class="p">(</span><span class="nf">listOf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>그러나 기저 클래스는 같지만 타입 인자가 다른 타입으로 캐스팅해도 캐스팅을 성공시켜준다는 사실에 유의해야한다.</p>
+
+<p>컴파일러가 <code class="language-plaintext highlighter-rouge">unchecked cast</code>라는 경고를 내긴 하지만 항상 성공한다.</p>
+
+<p>캐스팅 관련 경고를 제외하면 모든 문제가 컴파일되는데 이 책의 옮긴이의 말에 따르면 코틀린 REPL은 아직 더 개선할 여지가 많다고 한다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">printSum</span><span class="p">(</span><span class="nf">setOf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="nc">IllegalArgumentException</span> <span class="p">:</span> <span class="nc">List</span> <span class="k">is</span> <span class="n">expected</span>
+
+<span class="nf">printSum</span><span class="p">(</span><span class="nf">listOf</span><span class="p">(</span><span class="s">"a"</span><span class="p">,</span><span class="s">"b"</span><span class="p">,</span><span class="s">"c"</span><span class="p">))</span>
+<span class="nc">ClassCastException</span><span class="p">:</span> <span class="nc">String</span> <span class="n">cannot</span> <span class="n">be</span> <span class="n">cast</span> <span class="n">to</span> <span class="nc">Number</span>
+</code></pre></div></div>
+
+<p>여기 두 개의 예제가 있다.</p>
+
+<p>위 예제에서 첫 번째 예제의 경우 정수 집합에 대해서는 <code class="language-plaintext highlighter-rouge">IllegalArgumentException</code>를 출력하는 것을 확인할 수 있다.</p>
+
+<p>우리가 눈여겨봐야하는 부분은 두 번째 예제인데, <code class="language-plaintext highlighter-rouge">List&lt;int&gt;</code>인지 검사할 수 없으므로 <code class="language-plaintext highlighter-rouge">IllegalArgumentException</code>이 발생하지는 않는다.</p>
+
+<p>따라서 as? 캐스트가 성공하고 문자열 리스트에 대해 sum 함수가 호출된다.</p>
+
+<p>하지만 sum이 실행되는 도중 예외가 발생한다 sum은 Number 타입의 값을 리스트에서 가져와 더하려고 시도하지만 String을 Number로 사용하려고 하면 실행 시 <code class="language-plaintext highlighter-rouge">ClassCastException</code>이 발생한다.</p>
+
+<h2 id="실체화한-타입-파라미터를-사용한-함수-선언">실체화한 타입 파라미터를 사용한 함수 선언</h2>
+
+<p>컴파일 타임에 제네릭 타입의 인자 정보가 지워짐으로 인해 제네릭 클래스의 인스턴스가 있어도 그 인스턴스를 만들 때 사용한 타입 인자를 알아낼 수가 없다.</p>
+
+<p>이는 제네릭 함수도 예외가 아니다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;</span> <span class="nf">isA</span><span class="p">(</span><span class="n">value</span><span class="p">:</span><span class="nc">Any</span><span class="p">)</span> <span class="p">=</span> <span class="n">value</span> <span class="k">is</span> <span class="nc">T</span>
+<span class="nc">Error</span><span class="p">:</span> <span class="nc">Cannot</span> <span class="n">check</span> <span class="k">for</span> <span class="n">instance</span> <span class="n">of</span> <span class="n">erased</span> <span class="n">type</span><span class="p">:</span> <span class="nc">T</span>
+</code></pre></div></div>
+
+<p>이런 제약을 피할 수 있는 방법이 하나 있는데, 인라인 함수의 타입 파라미터는 실체화되므로 실행 시점에 인라인 함수의 타입 인자를 알 수 있다.</p>
+
+<p>앞서 만든 함수를 인라인 함수로 만들고 타입 파라미터를 reified로 지정하면 value 타입이 T의 인스턴스인지를 실행 시점에 검사할 수 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">inline</span> <span class="k">fun</span> <span class="p">&lt;</span><span class="k">reified</span> <span class="nc">T</span><span class="p">&gt;</span> <span class="nf">isA</span><span class="p">(</span><span class="n">value</span><span class="p">:</span><span class="nc">Any</span><span class="p">)</span> <span class="p">=</span> <span class="n">value</span> <span class="k">is</span> <span class="nc">T</span>
+<span class="nf">println</span><span class="p">(</span><span class="n">isA</span><span class="p">&lt;</span><span class="nc">String</span><span class="p">&gt;(</span><span class="s">"abc"</span><span class="p">))</span>
+<span class="c1">// true</span>
+<span class="nf">println</span><span class="p">(</span><span class="n">isA</span><span class="p">&lt;</span><span class="nc">String</span><span class="p">&gt;(</span><span class="mi">123</span><span class="p">))</span>
+<span class="c1">// false</span>
+</code></pre></div></div>
+
+<p>reified를 활용하는 가장 간단 예제 중 하나는 표준 라이브러리 함수인 <strong>filterIsInsance</strong>이다.</p>
+
+<p>이 함수는 인자로 받은 컬렉션의 원소 중에서 타입 인자로 지정한 클래스의 인스턴스만을 모아서 만든 리스트를 반환한다.</p>
+
+<p>다음 예제는 <strong>filterInstance</strong> 사용법을 보여준다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">items</span> <span class="p">=</span> <span class="nf">listOf</span><span class="p">(</span><span class="s">"one"</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="s">"three"</span><span class="p">)</span>
+<span class="nf">println</span><span class="p">(</span><span class="n">items</span><span class="p">.</span><span class="n">filterInstance</span><span class="p">&lt;</span><span class="nc">String</span><span class="p">&gt;())</span>
+<span class="na">[one,three]</span>
+</code></pre></div></div>
+
+<p>이 함수는 실행 시점에 타입 인자를 알아냈고 그 타입 인자를 사용해 리스트의 원소 중 타입 인자와 일치하는 원소만을 추려냈다.</p>
+
+<p>그러면 인라인 함수에서만 reified type argument를 사용할 수 있는 이유가 무엇일까? reified type argument는 어떻게 동작하며 왜 일반 함수에서는 element is T를 사용할 수 없고 인라인 함수에서만 사용할 수 있을까?</p>
+
+<p>앞서 배웠듯이 컴파일러는 인라인 함수의 본문을 구현한 바이트코드를 그 함수가 호출되는 모든 시점에 삽입한다.</p>
+
+<p>컴파일러는 reified type argument를 통해 인라인 함수를 호출하는 각 부분의 정확한 타입을 모두 알아낼 수 있다.</p>
+
+<p>따라서 컴파일러는 타입 인자로 쓰인 구체적인 클래스를 참조하는 바이트코드를 생성해 삽입할 수 있다.</p>
+
+<p>타입 파라미터가 아니라 구체적인 타입을 사용하기 때문에 만들어진 바이트코드는 실행 시점에 벌어지는 타입 소거의 영향을 받지 않는다.</p>
+
+<p>단, 자바 코드에서는 reified 타입 파라미터를 사용하는 inline 함수를 호출할 수 없다.</p>
+
+<p>자바에서는 코틀린 inline 함수를 일반 함수처럼 호출한다. 그 경우 인라인 함수를 호출해도 실제로 인라이닝이 되지 않는다.</p>
+
+<p>reified 타입 파라미터가 있는 함수의 경우 타입 인자를 바이트코드에 넣기 위해 일반 함수보다 더 많은 작업이 필요하고, 항상 인라이닝 되어야만 한다.</p>
+
+<p>따라서 reified 타입 파라미터가 있는 인라이닝 함수를 일반 함수처럼 자바에서는 호출할 수 없다. 이것이 그 이유이다.</p>
+
+<p>우리는 앞서 인라인 함수는 람다를 파라미터로 받는 경우 사용하면 유용하다고 알고 있다.</p>
+
+<p>그러나 reified 타입 파라미터를 사용하기 위해 inline을 사용했다는 사실을 명심하라.</p>
+
+<p>성능을 좋게 하고 싶거든 inline 함수의 크기를 계속 관찰하라.</p>
+
+<p>함수가 커지면 reified 타입에 의존하지 않는 부분을 별도의 일반 함수로 뽑아내는 편이 더 낫다.</p>
+
+<h2 id="실체화한-타입-파라미터로-클래스-참조-대신">실체화한 타입 파라미터로 클래스 참조 대신</h2>
+
+<p><code class="language-plaintext highlighter-rouge">java.lang.Class</code> 타입 인자를 파라미터로 받는 API에 대한 코틀린 어댑터를 구축하는 경우 reified 타입 파라미터를 자주 사용한다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">java.lang.Class</code>를 자주 사용하는 API의 예로는 JDK의 <strong>ServiceLoader</strong>가 있다.</p>
+
+<p><strong>ServiceLoader</strong>는 어떤 추상 클래스나 인터페이스를 표현하는 <code class="language-plaintext highlighter-rouge">java.lang.Class</code>를 받아서 그 클래스나 인스턴스를 구현한 인스턴스를 반환한다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">serviceImpl</span> <span class="p">=</span> <span class="nc">ServiceLoader</span><span class="p">.</span><span class="nf">load</span><span class="p">(</span><span class="nc">Service</span><span class="o">::</span><span class="k">class</span><span class="p">.</span><span class="n">java</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>::class.java는 코틀린 클래스에 대응하는 <code class="language-plaintext highlighter-rouge">java.lang.Class</code> 참조를 얻는 방법이다.</p>
+
+<p>이는 10장에서 리플렉션에 대해 설명할 때 더 자세히 다루도록 하겠다.</p>
+
+<p>이 예제를 reified 타입 파라미터를 사용해 다시 작성해보자.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">serviceImpl</span> <span class="p">=</span> <span class="n">loadService</span><span class="p">&lt;</span><span class="nc">Service</span><span class="p">&gt;()</span>
+</code></pre></div></div>
+
+<p>훨씬 간결해졌다. 읽을 서비스 클래스를 loadService 함수의 타입 인자로 지정하면 ::class.java라고 쓰는 경우보다 훨씬 읽고 이해하기 쉽다.</p>
+
+<p>아래는 loadService() 함수의 내용이다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">inline</span> <span class="k">fun</span> <span class="p">&lt;</span><span class="k">reified</span> <span class="nc">T</span><span class="p">&gt;</span> <span class="nf">loadService</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nc">ServiceLoader</span><span class="p">.</span><span class="nf">load</span><span class="p">(</span><span class="nc">T</span><span class="o">::</span><span class="k">class</span><span class="p">.</span><span class="n">java</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="reified-타입-파라미터의-제약">reified 타입 파라미터의 제약</h2>
+
+<p>reified 타입 파라미터는 유용한 도구이지만 몇 가지 제약이 존재한다.</p>
+
+<p>일부는 실체화의 개념으로 인한 생기는 제약이며 나머지는 지금 코틀린이 실체화를 구현하는 방식에 의한 제약이며 향후 개선될 가능성이 있다.</p>
+
+<p>reified 타입 파라미터는 다음과 같은 경우 사용할 수 있다.</p>
+
+<ul>
+  <li>
+    <p>타입 검사와 캐스팅 (is,!is,as,as?)</p>
+  </li>
+  <li>
+    <p>10장에서 설명할 코틀린 리플렉션 API(::class)</p>
+  </li>
+  <li>
+    <p>코틀린 타입에 대응하는 java.lang.Class 얻기 (::class.java)</p>
+  </li>
+  <li>
+    <p>다른 함수를 호출할 때 타입 인자로 사용</p>
+  </li>
+</ul>
+
+<p>하지만 다음과 같은 작업은 불가능</p>
+
+<ul>
+  <li>
+    <p>타입 파라미터 클래스의 인스턴스 생성하기</p>
+  </li>
+  <li>
+    <p>타입 파라미터 클래스의 동반 객체 메소드 호출하기</p>
+  </li>
+  <li>
+    <p>reified 타입 파라미터를요구하는 함수를 호출하면서 reified 하지 않은 타입 파라미터로 받은 타입을 타입 인자로 넘기기</p>
+  </li>
+  <li>
+    <p>클래스, 프로퍼티, 인라인 함수가 아닌 함수의 타입 파라미터를 reified로 지정하기</p>
+  </li>
+</ul>
+
+<h2 id="variance--제네릭과-하위-타입">Variance : 제네릭과 하위 타입</h2>
+
+<p>변성(Variance) 개념은 <code class="language-plaintext highlighter-rouge">List&lt;String&gt;</code>과 <code class="language-plaintext highlighter-rouge">List&lt;Any&gt;</code>의 기저 타입이 같고 타입 인자가 다른 여러 타입이 서로 어떤 관계가 있는지를 설명하는 개념이다.</p>
+
+<h2 id="variance가-있는-이유--인자를-함수에-넘기기">Variance가 있는 이유 : 인자를 함수에 넘기기</h2>
+
+<p><code class="language-plaintext highlighter-rouge">List&lt;Any&gt;</code> 타입의 파라미터를 받는 함수에 <code class="language-plaintext highlighter-rouge">List&lt;String&gt;</code>을 넘기면 안전할까?</p>
+
+<p>안전하다.</p>
+
+<p>그러나 Any와 String이 List 인터페이스의 타입 인자로 들어가는 경우라면 안정성을 확신하기 힘들다.</p>
+
+<p>예제를 하나 보자.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">printContents</span><span class="p">(</span><span class="n">list</span><span class="p">:</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Any</span><span class="p">&gt;){</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">list</span><span class="p">.</span><span class="nf">joinToString</span><span class="p">())</span>
+<span class="p">}</span>
+<span class="nf">printContents</span><span class="p">(</span><span class="nf">listOf</span><span class="p">(</span><span class="s">"abc"</span><span class="p">,</span><span class="s">"bac"</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>이 경우 문자열 리스트도 잘 작동한다.</p>
+
+<p>이 함수는 각 원소를 Any로 취급하며 모든 문자열은 Any 타입이기도 하므로 완전히 안전하다.</p>
+
+<p>리스트를 변경하는 다른 함수를 살펴보자.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">add</span> <span class="nc">Answer</span><span class="p">(</span><span class="n">list</span><span class="p">:</span> <span class="nc">MutableList</span><span class="p">&lt;</span><span class="nc">Any</span><span class="p">&gt;){</span>
+    <span class="n">list</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">val</span> <span class="py">strings</span> <span class="p">=</span> <span class="nf">mutableListOf</span><span class="p">(</span><span class="s">"abc"</span><span class="p">,</span><span class="s">"bac"</span><span class="p">)</span>
+<span class="nf">addAnswer</span><span class="p">(</span><span class="n">strings</span><span class="p">)</span> <span class="c1">// 이 줄이 컴파일 된다면</span>
+<span class="nf">println</span><span class="p">(</span><span class="n">strings</span><span class="p">.</span><span class="nf">maxBy</span> <span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">length</span> <span class="p">})</span> <span class="c1">// 실행 시 여기서 예외가 발생</span>
+</code></pre></div></div>
+
+<p>위 함수는 에러를 발생시킨다.</p>
+
+<p>어떤 함수가 리스트이 원소를 추가하거나 변경한다면 타입 불일치가 발생할 수 있어서 <code class="language-plaintext highlighter-rouge">List&lt;Any&gt;</code> 대신 <code class="language-plaintext highlighter-rouge">List&lt;string&gt;</code>을 넘길 수 없다.</p>
+
+<p>하지만 그런 경우가 아니라면 괜찮다. ( 왜 그런지에 대해서는 나중에 설명 )</p>
+
+<h2 id="클래스-타입-하위-타입">클래스, 타입, 하위 타입</h2>
+
+<p>지금부터는 하위 타입(subtype)에 대해서 학습해보자.</p>
+
+<p>타입 사이의 관계를 논하기 위해 subtype에 대한 개념에 대해서 잘 알고 있어야한다.</p>
+
+<p>어떤 타입 A의 값이 필요한 모든 장소에 어떤 타입 B의 값을 넣어도 아무 문제가 없다면 B는 A의 subtype이다.</p>
+
+<p>예를 들어, Int는 Number의 subtype이지만 String의 subtype은 아니다.</p>
+
+<p>supertype은 정확히 반대의 개념이다.</p>
+
+<p>한 타입이 다른 타입의 subtype인지가 왜 중요할까?</p>
+
+<p>컴파일러는 사실 변수 대입이나 함수 인자 전달 시 subtype 검사를 매번 수행한다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">test</span><span class="p">(</span><span class="n">i</span><span class="p">:</span><span class="n">int</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">n</span><span class="p">:</span><span class="nc">Number</span> <span class="p">=</span> <span class="n">i</span> <span class="c1">// 성공</span>
+
+    <span class="k">fun</span> <span class="nf">f</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nc">String</span><span class="p">)</span> <span class="p">{</span> <span class="o">..</span><span class="p">.</span> <span class="p">}</span>
+    <span class="nf">f</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="c1">// 실패</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>간단한 경우라면 subtype은 마치 subclass와 근본적으로 같다.</p>
+
+<p>널이 될 수 없는 타입은 널이 될 수 있는 타입의 subtype이다.</p>
+
+<p>자 갑자기 왜 subtype 얘기를 하고 있는지 의아할 것이다.</p>
+
+<p>우리는 앞의 문제로 돌아가서</p>
+
+<p><code class="language-plaintext highlighter-rouge">List&lt;String&gt;</code> 타입의 값을 <code class="language-plaintext highlighter-rouge">List&lt;Any&gt;</code>를 파라미터로 받는 함수에 전달해도 괜찮을까?</p>
+
+<p>에 대한 질문을 subtype 관계로 다시 써보면</p>
+
+<p><code class="language-plaintext highlighter-rouge">List&lt;String&gt;</code> 타입은 <code class="language-plaintext highlighter-rouge">List&lt;Any&gt;</code>의 subtype인가?</p>
+
+<p>로 귀결된다.</p>
+
+<p>우리는 앞서 <code class="language-plaintext highlighter-rouge">MutableList&lt;String&gt;</code>을 <code class="language-plaintext highlighter-rouge">MutableList&lt;Any&gt;</code>의 subtype으로 다루면 안되는지에 대해 알아보았다.</p>
+
+<p>제네릭 타입을 인스턴화 할 때 타입 인자로 서로 다른 타입이 들어간다고 가정하자.</p>
+
+<p>인스턴스 타입 사이의 subtype 관계가 성립하지 않으면 그 제네릭 타입을 <strong>invariant</strong>(무공변)이라고 말한다.</p>
+
+<p>자바에서는 모든 클래스가 <strong>invariant</strong>하다.</p>
+
+<p>코틀린의 List 인터페이스는 읽기 전용 컬렉션을 표현한다.</p>
+
+<p>A가 B의 subtype이라면 <code class="language-plaintext highlighter-rouge">List&lt;A&gt;</code>는 <code class="language-plaintext highlighter-rouge">List&lt;B&gt;</code>의 subtype이다.</p>
+
+<p>이런 클래스나 인터페이스를 <strong>covariant</strong>(공변적)이라고 말한다.</p>
+
+<h2 id="covariant--하위-타입-관계-유지">covariant : 하위 타입 관계 유지</h2>
+
+<p><code class="language-plaintext highlighter-rouge">Producer&lt;T&gt;</code>를 예로 covariant 클래스를 설명해보자.</p>
+
+<p>A가 B의 subtype일 때 <code class="language-plaintext highlighter-rouge">Producer&lt;A&gt;</code>는 <code class="language-plaintext highlighter-rouge">Producer&lt;B&gt;</code>의 subtype이고, <strong>Producer</strong>는 <strong>covariant</strong> 하다고 말할 수 있다.</p>
+
+<p>코틀린에서 제네릭 클래스가 타입 파라미터에 대해 <strong>covariant</strong>임을 표시하려면 타입 파라미터 이름 앞에 <code class="language-plaintext highlighter-rouge">out</code>을 넣어야한다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">interface</span> <span class="nc">Producer</span><span class="p">&lt;</span><span class="k">out</span> <span class="nc">T</span><span class="p">&gt;</span> <span class="p">{</span>
+    <span class="k">fun</span> <span class="nf">produce</span><span class="p">()</span> <span class="p">:</span> <span class="nc">T</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>클래스의 타입 파라미터를 covariant하게 만들면 함수 정의에 사용한 파라미터 타입과 타입 인자의 파라미터 타입이 일치하지 안하도 그 클래스의 인스턴스를 함수 인자나 반환 값으로 사용할 수 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">open</span> <span class="kd">class</span> <span class="nc">Animal</span> <span class="p">{</span>
+    <span class="k">fun</span> <span class="nf">feed</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nf">println</span><span class="p">(</span><span class="s">"마이쪙!"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Herd</span><span class="p">&lt;</span><span class="nc">T</span> <span class="p">:</span> <span class="nc">Animal</span><span class="p">&gt;</span> <span class="p">(</span><span class="kd">val</span> <span class="py">size</span><span class="p">:</span><span class="nc">Int</span><span class="p">,</span> <span class="k">private</span> <span class="kd">val</span> <span class="py">animal</span><span class="p">:</span> <span class="nc">T</span><span class="p">){</span>
+    <span class="k">operator</span> <span class="k">fun</span> <span class="nf">get</span><span class="p">(</span><span class="n">i</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span> <span class="nc">T</span> <span class="p">=</span> <span class="k">when</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="mi">0</span> <span class="p">-&gt;</span> <span class="n">animal</span>
+        <span class="k">else</span> <span class="p">-&gt;</span> <span class="k">throw</span> <span class="nc">IndexOutOfBoundsException</span><span class="p">(</span><span class="s">"Invalid coordinate $i"</span><span class="p">)</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="k">fun</span> <span class="nf">feedAll</span><span class="p">(</span><span class="n">animals</span><span class="p">:</span><span class="nc">Herd</span><span class="p">&lt;</span><span class="nc">Animal</span><span class="p">&gt;){</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="mi">0</span> <span class="n">until</span> <span class="n">animals</span><span class="p">.</span><span class="n">size</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">animals</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">feed</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Cat</span><span class="p">:</span> <span class="nc">Animal</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">fun</span> <span class="nf">meow</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nf">println</span><span class="p">(</span><span class="s">"나 핵 배고파"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">fun</span> <span class="nf">takeCareOfCats</span><span class="p">(</span><span class="n">cats</span><span class="p">:</span> <span class="nc">Herd</span><span class="p">&lt;</span><span class="nc">Cat</span><span class="p">&gt;)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="mi">0</span> <span class="n">until</span> <span class="n">cats</span><span class="p">.</span><span class="n">size</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">cats</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">meow</span><span class="p">()</span>
+        <span class="nf">feedAll</span><span class="p">(</span><span class="n">cats</span><span class="p">)</span> <span class="c1">// 에러 발생</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nf">takeCareOfCats</span><span class="p">(</span> <span class="nc">Herd</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nc">Cat</span><span class="p">())</span> <span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>불행히도 위 예제는 실행되지 않는다.</p>
+
+<p>feedAll 함수에 고양이 무리를 넘기면 타입 불일치를 발생시키기 때문이다.</p>
+
+<p>물론 이 문제를 풀기 위해 타입 캐스팅을 사용할 수 있지만, 코드가 복잡해지고 실수를 하기 쉽다.</p>
+
+<p>게다가 타입 불일치를 해결하기 위해 강제 캐스팅을 하는 것은 올바른 문제해결 방법이 아니다.</p>
+
+<p>이를 해결하기 위해 out을 사용하여 <strong>covariant</strong>하게 만들어줄 수 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Herd</span><span class="p">&lt;</span><span class="k">out</span> <span class="nc">T</span> <span class="p">:</span> <span class="nc">Animal</span><span class="p">&gt;</span> <span class="p">(</span><span class="kd">val</span> <span class="py">size</span><span class="p">:</span><span class="nc">Int</span><span class="p">,</span> <span class="k">private</span> <span class="kd">val</span> <span class="py">animal</span><span class="p">:</span> <span class="nc">T</span><span class="p">){</span>
+    <span class="k">operator</span> <span class="k">fun</span> <span class="nf">get</span><span class="p">(</span><span class="n">i</span><span class="p">:</span> <span class="nc">Int</span><span class="p">):</span> <span class="nc">T</span> <span class="p">=</span> <span class="k">when</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="mi">0</span> <span class="p">-&gt;</span> <span class="n">animal</span>
+        <span class="k">else</span> <span class="p">-&gt;</span> <span class="k">throw</span> <span class="nc">IndexOutOfBoundsException</span><span class="p">(</span><span class="s">"Invalid coordinate $i"</span><span class="p">)</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Herd의 T 앞에 out을 붙여주는 것 만으로 코드가 정상적으로 작동하는 것을 확인할 수 있다. (신기하지 않은가!?)</p>
+
+<p>그렇다고 해서 모든 클래스를 <strong>covariant</strong>하게 만들어야하는 것을 의미하지는 않는다.</p>
+
+<p>여기서 out 키워드가 갖는 의미는 <strong>클래스가 T 타입의 값을 생산할 수는 있지만 소비할 수 없다</strong>는 것을 의미한다.</p>
+
+<p>클래스 멤버를 선언할 때 타입 파라미터를 사용할 수 있는 지점은 모두 in과 out으로 나뉜다.</p>
+
+<p>만약 T가 함수의 반환 타입에 쓰인다면 T는 out인 경우이다.</p>
+
+<p>그게 아니라 T가 함수의 파라미터 타입에 쓰인다면 T는 in인 경우이다.</p>
+
+<p>이 함수는 T 타입의 값을 consume한다.</p>
+
+<p>이 in,out을 적절히 사용하면 T의 사용법을 제한하여 이로 인해 생기는 subtype 관계의 타입 안정성을 보장해줄 수 있다.</p>
+
+<p>당연히 Mutable의 경우 covariant하지 않는다. (앞에서 살펴보았다.)</p>
+
+<p>생성자 파라미터는 in,out 어느 쪽에도 해당되지 않는다는 사실을 기억하자.</p>
+
+<p>variance는 코드에서 위험할 여지가 있는 메소드를 호출할 수 없게 만듦으로써 제네릭 타입의 인스턴스 역할을 하는 클래스 인스턴스를 잘못 사용하는 일이 없게 방지하는 역할을 한다.</p>
+
+<p>생성자는 나중에 호출하는 메소드가 아니므로 위험할 여지가 없다.</p>
+
+<p>하지만 val이나 var 키워드를 생성자 파라미터에 적는다면 게터나 세터를 정의하는 것과 같으므로 읽기 전용 프로퍼티의 경우 out, 변경 가능 프로퍼티의 경우 out, in 모두에 해당한다.</p>
+
+<h2 id="contravariance--뒤집힌-하위-타입-관계">contravariance : 뒤집힌 하위 타입 관계</h2>
+
+<p><strong>contravariance</strong>는 covariant를 거울에 비친 모습이라고 생각하면 된다.</p>
+
+<p><strong>contravariance</strong> 클래스의 subtype 관계는 covariant와는 반대다.</p>
+
+<p>아래의 예시를 보자</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">interface</span> <span class="nc">Comparator</span><span class="p">&lt;</span><span class="k">in</span> <span class="nc">T</span><span class="p">&gt;</span> <span class="p">{</span>
+    <span class="k">fun</span> <span class="nf">compare</span><span class="p">(</span><span class="n">e1</span><span class="p">:</span> <span class="nc">T</span><span class="p">,</span> <span class="n">e2</span><span class="p">:</span> <span class="nc">T</span><span class="p">)</span> <span class="p">:</span> <span class="nc">Int</span> <span class="p">{</span> <span class="o">..</span><span class="p">.</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>compare 메소드에서 T 타입의 값을 소비하므로 in을 붙여야만한다.</p>
+
+<p>어떤 타입에 대해 Comparator를 구현하면 그 타입의 subtype에 속하는 모든 값을 비교할 수 있다.</p>
+
+<p>예를 들어 <code class="language-plaintext highlighter-rouge">Comparator&lt;Any&gt;</code>가 존재하면 이를 사용해 모든 타입의 값을 비교할 수 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">anyComparator</span> <span class="p">=</span> <span class="nc">Comparator</span><span class="p">&lt;</span><span class="nc">Any</span><span class="p">&gt;</span> <span class="p">{</span>
+    <span class="n">e1</span><span class="p">,</span> <span class="n">e2</span> <span class="p">-&gt;</span> <span class="n">e1</span><span class="p">.</span><span class="nf">hashCode</span><span class="p">()</span> <span class="p">-</span> <span class="n">e2</span><span class="p">.</span><span class="nf">hashCode</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">val</span> <span class="py">strings</span><span class="p">:</span><span class="nc">List</span><span class="p">&lt;</span><span class="nc">String</span><span class="p">&gt;</span> <span class="p">=</span> <span class="o">..</span><span class="p">.</span>
+<span class="n">strings</span><span class="p">.</span><span class="nf">sortedWith</span><span class="p">(</span><span class="n">anyComparator</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>여기서 sortedWith는 <code class="language-plaintext highlighter-rouge">Comparator&lt;String&gt;</code>을 요구하므로 String보다 더 일반적인 타입을 비교할 수 있는 Comparator를 sortedWith에 넘기는 것이 안전하다.</p>
+
+<p>어떤 타입의 객체를 Comparator로 비교해야 한다면 그 타입이나 그 타입의 조상 타입을 비교할 수 있는 Comparator를 사용할 수 있다.</p>
+
+<p>이는 <code class="language-plaintext highlighter-rouge">Comparator&lt;Any&gt;</code>가 <code class="language-plaintext highlighter-rouge">Comparator&lt;String&gt;</code>의 subtype이라는 것을 의미한다.</p>
+
+<p>그러나 Any는 String의 supertype이다.</p>
+
+<p>즉, 서로 다른 타입 인자에 대해 Comparator의 subtype 관계는 타입 인자의 subtype 관계와는 정 반대의 관계임을 알 수 있다.</p>
+
+<p>이제야 contravariance에 대해 이야기할 준비가 되었다.</p>
+
+<p>예시를 들어보겠다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Cat&lt;T&gt;</code>를 예로 들겠다.</p>
+
+<p>만약 타입 B가 A의 subtype이라고 가정하고, <code class="language-plaintext highlighter-rouge">Cat&lt;A&gt;</code>가 <code class="language-plaintext highlighter-rouge">Cat&lt;B&gt;</code>의 subtype이 성립하면 제네릭 클래스 <code class="language-plaintext highlighter-rouge">Cat&lt;T&gt;</code>는 타입 인자 T에 대해 <strong>contravariance</strong>하다고 할 수 있겠다.</p>
+
+<p>이를 요악해서 표로 표현해보면 다음과 같다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>covariant</th>
+      <th>contravariance</th>
+      <th>invariant</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Producer&lt;out T&gt;</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Consumer&lt;in T&gt;</code></td>
+      <td>MutableList<T></T></td>
+    </tr>
+    <tr>
+      <td>타입 인자의 subtype 관계가 제네릭 타입에서도 유지</td>
+      <td>타입 인자의 subtype 관계가 제네릭 타입에서 역전</td>
+      <td>subtype 관계 성립 안됨</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">Producer&lt;Cat&gt;</code>은 <code class="language-plaintext highlighter-rouge">Producer&lt;Animal&gt;</code>의 subtype</td>
+      <td><code class="language-plaintext highlighter-rouge">Consumer&lt;Animal&gt;</code>은 <code class="language-plaintext highlighter-rouge">Consumer&lt;Cat&gt;</code>의 subtype</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>T를 out 위치에만 사용 가능</td>
+      <td>T를 in 위치에만 사용 가능</td>
+      <td>T를 아무데나 사용 가능</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="사용-지점-variance--타입이-언급되는-지점에서-variance-지정">사용 지점 variance : 타입이 언급되는 지점에서 variance 지정</h2>
+
+<p>클래스를 선언하면서 variance를 지정하면 그 클래스를 사용하는 모든 장소에 variance 지정자가 영향을 끼치므로 편리하다.</p>
+
+<p>이런 방식을 declaration site variance라고 부른다.</p>
+
+<p>자바의 와일드카드 타입(? extends나 ? super)에 익숙하다면 자바는 variance를 다른 방식으로 다룬다는 점을 깨달았을 것이다.</p>
+
+<p>자바에서는 타입 파라미터가 있는 타입을 사용할 때마다 해당 타입 파라미터의 subtype이나 supertype 중 어떤 타입으로 대치할 수 있는지 명시해야한다.</p>
+
+<p>이런 방식을 use-site variance라고 부른다.</p>
+
+<p>자바에서는 <code class="language-plaintext highlighter-rouge">Function&lt;? super T, ? extends R&gt;</code>과 같이 와일드카드를 사용해야한다.</p>
+
+<p>하지만 코틀린처럼 클래스 선언 지점에서 variance를 한번만 지정하면 더 간결하고 우아한 코드를 작성할 수 있다.</p>
+
+<p>코틀린도 use-site variance를 지원한다.</p>
+
+<p>따라서 클래스 안에서 어떤 타입 파라미터가 covariant이거나 contravariance인지 선언할 수 없는 경우에도 특정 타입 파라미터가 나타나는 지점에서 variance를 정할 수 있다.</p>
+
+<p>대표적인 예시가 MutableList이다.</p>
+
+<p>이러한 인터페이스는 타입 파라미터로 지정된 타입을 소비하면서 동시에 생산한다.</p>
+
+<p>하지만 이런 인터페이스 타입의 변수가 한 함수 안에서 생산자나 소비자 중 단 한가지 역할만을 담당하는 경우가 종종 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;</span> <span class="nf">copyData</span><span class="p">(</span><span class="n">source</span><span class="p">:</span> <span class="nc">MutableList</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;,</span>
+                <span class="n">destination</span><span class="p">:</span> <span class="nc">MutableList</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">item</span> <span class="k">in</span> <span class="n">source</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">destination</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이 함수는 컬렉션의 원소를 다른 컬렉션으로 복사한다.</p>
+
+<p>두 컬렉션 모두 invariant 타입이지만 원본 컬렉션에서 읽기만 하고 대상 컬렉션은 쓰기만 한다.</p>
+
+<p>이 경우 두 컬렉션의 원소 타입이 정확히 일치할 필요가 없다.</p>
+
+<p>만약 다른 리스트 타입에 대해 작동하게 하려면 어떻게 할 수 있을까?</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="p">&lt;</span><span class="nc">T</span><span class="p">:</span><span class="nc">R</span><span class="p">,</span> <span class="nc">R</span><span class="p">&gt;</span> <span class="nf">copyData</span><span class="p">(</span><span class="n">source</span><span class="p">:</span> <span class="nc">MutableList</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;,</span>
+                <span class="n">destination</span><span class="p">:</span> <span class="nc">MutableList</span><span class="p">&lt;</span><span class="nc">R</span><span class="p">&gt;)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">item</span> <span class="k">in</span> <span class="n">source</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">destination</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>타입 파라미터가 두 개인 경우 원본 리스트의 원소 타입은 대상 리스트 원소 타입의 subtype이 되어야한다.</p>
+
+<p>하지만 코틀린에서는 이를 더욱 우아하게 표현할 수 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;</span> <span class="nf">copyData</span><span class="p">(</span><span class="n">source</span><span class="p">:</span> <span class="nc">MutableList</span><span class="p">&lt;</span><span class="k">out</span> <span class="nc">T</span><span class="p">&gt;,</span>
+                <span class="n">destination</span><span class="p">:</span> <span class="nc">MutableList</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">item</span> <span class="k">in</span> <span class="n">source</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">destination</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>바로 out 키워드를 타입을 사용하는 위치 앞에 붙이면 in 위치에 사용하는 메소드를 호출하지 않겠다는 의미가 된다.</p>
+
+<p>타입 선언에서 타입 파라미터를 사용하는 위치라면 어디에서나 variance 변경자를 붙일 수 있으며 파라미터 타입, 로컬 변수 타입, 함수 반환 타입 등에 타입 파라미터가 쓰이는 경우 in 또는 out 변경자를 붙일 수 있다.</p>
+
+<p>이때 Type Projection이 일어나는데, 즉 source를 일반적인 MutableList가 아닌 MutableList를 프로젝션 한 타입으로 만든다.</p>
+
+<p>이 경우 copyData 함수는 source의 메소드 중 반환 타입으로 타입 파라미터 T를 사용하는 메소드만 호출이 가능하게 된다.</p>
+
+<p>컴파일러는 타입 파라미터 T를 함수 인자 타입으로 사용하지 못하게 막는다.</p>
+
+<p>당연히 프로젝션 타입의 메소드 중 일부를 호출하지 못하는 경우라면 일반 타입을 사용하면 된다.</p>
+
+<p>물론 여기서 제대로 사용하려면 사실 source를 <code class="language-plaintext highlighter-rouge">List&lt;T&gt;</code> 타입으로 지정해야 할 것이다.</p>
+
+<p>하지만 여기서는 covariance를 설명하기 위해 이렇게 하였다.</p>
+
+<p>당연히 <code class="language-plaintext highlighter-rouge">List&lt;out T&gt;</code>는 무의미하기 때문에 컴파일러는 불필요한 프로젝션이라고 오류를 뱉는다.</p>
+
+<p>비슷한 방식으로 타입 파라미터가 쓰이는 위치 앞에 in을 붙여서 그 위치에 있는 값이 소비자 역할을 수행한다는 것을 표시할 수 있다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;</span> <span class="nf">copyData</span><span class="p">(</span><span class="n">source</span><span class="p">:</span> <span class="nc">MutableList</span><span class="p">&lt;</span><span class="k">out</span> <span class="nc">T</span><span class="p">&gt;,</span>
+                <span class="n">destination</span><span class="p">:</span> <span class="nc">MutableList</span><span class="p">&lt;</span><span class="k">in</span> <span class="nc">T</span><span class="p">&gt;)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">item</span> <span class="k">in</span> <span class="n">source</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">destination</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>in을 붙이면 그 파라미터를 더 supertype으로 대치할 수 있다.</p>
+
+<h2 id="start-projection--타입-인자-대신--사용">Start Projection : 타입 인자 대신 * 사용</h2>
+
+<p>제네릭 타입 인자 정보가 없음을 표현하기 위해 <strong>Star Projection</strong>을 사용할 수 있다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">List&lt;*&gt;</code>와 같이 사용 가능하다.</p>
+
+<p>이제 <strong>Star Projection</strong>의 의미를 자세히 살펴보자.</p>
+
+<p>첫 째, <code class="language-plaintext highlighter-rouge">MutableList&lt;*&gt;</code>는 <code class="language-plaintext highlighter-rouge">MutableList&lt;Any?&gt;</code>와는 다르다. (여기서 <code class="language-plaintext highlighter-rouge">MutableList&lt;T&gt;</code>가 invariant 하다는 것이 중요하다.)</p>
+
+<p><code class="language-plaintext highlighter-rouge">MutableList&lt;Any?&gt;</code>는 모든 타입의 원소를 받을 수 있다는 사실을 알 수 있는 리스트이다.</p>
+
+<p>반면 <code class="language-plaintext highlighter-rouge">MutableList&lt;*&gt;</code>는 어떤 정해진 구체적인 타입의 원소만을 담는 리스트이지만 그 원소의 타입을 정확히 모른다는 사실을 표현한다.</p>
+
+<p>즉, <code class="language-plaintext highlighter-rouge">MutableList&lt;*&gt;</code>는 String과 같이 구체적인 타입의 원소를 저장하기 위해 만들어진 것이 아니라는 것을 뜻한다.</p>
+
+<p>그 리스트의 원소 타입이 어떤 타입인지 모른다고 해서 아무거나 넣을 수 있다는 뜻이 아니다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">MutableList&lt;*&gt;</code> 타입의 리스트에서 원소를 얻을 수는 있지만 그 타입이 정확히 어떤 타입인지는 알 수 없다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Any?</code>의 하위타입이라는 사실만은 분명하다.</p>
+
+<p>조금 더 이해를 위해 아래의 예시를 보자.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">list</span><span class="p">:</span> <span class="nc">MutableList</span><span class="p">&lt;</span><span class="nc">Any</span><span class="p">?&gt;</span> <span class="p">=</span> <span class="nf">mutableListOf</span><span class="p">(</span><span class="sc">'a'</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="s">"hello"</span><span class="p">)</span>
+<span class="kd">val</span> <span class="py">chars</span> <span class="p">=</span> <span class="nf">mutableListOf</span><span class="p">(</span><span class="sc">'a'</span><span class="p">,</span><span class="sc">'b'</span><span class="p">,</span><span class="sc">'c'</span><span class="p">)</span>
+<span class="kd">val</span> <span class="py">unknownElements</span><span class="p">:</span><span class="nc">MutableList</span><span class="p">&lt;</span><span class="err">*</span><span class="p">&gt;</span> <span class="p">=</span> <span class="k">if</span><span class="p">(</span><span class="nc">Random</span><span class="p">().</span><span class="nf">nextBoolean</span><span class="p">())</span> <span class="n">list</span> <span class="k">else</span> <span class="n">chars</span>
+<span class="n">unknownElements</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="nc">Error</span><span class="p">:</span> <span class="nc">Out-projected</span> <span class="n">type</span> <span class="err">'</span><span class="nc">MutableList</span><span class="p">&lt;</span><span class="err">*</span><span class="p">&gt;</span><span class="err">'</span> <span class="n">prohibits</span> <span class="n">the</span> <span class="n">the</span> <span class="n">use</span> <span class="n">of</span> <span class="err">'</span><span class="k">fun</span> <span class="nf">add</span><span class="p">(</span><span class="n">element</span><span class="p">:</span> <span class="nc">E</span><span class="p">):</span> <span class="nc">Boolean</span><span class="err">'</span>
+</code></pre></div></div>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">println</span><span class="p">(</span><span class="n">unknownElements</span><span class="p">.</span><span class="nc">First</span><span class="p">())</span>
+<span class="c1">// 출력 : a</span>
+</code></pre></div></div>
+
+<p>왜 컴파일러는 <code class="language-plaintext highlighter-rouge">MutableList&lt;*&gt;</code>를 아웃 프로젝션 타입으로 인식할까?</p>
+
+<p>여기서의 <code class="language-plaintext highlighter-rouge">MutableList&lt;*&gt;</code>는 <code class="language-plaintext highlighter-rouge">MutableList&lt;out Any?&gt;</code>와 동일하게 동작한다.</p>
+
+<p>어떤 리스트의 원소 타입을 모르더라도 그 리스트에서 안전하게 Any? 타입을 꺼내오는 것은 가능하지만, 타입을 모르는 리스트에 원소를 마음대로 넣는 것은 불가능하다.</p>
+
+<p>자바 와일드카드에 비유하자면 코틀린의 <code class="language-plaintext highlighter-rouge">MyType&lt;*&gt;</code>는 자바의 <code class="language-plaintext highlighter-rouge">MyType&lt;?&gt;</code>과 동일하다.</p>
+
+<h2 id="reference">Reference</h2>
+
+<p><strong>Kotlin In Action</strong> (드미트리 제메로프, 스베트라나 이사코바)</p>
+
+<p>https://kychul98.tistory.com/81</p>
+
+<p>https://kotlinlang.org/docs/reference/generics.html</p>
+
+    <br />
+    <br />
+  </div>
+  
+
+</article>
+
+<!--<hr class="dingbat" />-->
+<!--
+<div class="share">
+  <h2>Share this post</h2>
+  <div class="share-body">
+    <a href="http://twitter.com/share?text=Kotlin In Action 9장&amp;url=http://localhost:4000/language/2020/05/02/Kotlin-09/"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="icon-twitter">
+      </span>
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/language/2020/05/02/Kotlin-09/"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="icon-facebook">
+      </span>
+    </a>
+  </div>
+</div>
+-->
+<br />
+
+
+
+
+<aside class="related" role="complementary">
+  <h2 class="hr">Related Posts</h2>
+
+  <ul class="related-posts">
+    
+      
+      
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/language/2021/05/27/Effective-Java-44/" data-flip="title">
+    <span>Effective Java 07 람다와 스트림</span>
+  </a>
+  <small><time datetime="2021-05-27T00:00:00+09:00">
+    27 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/language/2021/05/25/Effective-Java-43/" data-flip="title">
+    <span>Effective Java 06 - item 41 -</span>
+  </a>
+  <small><time datetime="2021-05-25T00:00:00+09:00">
+    25 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/language/2021/05/25/Effective-Java-42/" data-flip="title">
+    <span>Effective Java 06 - item 40 -</span>
+  </a>
+  <small><time datetime="2021-05-25T00:00:00+09:00">
+    25 May 2021
+  </time></small>
+</li>
+
+        
+      
+        
+        
+      
+    
+  </ul>
+</aside>
+  <aside class="comments" role="complementary">
+  <h2>Comments</h2>
+  <hr/>
+
+  <script src="https://utteranc.es/client.js"
+    repo="minkukjo/minkukjo.github.io"
+    issue-term="title"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</aside>
+
+       <footer>
+  <hr/>
+  
+    <p>© 2022. by minkuk</p>
+
+  
+  <p>
+    <code>Powered by <a href="https://minkukjo.github.io/">minkuk</a></code>
+  </p>
+</footer>
+
+    </main>
+    <div class="right-side">
+  <div class="add-first">
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+    ></script>
+    <!-- 우측 광고 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="9124111205"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+  <br />
+  <br />
+  <div class="add-second">
+    <!-- 우측 광고2 -->
+    <ins
+      class="adsbygoogle"
+      style="display: block"
+      data-ad-client="ca-pub-8247516864622650"
+      data-ad-slot="5156946039"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+
+  </div>
+  <div id="_yDrawer">
+  <div id="_sidebar" class="sidebar">
+    <div class="sidebar-bg" style="background-color:#4f86aa;background-image:url(/assets/img/bg.jpg)"></div>
+    <header class="sidebar-sticky" role="banner">
+      <br/>
+      <div class="sidebar-about">
+        <h1><a id="_title" href="/">도전하는 개발자</a></h1>
+        
+
+      </div>
+
+      <br/>
+      <br/>
+      <nav class="sidebar-nav heading" role="navigation">
+        <span class="sr-only">Navigation:</span>
+<ul>
+  
+
+  
+
+  
+  
+  
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-1"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/life/">Life</a>
+       <label class="folder" for="list-item-1">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-daily/">Daily</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-review/">Review</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/daily-books/">Books</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-2"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/computer-science/">Computer Science</a>
+       <label class="folder" for="list-item-2">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-algorithm/">Algorithm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-oop/">OOP</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-network/">Network</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-db/">Database</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-ai/">AI</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-security/">Security</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/cs-distribution-system/">Distribution System</a>
+             </li>
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-3"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/programming-language/">Programming Language</a>
+       <label class="folder" for="list-item-3">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-kotlin/">Kotlin</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-go/">Go</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-java/">Java</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-javascript/">JavaScript</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/programming-language-typescript/">TypeScript</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-4"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/framework/">Framework</a>
+       <label class="folder" for="list-item-4">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring/">Spring</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-data-jpa/">Spring Data JPA</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-spring-security/">Spring Security</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/framework-junit/">JUnit</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-5"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/language/">Language</a>
+       <label class="folder" for="list-item-5">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/language-english/">English</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-6"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/development/">Development</a>
+       <label class="folder" for="list-item-6">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-ddd/">DDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-tdd/">TDD</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-clean-code/">Clean Code</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/development-git/">Git</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-7"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/devops/">Devops</a>
+       <label class="folder" for="list-item-7">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-alarm/">Alarm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-ansible/">Ansible</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-cicd/">CI/CD</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-docker/">Docker</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-es/">Elasticsearch</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-k8s/">Kubernetes</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-public-cloud/">Public Cloud</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/devops-kafka/">Kafka</a>
+             </li>
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-8"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/opensource/">Open Source</a>
+       <label class="folder" for="list-item-8">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/opensource-opensource/">Open Source</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-9"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/about/">About</a>
+       
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+</ul>
+
+      </nav>
+    <br/>
+    <br/>
+      <div class="sidebar-box">
+        
+      </div>
+      <p>매일 매일 한계를 뛰어넘기 위한 도전을 즐기는 개발자</p>
+
+      
+      
+        <div class="sidebar-social">
+          <span class="sr-only">Social:</span>
+<ul>
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://github.com/minkukjo">
+    <span class="icon-github" title="GitHub"></span>
+    <span class="sr-only">GitHub</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://www.linkedin.com/in/민국-조-567052166">
+    <span class="icon-linkedin2" title="LinkedIn"></span>
+    <span class="sr-only">LinkedIn</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:harrycode@kakao.com">
+    <span class="icon-mail" title="Email"></span>
+    <span class="sr-only">Email</span>
+  </a>
+</li>
+
+  
+</ul>
+
+        </div>
+      
+    </header>
+  </div>
+</div>
+</div>
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-158654037-1', 'auto');
+  ga('send', 'pageview');
+  loadJSDeferred('https://www.google-analytics.com/analytics.js');
+</script>
+
+
+
+
+
+<!--[if gt IE 8]><!---->
+<script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+  WebFont.load({
+    
+    google: {
+      families: 'Lato'.split('|')
+    },
+    
+
+    custom: {
+      families: ['icomoon'],
+      urls: ['/assets/icomoon/style.css']
+    }
+  });
+</script>
+<!--<![endif]-->
+
+
+  <!--[if gt IE 9]><!---->
+  
+  <script>loadJSDeferred('/assets/js/hydejack.js?v=6.4.0');</script>
+
+  
+  <!--<![endif]-->
+
+
+
+</body>
+
+</html>
