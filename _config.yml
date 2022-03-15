@@ -10,10 +10,10 @@ url: https://minkukjo.github.io
 
 # Set to '' when hosting a blog on GitHub Pages, ie on `//<username>.github.io`
 # Set to '/<reponame>' when using the `gh-pages` branch of a repository
-baseurl: ""
+baseurl: ''
 
 # A very short description of your page
-tagline: ""
+tagline: ''
 
 # A short description of the page, used in the sidebar and as fallback for the meta description tag.
 # Markdown enabled, but don't use more than one paragraph (enforced by `>`)
@@ -27,7 +27,7 @@ author:
 
 # Fallback image and color
 image: /assets/img/bg.jpg
-color: "#4f86aa"
+color: '#4f86aa'
 
 # The font used for headings. Expects a string that is a valid CSS font-family value.
 font_heading: "'Lato', 'Sans-serif'"
@@ -50,14 +50,14 @@ google_analytics: UA-158654037-1
 # disqus_shortname: harrycode
 
 # This text will appear in the footer of every page. Markdown enabled.
-copyright: "&copy; 2020. by minkuk"
+copyright: '&copy; 2022. by minkuk'
 
 # Format of the permalinks
 permalink: pretty
 
 # Pagination configuration (used by the `blog` layout)
 paginate: 8
-paginate_path: "/page-:num/"
+paginate_path: '/page-:num/'
 
 # If you are upgrading form a v5 verison of Hydejack, uncomment the two lines below,
 # so that the location of the feed XML stays the same.
@@ -112,14 +112,14 @@ exclude:
   - Gemfile.lock
 
 kramdown:
-  footnote_backlink: "&#x21a9;&#xfe0e;"
+  footnote_backlink: '&#x21a9;&#xfe0e;'
   math_engine: mathjax
   math_engine_opts:
     preview: true
     preview_as_code: true
 
 compress_html:
-  comments: ["<!-- ", " -->"]
+  comments: ['<!-- ', ' -->']
   clippings: all
   endings: all
   ignore:
