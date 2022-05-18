@@ -26,6 +26,7 @@ order: 10
 - Flutter
 - Golang
 - Reactive Programming
+- Functional Programming
 
 ## 서식지
 
