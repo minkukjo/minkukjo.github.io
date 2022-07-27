@@ -1,4 +1,4 @@
----
+ ---
 layout: post
 title: 하이버네이트는 Entity에 ID를 어떻게 넣어줄까?
 subtitle: ''
@@ -25,9 +25,9 @@ immutable하게 변수를 선언하더라도 값을 세팅하는데 이슈가 �
 
 얕은 지식으로 어설프게 아는 척하면 안되겠다는 좋은 교훈을 얻게 되었다.
 
-그러다 문득, 하이버네이트의 어디서 `reflection`을 해주는 걸까? 
+그러다 문득, 하이버네이트는 `대체 어디서 reflection을 해주는 걸까`?라는 의문이 생겼고 이는 이 글을 쓰는 계기가 되었다.
 
-궁금해서 구글링도 해보고 [문서](https://developer.jboss.org/docs/DOC-15785#jive_content_id_But_Hibernate_uses_so_much_runtime_reflection)도 찾아봤는데, `어떤 클래스`에서 그 작업을 수행하다는 디테일한 설명은 없었다.
+구글링도 해보고 [관련 문서](https://developer.jboss.org/docs/DOC-15785#jive_content_id_But_Hibernate_uses_so_much_runtime_reflection)도 찾아봤는데, `어디서` `어떻게` 그 작업을 수행하는지에 대한 자세한 설명은 없었다.
 
 그래서 하이버네이트 코드를 까서 **직접 찾아보기로 했다**.
 
