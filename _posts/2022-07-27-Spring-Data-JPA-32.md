@@ -1,4 +1,4 @@
- ---
+---
 layout: post
 title: 하이버네이트는 Entity에 ID를 어떻게 넣어줄까?
 subtitle: ''
