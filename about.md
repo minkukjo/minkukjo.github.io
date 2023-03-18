@@ -198,7 +198,9 @@ order: 10
 <img width="850" alt="스크린샷 2020-11-24 오후 11 28 13" src="https://user-images.githubusercontent.com/43809168/100107185-bae8be80-2eac-11eb-9aa8-c9ae26cfa3d7.png">
 
 - [GDG Campus, 삼성, 네이버, 카카오 세 번의 인턴을 하며 내가 배운 것들](https://festa.io/events/1118?fbclid=IwAR3ZbOFO6raTOddnZO6kdtxn74ig-vFH9-HkXfIlPG05hTeNn4oc4scYZzs)
-  - 98% 청중이 내 발표를 잘 들었다고 투표
+  - 98% 청중이 도움이 되었다는 피드백을 받아서 뿌듯했었습니다.
+
+- [GDG Seoul Devfest 2022](https://festa.io/events/2873)
 
 ## 기술 블로그 기고
 
